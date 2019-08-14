@@ -87,7 +87,7 @@
                               $nota = $submissao->getNota();
                               
                               
-                              $visualizar = "<a href='visualizarSubmissao.php?id=" . $id . "'><img src='".$iconVisualizar."' width='20px'></a>";
+                              $visualizar = "<a class='visualizarObjeto' id='".$id."' name='Submissao'><img class='img-miniatura' src='".$iconVisualizar."' width='20px'></a>";
                               $editar="";
                               $excluir="";
                               if ($obj->getIsSubmissor() && $situacao->getDescricao()=="Submetida") {

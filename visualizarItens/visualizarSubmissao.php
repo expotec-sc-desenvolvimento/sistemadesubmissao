@@ -7,7 +7,7 @@
     $usuario = new Usuario();
     $usuario = $_SESSION['usuario'];
     
-    verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página
+    //verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página
     
     $submissao = Submissao::retornaDadosSubmissao($_GET['id']);
     if ($submissao->getId()=="") header('Location: ../paginaInicial.php');
@@ -62,7 +62,43 @@
             if (count($avaliacoes)==0) {
                 echo "<tr><td colspan='2'><p align='center'>Nenhuma Avaliação cadastrada para a Submissão</p><td></tr>";
             } else {
-                echo "ds";
+                $cont = 1;
+                foreach ($avaliacoes as $avaliacao) {
+                    $user = Usuario::retornaDadosUsuario($avaliacao->getIdUsuario());
+                    $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao());
+                    
+                    $nomeCompleto = "Avaliador $cont";
+                    $cont++;
+                    if (Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao() == "Administrador") $nomeCompleto = $user->getNome() . " " . $user->getSobrenome();
+                    
+                    echo "<table align='center' class='table_list'>"
+                        ."<tr><th class='direita'>Avaliador: </th><td>" . $nomeCompleto . "</td>"
+                        ."<tr><th class='direita'>Situação: </th><td>" . $situacaoAvaliacao->getDescricao() . "</td>";
+                        
+                    
+                    // Situação 4 - Aprovado, 5 - Aprovado Com Ressalvas, 6 - Reprovado(a) 
+                    if (in_array($situacaoAvaliacao->getId(), array('4','5','6'))) {
+                        
+                        echo "<tr><th class='direita'>Avaliação: </th><td>";
+                        $avaliacaoCriterios = AvaliacaoCriterio::retornaCriteriosParaAvaliacao($avaliacao->getId());
+                        
+                        echo "<ul class='listaCriterios'>";
+                        foreach ($avaliacaoCriterios as $avaliacaoCriterio) {
+                            $criterio = Criterio::retornaDadosCriterio($avaliacaoCriterio->getIdCriterio());
+                            echo "<li>".$criterio->getDescricao();
+                            //if ($submissao->getIdTipoSubmissao()==3) echo "(" .$criterio->getPeso().")";
+                            echo " - ";
+                            if ($submissao->getIdTipoSubmissao()==3) echo "<i>" . $avaliacaoCriterio->getNota() . "</i><br>";
+                            else echo $avaliacaoCriterio->getNota()==1 ? "<b>Sim</b><br>" : "<b>Não</b><br>";
+                        }
+                        echo "</ul>";
+                        
+                        if ($submissao->getIdTipoSubmissao()==3) echo "<tr><th class='direita'>Nota Final: </th><td>". $avaliacao->getNota()."</strong></td>";
+                        echo "<tr><th class='direita'>Observações:</th><td>" . $avaliacao->getObservacao() . "</td></tr>";
+                    }
+                 
+                    echo "</table><br>";
+                }
             }
         ?>
     </table>
