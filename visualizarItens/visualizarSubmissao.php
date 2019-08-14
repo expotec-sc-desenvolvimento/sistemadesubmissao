@@ -62,7 +62,7 @@
             if (count($avaliacoes)==0) {
                 echo "<tr><td colspan='2'><p align='center'>Nenhuma Avaliação cadastrada para a Submissão</p><td></tr>";
             } else {
-                
+                echo "ds";
             }
         ?>
     </table>
