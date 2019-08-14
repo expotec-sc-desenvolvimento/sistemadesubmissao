@@ -1,0 +1,262 @@
+body {
+    background-color: #F5F5F5;
+    margin: 0;
+    padding: 0;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#logoPequena {
+    
+    width: 30px;
+    padding-top: 10px;
+    
+}
+.inicio {
+
+    padding-top: 20px;
+    margin-top: 100px;
+    margin-left: 480px;
+    margin-right: 480px;
+    border-radius: 15px;
+    border: 1px solid #000000;
+    background: #ddf1f9; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ddf1f9 24%, #ddf1f9 34%, #feffff 91%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #ddf1f9 24%,#ddf1f9 34%,#feffff 91%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #ddf1f9 24%,#ddf1f9 34%,#feffff 91%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ddf1f9', endColorstr='#feffff',GradientType=0 ); /* IE6-9 */
+    
+}
+
+h3 {
+    font-size: 20px
+}
+.listaUsuarios {
+    margin: 0 auto;
+    
+}
+.listaUsuarios td {
+    padding: 6px;
+}
+#principal {
+    padding-top: 10px;
+    margin-top: 40px;
+    margin-left: 300px;
+    margin-right: 300px;
+    height: 250px;
+    border-radius: 15px;
+    border: 1px solid #000000;
+    background: #ddf1f9; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ddf1f9 24%, #ddf1f9 34%, #feffff 91%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #ddf1f9 24%,#ddf1f9 34%,#feffff 91%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #ddf1f9 24%,#ddf1f9 34%,#feffff 91%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ddf1f9', endColorstr='#feffff',GradientType=0 ); /* IE6-9 */
+
+}
+
+.users {
+    padding-top: 10px;
+    margin-top: 40px;
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    border: 1px solid #000000;
+    background: #ddf1f9; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ddf1f9 24%, #ddf1f9 34%, #feffff 91%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #ddf1f9 24%,#ddf1f9 34%,#feffff 91%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #ddf1f9 24%,#ddf1f9 34%,#feffff 91%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ddf1f9', endColorstr='#feffff',GradientType=0 ); /* IE6-9 */
+
+}
+
+legend {
+    margin-left: 20%;   
+}
+
+
+legend.legPrincipal {
+    margin-left: 300px;
+}
+
+#submissao {
+    font-size: 25px;
+}
+
+h2 {
+    margin-top: 10px;
+    font-family: URW Chancery L, cursive, Arial Narrow, sans-serif;
+    font-size: 20px;
+    color: #4682B4;
+    text-decoration: underline;
+    text-align: center;
+}
+#logo {
+    float: left;
+    width: 40px;
+    padding-right: 10px;
+}
+
+#fotoPerfil {
+    width: 120px;
+    height: 130px;
+    margin-left: 80px;
+    border-radius: 25px;
+    float: left;
+
+}
+
+#fotoMiniatura {
+    width: 20px;
+}
+
+#dadosPessoais {
+    list-style-type:none;
+    font-weight: bold;
+}
+
+#informacoesPerfil {
+    margin-left: 160px;
+    width: 650px;
+    height: 130px;
+}
+
+#inicio {
+    width: 100%;
+    background-color:#DCDCDC;
+}
+
+input{
+    width: 200px;
+    border-width: 3px;
+    border-radius: 5px;
+    padding: 5px;
+    color: #335;
+    background-color: #FFF;
+
+}
+
+.readOnly {
+    width: 200px;
+    border-width: 3px;
+    border-radius: 5px;
+    padding: 5px;
+    color: #335;
+    background-color: #D3D3D3;
+}
+.input:hover, .input:focus{
+    background-color: #DFF;
+}
+fieldset{
+    position: relative;
+    padding-top: 2em;
+    border: 0;
+    margin-left: 110px;
+}
+
+.msgerr {
+    font-size: 12px;
+    color: #FF0000;
+}
+.botaoConfirmar{
+
+    border-width: 2px;
+    border-radius: 15px;
+    background-color: #149dcc;
+    font-weight: bold;
+    padding-left: 20px;
+}
+.botaoConfirmar:hover {
+    background-color: #00FF00;
+}
+ol{
+   list-style: none;
+   margin-left: 80px;
+}
+
+a:hover {
+    color: #FF0000;
+}
+
+.direita{
+    text-align: right;
+}
+
+.tabCadastro {
+    margin-left: 70px;
+}
+table tr td{
+    padding-top: 8px;
+}
+
+*, *:after, *:before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+  /* Fundo do menu */
+
+.menu .menu-list, .menu .sub-menu{
+    list-style: none;
+}
+  /* Configura todos os links do nosso menu */
+.menu a{
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    font-size: 15px;
+    letter-spacing:0.1em;
+  }
+  /* Faz os <li>s ficarem na horizontal */
+  .menu > .menu-list > li{
+    float: left;
+    position: relative;
+  }
+  /* Configura os links do menu principal */
+  .menu > .menu-list > li > a {
+    padding: 20px;
+    margin: 0 5px;
+    background: #000;
+  }
+  /* Configura o fundo do menu principal quando com mouse hover */
+  .menu > .menu-list > li:hover a {
+    background: #444;
+  }
+  /* Mostra o submenu no evento de mouse hover */
+  .menu > .menu-list > li:hover > .sub-menu {
+    display: block;
+  }
+  /* Configura o estilo do submenu */
+  .menu > .menu-list > li > .sub-menu {
+    position: absolute;
+    top: 61px;
+    left: 5px;
+    min-width: 200px;
+    z-index: 1000;
+    display: none;
+  }
+  /* Configura os links do submenu */
+  .menu > .menu-list > li > .sub-menu > li > a {
+    padding: 10px 20px;
+  }
+  .menu > .menu-list > li > .sub-menu > li > a:hover {
+    background-color: #0000ff;
+  }
+  /* Clearfix para o menu */
+  .menu:after {
+    content: '.';
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+  }

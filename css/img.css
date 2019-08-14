@@ -1,0 +1,13 @@
+.img-miniatura {
+    max-width: 20px;
+    cursor: pointer;
+}
+
+.img-perfil {
+    max-width: 100px;
+    border-radius: 80px;
+}
+
+.img-perfil:hover {
+    cursor: pointer;
+}

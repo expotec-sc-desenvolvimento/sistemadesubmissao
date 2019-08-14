@@ -1,0 +1,24 @@
+.btn-verde,.btn-vermelho{
+    min-width: 150px;
+    border-width: 2px;
+    border-color: #149dcc;
+    border-radius: 20px;
+    color: #073b4c;
+    background-color: transparent;
+    padding: 7px;
+    margin: 7px;
+    cursor: pointer;
+}
+
+.btn-verde:hover{
+    background-color: #00FF00;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}
+.btn-vermelho:hover{
+    background-color: #b43d3d;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}

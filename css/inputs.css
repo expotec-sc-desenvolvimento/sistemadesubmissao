@@ -1,0 +1,32 @@
+.campoDeEntrada{
+    color: #073b4c;
+    border-color: #cfcfcf;
+    border-radius: 3px;
+    border-style: ridge;
+    border-width: 2px;
+    background-color: #FFF;
+    width: 100%;
+    resize: none;  /* IMPEDE QUE O textarea POSSA SER REDIMENSIONADO PELO USUÁRIO */
+    width: 400px;
+}
+
+.campoDeEntrada:hover, .campoDeEntrada:focus{
+    background-color: #efefff;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    
+}

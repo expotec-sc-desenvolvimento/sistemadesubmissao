@@ -1,0 +1,69 @@
+.cadastroItens {   
+    margin-left: 20%;
+    margin-top: 10px;
+}
+
+.cadastroItens-2 {   
+    margin-left: 10%;
+    margin-top: 10px;
+}
+
+th:hover {
+    cursor: pointer;
+}
+
+.table_list{
+    font-size: 15px;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+.table_list_2 {
+    font-size: 15px;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+.table_list_3 {
+    font-size: 15px;
+    border-collapse: collapse;
+    width: 80%;
+}
+ 
+.table_list tr, .table_list_2 tr, .table_list_3 tr{
+    border:1px black solid;
+}
+
+.table_list tr:nth-child(even) , .table_list_2 tr:nth-child(even), .table_list_3 tr:nth-child(even){
+    background: #FFF
+}
+
+
+.table_list tr:nth-child(odd), .table_list_2 tr:nth-child(odd), .table_list_3 tr:nth-child(odd){
+    background: #EEE
+}
+.table_list tr td, .table_list_2 tr td, .table_list_3 tr td{
+    text-align: center;
+}
+
+.table_normal{
+    font-size: 15px;
+    border-collapse: collapse;
+    width: 70%;
+}
+
+.table_normal tr td{
+    text-align: left;
+}
+
+.table_normal tr th{
+    font-weight: bold;
+}
+
+table label {
+    font-weight: 700;
+}
+
+.direita{
+    text-align: right;
+}
