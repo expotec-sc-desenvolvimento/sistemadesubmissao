@@ -24,7 +24,7 @@
                 <td><input class="campoDeEntrada" id="inpNomeEvento" name="pNomeEvento" required="true"></td>
             </tr>
             <tr>
-                <td class='direita'><label for="inpDescricao">Descrição: </label></td>
+                <td class='direita'><label for="inpDescricaoEvento">Descrição: </label></td>
                 <td><textarea class="campoDeEntrada" rows="10" cols="40" id="inpDescricaoEvento" name="pDescricaoEvento" required="true"></textarea></td>
             </tr>
             <tr>
@@ -32,24 +32,37 @@
                 <td><input class="campoDeEntrada" type="date" id="inpInicioSubmissao" name="pInicioSubmissao" required="true"></td>
             </tr>
             <tr>
-                <td class='direita'><label for="inpLocal">Fim da Submissão: </label></td>
+                <td class='direita'><label for="inpFimSubmissao">Fim da Submissão: </label></td>
                 <td><input class="campoDeEntrada" type="date" id="inpFimSubmissao" name="pFimSubmissao" required="true"></td>
             </tr>
             <tr>
-                <td class='direita'><label for="mediaAprovacaoTrabalhos">Média</label></td>
-                <td>
-                    <select class="campoDeEntrada" id="mediaAprovacaoTrabalhos" name="mediaAprovacaoTrabalhos" required="true">
-                        <option value="">Selecione um valor</option>
-                        <option value="60">60</option>
-                        <option value="70">70</option>
-                        <option value="80">80</option>
-                    </select>
-
-                </td>
+                <td class='direita'><label for="prazoFinalEnvioAvaliacaoParcial">Avaliações Parciais: </label></td>
+                <td><input class="campoDeEntrada" type="date" id="prazoFinalEnvioAvaliacaoParcial" name="prazoFinalEnvioAvaliacaoParcial" required="true"></td>
+            </tr>
+            <tr>
+                <td class='direita'><label for="prazoFinalEnvioSubmissaoCorrigida">Submissões Corrigidas: </label></td>
+                <td><input class="campoDeEntrada" type="date" id="prazoFinalEnvioSubmissaoCorrigida" name="prazoFinalEnvioSubmissaoCorrigida" required="true"></td>
+            </tr>
+            <tr>
+                <td class='direita'><label for="prazoFinalEnvioAvaliacaoCorrigida">Avaliações Corrigidas: </label></td>
+                <td><input class="campoDeEntrada" type="date" id="prazoFinalEnvioAvaliacaoCorrigida" name="prazoFinalEnvioAvaliacaoCorrigida" required="true"></td>
+            </tr>
+            <tr>
+                <td class='direita'><label for="prazoFinalEnvioAvaliacaoFinal">Avaliações Finais: </label></td>
+                <td><input class="campoDeEntrada" type="date" id="prazoFinalEnvioAvaliacaoFinal" name="prazoFinalEnvioAvaliacaoFinal" required="true"></td>
             </tr>
             <tr>
                 <td class='direita'><label for="inpImagem">Logo: </label></td>
                 <td><input class="campoDeEntrada" type="file" id="inpImagem" name="pImagem" required="true"></td>
+            </tr>
+            <tr>
+                <td class='direita'><label for="distribuicaoAutomaticaAvaliadores">Distruibuição <br>automática: </label></td>
+                <td>
+                    <select class='campoDeEntrada' id='distribuicaoAutomaticaAvaliadores' name='distribuicaoAutomaticaAvaliadores' onchange="if (this.value==1) alert('Ao ativar essa opção, os trabalhos submetidos a partir de agora serão distribuidos automaticamente!')">
+                        <option value='1'>Ativado</option>
+                        <option value='0' selected>Desativado</option>
+                    </select>
+                </td>
             </tr>
         </table>
         <div class="div-btn"><input class="btn-verde" type="submit" value="Adicionar Evento"></div>

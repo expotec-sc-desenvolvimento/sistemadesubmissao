@@ -7,8 +7,11 @@ class Evento {
     private $descricao;
     private $inicioSubmissao;
     private $fimSubmissao;
-    private $mediaAprovacaoTrabalhos;
-    
+    private $prazoFinalEnvioAvaliacaoParcial;
+    private $prazoFinalEnvioSubmissaoCorrigida;
+    private $prazoFinalEnvioAvaliacaoCorrigida;
+    private $prazoFinalEnvioAvaliacaoFinal;
+    private $distribuicaoAutomaticaAvaliadores;
     
     function __construct() {
         
@@ -39,11 +42,26 @@ class Evento {
         return $this->fimSubmissao;
     }
     
-    function getMediaAprovacaoTrabalhos() {
-        return $this->mediaAprovacaoTrabalhos;
+    function getPrazoFinalEnvioAvaliacaoParcial() {
+        return $this->prazoFinalEnvioAvaliacaoParcial;
     }
 
+    function getPrazoFinalEnvioSubmissaoCorrigida() {
+        return $this->prazoFinalEnvioSubmissaoCorrigida;
+    }
 
+    function getPrazoFinalEnvioAvaliacaoCorrigida() {
+        return $this->prazoFinalEnvioAvaliacaoCorrigida;
+    }
+
+    function getPrazoFinalEnvioAvaliacaoFinal() {
+        return $this->prazoFinalEnvioAvaliacaoFinal;
+    }
+
+    function getDistribuicaoAutomaticaAvaliadores() {
+        return $this->distribuicaoAutomaticaAvaliadores;
+    }
+    
     function setId($id) {
         $this->id = $id;
     }
@@ -68,14 +86,31 @@ class Evento {
         $this->fimSubmissao = $fimSubmissao;
     }
     
-    function setMediaAprovacaoTrabalhos($mediaAprovacao) {
-        $this->mediaAprovacao = $mediaAprovacaoTrabalhos;
+    function setPrazoFinalEnvioAvaliacaoParcial($prazoFinalEnvioAvaliacaoParcial) {
+        $this->prazoFinalEnvioAvaliacaoParcial = $prazoFinalEnvioAvaliacaoParcial;
     }
 
+    function setPrazoFinalEnvioSubmissaoCorrigida($prazoFinalEnvioSubmissaoCorrigida) {
+        $this->prazoFinalEnvioSubmissaoCorrigida = $prazoFinalEnvioSubmissaoCorrigida;
+    }
 
-    public static function adicionarEvento($logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$mediaAprovacaoTrabalhos) {
+    function setPrazoFinalEnvioAvaliacaoCorrigida($prazoFinalEnvioAvaliacaoCorrigida) {
+        $this->prazoFinalEnvioAvaliacaoCorrigida = $prazoFinalEnvioAvaliacaoCorrigida;
+    }
+
+    function setPrazoFinalEnvioAvaliacaoFinal($prazoFinalEnvioAvaliacaoFinal) {
+        $this->prazoFinalEnvioAvaliacaoFinal = $prazoFinalEnvioAvaliacaoFinal;
+    }
+
+    function setDistribuicaoAutomaticaAvaliadores($distribuicaoAutomaticaAvaliadores) {
+        $this->distribuicaoAutomaticaAvaliadores = $distribuicaoAutomaticaAvaliadores;
+    }
+
+    public static function adicionarEvento($logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
+                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $distribuicaoAutomaticaAvaliadores) {
         
-        $dado = EventoDAO::adicionarEvento($logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$mediaAprovacaoTrabalhos);
+        $dado = EventoDAO::adicionarEvento($logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
+                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $distribuicaoAutomaticaAvaliadores);
         $resposta = retornaRespostaUnica($dado);
 
         if ($resposta==1) return true;
@@ -90,8 +125,11 @@ class Evento {
         else return false;
         
     }
-    public static function atualizarEvento($id,$logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$mediaAprovacaoTrabalhos) {
-        $dado = EventoDAO::atualizarEvento($id,$logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$mediaAprovacaoTrabalhos);
+    public static function atualizarEvento($id,$logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
+                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $distribuicaoAutomaticaAvaliadores) {
+        
+        $dado = EventoDAO::atualizarEvento($id,$logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
+                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $distribuicaoAutomaticaAvaliadores);
         $resposta = retornaRespostaUnica($dado);
 
         if ($resposta==1) return true;

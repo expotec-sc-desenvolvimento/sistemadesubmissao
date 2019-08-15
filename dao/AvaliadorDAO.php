@@ -36,6 +36,11 @@ class AvaliadorDAO {
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }
-    
+ 
+    public static function adicionarAvaliacoesAutomaticas($idSubmissao, $idUsuario,$idSituacaoAvaliacao,$obs) {
+        $sql = "CALL adicionarAvaliacoesAutomaticas('$idSubmissao','$idUsuario','$idSituacaoAvaliacao','$obs');";
+        //echo $sql; exit(1);
+        return Conexao::executar($sql);
+    }
 }
 ?>

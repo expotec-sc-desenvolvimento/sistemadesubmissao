@@ -11,7 +11,9 @@
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"./paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página    
     
-        
+    if (!Avaliacao::atualizarSituacaoAvaliacoes()) {
+        echo "erro"; exit(1);
+    }  
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -165,7 +167,7 @@
                         <th>Tipo</th>
                         <th>Titulo</th>
                         <th>Arquivo</th>
-                        <th>Situacao</th>
+                        <th>Situação</th>
                         <th>Autores</th>
                         <th>Avaliadores</th>
                         <th>Nota</th>
@@ -189,8 +191,10 @@
                             
                             foreach ($avaliacoes as $avaliacao) {
                                 $editarAvaliador = "";
+                                $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getId();
                                 
-                                if (SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao()=="Pendente") {
+                                // Situações de Avaliação = 1-Pendente, 2-Finalizada, 3-Atrasada, 4-Aprovado(a), 5-Aprovado(a) com ressalvas, 6-Reprovado
+                                if (in_array($situacaoAvaliacao, array(1,3))) {
                                     $editarAvaliador = "<a class='editarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='".$iconEditar."' class='img-miniatura'></a>";
                                             //. "<a class='excluirObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='".$iconExcluir."' class='img-miniatura'></a>";
                                 }

@@ -51,6 +51,12 @@ class AvaliacaoDao {
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }
+    
+    public static function atualizarSituacaoAvaliacoes() {
+        $sql = "CALL atualizarSituacaoAvaliacoes();";
+        //echo $sql; exit(1);
+        return Conexao::executar($sql);
+    }
 }
     
         

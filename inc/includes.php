@@ -16,12 +16,10 @@
     require_once dirname(__FILE__) . '/../classes/Modalidade.php';
     require_once dirname(__FILE__) . '/../classes/ModalidadeEvento.php';
     require_once dirname(__FILE__) . '/../classes/Perfil.php';
-    require_once dirname(__FILE__) . '/../classes/PrazosEvento.php';
     require_once dirname(__FILE__) . '/../classes/SituacaoAvaliacao.php';
     require_once dirname(__FILE__) . '/../classes/SituacaoSubmissao.php';
     require_once dirname(__FILE__) . '/../classes/SolicitacaoAvaliador.php';
     require_once dirname(__FILE__) . '/../classes/Submissao.php';
-    require_once dirname(__FILE__) . '/../classes/TipoPrazo.php';
     require_once dirname(__FILE__) . '/../classes/TipoSubmissao.php';
     require_once dirname(__FILE__) . '/../classes/TipoUsuario.php';
     require_once dirname(__FILE__) . '/../classes/Usuario.php';
@@ -38,12 +36,10 @@
     require_once dirname(__FILE__) . '/../dao/ModalidadeDAO.php';
     require_once dirname(__FILE__) . '/../dao/ModalidadeEventoDAO.php';
     require_once dirname(__FILE__) . '/../dao/PerfilDAO.php';
-    require_once dirname(__FILE__) . '/../dao/PrazosEventoDAO.php';
     require_once dirname(__FILE__) . '/../dao/SituacaoAvaliacaoDAO.php';
     require_once dirname(__FILE__) . '/../dao/SituacaoSubmissaoDAO.php';
     require_once dirname(__FILE__) . '/../dao/SolicitacaoAvaliadorDAO.php';
     require_once dirname(__FILE__) . '/../dao/SubmissaoDAO.php';
-    require_once dirname(__FILE__) . '/../dao/TipoPrazoDAO.php';
     require_once dirname(__FILE__) . '/../dao/TipoSubmissaoDAO.php';
     require_once dirname(__FILE__) . '/../dao/TipoUsuarioDAO.php';
     require_once dirname(__FILE__) . '/../dao/UsuarioDAO.php';

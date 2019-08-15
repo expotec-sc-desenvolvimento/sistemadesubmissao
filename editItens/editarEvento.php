@@ -44,18 +44,28 @@
                 <td><input class="campoDeEntrada" type="date" id="inpFimSubmissao" name="pFimSubmissao" value="<?php echo $evento->getFimSubmissao() ?>" required="true"></td>
             </tr>
             <tr>
-                <td class='direita'><label for="mediaAprovacaoTrabalhos">Média: </label></td>
-                <td>
-                    <select class="campoDeEntrada" id="mediaAprovacaoTrabalhos" name="mediaAprovacaoTrabalhos" required="true">
-                        <option value="">Selecione um valor</option>
-                        <option value="60" <?php if ($evento->getMediaAprovacaoTrabalhos()==60) echo " selected"?>>60</option>
-                        <option value="70" <?php if ($evento->getMediaAprovacaoTrabalhos()==70) echo " selected"?>>70</option>
-                        <option value="80" <?php if ($evento->getMediaAprovacaoTrabalhos()==80) echo " selected"?>>80</option>
-                    </select>
-
-                </td>
+                <td class='direita'><label for="prazoFinalEnvioAvaliacaoParcial">Avaliações Parciais: </label></td>
+                <td><input class="campoDeEntrada" type="date" id="prazoFinalEnvioAvaliacaoParcial" name="prazoFinalEnvioAvaliacaoParcial" value="<?php echo $evento->getPrazoFinalEnvioAvaliacaoParcial() ?>" required="true"></td>
             </tr>
-
+            <tr>
+                <td class='direita'><label for="prazoFinalEnvioSubmissaoCorrigida">Submissões Corrigidas: </label></td>
+                <td><input class="campoDeEntrada" type="date" id="prazoFinalEnvioSubmissaoCorrigida" name="prazoFinalEnvioSubmissaoCorrigida" value="<?php echo $evento->getPrazoFinalEnvioSubmissaoCorrigida() ?>" required="true"></td>
+            </tr>
+            <tr>
+                <td class='direita'><label for="prazoFinalEnvioAvaliacaoCorrigida">Avaliações Corrigidas: </label></td>
+                <td><input class="campoDeEntrada" type="date" id="prazoFinalEnvioAvaliacaoCorrigida" name="prazoFinalEnvioAvaliacaoCorrigida" value="<?php echo $evento->getPrazoFinalEnvioAvaliacaoCorrigida() ?>" required="true"></td>
+            </tr>
+            <tr>
+                <td class='direita'><label for="prazoFinalEnvioAvaliacaoFinal">Avaliações Finais: </label></td>
+                <td><input class="campoDeEntrada" type="date" id="prazoFinalEnvioAvaliacaoFinal" name="prazoFinalEnvioAvaliacaoFinal" value="<?php echo $evento->getPrazoFinalEnvioAvaliacaoFinal() ?>" required="true"></td>
+            </tr>
+            <tr>
+                <td class='direita'><label for="distribuicaoAutomaticaAvaliadores">Distribuição Automática<br> de Avaliadores: </label></td>
+                <td><select class='campoDeEntrada' id='distribuicaoAutomaticaAvaliadores' name='distribuicaoAutomaticaAvaliadores' onchange="if (this.value==1) alert('Ao ativar essa opção, os trabalhos submetidos a partir de agora serão distribuidos automaticamente!')">
+                        <option value='1' <?php if ($evento->getDistribuicaoAutomaticaAvaliadores()=='1') echo " selected";?>>Ativado</option>
+                        <option value='0' <?php if ($evento->getDistribuicaoAutomaticaAvaliadores()=='0') echo " selected";?>>Desativado</option>
+                    </select></td>
+            </tr>
             <tr>
                 <td class='direita'><label for="inpImagem">Logo: </label></td>
                 <td><input class="campoDeEntrada" type="file" id="inpImagem" name="pImagem"></td>

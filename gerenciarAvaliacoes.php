@@ -11,7 +11,9 @@
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"./paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página    
     
-        
+    if (!Avaliacao::atualizarSituacaoAvaliacoes()) {
+        echo "erro"; exit(1);
+    }  
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -95,19 +97,22 @@
                             if (isset($_GET['idSituacao']) && $_GET['idSituacao'] == $tipo->getId()) echo " selected";
                             echo ">" . $tipo->getDescricao() . "</option>";
                         }
+                        
                     ?>
                 </select>
                 
             </p>
             
-            <table border="1" align="center" class='table_list_2'>
+            <table border="1" align="center" class='table_list'>
                 <thead>
                     <tr>
                         <th>*</th>
                         <th>Trabalho</th>
                         <th>Avaliador</th>
                         <th>Situação</th>
+                        <th>Data de Recebimento</th>
                         <th>Data Final para Entrega</th>
+                        <th>Observação</th>
                         
                     </tr>
                 </thead>
@@ -122,14 +127,8 @@
                             
                             $avaliador = Usuario::retornaDadosUsuario($avaliacao->getIdUsuario());
                             $dataAtual = date('Y-m-d');
-                            $situacaoAvaliacao = '';
+                            $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao();
                             
-                            if (strtotime($avaliacao->getPrazo())< strtotime($dataAtual)) {
-                                // Situacao: 3-Atrasada
-                                Avaliacao::atualizarAvaliacao ($avaliacao->getId(), $avaliacao->getIdUsuario(), 3, $avaliacao->getPrazo());
-                                $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao(3)->getDescricao();
-                            }
-                            else $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao();
 
                     ?>
                         <tr>
@@ -137,11 +136,27 @@
                             <td><?php echo Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()?></td>
                             <td><?php echo $avaliador->getNome() . " " . $avaliador->getSobrenome() ?></td>
                             <td><?php echo $situacaoAvaliacao ?></td>
+                            <td><?php echo date('d/m/y', strtotime($avaliacao->getDataRecebimento())) ?></td>
                             <td><?php 
                                     // SituacaoAvaliacao = 1-Pendente / 3-Atrasada
                                     if ($avaliacao->getIdSituacaoAvaliacao()==1 || $avaliacao->getIdSituacaoAvaliacao()==3) echo date('d/m/Y',strtotime($avaliacao->getPrazo())); 
                                     else echo "-";
                                 ?></td>
+                            <td><?php
+                                    if ($avaliacao->getIdSituacaoAvaliacao()==1 || $avaliacao->getIdSituacaoAvaliacao()==3) {
+                                        /*$prazoEntrega = strtotime(date($avaliacao->getPrazo())); 
+                                        $dataAtual = strtotime(date('Y-m-d'));
+                                        // verifica a diferença em segundos entre as duas datas e divide pelo número de segundos que um dia possui
+                                        $dataFinal = ($d2 - $d1) /86400;
+                                        // caso a data 2 seja menor que a data 1
+                                        if($dataFinal < 0)
+                                        $dataFinal = $dataFinal * -1;
+                                        echo "Entre as duas datas informadas, existem $dataFinal dias."; */
+                                    }
+                                    else echo "-";
+                                    
+                            
+                            ?></td>
                         </tr>
                             
                                 

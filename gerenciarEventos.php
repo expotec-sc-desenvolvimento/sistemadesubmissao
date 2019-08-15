@@ -55,11 +55,9 @@
                 <th>*</th>
                 <th>Logo</th>
                 <th>Nome</th>
-                <th>Início da Submissão</th>
-                <th>Fim da Submissão</th>
                 <th>Modalidades de Submissão</th>
                 <th>Áreas de Submissão</th>
-                <th>Prazos para Avaliação</th>
+                <th>Prazos</th>
                 
             </tr>
             <?php foreach($listaEventos as $evento){ 
@@ -75,8 +73,6 @@
                     
                     <td><img src='<?php echo $pastaFotosEventos . $evento->getLogo() ?>' width='90px'></td>
                     <td><?php echo $evento->getNome() ?></td>
-                    <td><?php echo date('d/m/Y', strtotime($evento->getInicioSubmissao())) ?></td>
-                    <td><?php echo date('d/m/Y', strtotime($evento->getFimSubmissao())) ?></td>
                         
                     <?php if (count($modalidadesDoEvento)==0) { ?> <td>-
                     <?php 
@@ -115,17 +111,14 @@
                     <p align='center'><input type='button' class='addObjeto btn-verde' id='<?php echo $evento->getId() ?>' name='AreaEvento' value='Vincular Area' ></p>
                         </td>
                         <td>
-                            <?php if (count(PrazosEvento::listaPrazosEventoComFiltro($evento->getId(),''))>0) {
-                                    echo "<ul class='listaCriterios'>";
-                                    foreach (PrazosEvento::listaPrazosEventoComFiltro($evento->getId(),'') as $prazoevento) { ?>
-                                        <li><a class='editarObjeto' id='<?php echo $prazoevento->getId() ?>' name='PrazoEvento'><img src='<?php echo $iconEditar ?>' class='img-miniatura'></a>
-                                        <a class='excluirObjeto' id='<?php echo $prazoevento->getId() ?>' name='PrazoEvento'><img src='<?php echo $iconExcluir ?>' class='img-miniatura'></a>
-                                     <?php echo TipoPrazo::retornaDadosTipoPrazo($prazoevento->getIdTipoPrazo())->getDescricao() ." - " . $prazoevento->getDias() . " dias"; ?>    
-                            <?php } 
-                                    echo "</ul>";
-                            }
-                            ?>
-                            <p align='center'><input type='button' class='addObjeto btn-verde' id='<?php echo $evento->getId() ?>' name='PrazoEvento' value='Adicionar Prazo' ></p>
+                            <ul class="listaCriterios">
+                                <li><strong>Período de Submissão:</strong> <?php echo date('d/m/Y',strtotime($evento->getInicioSubmissao())) ." a ". date('d/m/Y',strtotime($evento->getFimSubmissao()));?></li>
+                                <li><strong>Prazo para envio de Avaliações Parciais:</strong> <?php echo date('d/m/Y',strtotime($evento->getprazoFinalEnvioAvaliacaoParcial()));?></li>
+                                <li><strong>Prazo para envio de Submissões Corrigidas:</strong> <?php echo date('d/m/Y',strtotime($evento->getprazoFinalEnvioSubmissaoCorrigida()));?></li>
+                                <li><strong>Prazo para envio de Avaliações Corrigidas:</strong> <?php echo date('d/m/Y',strtotime($evento->getPrazoFinalEnvioAvaliacaoCorrigida()));?></li>
+                                <li><strong>Prazo para envio de Avaliações Finais:</strong> <?php echo date('d/m/Y',strtotime($evento->getprazoFinalEnvioAvaliacaoFinal()));?></li>
+                                
+                            </ul>
                         </td>
                     </tr>
                 

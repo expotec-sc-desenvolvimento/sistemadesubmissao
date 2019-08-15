@@ -129,7 +129,7 @@
                     </tr>
                 </table>
                 
-                <p align='center'><input type='submit' class='btn-verde' value='Enviar Avaliacao'></p>
+                <p align='center'><input type='submit' class='btn-verde' value='Enviar Avaliação'></p>
                 
             </form>
 </div>

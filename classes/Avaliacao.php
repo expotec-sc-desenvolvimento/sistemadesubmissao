@@ -9,6 +9,7 @@ class Avaliacao {
     private $idSituacaoAvaliacao;
     private $nota;
     private $observacao;
+    private $dataRecebimento;
     private $prazo;
             
     function __construct() {
@@ -39,6 +40,10 @@ class Avaliacao {
         return $this->observacao;
     }
     
+    function getDataRecebimento() {
+        return $this->dataRecebimento;
+    }
+    
     function getPrazo() {
         return $this->prazo;
     }
@@ -65,6 +70,10 @@ class Avaliacao {
 
     function setObservacao($observacao) {
         $this->observacao = $observacao;
+    }
+    
+    function setDataRecebimento($dataRecebimento) {
+        $this->dataRecebimento = $dataRecebimento;
     }
     
     function setPrazo($prazo) {
@@ -145,6 +154,22 @@ class Avaliacao {
     }
     public static function excluirAvaliacao ($idAvaliacao) {
         $dado = AvaliacaoDao::excluirAvaliacao($idAvaliacao);
+        $resposta = retornaRespostaUnica($dado);
+
+        if ($resposta==1) return true;
+        else return false;
+    }
+    
+    public static function atualizarSituacaoAvaliacoes() {
+        $dado = AvaliacaoDao::atualizarSituacaoAvaliacoes();
+        $resposta = retornaRespostaUnica($dado);
+
+        if ($resposta==1) return true;
+        else return false;
+    }
+    
+    public static function adicionarAvaliacoesAutomaticas($idSubmissao, $idUsuario,$idSituacaoAvaliacao,$obs) {
+        $dado = AvaliadorDAO::adicionarAvaliacoesAutomaticas($idSubmissao, $idUsuario,$idSituacaoAvaliacao,$obs);
         $resposta = retornaRespostaUnica($dado);
 
         if ($resposta==1) return true;

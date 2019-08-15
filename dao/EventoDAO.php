@@ -10,13 +10,19 @@ class EventoDao {
         return Conexao::executar($sql);
     }
     
-    public static function atualizarEvento($id,$logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$mediaAprovacaoTrabalhos) {
-        $sql = "CALL atualizarEvento('$id','$logo','$nome','$descricao','$inicioSubmissao','$fimSubmissao','$mediaAprovacaoTrabalhos');";
+    public static function atualizarEvento($id,$logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
+                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $distribuicaoAutomaticaAvaliadores) {
+        
+        $sql = "CALL atualizarEvento('$id','$logo','$nome','$descricao','$inicioSubmissao','$fimSubmissao','$prazoFinalEnvioAvaliacaoParcial','$prazoFinalEnvioSubmissaoCorrigida',
+                                           '$prazoFinalEnvioAvaliacaoCorrigida', '$prazoFinalEnvioAvaliacaoFinal', '$distribuicaoAutomaticaAvaliadores');";
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }
-    public static function adicionarEvento($logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$mediaAprovacaoTrabalhos) {
-        $sql = "CALL adicionarEvento('$logo','$nome','$descricao','$inicioSubmissao','$fimSubmissao','$mediaAprovacaoTrabalhos');";
+    public static function adicionarEvento($logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
+                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $distribuicaoAutomaticaAvaliadores) {
+        
+        $sql = "CALL adicionarEvento('$logo','$nome','$descricao','$inicioSubmissao','$fimSubmissao','$prazoFinalEnvioAvaliacaoParcial','$prazoFinalEnvioSubmissaoCorrigida',
+                                           '$prazoFinalEnvioAvaliacaoCorrigida', '$prazoFinalEnvioAvaliacaoFinal', '$distribuicaoAutomaticaAvaliadores');";
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }
@@ -38,12 +44,6 @@ class EventoDao {
         $sql = "CALL retornaItemPorId('evento','$idEvento')";
         //echo $sql; exit(1);
         return Conexao::executar($sql);
-    }
-    
-    public static function dependenciasEventos($idEvento) {
-       $sql = "CALL dependenciasEventos('$idEvento')";
-       //echo $sql; exit(1);
-        return Conexao::executar($sql);   
     }
     
 }

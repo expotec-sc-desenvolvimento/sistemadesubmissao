@@ -40,6 +40,12 @@
                 <td>
             </tr>
             <tr>
+                <th class='direita'>Situação: </th>
+                <td colspan="2">
+                    <?php echo SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao()?>
+                <td>
+            </tr>
+            <tr>
                 <th class='direita'>Avaliador: </th>
                 <td><select class='campoDeEntrada' id="novoAvaliador" name="novoAvaliador" required="true"></select>
                 <td>
@@ -57,7 +63,7 @@
                 <td>
             </tr>
         </table>
-        <div class='div-btn'><input type="submit" class='btn-verde' value="Alterar Avaliador"><input type='button' value='Fechar' class='btn-vermelho' onclick="$('#modal').fadeOut(500)"></div>
+        <div class='div-btn'><input type="submit" class='btn-verde' value="Alterar Avaliação"><input type='button' value='Fechar' class='btn-vermelho' onclick="$('#modal').fadeOut(500)"></div>
     </form>
             
 
