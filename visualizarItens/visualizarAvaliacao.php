@@ -34,7 +34,7 @@
         ?>
     
             
-            <table align='center' border=1 class='table_list_2'>
+            <table align='center' border=1 class='table_list'>
                 <tr><th>Nome do Avaliador:</th><td align='center'><?php echo $nomeCompleto ?></td>
                 <tr><th>Situacao da Avaliação:</th><td><?php echo $situacaoAvaliacao ?></td>
                 <tr><th>Avaliação:</th><td>
@@ -54,6 +54,6 @@
                 ?>
                 </td>
                 <tr><th>Observações:</th><td><?php echo $avaliacao->getObservacao() ?></td></tr>
-            </table><br>
+            </table>
         <?php } ?>
     </div>

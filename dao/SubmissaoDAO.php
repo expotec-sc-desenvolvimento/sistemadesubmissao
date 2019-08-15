@@ -58,4 +58,10 @@ class SubmissaoDAO {
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }
+    
+    public static function retornaSubmissaoCorrigidaPelaParcial($idSubmissaoParcial) {
+        $sql = "CALL retornaSubmissaoCorrigidaPelaParcial('$idSubmissaoParcial');";
+        //echo $sql; exit(1);
+        return Conexao::executar($sql);
+    }
 }

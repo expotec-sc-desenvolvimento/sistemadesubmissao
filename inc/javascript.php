@@ -35,7 +35,7 @@
                    var name = $(this).attr('name');
                    var id = "";
                    
-                   if (name == 'ModalidadeEvento' || name == 'AreaEvento' || name == 'Avaliacao' || name=='AvaliacaoRepetida' || name=='PrazoEvento') id = "?id="+$(this).attr('id');
+                   if (name == 'ModalidadeEvento' || name == 'AreaEvento' || name == 'Avaliacao' || name=='AvaliacaoRepetida' || name=='VersaoCorrigida') id = "?id="+$(this).attr('id');
                    $('.modal-box-conteudo').load("addItens/add"+name+".php"+id);
                 });
                 

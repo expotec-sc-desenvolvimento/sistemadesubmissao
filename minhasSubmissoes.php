@@ -90,7 +90,7 @@
                               $visualizar = "<a class='visualizarObjeto' id='".$id."' name='Submissao'><img class='img-miniatura' src='".$iconVisualizar."' width='20px'></a>";
                               $editar="";
                               $excluir="";
-                              if ($obj->getIsSubmissor() && $situacao->getDescricao()=="Submetida") {
+                              if ($obj->getIsSubmissor() && $situacao->getDescricao()=="Submetida" && $submissao->getIdTipoSubmissao()==1) {
                                   //$editar = "<a href='editarSubmissao.php?id=" . $id . "'><img src='".$iconEditar."' width='20px'></a>";
                                   $editar = "<a class='editarObjeto' id='".$id."' name='Submissao'><img class='img-miniatura' src='".$iconEditar."' ></a>";
                                   
@@ -105,10 +105,10 @@
                               
                                 // Tipos de Submissoes: 1-Parcial, 2-Corrigida, 3-Final
                                 // Tipos de Situacao de Submissao: 4-Aprovado(a), 5-Aprovado(a), 6-Reprovado(a)
-                                if ($submissao->getIdTipoSubmissao()==2 && $submissao->getIdSituacaoSubmissao()==5 && !Submissao::existeSubmissaoCorrigida($submissao->getId())) {  
-                                      $versaoFinal = "<input type='button' class='addObjeto btn-verde' value='Enviar Versão Corrigida'>";
+                                if ($submissao->getIdTipoSubmissao()==1 && $submissao->getIdSituacaoSubmissao()==5 && !Submissao::existeSubmissaoCorrigida($submissao->getId())) {  
+                                      $versaoFinal = "<input type='button' class='addObjeto btn-verde' name='VersaoCorrigida' id='".$submissao->getId()."' value='Enviar Versão Corrigida'>";
                                 }
-                                else if ($submissao->getIdTipoSubmissao()==2 && $submissao->getIdSituacaoSubmissao()==5 && Submissao::existeSubmissaoCorrigida($submissao->getId())) {
+                                else if ($submissao->getIdTipoSubmissao()==1 && $submissao->getIdSituacaoSubmissao()==5 && Submissao::existeSubmissaoCorrigida($submissao->getId())) {
                                     $versaoFinal = "Enviada";
                                 }
                               

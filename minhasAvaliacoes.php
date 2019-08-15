@@ -10,7 +10,9 @@
     $usuario = $_SESSION['usuario'];
     
  //   verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página    
-    
+    if (!Avaliacao::atualizarSituacaoAvaliacoes()) {
+        echo "erro"; exit(1);
+    }  
         
 ?>
 <!DOCTYPE html>
@@ -39,7 +41,7 @@
         <fieldset>
             <h2 align="center">Minhas avaliações</h2>
             
-            <table border="1" align="center" class='table_list_2'>
+            <table border="1" align="center" class='table_list'>
                 <tr>
                     <td align="center"><strong>*</strong></td>
                     <td align="center"><strong>Evento</strong></td>
@@ -59,14 +61,31 @@
                     else {
                         foreach ($minhasAvaliacoes as $avaliacao) {
                            
-                            $situacaoSubmissao = SituacaoSubmissao::retornaDadosSituacaoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdSituacaoSubmissao())->getDescricao();
                             $tipoSubmissao = TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdTipoSubmissao())->getId();
+                            
+                            // Tipos De Submissao: 1-Parcial, 2-Corrigida, 3-Final
+                            // Tipos de Situacao Submissao: 4-Aprovado, 5-Aprovado com Ressalvas, 6-Reprovado
+                            
+                            /*
+                             * O IF abaixo verifica se essa é uma Avaliação de uma submissão corrigida. Sendo assim, o sistema busca a situação da avaliação do usuário
+                             * na versão Parcial da Submissão. Caso tenha diso APROVADO COM RESSALVAS (5), o sistema habilita para ele realizar a avaliação. Caso contrário,
+                             * ou seja, o avaliador tenha avaliado a versão parcial do Trabalho como APROVADO ou REPROVADO, ele não precisa mais realizar a avaliação
+                             */
+                            if ($tipoSubmissao==2) {
+                                $submissaoParcial = Submissao::retornaDadosSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdRelacaoComSubmissao());
+                                if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $submissaoParcial->getId(), 5))!=1) continue;
+                            }
+                            
+                            $situacaoSubmissao = SituacaoSubmissao::retornaDadosSituacaoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdSituacaoSubmissao())->getDescricao();
+                            $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao();
+                            
+                            
                             $avParcialCorrigida = array(1,2);
                             
                             if ($situacaoSubmissao=="Em avaliacao") {
-                                echo "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a></td>";
+                                echo "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='$iconEditar' class='img-miniatura'></a></td>";
                             }
-                            else echo "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconVisualizar' class='img-miniatura'></a></td>";
+                            else echo "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='$iconVisualizar' class='img-miniatura'></a></td>";
                             
                             echo "<td>".Evento::retornaDadosEvento(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdEvento())->getNome()."</td>";
                             echo "<td>".Area::retornaDadosArea(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdArea())->getDescricao()."</td>";

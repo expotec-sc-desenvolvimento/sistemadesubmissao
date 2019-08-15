@@ -66,7 +66,21 @@
                     <span align='center' style="font-size: 20px;">Solicitação para Avaliador </span></span>
             </div>
             <div class='acoes-user'>                
-                <span align='center' style="font-size: 40px"><a href="minhasAvaliacoes.php"><?php echo count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(),'',''))?></a><br>
+                <span align='center' style="font-size: 40px"><a href="minhasAvaliacoes.php">
+                    <?php 
+                        //echo count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(),'',''))
+                        $cont=0;
+                        foreach (Avaliacao::listaAvaliacoesComFiltro($usuario->getId(),'','') as $avaliacao) {
+                            // Tipos de Submissao: 1-Parcial, 2-Corrigida, 3-Final
+                            $submissao = Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao());
+                            if ($submissao->getIdTipoSubmissao()==2) {
+                                $subParcial = Submissao::retornaDadosSubmissao($submissao->getIdRelacaoComSubmissao());
+                                if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $subParcial->getId(), 5))==1) $cont++;
+                            }
+                            else $cont++;
+                        }
+                        echo $cont;
+                    ?></a><br>
                     <span align='center' style="font-size: 20px;">Avaliação de Trabalho</span></span>
             </div>
         </div>

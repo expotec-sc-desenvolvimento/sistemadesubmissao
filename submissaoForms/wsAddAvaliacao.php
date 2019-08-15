@@ -22,7 +22,6 @@
         try {
             $p = filter_input_array(INPUT_POST);    
 
-            $submissao = new Submissao();
             $submissao = Submissao::retornaDadosSubmissao($p['idSubmissao']);
             
             // Tipo Submissões - 1-Parcial / 2-Corrigida / 3-Final
@@ -32,11 +31,12 @@
             
             $prazo = "";
             
-            if (count(PrazosEvento::listaPrazosEventoComFiltro($submissao->getIdEvento(), $submissao->getIdTipoSubmissao()+1))>0) {
-                $idPrazoEvento = PrazosEvento::retornaIdPrazosEvento($submissao->getIdEvento(), $submissao->getIdTipoSubmissao()+1);
-                $dias = PrazosEvento::retornaDadosPrazosEvento($idPrazoEvento)->getDias();
-                $data = date('Y-m-d');
-                $prazo = date('Y-m-d', strtotime($data. ' + '.$dias.' days'));
+            
+            // Tipos de Submissoes: 1-Parcial, 2-Corrigida, 3-Final
+            switch ($submissao->getIdTipoSubmissao()) {
+                case 1: $prazo = Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoParcial(); break;
+                case 2: $prazo = Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoCorrigida(); break;
+                case 3: $prazo = Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoFinal(); break;
             }
             
             

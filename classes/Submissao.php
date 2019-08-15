@@ -230,6 +230,24 @@ class Submissao {
         else return false;
     }
     
+    public static function retornaSubmissaoCorrigidaPelaParcial($idSubmissaoParcial) {
+        $submissao = new Submissao();
+        $dado = SubmissaoDAO::retornaSubmissaoCorrigidaPelaParcial($idSubmissaoParcial);
+        
+        try{
+            foreach ($dado as $obj){
+                foreach ($obj as $key => $value) 
+                    $submissao->{$key} = $value;
+                
+            }
+        } catch (Exception $e){
+            echo $e->getMessage();
+        }
+        
+        return $submissao;
+    }
+  
+    
 } 
     
 

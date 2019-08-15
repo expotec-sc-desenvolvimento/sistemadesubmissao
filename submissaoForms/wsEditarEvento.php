@@ -22,7 +22,11 @@
             $descricaoEvento = $p['pDescricaoEvento'];
             $inicioSubmissao = $p['pInicioSubmissao'];
             $fimSubmissao = $p['pFimSubmissao'];
-            $mediaAprovacaoTrabalhos = $p['mediaAprovacaoTrabalhos'];
+            $prazoFinalEnvioAvaliacaoParcial = $p['prazoFinalEnvioAvaliacaoParcial'];
+            $prazoFinalEnvioSubmissaoCorrigida = $p['prazoFinalEnvioSubmissaoCorrigida'];
+            $prazoFinalEnvioAvaliacaoCorrigida = $p['prazoFinalEnvioAvaliacaoCorrigida'];
+            $prazoFinalEnvioAvaliacaoFinal = $p['prazoFinalEnvioAvaliacaoFinal'];
+            $distribuicaoAutomaticaAvaliadores = $p['distribuicaoAutomaticaAvaliadores'];
                    
                         
             $tipoArquivo = strtolower(pathinfo($_FILES[ 'pImagem' ]["name"], PATHINFO_EXTENSION));
@@ -37,7 +41,8 @@
                 $nomeImagem = $idEvento . "." . $tipoArquivo;
 
                 if (move_uploaded_file($_FILES['pImagem']['tmp_name'], './../'. $pastaFotosEventos . $nomeImagem)) { // Tenta Inserir a imagem na pasta
-                    if (Evento::atualizarEvento($idEvento, $nomeImagem, $nomeEvento, $descricaoEvento, $inicioSubmissao, $fimSubmissao, $mediaAprovacaoTrabalhos))
+                    if (Evento::atualizarEvento($idEvento, $nomeImagem, $nomeEvento, $descricaoEvento,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
+                                                $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal,$distribuicaoAutomaticaAvaliadores))
                         header('Location: ../gerenciarEventos.php?Item=Atualizado');
                     else echo "<script>window.alert('Houve um erro na Atualização do Evento');window.history.back();</script>";
                 }
@@ -47,7 +52,8 @@
             else {
                 
                 if (!$tamanho>0) {
-                    Evento::atualizarEvento($idEvento, -1, $nomeEvento, $descricaoEvento, $inicioSubmissao,$fimSubmissao,$mediaAprovacaoTrabalhos,$localEvento);
+                    Evento::atualizarEvento($idEvento, -1, $nomeEvento, $descricaoEvento,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
+                                                $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal,$distribuicaoAutomaticaAvaliadores);
                     header('Location: ../gerenciarEventos.php?Item=Atualizado');
                 }
                 else echo "<script>window.alert('$resposta');window.history.back();</script>";

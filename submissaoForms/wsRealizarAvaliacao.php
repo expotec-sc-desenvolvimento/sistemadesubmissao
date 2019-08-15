@@ -14,6 +14,7 @@
     
     
     
+    
     if ($metodoHttp === 'POST') {
         try {
             
@@ -57,7 +58,37 @@
             else $notaFinalAvaliacao = round($somaNotas / $somaPesos);
             
             
+            
             if (Avaliacao::realizarAvaliacao($avaliacao->getId(),$situacaoAvaliacao,$notas,$notaFinalAvaliacao,$observacao)) {
+                // Tipo de Submissao: 1-Parcial, 2-Corrigida, 3-Final
+                // Situação das Submissões: 4-Aprovado, 6-Reprovado
+
+                $submissao = Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao());
+                if ($submissao->getIdTipoSubmissao()==2 && $submissao->getIdSituacaoSubmissao()==4) {
+                    $evento = Evento::retornaDadosEvento($submissao->getIdEvento());
+                    $modalidade = Modalidade::retornaDadosModalidade($submissao->getIdModalidade());
+                    $novoArquivo = $evento->getNome() . "-" . $modalidade->getDescricao() . "-" . substr(md5(time()), 0,15) . "-Final.pdf";
+                    $idUsuariosAdd = "";
+                    
+                    foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $user) {
+                        $idUsuariosAdd .= $user->getIdUsuario() . ";";
+                    }
+                    
+                    
+                    if (Submissao::adicionarSubmissao($submissao->getIdEvento(), $submissao->getIdArea(), $submissao->getIdModalidade(),3,1,$novoArquivo,$submissao->getTitulo(),
+                                                      $submissao->getResumo(),$submissao->getPalavrasChave(),$submissao->getRelacaoCom(),$idUsuariosAdd,$submissao->getId())) {
+                        
+                    
+                        copy('./../' . $pastaSubmissoes . $submissao->getArquivo(), './../' . $pastaSubmissoes . $novoArquivo);
+                        header('Location: ../minhasAvaliacoes.php?Item=Atualizado');
+                    }
+                    else {
+                        echo "OCORREU UM ERRO. CONTACTE O ADMINISTRADOR";
+                        exit(1);
+                    }
+                    //GERA UMA NOVA SUBMISSAO
+
+                }
                 header('Location: ../minhasAvaliacoes.php?Item=Atualizado');
             }
             else header('Location: ../minhasAvaliacoes.php?Item=NaoAtualizado');

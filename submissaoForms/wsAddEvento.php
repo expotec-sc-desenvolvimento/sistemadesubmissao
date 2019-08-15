@@ -24,8 +24,12 @@
             $descricaoEvento = $p['pDescricaoEvento'];
             $inicioSubmissao = $p['pInicioSubmissao'];
             $fimSubmissao = $p['pFimSubmissao'];
-            $mediaAprovacaoTrabalhos = $p['mediaAprovacaoTrabalhos'];
-            
+            $prazoFinalEnvioAvaliacaoParcial = $p['prazoFinalEnvioAvaliacaoParcial'];
+            $prazoFinalEnvioSubmissaoCorrigida = $p['prazoFinalEnvioSubmissaoCorrigida'];
+            $prazoFinalEnvioAvaliacaoCorrigida = $p['prazoFinalEnvioAvaliacaoCorrigida'];
+            $prazoFinalEnvioAvaliacaoFinal = $p['prazoFinalEnvioAvaliacaoFinal'];
+            $distribuicaoAutomaticaAvaliadores = $p['distribuicaoAutomaticaAvaliadores'];
+
 
             $tipoArquivo = strtolower(pathinfo($_FILES[ 'pImagem' ]["name"], PATHINFO_EXTENSION));
             $tamanho = $_FILES[ 'pImagem' ][ 'size' ];
@@ -35,13 +39,16 @@
             
             if ($resposta=="") { // Verifica se a imagem está de acordo com as especificações esperadas. Se não retornar nenhuma reposta, o arquivo está OK
     
-                Evento::adicionarEvento("-1", $nomeEvento, $descricaoEvento,$inicioSubmissao,$fimSubmissao,$mediaAprovacaoTrabalhos);
+                Evento::adicionarEvento("-1", $nomeEvento, $descricaoEvento,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
+                                        $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal,$distribuicaoAutomaticaAvaliadores);
+                
                 $idEvento = Evento::retornaIdUltimoEvento();
 
                 $nomeImagem = $idEvento . "." . $tipoArquivo;
 
                 if (move_uploaded_file($_FILES['pImagem']['tmp_name'], './../' . $pastaFotosEventos . $nomeImagem)) { // Tenta Inserir a imagem na pasta
-                    if (Evento::atualizarEvento($idEvento, $nomeImagem, $nomeEvento, $descricaoEvento, $inicioSubmissao,$fimSubmissao,$mediaAprovacaoTrabalhos))
+                    if (Evento::atualizarEvento($idEvento, $nomeImagem, $nomeEvento, $descricaoEvento,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
+                                                $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal,$distribuicaoAutomaticaAvaliadores))
                         header('Location: ../gerenciarEventos.php?Item=Criado');
                     else echo "<script>window.alert('Houve um erro na Criação do Evento');window.history.back();</script>";
                 }
