@@ -64,7 +64,10 @@
 
         <body>
 
-            <?php require_once './inc/menuInicial.php';?>
+            <?php 
+                require_once './inc/menuInicial.php';
+                require_once './inc/modal.php';
+            ?>
 
 
             <?php 
@@ -82,7 +85,7 @@
             ?>
             <br><br>
             <h3 align='center'>Listagem de Usuários: <?php echo count ($listaUsuarios)?></h3>
-            <p align="center"><input type="button" class="addObjeto"  value="Adicionar Usuário"></p>
+            <p align="center"><input type="button" class="addObjeto btn-verde" name="Usuario" value="Adicionar Usuário"></p>
             
             <div class="users">
             

@@ -83,7 +83,7 @@
                             $avParcialCorrigida = array(1,2);
                             
                             if ($situacaoSubmissao=="Em avaliacao") {
-                                echo "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='$iconEditar' class='img-miniatura'></a></td>";
+                                echo "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a></td>";
                             }
                             else echo "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='$iconVisualizar' class='img-miniatura'></a></td>";
                             
