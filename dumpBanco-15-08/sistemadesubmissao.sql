@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version 5.5.5-10.1.35-MariaDB)
-# Date: 2019-08-15 17:02:25
+# Date: 2019-08-16 19:43:13
 # Generator: MySQL-Front 6.1  (Build 1.26)
 
 
@@ -19,6 +19,7 @@ CREATE TABLE `area` (
 # Data for table "area"
 #
 
+INSERT INTO `area` VALUES (26,'Mecanica','-'),(27,'Português','-'),(28,'Matemática','-'),(29,'Geografia','-');
 
 #
 # Structure for table "evento"
@@ -45,6 +46,7 @@ CREATE TABLE `evento` (
 # Data for table "evento"
 #
 
+INSERT INTO `evento` VALUES (23,'23.jpg','EXPOTEC','Expotec','','2019-08-12','2019-09-15','2019-09-17','2019-09-20','2019-09-22','2019-09-30',0);
 
 #
 # Structure for table "areasevento"
@@ -66,6 +68,7 @@ CREATE TABLE `areasevento` (
 # Data for table "areasevento"
 #
 
+INSERT INTO `areasevento` VALUES (23,23,26),(24,23,27),(25,23,28),(26,23,29);
 
 #
 # Structure for table "modalidade"
@@ -82,6 +85,7 @@ CREATE TABLE `modalidade` (
 # Data for table "modalidade"
 #
 
+INSERT INTO `modalidade` VALUES (31,'Apresentação Oral');
 
 #
 # Structure for table "modalidadesevento"
@@ -103,6 +107,7 @@ CREATE TABLE `modalidadesevento` (
 # Data for table "modalidadesevento"
 #
 
+INSERT INTO `modalidadesevento` VALUES (32,23,31);
 
 #
 # Structure for table "perfil"
@@ -212,6 +217,7 @@ CREATE TABLE `submissao` (
 # Data for table "submissao"
 #
 
+INSERT INTO `submissao` VALUES (60,23,27,31,1,3,'EXPOTEC-Apresentação Oral-8cfad2e44a4e321-Parcial.pdf','j','j','j','-','2019-08-16',NULL,NULL),(61,23,26,31,1,3,'EXPOTEC-Apresentação Oral-7cba2685b21eee8-Parcial.pdf','h','h','h','PI','2019-08-16',NULL,NULL),(62,23,26,31,1,3,'EXPOTEC-Apresentação Oral-7bd7de8c61eb0f7-Parcial.pdf','ds','ds','sd','PI','2019-08-16',NULL,NULL),(63,23,28,31,1,3,'EXPOTEC-Apresentação Oral-4338251954b1ed8-Parcial.pdf','s','a','ds','TCC','2019-08-16',NULL,NULL),(64,23,26,31,1,3,'EXPOTEC-Apresentação Oral-9acd769d879f154-Parcial.pdf','as','as','as','-','2019-08-16',NULL,NULL),(65,23,28,31,1,3,'EXPOTEC-Apresentação Oral-a1d0e1b5b7b7595-Parcial.pdf','asd','asd','nads;dsdskl;dskldks','PI','2019-08-16',NULL,NULL),(66,23,29,31,1,3,'EXPOTEC-Apresentação Oral-fb58940add28cbd-Parcial.pdf','as','s','ds','TCC','2019-08-16',NULL,NULL),(67,23,29,31,1,3,'EXPOTEC-Apresentação Oral-11e131c63a25848-Parcial.pdf','a','a','a','TCC','2019-08-16',NULL,NULL),(68,23,27,31,1,3,'EXPOTEC-Apresentação Oral-0dd750b6a2df2fb-Parcial.pdf','as','as','dsdsds','PI','2019-08-16',NULL,NULL),(69,23,27,31,1,3,'EXPOTEC-Apresentação Oral-c804a91ff76eeb0-Parcial.pdf','as','das','Ad; ds; qwe','PI','2019-08-16',NULL,NULL);
 
 #
 # Structure for table "criterio"
@@ -236,6 +242,7 @@ CREATE TABLE `criterio` (
 # Data for table "criterio"
 #
 
+INSERT INTO `criterio` VALUES (19,31,1,'Criterio 1',0,'O trabalho foi satisfatório?'),(20,31,2,'Criterio 5',0,'O Trabalho foi corrigido?'),(21,31,3,'Apresentação 1',2,'Teste'),(22,31,3,'Apresentação 2',2,'d');
 
 #
 # Structure for table "tipousuario"
@@ -285,7 +292,7 @@ CREATE TABLE `usuario` (
 # Data for table "usuario"
 #
 
-INSERT INTO `usuario` VALUES (2,1,'069.440.264-81','José Sueney','de Lima','4737bbadab50fcbf8d2acf5a6962e12b','1987-06-24','sueney.lima@ifrn.edu.br',1,'06944026481.jpg',0,NULL),(3,2,'123.456.789-00','Danilo Henrique','Macedos','827ccb0eea8a706c4c34a16891f84e7b','1987-10-10','a@g.com',1,'semFoto.jpg',0,NULL),(23,2,'069.440.264-82','Leonardo Duarte','de Albuquerque','26b5542258bc1994b7423fb175caf101','1986-06-14','leo@ifrn.br',1,'semFoto.jpg',0,NULL),(30,2,'876.537.890-65','Samira Fernandes','Delgado','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','sueney.lima@ifrn.edu',1,'semFoto.jpg',0,NULL),(31,2,'876.547.890-65','Kassimati','Maria','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','sueney.lima@ifrn.ed',1,'semFoto.jpg',0,NULL),(32,2,'876.667.840-65','Alyson Alves','de Lima','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','sueney.lima@ifrn.q',1,'semFoto.jpg',0,NULL),(33,2,'872.587.840-65','Danielle Bezerra','de Souza','26b5542258bc1994b7423fb175caf101','2017-12-12','sueney.lima@ifrn.qas',1,'semFoto.jpg',0,NULL),(34,2,'111.141.111-11','Ana Luiza','Palhano','26b5542258bc1994b7423fb175caf101','2017-12-12','sueney.lima@ifrn.br.sv',1,'semFoto.jpg',0,NULL),(35,2,'111.111.111-12','Vinicius Fernandes','Pinto','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','sueney.lima@ifrn.br.sb',1,'semFoto.jpg',0,NULL),(36,2,'111.131.111-14','Laysi Rocha','de Oliveira','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','sueney.lima@ifrn.asd',1,'semFoto.jpg',0,NULL),(37,2,'111.569.235-76','Erivan Ferreira','do Amaral','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','dado.lima@ifrn.asw',1,'semFoto.jpg',0,NULL),(38,2,'211.555.235-72','Jean Carlos Pinto','Fernandes','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','dado.lima@ifrn.as',1,'semFoto.jpg',0,NULL),(39,3,'198.723.789-98','Andreza Luna','de Brandao','827ccb0eea8a706c4c34a16891f84e7b','1989-11-11','s@iui.com',1,'semFoto.jpg',0,NULL),(41,2,'927.478.291-82','Ricardo Luiz','Cacho','26b5542258bc1994b7423fb175caf101','1989-11-11','sd@4.comcc',1,'semFoto.jpg',0,NULL),(42,2,'098.267.487-56','Joatan Fernandes','Junior','26b5542258bc1994b7423fb175caf101','1989-10-11','sasq@s.com',1,'semFoto.jpg',0,NULL),(43,2,'567.125.435-60','Adriano de Lima','Nobrega','827ccb0eea8a706c4c34a16891f84e7b','1978-07-06','etec@com.brom',1,'semFoto.jpg',0,NULL),(44,2,'239.871.253-68','Geogenes Ferreira','Pinto','4737bbadab50fcbf8d2acf5a6962e12b','1989-08-11','dsasdlkj@iico.com',1,'semFoto.jpg',0,NULL),(46,2,'222.222.222-22','Severino Zeca','Medeiros','827ccb0eea8a706c4c34a16891f84e7b','1990-11-11','a@g.c',1,'semFoto.jpg',0,NULL),(50,2,'123.123.234-56','Mirosmar Bolsista','Bodão','26b5542258bc1994b7423fb175caf101','1990-12-11','sdsds@ifrn.c',1,'semFoto.jpg',0,NULL),(67,2,'876.547.890-63','Felipe Fernandes','de Oliveira','827ccb0eea8a706c4c34a16891f84e7b','1990-11-11','dsds@dsds.com',1,'semFoto.jpg',0,NULL),(68,2,'077.669.584-30','Edwiges Pereira','do Nascimento','827ccb0eea8a706c4c34a16891f84e7b','1994-02-02','edwiges_pereira8@hotmail.com',1,'semFoto.jpg',0,NULL),(69,2,'543.039.458-42','Joao Batista','Dantinhas','827ccb0eea8a706c4c34a16891f84e7b','1989-10-11','joao.danta@ifrn.edu',2,'54303945842.jpg',0,NULL),(71,3,'738.291.823-71','Gilbran','Lopes','827ccb0eea8a706c4c34a16891f84e7b','1979-12-11','gilb.dsd@ds.co',2,'semFoto.jpg',0,NULL),(72,2,'091.283.091-28','Cristiane Maria','Nobrega','827ccb0eea8a706c4c34a16891f84e7b','1980-10-11','cristiane@ifrn.com',2,'semFoto.jpg',0,NULL),(73,1,'049.063.294-70','Lennedy','Soarea','827ccb0eea8a706c4c34a16891f84e7b','1989-10-11','lennedy.soarea@ids.ed',2,'04906329470.jpg',0,NULL);
+INSERT INTO `usuario` VALUES (2,1,'069.440.264-81','José Sueney','de Lima','4737bbadab50fcbf8d2acf5a6962e12b','1987-06-24','sueney.lima@ifrn.edu.br',1,'06944026481.jpg',0,NULL),(3,2,'123.456.789-00','Danilo Henrique','Macedos','827ccb0eea8a706c4c34a16891f84e7b','1987-10-10','a@g.com',1,'semFoto.jpg',0,NULL),(23,2,'069.440.264-82','Leonardo Duarte','de Albuquerque','827ccb0eea8a706c4c34a16891f84e7b','1986-06-14','leo@ifrn.br',1,'semFoto.jpg',0,NULL),(30,2,'876.537.890-65','Samira Fernandes','Delgado','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','sueney.lima@ifrn.edu',1,'semFoto.jpg',0,NULL),(31,2,'876.547.890-65','Kassimati','Maria','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','sueney.lima@ifrn.ed',1,'semFoto.jpg',0,NULL),(32,2,'876.667.840-65','Alyson Alves','de Lima','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','sueney.lima@ifrn.q',1,'semFoto.jpg',0,NULL),(33,2,'872.587.840-65','Danielle Bezerra','de Souza','26b5542258bc1994b7423fb175caf101','2017-12-12','sueney.lima@ifrn.qas',1,'semFoto.jpg',0,NULL),(34,2,'111.141.111-11','Ana Luiza','Palhano','26b5542258bc1994b7423fb175caf101','2017-12-12','sueney.lima@ifrn.br.sv',1,'semFoto.jpg',0,NULL),(35,2,'111.111.111-12','Vinicius Fernandes','Pinto','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','sueney.lima@ifrn.br.sb',1,'semFoto.jpg',0,NULL),(36,2,'111.131.111-14','Laysi Rocha','de Oliveira','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','sueney.lima@ifrn.asd',1,'semFoto.jpg',0,NULL),(37,2,'111.569.235-76','Erivan Ferreira','do Amaral','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','dado.lima@ifrn.asw',1,'semFoto.jpg',0,NULL),(38,2,'211.555.235-72','Jean Carlos Pinto','Fernandes','827ccb0eea8a706c4c34a16891f84e7b','2017-12-12','dado.lima@ifrn.as',1,'semFoto.jpg',0,NULL),(39,3,'198.723.789-98','Andreza Luna','de Brandao','827ccb0eea8a706c4c34a16891f84e7b','1989-11-11','s@iui.com',1,'semFoto.jpg',0,NULL),(41,2,'927.478.291-82','Ricardo Luiz','Cacho','827ccb0eea8a706c4c34a16891f84e7b','1989-11-11','sd@4.comcc',1,'semFoto.jpg',0,NULL),(42,2,'098.267.487-56','Joatan Fernandes','Junior','26b5542258bc1994b7423fb175caf101','1989-10-11','sasq@s.com',1,'semFoto.jpg',0,NULL),(43,2,'567.125.435-60','Adriano de Lima','Nobrega','827ccb0eea8a706c4c34a16891f84e7b','1978-07-06','etec@com.brom',1,'semFoto.jpg',0,NULL),(44,2,'239.871.253-68','Geogenes Ferreira','Pinto','4737bbadab50fcbf8d2acf5a6962e12b','1989-08-11','dsasdlkj@iico.com',1,'semFoto.jpg',0,NULL),(46,2,'222.222.222-22','Severino Zeca','Medeiros','827ccb0eea8a706c4c34a16891f84e7b','1990-11-11','a@g.c',1,'semFoto.jpg',0,NULL),(50,2,'123.123.234-56','Mirosmar Bolsista','Bodão','26b5542258bc1994b7423fb175caf101','1990-12-11','sdsds@ifrn.c',1,'semFoto.jpg',0,NULL),(67,2,'876.547.890-63','Felipe Fernandes','de Oliveira','827ccb0eea8a706c4c34a16891f84e7b','1990-11-11','dsds@dsds.com',1,'semFoto.jpg',0,NULL),(68,2,'077.669.584-30','Edwiges Pereira','do Nascimento','827ccb0eea8a706c4c34a16891f84e7b','1994-02-02','edwiges_pereira8@hotmail.com',1,'semFoto.jpg',0,NULL),(69,2,'543.039.458-42','Joao Batista','Dantinhas','827ccb0eea8a706c4c34a16891f84e7b','1989-10-11','joao.danta@ifrn.edu',2,'semFoto.jpg',0,NULL),(71,3,'738.291.823-71','Gilbran','Lopes','827ccb0eea8a706c4c34a16891f84e7b','1979-12-11','gilb.dsd@ds.co',2,'semFoto.jpg',0,NULL),(72,2,'091.283.091-28','Cristiane Maria','Nobrega','827ccb0eea8a706c4c34a16891f84e7b','1980-10-11','cristiane@ifrn.com',2,'semFoto.jpg',0,NULL),(73,1,'049.063.294-70','Lennedy','Soarea','827ccb0eea8a706c4c34a16891f84e7b','1989-10-11','lennedy.soarea@ids.ed',2,'semFoto.jpg',0,NULL);
 
 #
 # Structure for table "avaliacao"
@@ -314,6 +321,7 @@ CREATE TABLE `avaliacao` (
 # Data for table "avaliacao"
 #
 
+INSERT INTO `avaliacao` VALUES (200,60,3,1,NULL,NULL,'2019-08-16','2019-09-17'),(201,60,68,1,NULL,NULL,'2019-08-16','2019-09-17'),(202,60,2,1,NULL,NULL,'2019-08-16','2019-09-17'),(203,61,31,1,NULL,NULL,'2019-08-16','2019-09-17'),(204,61,36,1,NULL,NULL,'2019-08-16','2019-09-17'),(205,61,31,1,NULL,NULL,'2019-08-16','2019-09-17'),(206,62,30,1,NULL,NULL,'2019-08-16','2019-09-17'),(207,62,42,1,NULL,NULL,'2019-08-16','2019-09-17'),(208,62,23,1,NULL,NULL,'2019-08-16','2019-09-17'),(209,63,71,1,NULL,NULL,'2019-08-16','2019-09-17'),(210,63,2,1,NULL,NULL,'2019-08-16','2019-09-17'),(211,63,34,1,NULL,NULL,'2019-08-16','2019-09-17'),(212,64,50,1,NULL,NULL,'2019-08-16','2019-09-17'),(213,64,67,1,NULL,NULL,'2019-08-16','2019-09-17'),(214,64,44,1,NULL,NULL,'2019-08-16','2019-09-17'),(215,65,3,1,NULL,NULL,'2019-08-16','2019-09-17'),(216,65,71,1,NULL,NULL,'2019-08-16','2019-09-17'),(217,65,72,1,NULL,NULL,'2019-08-16','2019-09-17'),(218,66,23,1,NULL,NULL,'2019-08-16','2019-09-17'),(219,66,34,1,NULL,NULL,'2019-08-16','2019-09-17'),(220,66,30,1,NULL,NULL,'2019-08-16','2019-09-17'),(221,67,44,1,NULL,NULL,'2019-08-16','2019-09-17'),(222,67,23,1,NULL,NULL,'2019-08-16','2019-09-17'),(223,67,36,1,NULL,NULL,'2019-08-16','2019-09-17'),(224,68,68,1,NULL,NULL,'2019-08-16','2019-09-17'),(225,68,72,1,NULL,NULL,'2019-08-16','2019-09-17'),(226,68,42,1,NULL,NULL,'2019-08-16','2019-09-17'),(227,69,3,1,NULL,NULL,'2019-08-16','2019-09-17'),(228,69,68,1,NULL,NULL,'2019-08-16','2019-09-17'),(229,69,50,1,NULL,NULL,'2019-08-16','2019-09-17');
 
 #
 # Structure for table "avaliacaocriterio"
@@ -336,6 +344,7 @@ CREATE TABLE `avaliacaocriterio` (
 # Data for table "avaliacaocriterio"
 #
 
+INSERT INTO `avaliacaocriterio` VALUES (438,200,19,NULL),(439,201,19,NULL),(440,202,19,NULL),(441,203,19,NULL),(442,204,19,NULL),(443,205,19,NULL),(444,206,19,NULL),(445,207,19,NULL),(446,208,19,NULL),(447,209,19,NULL),(448,210,19,NULL),(449,211,19,NULL),(450,212,19,NULL),(451,213,19,NULL),(452,214,19,NULL),(453,215,19,NULL),(454,216,19,NULL),(455,217,19,NULL),(456,218,19,NULL),(457,219,19,NULL),(458,220,19,NULL),(459,221,19,NULL),(460,222,19,NULL),(461,223,19,NULL),(462,224,19,NULL),(463,225,19,NULL),(464,226,19,NULL),(465,227,19,NULL),(466,228,19,NULL),(467,229,19,NULL);
 
 #
 # Structure for table "solicitacaoavaliador"
@@ -386,6 +395,7 @@ CREATE TABLE `avaliador` (
 # Data for table "avaliador"
 #
 
+INSERT INTO `avaliador` VALUES (57,23,26,31),(58,23,26,36),(60,23,27,72),(61,23,27,3),(62,23,26,42),(63,23,26,67),(64,23,26,30),(65,23,26,50),(66,23,29,34),(67,23,29,23),(68,23,29,44),(69,23,27,68),(70,23,28,71),(71,23,28,31),(72,23,28,2),(73,23,28,3);
 
 #
 # Structure for table "usuariosdasubmissao"
@@ -408,6 +418,7 @@ CREATE TABLE `usuariosdasubmissao` (
 # Data for table "usuariosdasubmissao"
 #
 
+INSERT INTO `usuariosdasubmissao` VALUES (140,60,23,1),(141,60,30,0),(142,61,23,1),(143,61,30,0),(144,62,41,1),(145,62,44,0),(146,62,50,0),(147,62,69,0),(148,63,41,1),(149,64,41,1),(150,64,30,0),(151,65,41,1),(152,65,50,0),(153,66,41,1),(154,66,39,0),(155,67,41,1),(156,68,41,1),(157,69,41,1),(158,69,2,0);
 
 #
 # Procedure "adicionarArea"
@@ -1790,7 +1801,7 @@ DROP PROCEDURE IF EXISTS `listaUsuarios`;
 CREATE PROCEDURE `listaUsuarios`(IN filtroNome varchar(250), IN filtroTipoUsuario int(10), IN filtroPerfil int(10))
 BEGIN
 
-  SET @consulta = 'SELECT u.id,u.idPerfil,u.cpf,u.nome,u.sobrenome,u.dataNascimento,u.email,u.idTipoUsuario,u.imagem,u.isCredenciado,u.dataCredenciamento FROM usuario u, perfil p ';
+  SET @consulta = 'SELECT u.* FROM usuario u, perfil p ';
   SET @consulta = CONCAT(@consulta, ' WHERE u.nome LIKE \'%', filtroNome, '%\'');
   
   IF (filtroTipoUsuario != '-1' AND filtroTipoUsuario!='') THEN
@@ -1979,14 +1990,14 @@ BEGIN
 END;
 
 #
-# Procedure "retornaIdUltimoDownload"
+# Procedure "retornaIdUltimaSubmissao"
 #
 
-DROP PROCEDURE IF EXISTS `retornaIdUltimoDownload`;
-CREATE PROCEDURE `retornaIdUltimoDownload`()
+DROP PROCEDURE IF EXISTS `retornaIdUltimaSubmissao`;
+CREATE PROCEDURE `retornaIdUltimaSubmissao`()
 BEGIN
 
-  SELECT MAX(id) as id from download;
+  SELECT MAX(id) as id from submissao;
   
 END;
 
