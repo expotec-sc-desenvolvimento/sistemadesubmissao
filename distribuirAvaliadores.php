@@ -40,28 +40,37 @@
             <h3 align='center'>Distribuir Avaliadores</h3>
             
             <form method="post" action="<?=htmlspecialchars('submissaoForms/wsDitribuirAvaliacoes.php');?>">
-                <p align="center">
-                    <label for="select-Eventos">Selecione o Tipo de Avaliação: </label>
-                        <select id="select-tipoAvaliacao" name="select-tipoAvaliacao" onchange="loadInfoEvento(document.getElementById('select-Eventos').value,this.value,'info-evento')">
-                            <?php
-                                foreach (TipoSubmissao::listaTipoSubmissoes() as $tipo) {
-                                    echo "<option value='".$tipo->getId() . "'>" . $tipo->getDescricao() . "</option>";
-                                }
-                            ?>
-                        </select>
-                </p>
-                <p align="center"> 
-                    <label for="select-Eventos">Selecione o Evento: </label>
-                    <select id="select-Eventos" name="select-Eventos" onchange="loadInfoEvento(this.value,document.getElementById('select-tipoAvaliacao').value,'info-evento')">
-                        <option value="">Selecione um evento</option>
-                        <?php
-                            foreach (Evento::listaEventos() as $evento) {
-                                echo "<option value='".$evento->getId() . "'>" . $evento->getNome() . "</option>";
-                            }
-                        ?>
-                    </select><br>
-                </p>
-                    <div id="info-evento" name="info-evento" align="center"></div>
+                
+                <table align='center'>
+                    <tr>
+                        <th class='direta'>Selecione o Tipo de Avaliação: </th>
+                        <td>
+                            <select class='campoDeEntrada' id="select-tipoAvaliacao" name="select-tipoAvaliacao" onchange="loadInfoEvento(document.getElementById('select-Eventos').value,this.value,'info-evento')">
+                                <?php
+                                    foreach (TipoSubmissao::listaTipoSubmissoes() as $tipo) {
+                                        echo "<option value='".$tipo->getId() . "'>" . $tipo->getDescricao() . "</option>";
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class='direta'>Selecione o Evento: </th>
+                        <td>
+                            <select class='campoDeEntrada' id="select-Eventos" name="select-Eventos" onchange="loadInfoEvento(this.value,document.getElementById('select-tipoAvaliacao').value,'info-evento')">
+                                <option value="">Selecione um evento</option>
+                                <?php
+                                    foreach (Evento::listaEventos() as $evento) {
+                                        echo "<option value='".$evento->getId() . "'>" . $evento->getNome() . "</option>";
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                        
+                </table>
+                <br>
+                <div id="info-evento" name="info-evento" align="center"></div>
            </form>
         </fieldset>
             

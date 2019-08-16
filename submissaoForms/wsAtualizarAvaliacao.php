@@ -25,11 +25,12 @@
             
             $dataAtual = date('Y-m-d');
             
+            
             if (strtotime($prazo)>=strtotime($dataAtual)) {
                 if (Avaliacao::atualizarAvaliacao($idAvaliacao, $novoAvaliador,1,$prazo)) {
-                    header('Location: ../gerenciarSubmissoes.php?Item=Atualizado');
+                    header('Location: '.$_SERVER["HTTP_REFERER"].'?Item=Atualizado');
                 }
-                    else header('Location: ../gerenciarSubmissoes.php?Item=NaoAtualizado');
+                    else header('Location: '.$_SERVER["HTTP_REFERER"].'?Item=NaoAtualizado');
                 }
             else echo "<script>window.alert('A data do prazo é menor que a data Atual!');window.history.back();</script>";
             

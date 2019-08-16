@@ -22,8 +22,8 @@
             $idEvento = $p['select-Eventos'];
             $idTipoAvalicao = $p['select-tipoAvaliacao'];
             
-            $qtdeAvaliadoresArea = $p['avaliadoresDaArea'];
-            $qtdeAvaliadoresOutraArea = $p['avaliadoresOutraArea'];
+            $qtdeAvaliadoresArea = 2;
+            $qtdeAvaliadoresOutraArea = 1;
 
             $submissoes = Submissao::listaSubmissoesComFiltro($idEvento, '', '', 1, $idTipoAvalicao); // Situação 1 = Submetida
             
@@ -55,8 +55,13 @@
                         }
                     }
                     
+                    $prazo="";
                     
-                    if (Avaliacao::adicionarAvaliacoes($submissao->getId(),$submissao->getIdTipoSubmissao(),$submissao->getIdModalidade(),$idsAvaliadores)) {
+                    if ($submissao->getIdTipoSubmissao()==1) $prazo = Evento::retornaDadosEvento ($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoParcial ();
+                    else if ($submissao->getIdTipoSubmissao()==2) $prazo = Evento::retornaDadosEvento ($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoCorrigida ();
+                    else if ($submissao->getIdTipoSubmissao()==3) $prazo = Evento::retornaDadosEvento ($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoFinal ();
+                    
+                    if (Avaliacao::adicionarAvaliacoes($submissao->getId(),$submissao->getIdTipoSubmissao(),$submissao->getIdModalidade(),$idsAvaliadores,$prazo)) {
                         $avaliacoesComAvaliadores+=1;
                     }
                     else $avaliacoesSemAvaliadores+=1;                

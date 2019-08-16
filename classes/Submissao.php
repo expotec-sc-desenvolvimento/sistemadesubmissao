@@ -246,7 +246,13 @@ class Submissao {
         
         return $submissao;
     }
-  
+    
+    
+    public static function retornaIdUltimaSubmissao() {
+        $dado = SubmissaoDao::retornaIdUltimaSubmissao();
+        $resposta = retornaRespostaUnica($dado);
+        return $resposta;
+    }
     
 } 
     

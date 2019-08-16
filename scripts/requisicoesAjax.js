@@ -35,6 +35,7 @@ function loadModalidades() {
 function loadUsers(busca,resposta) {
       
     if (document.getElementById(busca).value.length>=3) {
+        document.getElementById("resposta").style.display = "block";
         var xhttp = new XMLHttpRequest();
         var nome = document.getElementById(busca).value;
         xhttp.onreadystatechange = function() {
@@ -45,10 +46,9 @@ function loadUsers(busca,resposta) {
 
         xhttp.open("GET", "reqAjax/wsUsuariosAjax.php?nome="+nome, true);
         xhttp.send();
-    }
-    else document.getElementById("resposta").innerHTML = "Digite ao menos 4 letras";
 
   }
+}
 
 function usuariosSubmissao(busca,resposta,idSubmissor) {
       

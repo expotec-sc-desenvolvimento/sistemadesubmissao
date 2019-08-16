@@ -64,4 +64,10 @@ class SubmissaoDAO {
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }
+    
+    public static function retornaIdUltimaSubmissao() {
+        $sql = "CALL retornaIdUltimaSubmissao();";
+        //echo $sql; exit(1);
+        return Conexao::executar($sql);
+    }
 }

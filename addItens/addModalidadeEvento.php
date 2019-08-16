@@ -40,7 +40,7 @@
             </table>
             
             <?php if ($flag=="") { ?>
-                <div class="div-btn"><input class="botaoConfirmar" type="submit" value="Vincular Modalidades"></div>
+                <div class="div-btn"><input class="btn-verde" type="submit" value="Vincular Modalidades"></div>
             <?php } else echo $flag; ?>
 
         </form>

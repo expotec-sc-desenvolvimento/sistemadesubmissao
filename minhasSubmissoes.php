@@ -44,6 +44,7 @@
             
                 <h2 align="center">Submissões do Usuário</h2>
                 <table border="1" class='table_list' align="center">
+                <thead>
                 <?php if (count($submissoes)==0) echo "<tr><td>Nenhum trabalho submetido</td></tr>";
                       else {
                           echo "<tr>"
@@ -56,7 +57,7 @@
                                 . "<th><strong>Arquivo</th>"
                                 . "<th><strong>Situação</th>"
                                 . "<th><strong>Autores</th>"
-                                . "<th><strong>Versão Final</strong></td></tr>";
+                                . "<th><strong>Versão Final</strong></td></tr></thead><tbody>";
                                 
                                 
                           foreach ($submissoes as $obj) {
@@ -131,6 +132,7 @@
                           
                       }
                 ?>
+                    </tbody>
                 </table>
             </fieldset>
         </body>

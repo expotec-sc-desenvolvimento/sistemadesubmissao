@@ -48,7 +48,7 @@
                 <thead>
                     <tr>
                         <th>*</th>
-                        <th>Descricao</th>
+                        <th>Descrição</th>
                         <th>SubAreas</th>
                     </tr>
                 </thead>

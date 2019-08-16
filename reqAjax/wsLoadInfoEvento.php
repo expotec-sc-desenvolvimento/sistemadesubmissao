@@ -55,20 +55,6 @@ if(isset($_GET['evento']) && $_GET['evento']!="") {
         
     }
         $resposta = $resposta . "</table>";
-        $resposta = $resposta .    "<p align=center><strong>Adicionar Avaliadores da Área: </strong>"
-                                    . "<select id='avaliadoresDaArea' name='avaliadoresDaArea' required='true'>"
-                                        . "<option value=''>0</option>"
-                                        . "<option value='1'>1</option>"
-                                        . "<option value='2'>2</option>"
-                                        . "<option value='3'>3</option>"
-                                    . "</select></p>";
-        $resposta = $resposta .    "<p align=center><strong>Adicionar Avaliadores de Outra Área: </strong>"
-                                    . "<select id='avaliadoresOutraArea' name='avaliadoresOutraArea'>"
-                                        . "<option value='0'>0</option>"
-                                        . "<option value='1'>1</option>"
-                                        . "<option value='2'>2</option>"
-                                        . "<option value='3'>3</option>"
-                                    . "</select></p>";
         
        /* $resposta = $resposta . "<p align='center'><input type='submit' value='Distribuir Avaliadores'"
                 . "onclick=\"return confirm('Resumo: '+document.getElementById('avaliadoresDaArea').value+ ' Avaliadores da Área \\n "
@@ -76,7 +62,7 @@ if(isset($_GET['evento']) && $_GET['evento']!="") {
                 . "              Deseja gerar as avalições com esses valores?')\">"
                 . "</p>"; */
         
-        $resposta = $resposta . "<p align='center'><input type='button' class='addDistribuicao' value='Verificar'></p>";
+        $resposta = $resposta . "<p align='center'><input type='button' class='addDistribuicao btn-verde' value='Verificar'></p>";
      echo $resposta;
 }
 else {

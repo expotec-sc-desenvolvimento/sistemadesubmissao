@@ -73,7 +73,7 @@
         <fieldset>
             <h3 align='center'>Listagem de Avaliações (<?php echo count($listaAvaliacoes)?>)</h3>
             
-            <p align="center"><a href="downloads/wsListagemSubmissoes.php?<?php echo $vars ?>">Exportar Planilha Excel</a></p>
+            <p align="center"><a href="downloads/wsListagemAvaliadores.php?<?php echo $vars ?>">Exportar Planilha Excel</a></p>
             <p align="center">     
                 <label for="select-Usuario">Usuario: </label>
                 <select class="campoDeEntrada" id="select-Usuario" name="select-Usuario" onchange="direcionar()" style="width: 200px">
@@ -119,7 +119,7 @@
                 <tbody>
                 <?php 
                     if (count($listaAvaliacoes)==0) { ?>
-                        <tr><td colspan='4' align=center>Nenhuma Avaliação com os Filtros acima!</td></tr>
+                        <tr><td colspan='7' align=center>Nenhuma Avaliação com os Filtros acima!</td></tr>
                     
                     <?php }
                     else {
@@ -129,14 +129,18 @@
                             $dataAtual = date('Y-m-d');
                             $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao();
                             
+                            $editarAvaliacao = "";
+                            if ($avaliacao->getIdSituacaoAvaliacao()==1 ||$avaliacao->getIdSituacaoAvaliacao()==3) {
+                                $editarAvaliacao = $editarAvaliador = "<a class='editarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='".$iconEditar."' class='img-miniatura'></a>";
+                            }
 
                     ?>
                         <tr>
-                            <td><a class='visualizarObjeto' id='<?php echo $avaliacao->getId()?>' name='Avaliacao'><img src='<?php echo $iconVisualizar ?>' class='img-miniatura'></a></td>
+                            <td><a class='visualizarObjeto' id='<?php echo $avaliacao->getId()?>' name='Avaliacao'><img src='<?php echo $iconVisualizar ?>' class='img-miniatura'></a><?php echo $editarAvaliacao ?></td>
                             <td><?php echo Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()?></td>
                             <td><?php echo $avaliador->getNome() . " " . $avaliador->getSobrenome() ?></td>
                             <td><?php echo $situacaoAvaliacao ?></td>
-                            <td><?php echo date('d/m/y', strtotime($avaliacao->getDataRecebimento())) ?></td>
+                            <td><?php echo date('d/m/Y', strtotime($avaliacao->getDataRecebimento())) ?></td>
                             <td><?php 
                                     // SituacaoAvaliacao = 1-Pendente / 3-Atrasada
                                     if ($avaliacao->getIdSituacaoAvaliacao()==1 || $avaliacao->getIdSituacaoAvaliacao()==3) echo date('d/m/Y',strtotime($avaliacao->getPrazo())); 
@@ -144,14 +148,17 @@
                                 ?></td>
                             <td><?php
                                     if ($avaliacao->getIdSituacaoAvaliacao()==1 || $avaliacao->getIdSituacaoAvaliacao()==3) {
-                                        /*$prazoEntrega = strtotime(date($avaliacao->getPrazo())); 
+                                        $prazoEntrega = strtotime(date($avaliacao->getPrazo())); 
                                         $dataAtual = strtotime(date('Y-m-d'));
                                         // verifica a diferença em segundos entre as duas datas e divide pelo número de segundos que um dia possui
-                                        $dataFinal = ($d2 - $d1) /86400;
+                                        
+                                        $diferenca = ($prazoEntrega - $dataAtual) /86400;
                                         // caso a data 2 seja menor que a data 1
-                                        if($dataFinal < 0)
-                                        $dataFinal = $dataFinal * -1;
-                                        echo "Entre as duas datas informadas, existem $dataFinal dias."; */
+                                        
+                                        if ($diferenca+1>0) echo $diferenca+1 . " para término do prazo!";
+                                        else if ($diferenca+1>0) echo $diferenca+1 . " dia(s) de atraso!";
+                                        else echo "<strong>Último dia para entrega da Avaliação</strong>";
+                                        
                                     }
                                     else echo "-";
                                     

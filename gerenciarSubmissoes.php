@@ -94,8 +94,7 @@
             <h3 align='center'>Listagem de Submissoes (<?php echo count($listaSubmissoes)?>)</h3>
             
             <p align="center">
-                <input class="addObjeto btn-verde" type="button" value="Distribuir Avaliadores" onclick="window.location.href='distribuirAvaliadores.php'"/>
-                <input class="addObjeto btn-verde" type="button" value="Processar Avaliações" onclick="window.location.href='submissaoForms/wsProcessarAvaliacoes.php'"/>
+                <input class="addObjeto btn-verde" type="button" value="Distribuir Avaliadores Automaticamente" onclick="window.location.href='distribuirAvaliadores.php'"/>
             </p>
             <p align="center"><a href="downloads/wsListagemSubmissoes.php?<?php echo $vars ?>">Exportar Planilha Excel</a></p>
             <p align="center">     
@@ -216,7 +215,7 @@
                             $situacaoSubmissao = SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao())->getDescricao();
                             if ($situacaoSubmissao=="Submetida") {
                                 $addAvaliador = "<p align='center'><input type='button' class='addObjeto btn-verde' id='".$submissao->getId()."' name='Avaliacao' value='Adicionar Manualmente'></p>";
-                                $addAvaliador .= "<p align='center'><input type='button' class='addObjeto btn-verde' id='".$submissao->getId()."' name='Avaliacao' value='Distribuir Automaticamente'></p>";
+                                $addAvaliador .= "<p align='center'><input type='button' class='btn-verde' onclick=\"window.location.href='submissaoForms/wsDistribuirAvaliacoesPorSubmissaoIndividual.php?id=".$submissao->getId()."'\" value='Distribuir Automaticamente'></p>";
                             }
                             
                             if (TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao()=="Final" &&

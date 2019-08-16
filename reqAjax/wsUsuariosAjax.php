@@ -24,8 +24,8 @@ if(isset($_GET['nome'])) {
         $nomeCompleto = $usuario->getNome() . " " . $usuario->getSobrenome();
         
         $resposta = $resposta . "<input type='hidden' id='". $idUsuario."' value='". $idUsuario ."'>"
-                                . "<div id='users-dinamic' onclick=\"javascript:adicionarId('".$usuario->getId()."','".$nomeCompleto ."','$iconExcluir')\">" 
-                                  . "<img src='".$pastaFotosPerfil . $usuario->getImagem()."' width='25px'> "  . $nomeCompleto . "</div>";
+                                . "<span id='users-dinamic' onclick=\"javascript:adicionarId('".$usuario->getId()."','".$nomeCompleto ."','$iconExcluir')\">" 
+                                  . "<img src='".$pastaFotosPerfil . $usuario->getImagem()."' width='20px'> "  . $nomeCompleto . "</span><br>";
     }
     
     echo $resposta;
