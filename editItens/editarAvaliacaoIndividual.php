@@ -13,9 +13,16 @@
     
     if ($avaliacao->getIdUsuario()!=$usuario->getId()) header('Location: ./paginaInicial.php?User=permissaoNegada');
     
+    
+    
     $submissao = new Submissao();
     $submissao = Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao());
 
+    $realizarAvaliacao = "";
+    if ($submissao->getIdTipoSubmissao()==1) $realizarAvaliacao = "Realizar Avaliação Parcial";
+    else if ($submissao->getIdTipoSubmissao()==2) $realizarAvaliacao = "Realizar Avaliação da Versão Corrigida";
+    if ($submissao->getIdTipoSubmissao()==1) $realizarAvaliacao = "Realizar Avaliação Final";
+    
     $avaliacaoCriterios = AvaliacaoCriterio::retornaCriteriosParaAvaliacao($avaliacao->getId());
     
 ?>
@@ -29,7 +36,7 @@
         else document.getElementById('observacao').removeAttribute('required');
     }
 </script>
-<div class="titulo-modal">Realizar Avaliação</div>
+<div class="titulo-modal"><?php echo $realizarAvaliacao ?></div>
 
 <div class="itens-modal">
     
@@ -78,7 +85,7 @@
                 ?>
                     <input type='hidden' id='<?php echo $id ?>' name='<?php echo $id ?>' value='<?php echo $avaliacaoCriterio->getNota()?>'>
                     <tr><td><?php echo $criterio->getDescricao() ?></td>
-                        <td align='center'><?php echo $criterio->getPeso() ?></td>
+                        <td align='center'><?php echo $submissao->getIdTipoSubmissao()==3 ? $criterio->getPeso() : "-" ?></td>
                         <td align='center'><?php echo $criterio->getDetalhamento()?></td>
                         <td><select required='true' class='campoDeEntrada' style='width: 70px' onchange="document.getElementById('<?php echo $avaliacaoCriterio->getId() ?>').value=this.value">
                                <option value=''>-</option>

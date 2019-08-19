@@ -64,6 +64,7 @@
             } else {
                 $cont = 1;
                 foreach ($avaliacoes as $avaliacao) {
+                    if ($avaliacao->getObservacao() == 'AVALIAÇÃO GERADA AUTOMATICAMENTE PELO SISTEMA') continue;
                     $user = Usuario::retornaDadosUsuario($avaliacao->getIdUsuario());
                     $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao());
                     
@@ -77,7 +78,7 @@
                         
                     
                     // Situação 4 - Aprovado, 5 - Aprovado Com Ressalvas, 6 - Reprovado(a) 
-                    if (in_array($situacaoAvaliacao->getId(), array('4','5','6'))) {
+                    if (in_array($situacaoAvaliacao->getId(), array('2','4','5','6'))) {
                         
                         echo "<tr><th class='direita'>Avaliação: </th><td>";
                         $avaliacaoCriterios = AvaliacaoCriterio::retornaCriteriosParaAvaliacao($avaliacao->getId());

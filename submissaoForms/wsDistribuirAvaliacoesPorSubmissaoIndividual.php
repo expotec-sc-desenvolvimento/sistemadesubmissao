@@ -28,13 +28,15 @@
 
             if ($submissao->getIdSituacaoSubmissao()==1 && count(Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), ''))==0) { // Se a submissão estiver no estado 'SUBMETIDA' e não possui avaliadores...
                 
-                $listaAvaliadoresArea = Usuario::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'mesma-area',2,$submissao->getId());
-                $listaAvaliadoresOutraArea = Usuario::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'outra-area',1,$submissao->getId());
+                $listaAvaliadoresArea = Usuario::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'mesma-area',30,$submissao->getId());
+                $listaAvaliadoresOutraArea = Usuario::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'outra-area',30,$submissao->getId());
                     
                 if (count($listaAvaliadoresArea)>=2 && count($listaAvaliadoresOutraArea)>=1) {
                     // DISTRIBUIR AVALIADORES
                     $idsAvaliadores="";
                     $prazo="";
+                    $listaIdsAvaliadores = array();
+                    $listaEmails = array();
                     
                     if ($submissao->getIdTipoSubmissao()==1) $prazo = Evento::retornaDadosEvento ($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoParcial ();
                     else if ($submissao->getIdTipoSubmissao()==2) $prazo = Evento::retornaDadosEvento ($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoCorrigida ();
@@ -42,10 +44,51 @@
                     
                     
                     // Coleta os ID's dos avaliadores da área do evento com menos avaliações
-                    foreach($listaAvaliadoresArea as $usuarioAvaliador) {$idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";}
-                    foreach($listaAvaliadoresOutraArea as $usuarioAvaliador) { $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";}
+                    $contArea=0;
+                    $contOutraArea=0;
                     
+                    foreach($listaAvaliadoresArea as $usuarioAvaliador) {
+                        if (in_array($usuarioAvaliador->getId(), $listaIdsAvaliadores)) continue;
+                        else {
+                            $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";
+                            array_push($listaEmails, $usuarioAvaliador);
+                            array_push($listaIdsAvaliadores, $usuarioAvaliador->getId());
+                            $contArea++;
+                            if ($contArea==2) break;
+                        }
+                    }
+                    foreach($listaAvaliadoresOutraArea as $usuarioAvaliador) { 
+                        if (in_array($usuarioAvaliador->getId(), $listaIdsAvaliadores)) continue;
+                        else {
+                            $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";
+                            array_push($listaEmails, $usuarioAvaliador);
+                            array_push($listaIdsAvaliadores, $usuarioAvaliador->getId());
+                            $contOutraArea++;
+                            if ($contOutraArea==1) break;
+                        }
+                    }
+                    
+                   
+                 //   echo $idsAvaliadores; exit(1);
                     if (Avaliacao::adicionarAvaliacoes($submissao->getId(),$submissao->getIdTipoSubmissao(),$submissao->getIdModalidade(),$idsAvaliadores,$prazo)) {
+                        
+                        foreach ($listaEmails as $userEmail) {
+                            $user = Usuario::retornaDadosUsuario($userEmail->getId());
+                            $titulo = "Atribuição de Avaliação de Trabalho";
+                            $remetente = "Sistema de Submissão";
+
+                            $corpo = "Olá, <strong>".$user->getNome()."</strong><br><br>"
+                                . "Foi cadastrada uma nova Avaliação de Trabalho para você.<br><br> ";
+
+                            $corpo .= "<strong>Titulo: </strong>" . $submissao->getTitulo() . "<br>";
+                            $corpo .= "<strong>Prazo Final: </strong>" . date('d/m/Y', strtotime($prazo)) . "<br><br>";
+                            $corpo .= "Atenciosamente, <br>";
+                            $corpo .= "<strong>Equipe do Sistema de Submissao</strong>";
+
+                            $EmailUsuario = EnviarEmail($titulo,$corpo,$remetente,$user->getEmail());
+                        }
+                        
+                        
                         header('Location: ../gerenciarSubmissoes.php?Item=Atualizado');
                     }
                     else header('Location: ../gerenciarSubmissoes.php?Item=NaoAtualizado');

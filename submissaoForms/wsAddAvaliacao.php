@@ -39,8 +39,25 @@
                 case 3: $prazo = Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoFinal(); break;
             }
             
+                        
+            $listaAvaliadores = explode(';', $novosAvaliadores);
             
             if (Avaliacao::adicionarAvaliacoes($submissao->getId(), $submissao->getIdTipoSubmissao(), $submissao->getIdModalidade(), $novosAvaliadores,$prazo)) {
+                foreach ($listaAvaliadores as $userEmail) {
+                    $user = Usuario::retornaDadosUsuario($userEmail);
+                    $titulo = "Atribuição de Avaliação de Trabalho";
+                    $remetente = "Sistema de Submissão";
+
+                    $corpo = "Olá, <strong>".$user->getNome()."</strong><br><br>"
+                        . "Foi cadastrada uma nova Avaliação de Trabalho para você.<br><br> ";
+
+                    $corpo .= "<strong>Titulo: </strong>" . $submissao->getTitulo() . "<br>";
+                    $corpo .= "<strong>Prazo Final: </strong>" . date('d/m/Y', strtotime($prazo)) . "<br><br>";
+                    $corpo .= "Atenciosamente, <br>";
+                    $corpo .= "<strong>Equipe do Sistema de Submissao</strong>";
+
+                    $EmailUsuario = EnviarEmail($titulo,$corpo,$remetente,$user->getEmail());
+                }
                 header('Location: ../gerenciarSubmissoes.php?Item=Atualizado');
             }
             else header('Location: ../gerenciarSubmissoes.php?Item=NaoAtualizado'); 

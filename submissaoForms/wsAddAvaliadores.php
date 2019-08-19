@@ -22,8 +22,10 @@
             $idArea = $p['select-Areas'];
             $idUsuarios = $p['idUsuariosAdd'];
 
+
             
             if (Avaliador::adicionarAvaliador($idEvento, $idArea, $idUsuarios)) {
+
                 header('Location: ../gerenciarAvaliadores.php?Item=Criado');
             }
             else echo "<script>window.alert('Erro no Cadastro! Verifique novamente os Avaliadores');window.history.back();</script>";

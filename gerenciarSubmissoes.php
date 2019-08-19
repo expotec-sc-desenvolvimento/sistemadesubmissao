@@ -170,7 +170,7 @@
                         <th>Autores</th>
                         <th>Avaliadores</th>
                         <th>Nota</th>
-                        <th>*</th>
+          <!--              <th>*</th> -->
 
                     </tr>
                 </thead>
@@ -190,6 +190,7 @@
                             
                             foreach ($avaliacoes as $avaliacao) {
                                 $editarAvaliador = "";
+                                $resultadoAvaliacao = "";
                                 $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getId();
                                 
                                 // Situações de Avaliação = 1-Pendente, 2-Finalizada, 3-Atrasada, 4-Aprovado(a), 5-Aprovado(a) com ressalvas, 6-Reprovado
@@ -197,9 +198,19 @@
                                     $editarAvaliador = "<a class='editarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='".$iconEditar."' class='img-miniatura'></a>";
                                             //. "<a class='excluirObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='".$iconExcluir."' class='img-miniatura'></a>";
                                 }
-                                else $editarAvaliador = "<a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='".$iconVisualizar."' class='img-miniatura'></a>";
+                                else {
+                                    $editarAvaliador = "<a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='".$iconVisualizar."' class='img-miniatura'></a>";
+                                
+                                    if ($situacaoAvaliacao == 2) /* Apresentado */ $resultadoAvaliacao = " - <img src='".$iconOK."' class='img-miniatura' title='Apresentado'>";
+                                    else if ($situacaoAvaliacao == 4) /* Aprovado */ $resultadoAvaliacao = " - <img src='".$iconOK."' class='img-miniatura' title='Aprovado'>";
+                                    else if ($situacaoAvaliacao == 5) /* Aprovado com Ressalvas */ $resultadoAvaliacao = " - <img src='".$iconOKRessalvas."' class='img-miniatura' title='Aprovado com Ressalvas'>";
+                                    else /* Reprovado */ $resultadoAvaliacao = " - <img src='".$iconExcluir."' class='img-miniatura' title='Reprovado'>";
+                                }
+                                
+                                
+                                
                                 $user = Usuario::retornaDadosUsuario($avaliacao->getIdUsuario());
-                                $avaliadores = $avaliadores . "<li>" .$editarAvaliador . $user->getNome() . "</li>";
+                                $avaliadores = $avaliadores . "<li>" .$editarAvaliador . $user->getNome() . $resultadoAvaliacao ."</li>";
                             }
                             
                             $avaliadores .= "</ul>";
@@ -235,7 +246,7 @@
                                 <td><?php echo $usuarioSubmissao ?></td>
                                 <td><?php echo $avaliadores . $addAvaliador . $repetirAvaliadores?></td>
                                 <td><?php echo $submissao->getIdTipoSubmissao()==3 ? $submissao->getNota() : '-'; ?></td>
-                                <td><?php echo $finalizar ?></td></tr>
+                                <!-- <td><? php echo $finalizar ?></td></tr> -->
                       <?php          
                         }
                     }

@@ -16,6 +16,7 @@ $pastaFotosEventos = 'uploads/eventos/';
 $iconEditar = 'img/iconEditar.png';
 $iconExcluir = 'img/iconExcluir.png';
 $iconOK = 'img/iconOK.png'; 
+$iconOKRessalvas = 'img/iconOKRessalvas.png'; 
 $iconAguardando = 'img/iconAguardando.png'; 
 $iconVisualizar = 'img/iconVisualizar.png'; 
 

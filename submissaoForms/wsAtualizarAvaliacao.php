@@ -28,7 +28,25 @@
             
             if (strtotime($prazo)>=strtotime($dataAtual)) {
                 if (Avaliacao::atualizarAvaliacao($idAvaliacao, $novoAvaliador,1,$prazo)) {
-                    header('Location: '.$_SERVER["HTTP_REFERER"].'?Item=Atualizado');
+                    
+                    $submissao = Submissao::retornaDadosSubmissao(Avaliacao::retornaDadosAvaliacao($idAvaliacao)->getIdSubmissao());
+                    
+                    $user = Usuario::retornaDadosUsuario($novoAvaliador);
+                    $titulo = "Atribuição de Avaliação de Trabalho";
+                    $remetente = "Sistema de Submissão";
+                    
+                    $corpo = "Olá,<br><br>"
+                        . "Foi cadastrada uma nova Avaliação de Trabalho para você.<br><br> ";
+                    
+                    $corpo .= "<strong>Titulo: </strong>" . $submissao->getTitulo() . "<br>";
+                    $corpo .= "<strong>Prazo Final: </strong>" . date('d/m/Y', strtotime($prazo)) . "<br><br>";
+                    $corpo .= "Atenciosamente, <br>";
+                    $corpo .= "<strong>Equipe do Sistema de Submissao</strong>";
+                    
+                    $EmailUsuario = EnviarEmail($titulo,$corpo,$remetente,$user->getEmail());
+                    if (!$EmailUsuario) echo "Erro no envio do Email";
+                    
+                    else header('Location: '.$_SERVER["HTTP_REFERER"].'?Item=Atualizado');
                 }
                     else header('Location: '.$_SERVER["HTTP_REFERER"].'?Item=NaoAtualizado');
                 }
