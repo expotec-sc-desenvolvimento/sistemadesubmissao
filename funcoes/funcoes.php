@@ -1,5 +1,9 @@
 <?php
 
+    include dirname(__FILE__) . '/../inc/includes.php';
+    include dirname(__FILE__) . '/../vendor/autoload.php';
+    
+    
     function loginObrigatorio () {
         if ( !isset( $_SESSION['usuario'] )) 
             header('Location: index.php?User=NaoLogado');
@@ -47,5 +51,47 @@
         return $resposta;
     }
     
+    function gerarCertificado ($evento,$user,$tipo,$pasta) {
+        
+        if ($tipo==1) {
+            $html = "
+            <html>
+            <head>
+                <meta charset='UTF-8'>
+                    <style type='text/css'>
+                        p {
+                                text-align: justify;
+                                line-height: 2.0;
+                                text-indent: 10em;
+                                margin-left: 70px;
+                                margin-right: 70px;
+                                font-size: 20px;
+                        }
+                    </style>
 
+            <body>
+            <fieldset>
+            <h1 ALIGN=CENTER>CERTIFICADO DE APRESENTAÇÃO DE TRABALHO</h1>
+            <p> Certificamos para os devidos fins que <strong>".$user->getNome()."</strong> apresentou um trabalho aqui! Parabéns!
+            </p>
+            </div>
+            </body>
+            </html>
+            ";
+
+            $mpdf=new \Mpdf\Mpdf();
+            $mpdf->SetDisplayMode('fullpage');
+            $mpdf->AddPage('L');
+            //$css = file_get_contents("css/estilo.css");
+            //$mpdf->WriteHTML($css,1);
+            $mpdf->WriteHTML($html);
+            
+            
+            $nomeArquivo = $user->getId() ."-". substr(md5(time()), 0,25) . ".pdf";
+            $mpdf->Output('./../'.$pasta.$nomeArquivo,'F');
+                    
+            Certificado::adicionarCertificado($evento->getId(), $user->getId(), $tipo, $nomeArquivo);
+        }
+        
+    }
 ?>

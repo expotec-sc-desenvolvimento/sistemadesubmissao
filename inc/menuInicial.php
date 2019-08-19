@@ -23,6 +23,7 @@
                 <li><a href="minhasAvaliacoes.php">Minhas Avaliações</a></li>
                 <li><a href="minhasSubmissoes.php">Minhas Submissoes</a></li>
                 <li><a href="solicitacaoAvaliador.php">Minhas Solicitacoes de Avaliador</a></li>
+                <li><a href="meusCertificados.php">Meus Certificados</a></li>
                 <li><a href="atualizarSenha.php">Trocar Senha</a></li>
                 <li><a href="submissaoForms/wsLogOut.php">Sair</a></li>
             </ul>

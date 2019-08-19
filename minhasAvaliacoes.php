@@ -42,18 +42,22 @@
             <h2 align="center">Minhas avaliações</h2>
             
             <table border="1" align="center" class='table_list'>
-                <tr>
-                    <td align="center"><strong>*</strong></td>
-                    <td align="center"><strong>Evento</strong></td>
-                    <td align="center"><strong>Área</strong></td>
-                    <td align="center"><strong>Modalidade</strong></td>
-                    <td align="center"><strong>Título</strong></td>
-                    <td align="center"><strong>Arquivo</strong></td>
-                    <td align="center"><strong>Situação<br>da Submissão</strong></td>
-                    <td align="center"><strong>Situação<br>desta Avaliação</strong></td>
-                    <td align="center"><strong>Nota</strong></td>
-                    
-                </tr>
+                <thead>
+                    <tr>
+                        <th>*</th>
+                        <th>Evento</th>
+                        <th>Área</th>
+                        <th>Modalidade</th>
+                        <th>Título</th>
+                        <th>Arquivo</th>
+            <!--            <th>Situação<br>da Submissão</th> -->
+                        <th>Situação desta Avaliação</th>
+                        <th>Prazo de Entrega</th>
+                        <th>Nota</th>
+
+                    </tr>
+                </thead>
+                <tbody>
                 
                 <?php
                     if (count($minhasAvaliacoes)==0)
@@ -92,8 +96,10 @@
                             echo "<td>".Modalidade::retornaDadosModalidade(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdModalidade())->getDescricao()."</td>";
                             echo "<td>".Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()."</td>";
                             echo "<td><a href='".$pastaSubmissoes . Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getArquivo()."'>Visualizar</td>";
-                            echo "<td>".$situacaoSubmissao."</td>";
+              //              echo "<td>".$situacaoSubmissao."</td>";
+                            
                             echo "<td>".SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao()."</td>";
+                            echo "<td>".date('d/m/Y', strtotime($avaliacao->getPrazo()))."</td>";
                             
                             if (in_array($tipoSubmissao, $avParcialCorrigida)) echo "<td>-</td></tr>";
                             else echo "<td>".$avaliacao->getNota()."</td></tr>";
@@ -101,6 +107,7 @@
                         }
                     }
                 ?>
+                </tbody>
             </table>
         </fieldset>
     </body>

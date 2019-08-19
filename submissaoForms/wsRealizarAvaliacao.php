@@ -64,7 +64,8 @@
                 // Situação das Submissões: 4-Aprovado, 6-Reprovado
 
                 $submissao = Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao());
-                if ($submissao->getIdTipoSubmissao()==2 && $submissao->getIdSituacaoSubmissao()==4) {
+                if ($submissao->getIdTipoSubmissao()==2 && $submissao->getIdSituacaoSubmissao()==4) { /* Caso seja uma submissão Corrigida e tenha sido considerada Aprovada depois
+                                                                                                        das devidas correções, é gerada uma submissão Final automaticamente */
                     $evento = Evento::retornaDadosEvento($submissao->getIdEvento());
                     $modalidade = Modalidade::retornaDadosModalidade($submissao->getIdModalidade());
                     $novoArquivo = $evento->getNome() . "-" . $modalidade->getDescricao() . "-" . substr(md5(time()), 0,15) . "-Final.pdf";
@@ -89,6 +90,17 @@
                     //GERA UMA NOVA SUBMISSAO
 
                 }
+                else if ($submissao->getIdTipoSubmissao()==3 && $submissao->getIdSituacaoSubmissao()==7) { /* Caso seja uma submissão Final e todos os avaliadores tenham terminado
+                                                                                                        a avaliação, são gerados certificados de Apresentação para os submissores */
+                    
+                    foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $user) {
+                        $evento = Evento::retornaDadosEvento($submissao->getIdEvento());
+                        gerarCertificado($evento, Usuario::retornaDadosUsuario($user->getIdUsuario()),1,$pastaCertificados);
+                        
+
+                    }
+                }
+                else {echo "PQP"; exit(1);}
                 header('Location: ../minhasAvaliacoes.php?Item=Atualizado');
             }
             else header('Location: ../minhasAvaliacoes.php?Item=NaoAtualizado');

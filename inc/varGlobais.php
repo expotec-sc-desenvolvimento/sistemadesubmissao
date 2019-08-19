@@ -10,6 +10,7 @@ $pastaFotosPerfil = 'uploads/usr/fotosPerfil/';
 $pastaSubmissoes = 'uploads/usr/submissoes/';
 $pastaDownloads = 'uploads/downloads/';
 $pastaFotosEventos = 'uploads/eventos/';
+$pastaCertificados = 'downloads/certificados/';
 
 
 
