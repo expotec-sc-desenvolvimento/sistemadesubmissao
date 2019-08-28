@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__). '/../dao/TipoSubmissaoDao.php';
+require_once dirname(__DIR__). '/dao/TipoSubmissaoDAO.php';
 
 class TipoSubmissao {
     

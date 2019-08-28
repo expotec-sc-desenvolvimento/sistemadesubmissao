@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__). '/../dao/TipoCertificadoDao.php';
+require_once dirname(__DIR__). '/dao/TipoCertificadoDAO.php';
 
 class TipoCertificado {
     private $id;

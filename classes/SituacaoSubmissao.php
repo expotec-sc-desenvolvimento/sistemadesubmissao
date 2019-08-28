@@ -1,5 +1,6 @@
 <?php
 
+require_once dirname(__DIR__). '/dao/SituacaoSubmissaoDAO.php';
 
 class SituacaoSubmissao {
     private $id;

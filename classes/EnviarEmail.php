@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . './../PHPMailer-5.2.27/PHPMailerAutoload.php';
+require_once dirname(__DIR__) . './PHPMailer-5.2.27/PHPMailerAutoload.php';
 
 function EnviarEmail($assunto,$corpo,$nome,$emails) {
         $M = new PHPMailer();

@@ -13,12 +13,12 @@ class Conexao extends MySQLi {
     private $usuario = "root";
     private $senha = "root";
     
-    private function __construct() {
+    public function __construct() {
         parent::__construct($this->servidor, $this->usuario, $this->senha, $this->banco);
         mysqli_set_charset($this, "utf8");
     }
   
-    private static function getInstance() {
+    public static function getInstance() {
         if(!self::$instance instanceof self){
             self::$instance = new Conexao();
         }

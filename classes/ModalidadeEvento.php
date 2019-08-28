@@ -1,7 +1,7 @@
 <?php
 
 
-require_once dirname(__FILE__). '/../dao/ModalidadeEventoDAO.php';
+require_once dirname(__DIR__). '/dao/ModalidadeEventoDAO.php';
 
 
 class ModalidadeEvento {

@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname(__DIR__). '/dao/EventoDAO.php';
+
 class Evento {
     private $id;
     private $logo;

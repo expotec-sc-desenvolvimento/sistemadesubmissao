@@ -1,7 +1,7 @@
 <?php
 
 
-require_once dirname(__FILE__). '/../dao/AreaEventoDAO.php';
+require_once dirname(__DIR__). '/dao/AreaEventoDAO.php';
 
 class AreaEvento {
     private $id;
