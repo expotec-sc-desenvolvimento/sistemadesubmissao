@@ -6,6 +6,9 @@
  * and open the template in the editor.
  */
     include dirname(__FILE__) . '/../inc/includes.php';
+    use PhpOffice\PhpSpreadsheet\Spreadsheet;
+    use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
     
     session_start();
     
@@ -16,7 +19,6 @@
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -31,7 +33,7 @@
             $arquivo = "submissoes.xls";
             
             $html = "";
-            $html .= "<table border=1>";
+            $html .= "<table border='1'>";
             $html .= "<tr><td><strong>Evento</strong></td>";
             $html .= "<td><strong>Área</strong></td>";
             $html .= "<td><strong>Modalidade</strong></td>";
@@ -100,7 +102,7 @@
             header("Cache-Control: no-cache, must-revalidate");
             header("Pragma: no-cache");
             header("Content-Type: application/vnd.ms-excel");
-            header("Content-Disposition: attachment; filename=".basename($arquivo));            
+            header("Content-Disposition: attachment; filename=".basename($arquivo));
             header("Content-Description: PHP Generated Data");
             echo $html;
         ?>

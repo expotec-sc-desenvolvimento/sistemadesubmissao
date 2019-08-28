@@ -2,7 +2,7 @@
 
 require_once dirname(__FILE__) . './../PHPMailer-5.2.27/PHPMailerAutoload.php';
 
-function EnviarEmail($assunto,$corpo,$nome,$emailDestinatario) {
+function EnviarEmail($assunto,$corpo,$nome,$emails) {
         $M = new PHPMailer();
 
 	$M->isSMTP(); # Informamos que é SMTP
@@ -19,7 +19,10 @@ function EnviarEmail($assunto,$corpo,$nome,$emailDestinatario) {
 #	$M-> SMTPDebug = 4;
 	$M->From = 'jsueneylove@gmail.com'; # Remetente do disparo.
 	$M->FromName = 'Sistema de Sumissão'; # Nome do remetente.
-	$M->addAddress($emailDestinatario, $nome); # Destinatário. A VARIAVEL $nome foi TROCADA PARA TESTE
+        $M->addAddress('jsueneylove@gmail.com', $nome); # Destinatário. A VARIAVEL $nome foi TROCADA PARA TESTE
+        
+        foreach ($emails as $email) {$M->addCC($email);}
+        
 	$M->isHTML(); # Informamos que o corpo tem o formato HTML.
         $M->CharSet = 'UTF-8';
         $M->Subject = $assunto;

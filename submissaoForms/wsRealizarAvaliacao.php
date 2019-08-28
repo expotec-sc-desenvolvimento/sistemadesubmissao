@@ -76,12 +76,32 @@
                     }
                     
                     
-                    if (Submissao::adicionarSubmissao($submissao->getIdEvento(), $submissao->getIdArea(), $submissao->getIdModalidade(),3,1,$novoArquivo,$submissao->getTitulo(),
+                    if (Submissao::adicionarSubmissao($submissao->getIdEvento(), $submissao->getIdArea(), $submissao->getIdModalidade(),3,3,$novoArquivo,$submissao->getTitulo(),
                                                       $submissao->getResumo(),$submissao->getPalavrasChave(),$submissao->getRelacaoCom(),$idUsuariosAdd,$submissao->getId())) {
                         
-                    
                         copy('./../' . $pastaSubmissoes . $submissao->getArquivo(), './../' . $pastaSubmissoes . $novoArquivo);
-                        header('Location: ../minhasAvaliacoes.php?Item=Atualizado');
+                        
+                        $novosAvaliadores = "";
+                        $emails = array();
+                        
+                        $prazo = Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioSubmissaoCorrigida();
+                        $avaliadoresAnteriores = Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), '');
+                        
+                        foreach ($avaliadoresAnteriores as $avaliador) { 
+                            $novosAvaliadores .= $avaliador->getIdUsuario() . ";";
+                            array_push($emails, Usuario::retornaDadosUsuario($avaliador->getIdUsuario())->getEmail());   
+                        }
+                        
+                        $sub = Submissao::retornaDadosSubmissao(Submissao::retornaIdUltimaSubmissao());
+                        
+                        
+                        
+                        if (Avaliacao::adicionarAvaliacoes($sub->getId(), 3, $submissao->getIdModalidade(), $novosAvaliadores, $prazo)) {
+                            emailAtribuicaoAvaliacao($sub, $prazo, $emails);
+                            header('Location: ../minhasAvaliacoes.php?Item=Atualizado');
+                        }
+                        else header('Location: ../minhasAvaliacoes.php?Item=NaoAtualizado');
+                        
                     }
                     else {
                         echo "OCORREU UM ERRO. CONTACTE O ADMINISTRADOR";
@@ -100,7 +120,7 @@
 
                     }
                 }
-                else {echo "PQP"; exit(1);}
+               // else {echo "PQP"; exit(1);}
                 header('Location: ../minhasAvaliacoes.php?Item=Atualizado');
             }
             else header('Location: ../minhasAvaliacoes.php?Item=NaoAtualizado');

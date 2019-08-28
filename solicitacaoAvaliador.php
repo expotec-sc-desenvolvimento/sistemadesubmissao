@@ -1,6 +1,6 @@
 <?php
 
-    include dirname(__FILE__) . './inc/includes.php';
+    include 'inc/includes.php';
     
     session_start();
     
@@ -21,8 +21,8 @@
             <title>SS - Minhas Solicitacoes de Avaliador</title>
             
             <?php
-                include './inc/css.php';
-                include './inc/javascript.php';
+                include 'inc/css.php';
+                include 'inc/javascript.php';
             ?>
             
         </head>
@@ -30,8 +30,8 @@
         <body>
 
             <?php 
-                include './inc/menuInicial.php';
-                include './inc/modal.php';
+                include 'inc/menuInicial.php';
+                include 'inc/modal.php';
             ?>
 
             <?php

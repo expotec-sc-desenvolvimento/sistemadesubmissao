@@ -9,6 +9,8 @@
     $usuario = new Usuario();
     $usuario = $_SESSION['usuario'];
     
+    date_default_timezone_set('America/Sao_Paulo');
+    
     // O código abaixo verifica se há eventos com datas disponíveis para submissão
     $eventos = Evento::listaEventos();
 

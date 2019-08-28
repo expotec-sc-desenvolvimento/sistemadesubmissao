@@ -1,6 +1,6 @@
 <?php
 
-    include dirname(__FILE__) . './inc/includes.php';
+    include 'inc/includes.php';
     
     session_start();
     
@@ -25,8 +25,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SS - Gerenciar Avaliações</title>
         <?php
-            include './inc/css.php';
-            include './inc/javascript.php';
+            include 'inc/css.php';
+            include 'inc/javascript.php';
         ?>
 
         <script type="text/javascript">
@@ -47,8 +47,8 @@
     <body>
         
         <?php 
-            include './inc/menuInicial.php';
-            include './inc/modal.php';
+            include 'inc/menuInicial.php';
+            include 'inc/modal.php';
 
             $idUsuario = "";
             $idSituacao = "";
@@ -73,7 +73,7 @@
         <fieldset>
             <h3 align='center'>Listagem de Avaliações (<?php echo count($listaAvaliacoes)?>)</h3>
             
-            <p align="center"><a href="downloads/wsListagemAvaliadores.php?<?php echo $vars ?>">Exportar Planilha Excel</a></p>
+            <p align="center"><a href="downloads/wsListagemAvaliacoes.php?<?php echo $vars ?>">Exportar Planilha Excel</a></p>
             <p align="center">     
                 <label for="select-Usuario">Usuario: </label>
                 <select class="campoDeEntrada" id="select-Usuario" name="select-Usuario" onchange="direcionar()" style="width: 200px">
@@ -108,6 +108,7 @@
                     <tr>
                         <th>*</th>
                         <th>Trabalho</th>
+                        <th>Tipo</th>
                         <th>Avaliador</th>
                         <th>Situação</th>
                         <th>Data de Recebimento</th>
@@ -119,7 +120,7 @@
                 <tbody>
                 <?php 
                     if (count($listaAvaliacoes)==0) { ?>
-                        <tr><td colspan='7' align=center>Nenhuma Avaliação com os Filtros acima!</td></tr>
+                        <tr><td colspan='8' align=center>Nenhuma Avaliação com os Filtros acima!</td></tr>
                     
                     <?php }
                     else {
@@ -138,6 +139,7 @@
                         <tr>
                             <td><a class='visualizarObjeto' id='<?php echo $avaliacao->getId()?>' name='Avaliacao'><img src='<?php echo $iconVisualizar ?>' class='img-miniatura'></a><?php echo $editarAvaliacao ?></td>
                             <td><?php echo Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()?></td>
+                            <td><?php echo TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdTipoSubmissao())->getDescricao()?></td>
                             <td><?php echo $avaliador->getNome() . " " . $avaliador->getSobrenome() ?></td>
                             <td><?php echo $situacaoAvaliacao ?></td>
                             <td><?php echo date('d/m/Y', strtotime($avaliacao->getDataRecebimento())) ?></td>
@@ -155,8 +157,8 @@
                                         $diferenca = ($prazoEntrega - $dataAtual) /86400;
                                         // caso a data 2 seja menor que a data 1
                                         
-                                        if ($diferenca+1>0) echo $diferenca+1 . " para término do prazo!";
-                                        else if ($diferenca+1>0) echo $diferenca+1 . " dia(s) de atraso!";
+                                        if ($diferenca>0) echo $diferenca . " para término do prazo!";
+                                        else if ($diferenca<0) echo -($diferenca) . " dia(s) de atraso!";
                                         else echo "<strong>Último dia para entrega da Avaliação</strong>";
                                         
                                     }

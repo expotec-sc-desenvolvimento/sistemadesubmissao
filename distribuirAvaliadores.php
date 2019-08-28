@@ -1,6 +1,6 @@
 <?php
 
-    include dirname(__FILE__) . './inc/includes.php';
+    include 'inc/includes.php';
     
     session_start();
     
@@ -23,8 +23,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SS - Distribuir Avaliadores</title>
         <?php
-            include './inc/css.php';
-            include './inc/javascript.php';
+            include 'inc/css.php';
+            include 'inc/javascript.php';
         ?>
         
     </head>
@@ -32,8 +32,8 @@
     <body>
         
         <?php 
-            include './inc/menuInicial.php';
-            include './inc/modal.php';
+            include 'inc/menuInicial.php';
+            include 'inc/modal.php';
         ?>
         
         <fieldset>

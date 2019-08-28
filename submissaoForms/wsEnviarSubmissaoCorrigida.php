@@ -47,21 +47,31 @@
                     if (move_uploaded_file($_FILES['arquivo']['tmp_name'], './../' . $pastaSubmissoes . $novoArquivo)) { // Tenta Inserir a imagem na pasta
                         
                         $novaSubmissao = Submissao::retornaSubmissaoCorrigidaPelaParcial($idSubmissao);
+                        $emails = array();
                         // CODIGO PARA GERAR AS AVALIACOES PARA OS AVALIADORES;
                         // Situação Avaliacao: 4-Aprovado, 5-Aprovado com Ressalvas, 6 - Reprovado
+                        $cont = 0;
                         foreach (Avaliacao::listaAvaliacoesComFiltro('', $idSubmissao, '') as $av) {
+                            
                             if ($av->getIdSituacaoAvaliacao()==5) {
-                                if (!Avaliacao::adicionarAvaliacoes($novaSubmissao->getId(), 2, $idModalidade, $av->getIdUsuario().";", $evento->getPrazoFinalEnvioAvaliacaoCorrigida())) {
-                                    echo "erro"; exit(1);
+                                //echo $novaSubmissao->getId() . " " . $evento->getPrazoFinalEnvioAvaliacaoCorrigida() . " " . $av->getIdUsuario(); exit(1);
+                                if (Avaliacao::adicionarAvaliacoes($novaSubmissao->getId(), 2, $idModalidade, $av->getIdUsuario().";", $evento->getPrazoFinalEnvioAvaliacaoCorrigida())) {
+                                    
+                                    //array_push($emails, Usuario::retornaDadosUsuario($av->getIdUsuario())->getEmail());
+                                    
+                                    
                                 }
+                                else {echo "erro"; exit(1);}
                             }
                             else {
                                 if (!Avaliacao::adicionarAvaliacoesAutomaticas($novaSubmissao->getId(),$av->getIdUsuario(),$av->getIdSituacaoAvaliacao(),'AVALIAÇÃO GERADA AUTOMATICAMENTE PELO SISTEMA')) {
                                     echo "erro 1"; exit(1);
                                 }
                             }
+                            
                         }
                         
+                        emailAtribuicaoAvaliacao($novaSubmissao, $evento->getPrazoFinalEnvioAvaliacaoCorrigida(), $emails);
                         header('Location: ../minhasSubmissoes.php?Item=Criado');
                     }
                     else echo "<script>window.alert('2-Houve um erro na Submissao. Entre em contato com um Administrador do Sistema');window.history.back();";

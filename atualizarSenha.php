@@ -1,6 +1,6 @@
 <?php
 
-    include dirname(__FILE__) . './inc/includes.php';
+    include 'inc/includes.php';
     
     session_start();
     
@@ -22,8 +22,8 @@
         <title>SS - Atualizar Senha</title>
         
         <?php
-            include './inc/css.php';
-            include './inc/javascript.php';
+            include 'inc/css.php';
+            include 'inc/javascript.php';
         ?>
         
        

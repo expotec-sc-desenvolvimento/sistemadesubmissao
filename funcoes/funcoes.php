@@ -51,6 +51,46 @@
         return $resposta;
     }
     
+    function emailAtribuicaoAvaliacao ($submissao,$prazoEnvio,$emails) {
+        
+        $titulo = "Atribuição de Avaliação de Trabalho";
+        $remetente = "Sistema de Submissão";
+
+        $corpo = "Foi cadastrada uma nova Avaliação de Trabalho para você.<br><br> ";
+        $corpo .= "<strong>Titulo: </strong>" . $submissao->getTitulo() . "<br>";
+        $corpo .= "<strong>Área: </strong>" . Area::retornaDadosArea($submissao->getIdArea())->getDescricao() . "<br>";
+        $corpo .= "<strong>Prazo Final: </strong>" . date('d/m/Y', strtotime($prazoEnvio)) . "<br><br>";
+        $corpo .= "Atenciosamente, <br>";
+        $corpo .= "<strong>Equipe do Sistema de Submissão - IFRN</strong>";
+        
+        //echo count($listaAvaliadores); exit(1);
+     //   echo $corpo; exit(1);
+        
+        if (EnviarEmail($titulo,$corpo,$remetente, $emails)) { /*echo "Email enviado para " . $user->getNome(); */}
+        
+        return;
+    }
+    
+    function emailAtualizacaoAvaliacao ($submissao,$prazoEnvio,$email) {
+        
+        
+        
+        $titulo = "Atualização de Avaliação de Trabalho";
+        $remetente = "Sistema de Submissão";
+
+        $corpo = "Foi atualizada uma nova Avaliação de Trabalho para você.<br><br> ";
+        $corpo .= "<strong>Titulo: </strong>" . $submissao->getTitulo() . "<br>";
+        $corpo .= "<strong>Área: </strong>" . Area::retornaDadosArea($submissao->getIdArea())->getDescricao() . "<br>";
+        $corpo .= "<strong>Prazo Final: </strong>" . date('d/m/Y', strtotime($prazoEnvio)) . "<br><br>";
+        $corpo .= "Atenciosamente, <br>";
+        $corpo .= "<strong>Equipe do Sistema de Submissão - IFRN</strong>";
+        
+        
+        if (EnviarEmail($titulo,$corpo,$remetente, array($email))) {};
+        
+        return;
+    }
+    
     function gerarCertificado ($evento,$user,$tipo,$pasta) {
         
         if ($tipo==1) {

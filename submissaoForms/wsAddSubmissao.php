@@ -59,10 +59,16 @@
                             
                             if (count($avaliadoresArea)>=2 && count($avaliadorOutraArea)>=1) {
                                 $idsAvaliadores="";
-                    
+                                $emails = array();
                                 // Coleta os ID's dos avaliadores da área do evento com menos avaliações
-                                foreach($avaliadoresArea as $usuarioAvaliador)    {$idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";}
-                                foreach($avaliadorOutraArea as $usuarioAvaliador) {$idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";}
+                                foreach($avaliadoresArea as $usuarioAvaliador)    {
+                                    $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";
+                                    array_push($emails, Usuario::retornaDadosUsuario($usuarioAvaliador->getId())->getEmail());
+                                }
+                                foreach($avaliadorOutraArea as $usuarioAvaliador) {
+                                    $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";
+                                    array_push($emails, Usuario::retornaDadosUsuario($usuarioAvaliador->getId())->getEmail());
+                                }
 
                                 $prazo="";
                     
@@ -71,6 +77,7 @@
                                 else if ($submissao->getIdTipoSubmissao()==3) $prazo = Evento::retornaDadosEvento ($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoFinal ();
                                 
                                 if (Avaliacao::adicionarAvaliacoes($id,1,$idModalidade,$idsAvaliadores,$prazo)) {
+                                    emailAtribuicaoAvaliacao(Submissao::retornaDadosSubmissao($id), $prazo, $emails);
                                     header('Location: ../minhasSubmissoes.php?Item=Criado');
                                 }
                             }

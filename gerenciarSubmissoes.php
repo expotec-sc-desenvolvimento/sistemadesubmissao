@@ -1,6 +1,6 @@
 <?php
 
-    include dirname(__FILE__) . './inc/includes.php';
+    include 'inc/includes.php';
     
     session_start();
     
@@ -25,8 +25,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SS - Gerenciar Submissões</title>
         <?php
-            include './inc/css.php';
-            include './inc/javascript.php';
+            include 'inc/css.php';
+            include 'inc/javascript.php';
         ?>
 
         <script type="text/javascript">
@@ -52,8 +52,8 @@
     <body>
         
         <?php 
-            include './inc/menuInicial.php';
-            include './inc/modal.php';
+            include 'inc/menuInicial.php';
+            include 'inc/modal.php';
 
             $idEvento = "";
             $idModalidade = "";
@@ -232,7 +232,7 @@
                             if (TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao()=="Final" &&
                                     SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao())->getDescricao()=="Submetida") {
                                 $repetirAvaliadores = "<p align='center'><input type='button' class='addObjeto btn-verde' id='".$submissao->getId()."' name='AvaliacaoRepetida' value='Repetir Avaliadores' ></p>";
-                            }    
+                            }    //date('m/d/Y',$submissao->getDataEnvio());
                     ?>
                             <tr>
                                 <td><a class='visualizarObjeto' id='<?php echo $submissao->getId() ?>' name='Submissao'><img src='<?php echo $iconVisualizar ?>' class='img-miniatura'></a></td>

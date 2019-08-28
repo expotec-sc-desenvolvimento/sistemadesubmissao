@@ -8,14 +8,14 @@
         <title>SS - Recuperar Senha</title>
         
         <?php
-            include './inc/css.php';
-            include './inc/javascript.php';
+            include 'inc/css.php';
+            include 'inc/javascript.php';
         ?>
     </head>
     
     <body>
         <?php
-            include dirname(__FILE__) . './inc/mensagensGET.php';
+            include 'inc/mensagensGET.php';
         ?>
 
        

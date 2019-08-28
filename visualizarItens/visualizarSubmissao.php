@@ -73,17 +73,17 @@
                     if (Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao() == "Administrador") $nomeCompleto = $user->getNome() . " " . $user->getSobrenome();
                     
                     echo "<table align='center' class='table_list'>"
-                        ."<tr><th class='direita'>Avaliador: </th><td>" . $nomeCompleto . "</td>"
-                        ."<tr><th class='direita'>Situação: </th><td>" . $situacaoAvaliacao->getDescricao() . "</td>";
+                        ."<tr><th class='direita' width='10px'>Avaliador: </th><td style='text-align:left; padding-left:10px;'>" . $nomeCompleto . "</td>"
+                        ."<tr><th class='direita'>Situação: </th><td style='text-align:left; padding-left:10px;'>" . $situacaoAvaliacao->getDescricao() . "</td>";
                         
                     
                     // Situação 4 - Aprovado, 5 - Aprovado Com Ressalvas, 6 - Reprovado(a) 
                     if (in_array($situacaoAvaliacao->getId(), array('2','4','5','6'))) {
                         
-                        echo "<tr><th class='direita'>Avaliação: </th><td>";
+                        echo "<tr><th class='direita' width='10px'>Avaliação: </th><td>";
                         $avaliacaoCriterios = AvaliacaoCriterio::retornaCriteriosParaAvaliacao($avaliacao->getId());
                         
-                        echo "<ul class='listaCriterios'>";
+                        echo "<ul class='listaCriterios' style='padding-left:10px;'>";
                         foreach ($avaliacaoCriterios as $avaliacaoCriterio) {
                             $criterio = Criterio::retornaDadosCriterio($avaliacaoCriterio->getIdCriterio());
                             echo "<li>".$criterio->getDescricao();
@@ -95,7 +95,7 @@
                         echo "</ul>";
                         
                         if ($submissao->getIdTipoSubmissao()==3) echo "<tr><th class='direita'>Nota Final: </th><td>". $avaliacao->getNota()."</strong></td>";
-                        echo "<tr><th class='direita'>Observações:</th><td>" . $avaliacao->getObservacao() . "</td></tr>";
+                        echo "<tr><th class='direita'>Observações:</th><td style='text-align:left; padding-left:10px;'>" . $avaliacao->getObservacao() . "</td></tr>";
                     }
                  
                     echo "</table><br>";

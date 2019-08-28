@@ -1,6 +1,6 @@
 <?php
 
-   include dirname(__FILE__) . './inc/includes.php';
+   include 'inc/includes.php';
    session_start();
 
    loginObrigatorio();
@@ -20,8 +20,8 @@
         <title>SS - Atualizar Dados</title>
 
         <?php
-            include './inc/css.php';
-            include './inc/javascript.php';
+            include 'inc/css.php';
+            include 'inc/javascript.php';
         ?>
         
     </head>

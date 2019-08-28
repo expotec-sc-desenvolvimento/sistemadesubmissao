@@ -35,9 +35,9 @@
     
             
             <table align='center' border=1 class='table_list'>
-                <tr><th>Nome do Avaliador:</th><td align='center'><?php echo $nomeCompleto ?></td>
-                <tr><th>Situacao da Avaliação:</th><td><?php echo $situacaoAvaliacao ?></td>
-                <tr><th>Avaliação:</th><td>
+                <tr><th style="width: 10px">Nome do Avaliador:</th><td id='listaAvaliacoes'><?php echo $nomeCompleto ?></td>
+                <tr><th>Situação da Avaliação:</th><td id='listaAvaliacoes'><?php echo $situacaoAvaliacao ?></td>
+                <tr><th>Avaliação:</th><td style='text-align:left; padding-left:10px;'>
             
             
         <?php
@@ -53,7 +53,7 @@
                 }
                 ?>
                 </td>
-                <tr><th>Observações:</th><td><?php echo $avaliacao->getObservacao() ?></td></tr>
+                <tr><th>Observações:</th><td id='listaAvaliacoes'><?php echo $avaliacao->getObservacao() ?></td></tr>
             </table>
         <?php } ?>
     </div>

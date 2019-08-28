@@ -8,7 +8,8 @@ include dirname(__DIR__) . '../inc/includes.php';
 
     $usuario = new Usuario();
     $usuario = $_SESSION['usuario'];
-    
+
+    date_default_timezone_set('America/Sao_Paulo');    
     // O código abaixo verifica se há eventos com datas disponíveis para submissão
     
     $submissao = Submissao::retornaDadosSubmissao($_GET['id']);
@@ -49,7 +50,7 @@ include dirname(__DIR__) . '../inc/includes.php';
     <form method="post" action="<?=htmlspecialchars('submissaoForms/wsEnviarSubmissaoCorrigida.php');?>" enctype="multipart/form-data">
     <input type="hidden" id="idSubmissao" name="idSubmissao" value="<?php echo $submissao->getId() ?>">
     <input type="hidden" id="idUsuariosAdd" name="idUsuariosAdd" value="<?php echo $submissores ?>">
-        
+
         <table class="cadastroItens-2">
             <tr><th></th><td><h2 align="center">Dados do Evento</h2></td></tr>
             <tr>

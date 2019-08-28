@@ -42,16 +42,20 @@
                 if (count($listaAvaliadoresArea)>=$qtdeAvaliadoresArea && count($listaAvaliadoresOutraArea)>=$qtdeAvaliadoresOutraArea) {
                     // DISTRIBUIR AVALIADORES
                     $idsAvaliadores="";
+                    $emails = array();
                     
                     // Coleta os ID's dos avaliadores da área do evento com menos avaliações
                     foreach($listaAvaliadoresArea as $usuarioAvaliador) {
                         $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";
+                        array_push($emails, Usuario::retornaDadosUsuario($usuarioAvaliador->getId())->getEmail());
+                        
                     }
                     
                     // Coleta os ID's dos avaliadores de outras áreas do evento com menos avaliações
                     if ($qtdeAvaliadoresOutraArea>0) {
                         foreach($listaAvaliadoresOutraArea as $usuarioAvaliador) {
                             $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";
+                            array_push($emails, Usuario::retornaDadosUsuario($usuarioAvaliador->getId())->getEmail());
                         }
                     }
                     
@@ -62,13 +66,13 @@
                     else if ($submissao->getIdTipoSubmissao()==3) $prazo = Evento::retornaDadosEvento ($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoFinal ();
                     
                     if (Avaliacao::adicionarAvaliacoes($submissao->getId(),$submissao->getIdTipoSubmissao(),$submissao->getIdModalidade(),$idsAvaliadores,$prazo)) {
-                        $avaliacoesComAvaliadores+=1;
+                      //  emailAtribuicaoAvaliacao($submissao, $prazo, $emails);
                     }
                     else $avaliacoesSemAvaliadores+=1;                
                 }
                 else $avaliacoesSemAvaliadores+=1;                
             }
-            
+           // echo "saiu"; exit(1);
             /*echo "Avaliacoes com avaliadores: " . $avaliacoesComAvaliadores . "<br>"
                     . "Avaliacoes sem avaliadores: " . $avaliacoesSemAvaliadores . "<br>"; */
               

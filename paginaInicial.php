@@ -1,6 +1,6 @@
 <?php
 
-    include dirname(__FILE__) . './inc/includes.php';
+    include 'inc/includes.php';
     
     session_start();
     
@@ -21,8 +21,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SS - Página Inicial</title>
         <?php
-            include './inc/css.php';
-            include './inc/javascript.php';
+            include 'inc/css.php';
+            include 'inc/javascript.php';
         ?>
         <script>
             $(document).on('click', '.img-perfil', function(){
@@ -36,7 +36,7 @@
     
     <body>
         
-        <?php include './inc/menuInicial.php';?>
+        <?php include 'inc/menuInicial.php';?>
         
         <div class='painelControle'>
             <div class='img-usuario'><img class='img-perfil' src='<?php echo $pastaFotosPerfil . $usuario->getImagem() ?>'></div>
@@ -70,9 +70,12 @@
                     <?php 
                         //echo count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(),'',''))
                         $cont=0;
+                        $a=1;
                         foreach (Avaliacao::listaAvaliacoesComFiltro($usuario->getId(),'','') as $avaliacao) {
                             // Tipos de Submissao: 1-Parcial, 2-Corrigida, 3-Final
+                            //echo "<script>alert(".$avaliacao->getIdSubmissao().")</script>";
                             $submissao = Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao());
+                            
                             if ($submissao->getIdTipoSubmissao()==2) {
                                 $subParcial = Submissao::retornaDadosSubmissao($submissao->getIdRelacaoComSubmissao());
                                 if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $subParcial->getId(), 5))==1) $cont++;

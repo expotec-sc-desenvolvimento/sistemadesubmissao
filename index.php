@@ -3,7 +3,7 @@
     session_start();
     
     if (isset( $_SESSION['usuario'] )) header('Location: paginaInicial.php');
-    
+
 ?>
 
 <html lang="pt-br">
@@ -17,15 +17,15 @@
         <link rel="icon" href="img/logo250.png">
 
         <?php
-            include './inc/css.php';
-            include './inc/javascript.php';
+            include 'inc/css.php';
+            include 'inc/javascript.php';
         ?>
 
     </head>
     
     <body>
         <?php
-            include dirname(__FILE__) . './inc/mensagensGET.php';
+            include 'inc/mensagensGET.php';
         ?>
 
         

@@ -1,6 +1,6 @@
 <?php
 
-    include dirname(__FILE__) . './inc/includes.php';
+    include 'inc/includes.php';
     
     session_start();
     
@@ -25,16 +25,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SS - Minhas Avaliações</title>
         <?php
-            include './inc/css.php';
-            include './inc/javascript.php';
+            include 'inc/css.php';
+            include 'inc/javascript.php';
         ?>
     </head>
     
     <body>
         
         <?php 
-            include './inc/menuInicial.php';
-            include './inc/modal.php';
+            include 'inc/menuInicial.php';
+            include 'inc/modal.php';
             $minhasAvaliacoes = Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), '', '');
         ?>
 
@@ -49,6 +49,7 @@
                         <th>Área</th>
                         <th>Modalidade</th>
                         <th>Título</th>
+                        <th>Versão</th>
                         <th>Arquivo</th>
             <!--            <th>Situação<br>da Submissão</th> -->
                         <th>Situação desta Avaliação</th>
@@ -61,7 +62,7 @@
                 
                 <?php
                     if (count($minhasAvaliacoes)==0)
-                        echo "<tr><td colspan='9' align=center>Não existem avaliações a serem realizadas por você</td></tr>";
+                        echo "<tr><td colspan='10' align=center>Não existem avaliações a serem realizadas por você</td></tr>";
                     else {
                         foreach ($minhasAvaliacoes as $avaliacao) {
                            
@@ -95,6 +96,7 @@
                             echo "<td>".Area::retornaDadosArea(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdArea())->getDescricao()."</td>";
                             echo "<td>".Modalidade::retornaDadosModalidade(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdModalidade())->getDescricao()."</td>";
                             echo "<td>".Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()."</td>";
+                            echo "<td>".TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdTipoSubmissao())->getDescricao()."</td>";
                             echo "<td><a href='".$pastaSubmissoes . Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getArquivo()."'>Visualizar</td>";
               //              echo "<td>".$situacaoSubmissao."</td>";
                             
