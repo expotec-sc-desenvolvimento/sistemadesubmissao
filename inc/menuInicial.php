@@ -1,5 +1,5 @@
 <?php
-    require_once dirname(__FILE__) . './includes.php';
+    require_once dirname(__FILE__) . '/includes.php';
     
 ?>
 
@@ -54,26 +54,5 @@
 </div>
 
 <?php
-    include dirname(__FILE__) . './mensagensGET.php';
+    include dirname(__FILE__) . '/mensagensGET.php';
 ?>
-<!--
-<fieldset id="principal">
-    <br>
-
-    <h2 align='center'>Informações Pessoais</h2>
-
-    <table>
-        <tr>
-            <td width="220px"><img id ='fotoPerfil' src="<?php echo $pastaFotosPerfil . $usuario->getImagem() ?>" width='70px'></img> <br>
-                <p align="center">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <a href="atualizarFoto.php">Editar Foto</a><p></td>
-            <td> <strong>Nome:</strong> <?php echo $usuario->getNome() . " " . $usuario->getSobrenome() ?> <br>
-                <strong>CPF: </strong><?php echo $usuario->getCpf() ?> <br>
-                <strong>Email: </strong><?php echo $usuario->getEmail() ?> <br>
-                <strong>Perfil: </strong> <?php echo Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao() ?> <br>
-            </td>
-        </tr>
-
-    </table>
-
-</fieldset>
--->
