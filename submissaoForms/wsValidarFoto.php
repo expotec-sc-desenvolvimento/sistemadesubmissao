@@ -1,6 +1,6 @@
 <?php
 
-    include dirname(__FILE__) . '/../inc/includes.php';
+    include dirname(__DIR__) . '/inc/includes.php';
     
     session_start();
     
@@ -20,7 +20,7 @@
         $caracteresCPF = array(".", "-");
         $nome = str_replace($caracteresCPF,"",$usuario->getCpf());
 
-        if (move_uploaded_file($_FILES['pImagem']['tmp_name'], './../' . $pastaFotosPerfil . $nome . "." . $tipoArquivo)) { // Tenta Inserir a imagem na pasta
+        if (move_uploaded_file($_FILES['pImagem']['tmp_name'], dirname(__DIR__) . "/" . $pastaFotosPerfil . $nome . "." . $tipoArquivo)) { // Tenta Inserir a imagem na pasta
 
             $imagem = $nome . "." . $tipoArquivo;
             $usuario->setImagem($imagem);

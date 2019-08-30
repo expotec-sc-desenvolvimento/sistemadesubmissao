@@ -1,6 +1,6 @@
 <?php
 
-    include dirname(__FILE__) . '/../inc/includes.php';
+    include dirname(__DIR__) . '/inc/includes.php';
     
     session_start();
     
@@ -49,7 +49,7 @@
                 // CONTINUAR DAQUI
                 
                 if (Submissao::adicionarSubmissao($idEvento, $idArea, $idModalidade,$idTipoSubmissao,1,$novoArquivo,$titulo,$resumo,$palavrasChave,$relacaoCom,$idUsuariosAdd,'')) {
-                    if (move_uploaded_file($_FILES['arquivo']['tmp_name'], './../' . $pastaSubmissoes . $novoArquivo)) { // Tenta Inserir a imagem na pasta
+                    if (move_uploaded_file($_FILES['arquivo']['tmp_name'], dirname(__DIR__) . "/" . $pastaSubmissoes . $novoArquivo)) { // Tenta Inserir a imagem na pasta
                         
                         if ($evento->getDistribuicaoAutomaticaAvaliadores()==1) {
                             $id = Submissao::retornaIdUltimaSubmissao();

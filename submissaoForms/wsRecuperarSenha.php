@@ -1,7 +1,7 @@
 <?php
 
 
-include dirname(__FILE__) . '/../inc/includes.php';
+include dirname(__DIR__) . '/inc/includes.php';
 
 $metodoHttp = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
 
@@ -16,10 +16,10 @@ if ($metodoHttp === 'POST') {
         $novaSenha = substr(md5(time()), 0,6);
         $senhaCriptografada = md5($novaSenha);
         
-        $usuario = null;
-        $usuario = Usuario::recuperarSenha($cpf, $email,$senhaCriptografada);
         
-        if ($usuario != NULL) {
+        $resposta = Usuario::recuperarSenha($cpf, $email,$senhaCriptografada);
+        
+        if ($resposta == true) {
             $EmailUsuario = EnviarEmail("Recuperação de senha do Sistema de Submissão 2.0",
                     "Olá,<br><br>"
                     . "Em nosso sistema foi solicitada a recuperação de senha "

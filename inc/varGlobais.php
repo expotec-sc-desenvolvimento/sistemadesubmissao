@@ -6,10 +6,9 @@
  * and open the template in the editor.
  */
 
-$pastaFotosPerfil = 'uploads/usr/fotosPerfil/';
-$pastaSubmissoes = 'uploads/usr/submissoes/';
-$pastaDownloads = 'uploads/downloads/';
-$pastaFotosEventos = 'uploads/eventos/';
+$pastaFotosPerfil = 'uploads/fotosPerfil/';
+$pastaSubmissoes = 'uploads/submissoes/';
+$pastaFotosEventos = 'uploads/fotosEventos/';
 $pastaCertificados = 'downloads/certificados/';
 
 

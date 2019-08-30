@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-    include dirname(__FILE__) . '/../inc/includes.php';
+    include dirname(__DIR__) . '/inc/includes.php';
     
     session_start();
     

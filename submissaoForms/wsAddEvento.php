@@ -1,6 +1,6 @@
 <?php
 
-    include dirname(__FILE__) . '/../inc/includes.php';
+    include dirname(__DIR__) . '/inc/includes.php';
     
     session_start();
     
@@ -46,7 +46,7 @@
 
                 $nomeImagem = $idEvento . "." . $tipoArquivo;
 
-                if (move_uploaded_file($_FILES['pImagem']['tmp_name'], './../' . $pastaFotosEventos . $nomeImagem)) { // Tenta Inserir a imagem na pasta
+                if (move_uploaded_file($_FILES['pImagem']['tmp_name'], dirname(__DIR__) . "/" . $pastaFotosEventos . $nomeImagem)) { // Tenta Inserir a imagem na pasta
                     if (Evento::atualizarEvento($idEvento, $nomeImagem, $nomeEvento, $descricaoEvento,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
                                                 $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal,$distribuicaoAutomaticaAvaliadores))
                         header('Location: ../gerenciarEventos.php?Item=Criado');

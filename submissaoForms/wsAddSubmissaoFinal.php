@@ -1,6 +1,6 @@
 <?php
 
-    include dirname(__FILE__) . '/../inc/includes.php';
+    include dirname(__DIR__) . '/inc/includes.php';
     
     session_start();
     
@@ -52,7 +52,7 @@
                 // CONTINUAR DAQUI
                 
                 if (Submissao::adicionarSubmissao($idEvento, $idArea, $idModalidade,$idTipoSubmissao,1,$novoArquivo,$titulo,$resumo,$palavrasChave,$relacaoCom,$idUsuariosAdd,$submissao->getId())) {
-                    if (move_uploaded_file($_FILES['arquivo']['tmp_name'], './../' . $pastaSubmissoes . $novoArquivo)) { // Tenta Inserir a imagem na pasta
+                    if (move_uploaded_file($_FILES['arquivo']['tmp_name'], dirname(__DIR__) . "/" . $pastaSubmissoes . $novoArquivo)) { // Tenta Inserir a imagem na pasta
                         header('Location: ../minhasSubmissoes.php?Item=Criado');
                     }
                     else echo "<script>window.alert('2-Houve um erro na Submissao. Entre em contato com um Administrador do Sistema');window.history.back();";

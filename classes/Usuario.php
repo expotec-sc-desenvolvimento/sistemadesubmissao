@@ -152,7 +152,11 @@ class Usuario {
     
     
     public static function recuperarSenha ($cpf,$email,$senha) {
-        return UsuarioDao::recuperarSenha($cpf, $email,$senha);
+        $dado = UsuarioDao::recuperarSenha($cpf, $email,$senha);
+        $resposta = retornaRespostaUnica($dado);
+        
+        if ($resposta==1) return true;
+        else return false;
     }
     
     

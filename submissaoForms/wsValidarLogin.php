@@ -1,8 +1,5 @@
 <?php
-
-	//echo dirname(__DIR__) . " - " . dirname(__FILE__); exit(1);
-        
-    require_once dirname(__FILE__). '/../inc/includes.php';
+    include dirname(__DIR__) . '/inc/includes.php';
     
 
 //    date_default_timezone_set('America/Sao_Paulo');

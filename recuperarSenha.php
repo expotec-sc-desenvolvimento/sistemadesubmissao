@@ -51,10 +51,6 @@
                     <a href="cadastrarUsuario.php" title="Cadastre-se">Cadastre-se</a>
                 </li>
             </ol>                
-     
-        <?php
-        require_once './inc/footer.php';
-        ?>
     </body>
         
 </html>
