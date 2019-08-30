@@ -26,6 +26,7 @@
             $prazoFinalEnvioSubmissaoCorrigida = $p['prazoFinalEnvioSubmissaoCorrigida'];
             $prazoFinalEnvioAvaliacaoCorrigida = $p['prazoFinalEnvioAvaliacaoCorrigida'];
             $prazoFinalEnvioAvaliacaoFinal = $p['prazoFinalEnvioAvaliacaoFinal'];
+            $prazoInscricaoAvaliadores = $p['prazoInscricaoAvaliadores'];
             $distribuicaoAutomaticaAvaliadores = $p['distribuicaoAutomaticaAvaliadores'];
                    
                         
@@ -42,7 +43,7 @@
 
                 if (move_uploaded_file($_FILES['pImagem']['tmp_name'], dirname(__DIR__) . "/" . $pastaFotosEventos . $nomeImagem)) { // Tenta Inserir a imagem na pasta
                     if (Evento::atualizarEvento($idEvento, $nomeImagem, $nomeEvento, $descricaoEvento,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
-                                                $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal,$distribuicaoAutomaticaAvaliadores))
+                                                $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal, $prazoInscricaoAvaliadores, $distribuicaoAutomaticaAvaliadores))
                         header('Location: ../gerenciarEventos.php?Item=Atualizado');
                     else echo "<script>window.alert('Houve um erro na Atualização do Evento');window.history.back();</script>";
                 }
@@ -53,7 +54,7 @@
                 
                 if (!$tamanho>0) {
                     Evento::atualizarEvento($idEvento, -1, $nomeEvento, $descricaoEvento,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
-                                                $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal,$distribuicaoAutomaticaAvaliadores);
+                                                $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal,$prazoInscricaoAvaliadores,$distribuicaoAutomaticaAvaliadores);
                     header('Location: ../gerenciarEventos.php?Item=Atualizado');
                 }
                 else echo "<script>window.alert('$resposta');window.history.back();</script>";

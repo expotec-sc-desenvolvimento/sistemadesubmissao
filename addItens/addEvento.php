@@ -52,6 +52,10 @@
                 <td><input class="campoDeEntrada" type="date" id="prazoFinalEnvioAvaliacaoFinal" name="prazoFinalEnvioAvaliacaoFinal" required="true"></td>
             </tr>
             <tr>
+                <td class='direita'><label for="prazoInscricaoAvaliadores">Inscrição de Avaliadores: </label></td>
+                <td><input class="campoDeEntrada" type="date" id="prazoInscricaoAvaliadores" name="prazoInscricaoAvaliadores" required="true"></td>
+            </tr>
+            <tr>
                 <td class='direita'><label for="inpImagem">Logo: </label></td>
                 <td><input class="campoDeEntrada" type="file" id="inpImagem" name="pImagem" required="true"></td>
             </tr>

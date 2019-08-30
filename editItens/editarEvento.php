@@ -60,6 +60,10 @@
                 <td><input class="campoDeEntrada" type="date" id="prazoFinalEnvioAvaliacaoFinal" name="prazoFinalEnvioAvaliacaoFinal" value="<?php echo $evento->getPrazoFinalEnvioAvaliacaoFinal() ?>" required="true"></td>
             </tr>
             <tr>
+                <td class='direita'><label for="prazoInscricaoAvaliadores">Inscrição de Avaliadores: </label></td>
+                <td><input class="campoDeEntrada" type="date" id="prazoInscricaoAvaliadores" name="prazoInscricaoAvaliadores" value="<?php echo $evento->getPrazoInscricaoAvaliadores() ?>" required="true"></td>
+            </tr>
+            <tr>
                 <td class='direita'><label for="distribuicaoAutomaticaAvaliadores">Distribuição Automática<br> de Avaliadores: </label></td>
                 <td><select class='campoDeEntrada' id='distribuicaoAutomaticaAvaliadores' name='distribuicaoAutomaticaAvaliadores' onchange="if (this.value==1) alert('Ao ativar essa opção, os trabalhos submetidos a partir de agora serão distribuidos automaticamente!')">
                         <option value='1' <?php if ($evento->getDistribuicaoAutomaticaAvaliadores()=='1') echo " selected";?>>Ativado</option>

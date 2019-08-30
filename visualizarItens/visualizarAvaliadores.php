@@ -1,6 +1,6 @@
 <?php
 
-include dirname(__DIR__) . '../inc/includes.php';
+include dirname(__DIR__) . '/inc/includes.php';
     
     session_start();
     loginObrigatorio();

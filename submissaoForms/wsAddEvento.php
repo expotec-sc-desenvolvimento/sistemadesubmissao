@@ -28,6 +28,7 @@
             $prazoFinalEnvioSubmissaoCorrigida = $p['prazoFinalEnvioSubmissaoCorrigida'];
             $prazoFinalEnvioAvaliacaoCorrigida = $p['prazoFinalEnvioAvaliacaoCorrigida'];
             $prazoFinalEnvioAvaliacaoFinal = $p['prazoFinalEnvioAvaliacaoFinal'];
+            $prazoInscricaoAvaliadores = $p['prazoInscricaoAvaliadores'];
             $distribuicaoAutomaticaAvaliadores = $p['distribuicaoAutomaticaAvaliadores'];
 
 
@@ -40,7 +41,7 @@
             if ($resposta=="") { // Verifica se a imagem está de acordo com as especificações esperadas. Se não retornar nenhuma reposta, o arquivo está OK
     
                 Evento::adicionarEvento("-1", $nomeEvento, $descricaoEvento,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
-                                        $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal,$distribuicaoAutomaticaAvaliadores);
+                                        $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal,$prazoInscricaoAvaliadores,$distribuicaoAutomaticaAvaliadores);
                 
                 $idEvento = Evento::retornaIdUltimoEvento();
 
@@ -48,7 +49,7 @@
 
                 if (move_uploaded_file($_FILES['pImagem']['tmp_name'], dirname(__DIR__) . "/" . $pastaFotosEventos . $nomeImagem)) { // Tenta Inserir a imagem na pasta
                     if (Evento::atualizarEvento($idEvento, $nomeImagem, $nomeEvento, $descricaoEvento,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
-                                                $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal,$distribuicaoAutomaticaAvaliadores))
+                                                $prazoFinalEnvioAvaliacaoCorrigida,$prazoFinalEnvioAvaliacaoFinal, $prazoInscricaoAvaliadores,$distribuicaoAutomaticaAvaliadores))
                         header('Location: ../gerenciarEventos.php?Item=Criado');
                     else echo "<script>window.alert('Houve um erro na Criação do Evento');window.history.back();</script>";
                 }

@@ -13,6 +13,7 @@ class Evento {
     private $prazoFinalEnvioSubmissaoCorrigida;
     private $prazoFinalEnvioAvaliacaoCorrigida;
     private $prazoFinalEnvioAvaliacaoFinal;
+    private $prazoInscricaoAvaliadores;
     private $distribuicaoAutomaticaAvaliadores;
     
     function __construct() {
@@ -60,6 +61,10 @@ class Evento {
         return $this->prazoFinalEnvioAvaliacaoFinal;
     }
 
+    function getPrazoInscricaoAvaliadores() {
+        return $this->prazoInscricaoAvaliadores;
+    }
+    
     function getDistribuicaoAutomaticaAvaliadores() {
         return $this->distribuicaoAutomaticaAvaliadores;
     }
@@ -104,15 +109,19 @@ class Evento {
         $this->prazoFinalEnvioAvaliacaoFinal = $prazoFinalEnvioAvaliacaoFinal;
     }
 
+    function setPrazoInscricaoAvaliadores($prazoInscricaoAvaliadores) {
+        $this->prazoInscricaoAvaliadores = $prazoInscricaoAvaliadores;
+    }
+    
     function setDistribuicaoAutomaticaAvaliadores($distribuicaoAutomaticaAvaliadores) {
         $this->distribuicaoAutomaticaAvaliadores = $distribuicaoAutomaticaAvaliadores;
     }
 
     public static function adicionarEvento($logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
-                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $distribuicaoAutomaticaAvaliadores) {
+                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $prazoInscricaoAvaliadores, $distribuicaoAutomaticaAvaliadores) {
         
         $dado = EventoDAO::adicionarEvento($logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
-                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $distribuicaoAutomaticaAvaliadores);
+                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $prazoInscricaoAvaliadores, $distribuicaoAutomaticaAvaliadores);
         $resposta = retornaRespostaUnica($dado);
 
         if ($resposta==1) return true;
@@ -128,10 +137,10 @@ class Evento {
         
     }
     public static function atualizarEvento($id,$logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
-                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $distribuicaoAutomaticaAvaliadores) {
+                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $prazoInscricaoAvaliadores ,$distribuicaoAutomaticaAvaliadores) {
         
         $dado = EventoDAO::atualizarEvento($id,$logo,$nome,$descricao,$inicioSubmissao,$fimSubmissao,$prazoFinalEnvioAvaliacaoParcial,$prazoFinalEnvioSubmissaoCorrigida,
-                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $distribuicaoAutomaticaAvaliadores);
+                                           $prazoFinalEnvioAvaliacaoCorrigida, $prazoFinalEnvioAvaliacaoFinal, $prazoInscricaoAvaliadores, $distribuicaoAutomaticaAvaliadores);
         $resposta = retornaRespostaUnica($dado);
 
         if ($resposta==1) return true;

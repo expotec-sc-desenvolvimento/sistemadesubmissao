@@ -117,6 +117,7 @@
                                 <li><strong>Prazo para envio de Submissões Corrigidas:</strong> <?php echo date('d/m/Y',strtotime($evento->getprazoFinalEnvioSubmissaoCorrigida()));?></li>
                                 <li><strong>Prazo para envio de Avaliações Corrigidas:</strong> <?php echo date('d/m/Y',strtotime($evento->getPrazoFinalEnvioAvaliacaoCorrigida()));?></li>
                                 <li><strong>Prazo para envio de Avaliações Finais:</strong> <?php echo date('d/m/Y',strtotime($evento->getprazoFinalEnvioAvaliacaoFinal()));?></li>
+                                <li><strong>Prazo para inscrição de Avaliadores:</strong> <?php echo date('d/m/Y',strtotime($evento->getprazoInscricaoAvaliadores()));?></li>
                                 
                             </ul>
                         </td>
