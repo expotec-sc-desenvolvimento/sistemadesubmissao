@@ -158,8 +158,8 @@ class Submissao {
         else return false;
     }
     
-    public static function finalizarSubmissao($id,$idSituacaoSubmissao) {
-        $dado = SubmissaoDAO::finalizarSubmissao($id,$idSituacaoSubmissao);
+    public static function finalizarSubmissao($id) {
+        $dado = SubmissaoDAO::finalizarSubmissao($id);
         $resposta = retornaRespostaUnica($dado);
 
         if ($resposta==1) return true;

@@ -29,7 +29,7 @@
             if (strtotime($prazo)>=strtotime($dataAtual)) {
                 if (Avaliacao::atualizarAvaliacao($idAvaliacao, $novoAvaliador,1,$prazo)) {
                     
-                    emailAtualizacaoAvaliacao(Submissao::retornaDadosSubmissao(Avaliacao::retornaDadosAvaliacao($idAvaliacao)->getIdSubmissao()), $prazo, Usuario::retornaDadosUsuario($novoAvaliador)->getEmail());
+               //     emailAtualizacaoAvaliacao(Submissao::retornaDadosSubmissao(Avaliacao::retornaDadosAvaliacao($idAvaliacao)->getIdSubmissao()), $prazo, Usuario::retornaDadosUsuario($novoAvaliador)->getEmail());
                     header('Location: '.$_SERVER["HTTP_REFERER"].'?Item=Atualizado');
                     
                 }

@@ -27,7 +27,7 @@ if ($metodoHttp === 'POST') {
                     . "A sua senha foi redefinida para: <b>".$novaSenha."</b><br><br>"
                     . "att,<br>"
                     . "Equipe SS2.0"
-                    ,"Sistema de Submissao",array($email));
+                    ,"Sistema de Submissao",$email,2);
             
             
             if (!$EmailUsuario) {

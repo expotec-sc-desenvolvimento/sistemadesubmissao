@@ -9,10 +9,11 @@
     $usuario = new Usuario();
     $usuario = $_SESSION['usuario'];
     
+    date_default_timezone_set('America/Sao_Paulo');
  //   verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página    
-    if (!Avaliacao::atualizarSituacaoAvaliacoes()) {
-        echo "erro"; exit(1);
-    }  
+  //  if (!Avaliacao::atualizarSituacaoAvaliacoes()) {
+    //    echo "erro"; exit(1);
+    //}  
         
 ?>
 <!DOCTYPE html>
@@ -51,7 +52,6 @@
                         <th>Título</th>
                         <th>Versão</th>
                         <th>Arquivo</th>
-            <!--            <th>Situação<br>da Submissão</th> -->
                         <th>Situação desta Avaliação</th>
                         <th>Prazo de Entrega</th>
                         <th>Nota</th>
@@ -82,13 +82,19 @@
                             }
                             
                             $situacaoSubmissao = SituacaoSubmissao::retornaDadosSituacaoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdSituacaoSubmissao())->getDescricao();
-                            $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao();
+                            $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao());
                             
                             
                             $avParcialCorrigida = array(1,2);
                             
-                            if ($situacaoSubmissao=="Em avaliacao") {
-                                echo "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a></td>";
+                            if ($situacaoSubmissao=="Em avaliacao") { // Se a submissão não tiver sido finalizada...
+                                if (!in_array($situacaoAvaliacao->getId(), array(2,4,5,6))) { // Se a avaliação não tiver sido finalizada
+                                    echo "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a></td>";
+                                }
+                                else if (strtotime(date('d-m-Y'))<=strtotime ($avaliacao->getDataRealizacaoAvaliacao())) { //Se a avaliação tiver sido finalizada, mas foi ainda está no prazo para alteração (mesmo dia da avaliação)
+                                    echo "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a></td>";
+                                }
+                                else echo "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='$iconVisualizar' class='img-miniatura'></a></td>";
                             }
                             else echo "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='$iconVisualizar' class='img-miniatura'></a></td>";
                             
@@ -98,7 +104,6 @@
                             echo "<td>".Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()."</td>";
                             echo "<td>".TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdTipoSubmissao())->getDescricao()."</td>";
                             echo "<td><a href='".$pastaSubmissoes . Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getArquivo()."'>Visualizar</td>";
-              //              echo "<td>".$situacaoSubmissao."</td>";
                             
                             echo "<td>".SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao()."</td>";
                             echo "<td>".date('d/m/Y', strtotime($avaliacao->getPrazo()))."</td>";

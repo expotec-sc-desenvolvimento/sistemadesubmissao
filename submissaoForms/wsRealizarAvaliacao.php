@@ -60,67 +60,7 @@
             
             
             if (Avaliacao::realizarAvaliacao($avaliacao->getId(),$situacaoAvaliacao,$notas,$notaFinalAvaliacao,$observacao)) {
-                // Tipo de Submissao: 1-Parcial, 2-Corrigida, 3-Final
-                // Situação das Submissões: 4-Aprovado, 6-Reprovado
-
-                $submissao = Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao());
-                if ($submissao->getIdTipoSubmissao()==2 && $submissao->getIdSituacaoSubmissao()==4) { /* Caso seja uma submissão Corrigida e tenha sido considerada Aprovada depois
-                                                                                                        das devidas correções, é gerada uma submissão Final automaticamente */
-                    $evento = Evento::retornaDadosEvento($submissao->getIdEvento());
-                    $modalidade = Modalidade::retornaDadosModalidade($submissao->getIdModalidade());
-                    $novoArquivo = $evento->getNome() . "-" . $modalidade->getDescricao() . "-" . substr(md5(time()), 0,15) . "-Final.pdf";
-                    $idUsuariosAdd = "";
-                    
-                    foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $user) {
-                        $idUsuariosAdd .= $user->getIdUsuario() . ";";
-                    }
-                    
-                    
-                    if (Submissao::adicionarSubmissao($submissao->getIdEvento(), $submissao->getIdArea(), $submissao->getIdModalidade(),3,3,$novoArquivo,$submissao->getTitulo(),
-                                                      $submissao->getResumo(),$submissao->getPalavrasChave(),$submissao->getRelacaoCom(),$idUsuariosAdd,$submissao->getId())) {
-                        
-                        copy('./../' . $pastaSubmissoes . $submissao->getArquivo(), './../' . $pastaSubmissoes . $novoArquivo);
-                        
-                        $novosAvaliadores = "";
-                        $emails = array();
-                        
-                        $prazo = Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioSubmissaoCorrigida();
-                        $avaliadoresAnteriores = Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), '');
-                        
-                        foreach ($avaliadoresAnteriores as $avaliador) { 
-                            $novosAvaliadores .= $avaliador->getIdUsuario() . ";";
-                            array_push($emails, Usuario::retornaDadosUsuario($avaliador->getIdUsuario())->getEmail());   
-                        }
-                        
-                        $sub = Submissao::retornaDadosSubmissao(Submissao::retornaIdUltimaSubmissao());
-                        
-                        
-                        
-                        if (Avaliacao::adicionarAvaliacoes($sub->getId(), 3, $submissao->getIdModalidade(), $novosAvaliadores, $prazo)) {
-                            emailAtribuicaoAvaliacao($sub, $prazo, $emails);
-                            header('Location: ../minhasAvaliacoes.php?Item=Atualizado');
-                        }
-                        else header('Location: ../minhasAvaliacoes.php?Item=NaoAtualizado');
-                        
-                    }
-                    else {
-                        echo "OCORREU UM ERRO. CONTACTE O ADMINISTRADOR";
-                        exit(1);
-                    }
-                    //GERA UMA NOVA SUBMISSAO
-
-                }
-                else if ($submissao->getIdTipoSubmissao()==3 && $submissao->getIdSituacaoSubmissao()==7) { /* Caso seja uma submissão Final e todos os avaliadores tenham terminado
-                                                                                                        a avaliação, são gerados certificados de Apresentação para os submissores */
-                    
-                    foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $user) {
-                        $evento = Evento::retornaDadosEvento($submissao->getIdEvento());
-                        gerarCertificado($evento, Usuario::retornaDadosUsuario($user->getIdUsuario()),1,$pastaCertificados);
-                        
-
-                    }
-                }
-               // else {echo "PQP"; exit(1);}
+                // O CÓDIGO QUE TINHA ABAIXO FOI TRANSFERIDO PARA O ARQUIVO wsFinalizarSubmissao.php
                 header('Location: ../minhasAvaliacoes.php?Item=Atualizado');
             }
             else header('Location: ../minhasAvaliacoes.php?Item=NaoAtualizado');

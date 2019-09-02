@@ -11,9 +11,9 @@
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"./paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página    
     
-    if (!Avaliacao::atualizarSituacaoAvaliacoes()) {
-        echo "erro"; exit(1);
-    }  
+   // if (!Avaliacao::atualizarSituacaoAvaliacoes()) {
+     //   echo "erro"; exit(1);
+    //}  
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

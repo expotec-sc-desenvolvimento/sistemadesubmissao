@@ -10,6 +10,7 @@ class Avaliacao {
     private $nota;
     private $observacao;
     private $dataRecebimento;
+    private $dataRealizacaoAvaliacao;
     private $prazo;
             
     function __construct() {
@@ -44,10 +45,14 @@ class Avaliacao {
         return $this->dataRecebimento;
     }
     
+    function getDataRealizacaoAvaliacao() {
+        return $this->dataRealizacaoAvaliacao;
+    }
+
     function getPrazo() {
         return $this->prazo;
     }
-
+    
     function setId($id) {
         $this->id = $id;
     }
@@ -76,6 +81,10 @@ class Avaliacao {
         $this->dataRecebimento = $dataRecebimento;
     }
     
+    function setDataRealizacaoAvaliacao($dataRealizacaoAvaliacao) {
+        $this->dataRealizacaoAvaliacao = $dataRealizacaoAvaliacao;
+    }
+
     function setPrazo($prazo) {
         $this->prazo = $prazo;
     }

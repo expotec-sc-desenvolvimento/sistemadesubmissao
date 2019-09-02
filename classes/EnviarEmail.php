@@ -2,7 +2,10 @@
 
 require_once dirname(__DIR__) . '/PHPMailer-5.2.27/PHPMailerAutoload.php';
 
-function EnviarEmail($assunto,$corpo,$nome,$emails) {
+function EnviarEmail($assunto,$corpo,$nome,$emails,$tipo) {
+    
+        // Tipo: 1 - Email com cópia para o email principal; Tipo: 2 - Email de recuperação de senha, enviado apenas para o usuário
+    
         $M = new PHPMailer();
 
 	$M->isSMTP(); # Informamos que é SMTP
@@ -18,10 +21,16 @@ function EnviarEmail($assunto,$corpo,$nome,$emails) {
 	 
 #	$M-> SMTPDebug = 4;
 	$M->From = 'jsueneylove@gmail.com'; # Remetente do disparo.
-	$M->FromName = 'Sistema de Sumissão'; # Nome do remetente.
-        $M->addAddress('jsueneylove@gmail.com', $nome); # Destinatário. A VARIAVEL $nome foi TROCADA PARA TESTE
+	$M->FromName = 'Sistema de Submissão'; # Nome do remetente.
         
-        foreach ($emails as $email) {$M->addCC($email);}
+        if ($tipo==1) { // Array de emails
+            $M->addAddress('jsueneylove@gmail.com', $nome);
+            foreach ($emails as $email) {$M->addCC($email);}
+        }
+        if ($tipo==2) { // Email único
+            $M->addAddress($email, $nome);
+        }
+        
         
 	$M->isHTML(); # Informamos que o corpo tem o formato HTML.
         $M->CharSet = 'UTF-8';
@@ -29,7 +38,7 @@ function EnviarEmail($assunto,$corpo,$nome,$emails) {
         $M->Body = $corpo;
         return $M-> send();
 
-    }
+}
     
 
 

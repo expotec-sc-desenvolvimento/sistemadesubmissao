@@ -11,9 +11,10 @@
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"./paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página    
     
-    if (!Avaliacao::atualizarSituacaoAvaliacoes()) {
-        echo "erro"; exit(1);
-    }  
+    date_default_timezone_set('America/Sao_Paulo');
+    //if (!Avaliacao::atualizarSituacaoAvaliacoes()) {
+      //  echo "erro"; exit(1);
+    //}  
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -170,7 +171,8 @@
                         <th>Autores</th>
                         <th>Avaliadores</th>
                         <th>Nota</th>
-          <!--              <th>*</th> -->
+                        
+                        <th>*</th>
 
                     </tr>
                 </thead>
@@ -216,9 +218,17 @@
                             $avaliadores .= "</ul>";
 
                             $finalizar="";
-                            if ($submissao->getNota()!="" && SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao())->getDescricao()=="Em avaliacao") {
-                                $finalizar="<a href='submissaoForms/wsFinalizarSubmissao.php?id=".$submissao->getId()."' onclick=\"return confirm('Deseja finalizar esta avaliação?')\">Finalizar</a>";
+                            if (SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao())->getDescricao()=="Em avaliacao") {
+                                $contAvaliacoesFinalizadas = 0;
+                                foreach (Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), '') as $aval) {
+                                    if (in_array($aval->getIdSituacaoAvaliacao(), array(2,4,5,6)) && strtotime(date('d-m-Y'))>strtotime($aval->getDataRealizacaoAvaliacao())) {
+                                        $contAvaliacoesFinalizadas++;
+                                    }
+                                }    
+                                if ($contAvaliacoesFinalizadas==3) $finalizar = "<input type='button' class='editarObjeto btn-verde' id='".$submissao->getId()."' name='Finalizacao' value='Finalizar Submissão' />";
+                                
                             }
+                            
                             
                             $addAvaliador = "";
                             $repetirAvaliadores = "";
@@ -246,7 +256,7 @@
                                 <td><?php echo $usuarioSubmissao ?></td>
                                 <td><?php echo $avaliadores . $addAvaliador . $repetirAvaliadores?></td>
                                 <td><?php echo $submissao->getIdTipoSubmissao()==3 ? $submissao->getNota() : '-'; ?></td>
-                                <!-- <td><? php echo $finalizar ?></td></tr> -->
+                                <td><?php echo $finalizar ?></td></tr>
                       <?php          
                         }
                     }

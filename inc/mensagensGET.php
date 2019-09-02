@@ -31,6 +31,7 @@
     
     else if (isset($_GET['Submissao']) && $_GET['Submissao']=="UsuarioNaoSubmissor") echo "<div style='background: red; text-align: center;'>Apenas o submissor tem acesso para alterar os dados!</div>";
     else if (isset($_GET['Submissao']) && $_GET['Submissao']=="EventosNaoDisponiveis") echo "<div style='background: red; text-align: center;'>Não há eventos com datas de Submissão disponíveis</div>";
+        else if (isset($_GET['Submissao']) && $_GET['Submissao']=="AvaliadoresInsuficientes") echo "<div style='background: red; text-align: center;'>Não há avaliadores suficientes para esta área de Submissão</div>";
     
     else if (isset($_GET['Solicitacao']) && $_GET['Solicitacao']=="Fora") echo "<div style='background: red; text-align: center;'>Fora do Prazo de Solicitacao!</div>";
     else if (isset($_GET['Solicitacao']) && $_GET['Solicitacao']=="Pendente") echo "<div style='background: red; text-align: center;'>Há solicitações pendentes aguardando avaliação!</div>";

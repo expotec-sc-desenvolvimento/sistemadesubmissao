@@ -27,8 +27,8 @@ class SubmissaoDAO {
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }
-    public static function finalizarSubmissao($id,$idSituacaoSubmissao) {
-        $sql = "CALL finalizarSubmissao('$id','$idSituacaoSubmissao');";
+    public static function finalizarSubmissao($id) {
+        $sql = "CALL finalizarSubmissao('$id');";
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }

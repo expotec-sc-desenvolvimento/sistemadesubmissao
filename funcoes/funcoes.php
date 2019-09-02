@@ -60,13 +60,13 @@
         $corpo .= "<strong>Titulo: </strong>" . $submissao->getTitulo() . "<br>";
         $corpo .= "<strong>Área: </strong>" . Area::retornaDadosArea($submissao->getIdArea())->getDescricao() . "<br>";
         $corpo .= "<strong>Prazo Final: </strong>" . date('d/m/Y', strtotime($prazoEnvio)) . "<br><br>";
-        $corpo .= "Atenciosamente, <br>";
+        $corpo .= "<br>Atenciosamente, <br>";
         $corpo .= "<strong>Equipe do Sistema de Submissão - IFRN</strong>";
         
         //echo count($listaAvaliadores); exit(1);
      //   echo $corpo; exit(1);
         
-        if (EnviarEmail($titulo,$corpo,$remetente, $emails)) { /*echo "Email enviado para " . $user->getNome(); */}
+        if (EnviarEmail($titulo,$corpo,$remetente, $emails,1)) { /*echo "Email enviado para " . $user->getNome(); */}
         
         return;
     }
@@ -82,11 +82,35 @@
         $corpo .= "<strong>Titulo: </strong>" . $submissao->getTitulo() . "<br>";
         $corpo .= "<strong>Área: </strong>" . Area::retornaDadosArea($submissao->getIdArea())->getDescricao() . "<br>";
         $corpo .= "<strong>Prazo Final: </strong>" . date('d/m/Y', strtotime($prazoEnvio)) . "<br><br>";
-        $corpo .= "Atenciosamente, <br>";
+        $corpo .= "<br>Atenciosamente, <br>";
         $corpo .= "<strong>Equipe do Sistema de Submissão - IFRN</strong>";
         
         
-        if (EnviarEmail($titulo,$corpo,$remetente, array($email))) {};
+        if (EnviarEmail($titulo,$corpo,$remetente, array($email),1)) {};
+        
+        return;
+    }
+    
+    function emailFinalizacaoSubmissao ($submissao,$emails) {
+
+        $titulo = "Finalização de Submissão";
+        $remetente = "Sistema de Submissão";
+
+        $corpo = "A seguinte submissão foi finalizada:<br><br> ";
+        $corpo .= "<strong>Titulo: </strong>" . $submissao->getTitulo() . "<br>";
+        $corpo .= "<strong>Área: </strong>" . Area::retornaDadosArea($submissao->getIdArea())->getDescricao() . "<br>";
+        $corpo .= "<strong>Situação: </strong>" . SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getId())->getDescricao() . "<br>";
+        
+        if ($submissao->getIdSituacaoSubmissao()==5) {
+            $corpo .= "<strong>Prazo Final para envio das correções solicitadas no sistema: </strong>" . date('d/m/Y', strtotime(Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioSubmissaoCorrigida())) . "<br><br>";
+        }
+        
+        
+        $corpo .= "<br>Atenciosamente, <br>";
+        $corpo .= "<strong>Equipe do Sistema de Submissão - IFRN</strong>";
+        
+        
+        if (EnviarEmail($titulo,$corpo,$remetente, $emails,1)) {};
         
         return;
     }

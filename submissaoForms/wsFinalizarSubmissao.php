@@ -17,21 +17,74 @@
     
     if (isset($_GET['id'])) {
         $submissao = Submissao::retornaDadosSubmissao($_GET['id']);
-        if ($submissao->getId()!="" || $submissao->getNota()==NULL) {
-            
-            $mediaAprovacao = Evento::retornaDadosEvento($submissao->getIdEvento())->getMediaAprovacaoTrabalhos();
-            $situacao = 0;
-            
-            if ($submissao->getNota()>=$mediaAprovacao) $situacao = 4; //APROVADO
-            else $situacao = 5; // REPROVADO;
-            
-            if (Submissao::finalizarSubmissao($submissao->getId(),$situacao)) {
-                header("Location: ../gerenciarSubmissoes.php?Item=Atualizado");
+        
+        if (Submissao::finalizarSubmissao($submissao->getId())) {
+            $emails = array();
+            foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $userSubmissao) {
+                array_push($emails, Usuario::retornaDadosUsuario($userSubmissao->getIdUsuario())->getEmail());
             }
-            else header("Location: ../gerenciarSubmissoes.php?Item=NaoAtualizado");
+            emailFinalizacaoSubmissao($submissao,$emails); // Envio de email para os usuários saberem que a submissão foi finalizada
             
+            if ($submissao->getIdTipoSubmissao()==2 && $submissao->getIdSituacaoSubmissao()==4) { /* Caso seja uma submissão Corrigida e tenha sido considerada Aprovada depois
+                                                                                                        das devidas correções, é gerada uma submissão Final automaticamente */
+                    $evento = Evento::retornaDadosEvento($submissao->getIdEvento());
+                    $modalidade = Modalidade::retornaDadosModalidade($submissao->getIdModalidade());
+                    $novoArquivo = $evento->getNome() . "-" . $modalidade->getDescricao() . "-" . substr(md5(time()), 0,15) . "-Final.pdf";
+                    $idUsuariosAdd = "";
+                    
+                    foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $user) {
+                        $idUsuariosAdd .= $user->getIdUsuario() . ";";
+                    }
+                    
+                    
+                    if (Submissao::adicionarSubmissao($submissao->getIdEvento(), $submissao->getIdArea(), $submissao->getIdModalidade(),3,3,$novoArquivo,$submissao->getTitulo(),
+                                                      $submissao->getResumo(),$submissao->getPalavrasChave(),$submissao->getRelacaoCom(),$idUsuariosAdd,$submissao->getId())) {
+                        
+                        copy(dirname('__DIR__') . '/' . $pastaSubmissoes . $submissao->getArquivo(), dirname('__DIR__') . '/' . $pastaSubmissoes . $novoArquivo);
+                        
+                        $novosAvaliadores = "";
+                        $emails = array();
+                        
+                        $prazo = Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioSubmissaoCorrigida();
+                        $avaliadoresAnteriores = Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), '');
+                        
+                        foreach ($avaliadoresAnteriores as $avaliador) { 
+                            $novosAvaliadores .= $avaliador->getIdUsuario() . ";";
+                            array_push($emails, Usuario::retornaDadosUsuario($avaliador->getIdUsuario())->getEmail());   
+                        }
+                        
+                        $sub = Submissao::retornaDadosSubmissao(Submissao::retornaIdUltimaSubmissao());
+                        
+                        
+                        
+                        if (Avaliacao::adicionarAvaliacoes($sub->getId(), 3, $submissao->getIdModalidade(), $novosAvaliadores, $prazo)) {
+                            emailAtribuicaoAvaliacao($sub, $prazo, $emails);
+                            header('Location: ../gerenciarSubmissoes.php?Item=Atualizado');
+                        }
+                        else header('Location: ../gerenciarSubmissoes.php?Item=NaoAtualizado');
+                        
+                    }
+                    else {
+                        echo "OCORREU UM ERRO. CONTACTE O ADMINISTRADOR";
+                        exit(1);
+                    }
+                    //GERA UMA NOVA SUBMISSAO
+
+                }
+                else if ($submissao->getIdTipoSubmissao()==3 && $submissao->getIdSituacaoSubmissao()==7) { /* Caso seja uma submissão Final e todos os avaliadores tenham terminado
+                                                                                                        a avaliação, são gerados certificados de Apresentação para os submissores */
+                    
+                    foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $user) {
+                        $evento = Evento::retornaDadosEvento($submissao->getIdEvento());
+                        gerarCertificado($evento, Usuario::retornaDadosUsuario($user->getIdUsuario()),1,$pastaCertificados);
+                        
+
+                    }
+                }
+               // else {echo "PQP"; exit(1);}
+                header('Location: ../gerenciarSubmissoes.php?Item=Atualizado');
         }
-        else echo "<script>window.alert('Submissão Inválida para finalização!');window.history.back();</script>";
+        else header('Location: ../gerenciarSubmissoes.php?Item=NaoAtualizado');
     }
     else echo "<script>window.alert('Submissão Inválida!');window.history.back();</script>";
 ?>

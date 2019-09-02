@@ -95,6 +95,7 @@
                         <th>Área</th>
                         <th>Avaliador</th>
                         <th>Avaliações Parciais</th>
+                        <th>Avaliações Ressubmetidas</th>
                         <th>Avaliações Finais</th>
                     </tr>
                 </thead>
@@ -111,9 +112,15 @@
                         foreach (Avaliador::listaAvaliadoresComFiltro($evento->getId(), $idArea, '',"area") as $avaliador) {
                                 
                                 $avParciais = 0;
+                                $avCorrigidas = 0;
                                 $avFinais = 0;
                                 foreach (Avaliacao::listaAvaliacoesComFiltro($avaliador->getIdUsuario(), '', '') as $av) {
                                     if (TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($av->getIdSubmissao())->getIdTipoSubmissao())->getDescricao()=="Parcial") $avParciais += 1;
+                                    else if (TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($av->getIdSubmissao())->getIdTipoSubmissao())->getDescricao()=="Corrigida") {
+                                        if ($av->getObservacao() != 'AVALIAÇÃO GERADA AUTOMATICAMENTE PELO SISTEMA') {
+                                            $avCorrigidas += 1;
+                                        }
+                                    }
                                     else $avFinais += 1;
                                 }
                                 
@@ -124,6 +131,7 @@
                                 <td><?php echo Area::retornaDadosArea($avaliador->getIdArea())->getDescricao() ?></td>
                                 <td><?php echo Usuario::retornaDadosUsuario($avaliador->getIdUsuario())->getNome() ?></td>
                                 <td><?php echo $avParciais ?></td>
+                                <td><?php echo $avCorrigidas ?></td>
                                 <td><?php echo $avFinais ?></td>
                             </tr>
                         

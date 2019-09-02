@@ -77,7 +77,7 @@ include dirname(__DIR__) . '/inc/includes.php';
                     }
                     else header('Location: ../gerenciarSubmissoes.php?Item=NaoAtualizado');
                 }
-                else header('Location: ../gerenciarSubmissoes.php?Item=NaoAtualizado');
+                else header('Location: ../gerenciarSubmissoes.php?Submissao=AvaliadoresInsuficientes');
             }
             else header('Location: ../gerenciarSubmissoes.php?Item=NaoAtualizado');
         } catch (Exception $e) {

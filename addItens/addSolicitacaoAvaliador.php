@@ -22,7 +22,7 @@
         
         $dataFimInscricaoAvaliadores = date('d-m-Y', strtotime($evento->getPrazoInscricaoAvaliadores()));                
         
-        if (strtotime($dataAtual) < strtotime($dataFimInscricaoAvaliadores)) {
+        if (strtotime($dataAtual) <= strtotime($dataFimInscricaoAvaliadores)) {
 
             $eventosComInscricoesParaAvaliadorDisponiveis = true;
             break;
