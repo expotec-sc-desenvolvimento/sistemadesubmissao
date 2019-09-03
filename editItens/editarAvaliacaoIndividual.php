@@ -134,9 +134,20 @@
                     <tr><th>Análise da Avaliação: </th>
                         <td><textarea class=campoDeEntrada id='observacao' name='observacao' cols='30' rows='5' style="resize: none;"><?php echo $avaliacao->getObservacao()?></textarea></td>
                     </tr>
+                    <?php if ($tipoSubmissao == 2) { // Submissão Corrigida, mostradas as observações feitas na submissão anterior?>
+                    <tr><th>Observações da <br>Submissão Parcial: </th>
+                        <td><i><?php 
+                                    foreach (Avaliacao::listaAvaliacoesComFiltro($avaliacao->getIdUsuario(), Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdRelacaoComSubmissao(), '') as $avalParcial) {
+                                        echo $avalParcial->getObservacao(); break;
+                                    }
+                                ?>
+                            </i></td>
+                    </tr>
+                    <?php } ?>
                 </table>
                 
                 <p align='center'><input type='submit' class='btn-verde' value='Enviar Avaliação'></p>
+                
                 
             </form>
 </div>

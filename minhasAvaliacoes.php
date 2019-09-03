@@ -42,44 +42,65 @@
         <fieldset>
             <h2 align="center">Minhas avaliações</h2>
             
-            <table border="1" align="center" class='table_list'>
-                <thead>
-                    <tr>
-                        <th>*</th>
-                        <th>Evento</th>
-                        <th>Área</th>
-                        <th>Modalidade</th>
-                        <th>Título</th>
-                        <th>Versão</th>
-                        <th>Arquivo</th>
-                        <th>Situação desta Avaliação</th>
-                        <th>Prazo de Entrega</th>
-                        <th>Nota</th>
-
-                    </tr>
-                </thead>
-                <tbody>
+            
+            
                 
                 <?php
                     if (count($minhasAvaliacoes)==0)
-                        echo "<tr><td colspan='10' align=center>Não existem avaliações a serem realizadas por você</td></tr>";
+                        echo "<h1 align='center'>Não existem avaliações a serem realizadas por você</h1>";
                     else {
+                        $cabecalho = "<table border='1' align='center' class='table_list'>
+                                            <thead>
+                                                <tr>
+                                                    <th>*</th>
+                                                    <th>Evento</th>
+                                                    <th>Área</th>
+                                                    <th>Modalidade</th>
+                                                    <th>Título</th>
+                                                    <th>Versão</th>
+                                                    <th>Arquivo</th>
+                                                    <th>Situação desta Avaliação</th>
+                                                    <th>Data de Realização da Avaliação</th>
+                                                    <th>Prazo de Entrega</th>
+                                                    <th>Nota</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>";
+                        
+                        $contAvParciais = 0;
+                        $contAvCorrigidas = 0;
+                        $contAvFinais = 0;
+                        
+                        $avParciais = "";
+                        $avCorrigidas = "";
+                        $avFinais = "";
+                        
                         foreach ($minhasAvaliacoes as $avaliacao) {
-                           
+
                             $tipoSubmissao = TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdTipoSubmissao())->getId();
-                            
-                            // Tipos De Submissao: 1-Parcial, 2-Corrigida, 3-Final
-                            // Tipos de Situacao Submissao: 4-Aprovado, 5-Aprovado com Ressalvas, 6-Reprovado
-                            
-                            /*
-                             * O IF abaixo verifica se essa é uma Avaliação de uma submissão corrigida. Sendo assim, o sistema busca a situação da avaliação do usuário
-                             * na versão Parcial da Submissão. Caso tenha diso APROVADO COM RESSALVAS (5), o sistema habilita para ele realizar a avaliação. Caso contrário,
-                             * ou seja, o avaliador tenha avaliado a versão parcial do Trabalho como APROVADO ou REPROVADO, ele não precisa mais realizar a avaliação
-                             */
-                            if ($tipoSubmissao==2) {
+                            $a;
+                            if ($tipoSubmissao==1) {$a = &$avParciais; $contAvParciais++;}
+                            else if ($tipoSubmissao==2) {
+                                // Tipos De Submissao: 1-Parcial, 2-Corrigida, 3-Final
+                                // Tipos de Situacao Submissao: 4-Aprovado, 5-Aprovado com Ressalvas, 6-Reprovado
+
+                                /*
+                                 * O IF abaixo verifica se essa é uma Avaliação de uma submissão corrigida. Sendo assim, o sistema busca a situação da avaliação do usuário
+                                 * na versão Parcial da Submissão. Caso tenha diso APROVADO COM RESSALVAS (5), o sistema habilita para ele realizar a avaliação. Caso contrário,
+                                 * ou seja, o avaliador tenha avaliado a versão parcial do Trabalho como APROVADO ou REPROVADO, ele não precisa mais realizar a avaliação
+                                 */
                                 $submissaoParcial = Submissao::retornaDadosSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdRelacaoComSubmissao());
                                 if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $submissaoParcial->getId(), 5))!=1) continue;
+                                else {
+                                    $a = &$avCorrigidas;
+                                    $contAvCorrigidas++;
+                                }
+                                
                             }
+                            else if ($tipoSubmissao==3) {$a = &$avFinais; $contAvFinais++;}
+                            
+                            
                             
                             $situacaoSubmissao = SituacaoSubmissao::retornaDadosSituacaoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdSituacaoSubmissao())->getDescricao();
                             $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao());
@@ -89,33 +110,41 @@
                             
                             if ($situacaoSubmissao=="Em avaliacao") { // Se a submissão não tiver sido finalizada...
                                 if (!in_array($situacaoAvaliacao->getId(), array(2,4,5,6))) { // Se a avaliação não tiver sido finalizada
-                                    echo "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a></td>";
+                                    $a.= "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a></td>";
                                 }
                                 else if (strtotime(date('d-m-Y'))<=strtotime ($avaliacao->getDataRealizacaoAvaliacao())) { //Se a avaliação tiver sido finalizada, mas foi ainda está no prazo para alteração (mesmo dia da avaliação)
-                                    echo "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a></td>";
+                                    $a.= "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a></td>";
                                 }
-                                else echo "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='$iconVisualizar' class='img-miniatura'></a></td>";
+                                else $a.= "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='$iconVisualizar' class='img-miniatura'></a></td>";
                             }
-                            else echo "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='$iconVisualizar' class='img-miniatura'></a></td>";
+                            else $a.= "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='$iconVisualizar' class='img-miniatura'></a></td>";
                             
-                            echo "<td>".Evento::retornaDadosEvento(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdEvento())->getNome()."</td>";
-                            echo "<td>".Area::retornaDadosArea(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdArea())->getDescricao()."</td>";
-                            echo "<td>".Modalidade::retornaDadosModalidade(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdModalidade())->getDescricao()."</td>";
-                            echo "<td>".Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()."</td>";
-                            echo "<td>".TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdTipoSubmissao())->getDescricao()."</td>";
-                            echo "<td><a href='".$pastaSubmissoes . Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getArquivo()."'>Visualizar</td>";
+                            $a.= "<td>".Evento::retornaDadosEvento(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdEvento())->getNome()."</td>";
+                            $a.= "<td>".Area::retornaDadosArea(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdArea())->getDescricao()."</td>";
+                            $a.= "<td>".Modalidade::retornaDadosModalidade(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdModalidade())->getDescricao()."</td>";
+                            $a.= "<td>".Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()."</td>";
+                            $a.= "<td>".TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdTipoSubmissao())->getDescricao()."</td>";
+                            $a.= "<td><a href='".$pastaSubmissoes . Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getArquivo()."'>Visualizar</td>";
                             
-                            echo "<td>".SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao()."</td>";
-                            echo "<td>".date('d/m/Y', strtotime($avaliacao->getPrazo()))."</td>";
+                            $a.= "<td>".SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao()."</td>";
                             
-                            if (in_array($tipoSubmissao, $avParcialCorrigida)) echo "<td>-</td></tr>";
-                            else echo "<td>".$avaliacao->getNota()."</td></tr>";
+                            if ($avaliacao->getDataRealizacaoAvaliacao()=='') {$a.= "<td>-</td>";}
+                            else $a.= "<td>" .date('d/m/Y', strtotime($avaliacao->getDataRealizacaoAvaliacao()))."</td>";
+                            
+                            if (in_array($avaliacao->getIdSituacaoAvaliacao(), array(2,4,5,6))) $a.= "<td>-</td>";
+                            else $a.= "<td>".date('d/m/Y', strtotime($avaliacao->getPrazo()))."</td>";
+                            
+                            if (in_array($tipoSubmissao, $avParcialCorrigida)) $a.= "<td>-</td></tr>";
+                            else $a.= "<td>".$avaliacao->getNota()."</td></tr>";
                             
                         }
+                        
+                        if ($contAvParciais>=1) { $avParciais = "<h3 align='center'>Avaliações Parciais (".$contAvParciais.")</h3>" . $cabecalho . $avParciais . "</tbody></table><br>"; echo $avParciais; }
+                        if ($contAvCorrigidas>=1) { $avCorrigidas = "<h3 align='center'>Avaliações de Ressubmissão - Solicitações de Correção (".$contAvCorrigidas.")</h3>" . $cabecalho . $avCorrigidas . "</tbody></table><br>"; echo $avCorrigidas; }
+                        if ($contAvFinais>=1) { $avFinais = "<h3 align='center'>Avaliações de Apresentação (".$contAvFinais.")</h3>" . $cabecalho . $avFinais. "</tbody></table>"; echo $avFinais; }
                     }
                 ?>
-                </tbody>
-            </table>
+                
         </fieldset>
     </body>
 </html>

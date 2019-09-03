@@ -112,6 +112,7 @@
                         <th>Avaliador</th>
                         <th>Situação</th>
                         <th>Data de Recebimento</th>
+                        <th>Data de Realização da Avaliação</th>
                         <th>Data Final para Entrega</th>
                         <th>Observação</th>
                         
@@ -143,6 +144,7 @@
                             <td><?php echo $avaliador->getNome() . " " . $avaliador->getSobrenome() ?></td>
                             <td><?php echo $situacaoAvaliacao ?></td>
                             <td><?php echo date('d/m/Y', strtotime($avaliacao->getDataRecebimento())) ?></td>
+                            <td><?php echo $avaliacao->getDataRealizacaoAvaliacao()=='' ? "-" : $avaliacao->getDataRealizacaoAvaliacao() ?></td>
                             <td><?php 
                                     // SituacaoAvaliacao = 1-Pendente / 3-Atrasada
                                     if ($avaliacao->getIdSituacaoAvaliacao()==1 || $avaliacao->getIdSituacaoAvaliacao()==3) echo date('d/m/Y',strtotime($avaliacao->getPrazo())); 

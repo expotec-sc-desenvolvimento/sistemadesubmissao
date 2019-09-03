@@ -95,7 +95,7 @@
                                 // Tipos de Submissoes: 1-Parcial, 2-Corrigida, 3-Final
                                 // Tipos de Situacao de Submissao: 4-Aprovado(a), 5-Aprovado(a), 6-Reprovado(a)
                                 if ($submissao->getIdTipoSubmissao()==1 && $submissao->getIdSituacaoSubmissao()==5 && !Submissao::existeSubmissaoCorrigida($submissao->getId())) {  
-                                      $versaoFinal = "<input type='button' class='addObjeto btn-verde' name='VersaoCorrigida' id='".$submissao->getId()."' value='Enviar Versão Corrigida'>";
+                                      $versaoFinal = "<input type='button' class='addObjeto btn-verde' name='VersaoCorrigida' id='".$submissao->getId()."' value='Enviar Versão Corrigida'><br><strong>Prazo Final:</strong> ". date('d/m/Y', strtotime(Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioSubmissaoCorrigida()));
                                 }
                                 else if ($submissao->getIdTipoSubmissao()==1 && $submissao->getIdSituacaoSubmissao()==5 && Submissao::existeSubmissaoCorrigida($submissao->getId())) {
                                     $versaoFinal = "Enviada";

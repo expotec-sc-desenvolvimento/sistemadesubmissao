@@ -64,7 +64,7 @@
             } else {
                 $cont = 1;
                 foreach ($avaliacoes as $avaliacao) {
-                    if ($avaliacao->getObservacao() == 'AVALIAÇÃO GERADA AUTOMATICAMENTE PELO SISTEMA') continue;
+                    
                     $user = Usuario::retornaDadosUsuario($avaliacao->getIdUsuario());
                     $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao());
                     
@@ -79,23 +79,26 @@
                     
                     // Situação 4 - Aprovado, 5 - Aprovado Com Ressalvas, 6 - Reprovado(a) 
                     if (in_array($situacaoAvaliacao->getId(), array('2','4','5','6'))) {
+                        if (!($avaliacao->getObservacao() == 'AVALIAÇÃO GERADA AUTOMATICAMENTE PELO SISTEMA')) {
                         
-                        echo "<tr><th class='direita' width='10px'>Avaliação: </th><td>";
-                        $avaliacaoCriterios = AvaliacaoCriterio::retornaCriteriosParaAvaliacao($avaliacao->getId());
-                        
-                        echo "<ul class='listaCriterios' style='padding-left:10px;'>";
-                        foreach ($avaliacaoCriterios as $avaliacaoCriterio) {
-                            $criterio = Criterio::retornaDadosCriterio($avaliacaoCriterio->getIdCriterio());
-                            echo "<li>".$criterio->getDescricao();
-                            //if ($submissao->getIdTipoSubmissao()==3) echo "(" .$criterio->getPeso().")";
-                            echo " - ";
-                            if ($submissao->getIdTipoSubmissao()==3) echo "<i>" . $avaliacaoCriterio->getNota() . "</i><br>";
-                            else echo $avaliacaoCriterio->getNota()==1 ? "<b>Sim</b><br>" : "<b>Não</b><br>";
+                            echo "<tr><th class='direita' width='10px'>Avaliação: </th><td>";
+                            $avaliacaoCriterios = AvaliacaoCriterio::retornaCriteriosParaAvaliacao($avaliacao->getId());
+
+                            echo "<ul class='listaCriterios' style='padding-left:10px;'>";
+                            foreach ($avaliacaoCriterios as $avaliacaoCriterio) {
+                                $criterio = Criterio::retornaDadosCriterio($avaliacaoCriterio->getIdCriterio());
+                                echo "<li>".$criterio->getDescricao();
+                                //if ($submissao->getIdTipoSubmissao()==3) echo "(" .$criterio->getPeso().")";
+                                echo " - ";
+                                if ($submissao->getIdTipoSubmissao()==3) echo "<i>" . $avaliacaoCriterio->getNota() . "</i><br>";
+                                else echo $avaliacaoCriterio->getNota()==1 ? "<b>Sim</b><br>" : "<b>Não</b><br>";
+                            }
+                            echo "</ul>";
+
+                            if ($submissao->getIdTipoSubmissao()==3) echo "<tr><th class='direita'>Nota Final: </th><td>". $avaliacao->getNota()."</strong></td>";
                         }
-                        echo "</ul>";
-                        
-                        if ($submissao->getIdTipoSubmissao()==3) echo "<tr><th class='direita'>Nota Final: </th><td>". $avaliacao->getNota()."</strong></td>";
                         echo "<tr><th class='direita'>Observações:</th><td style='text-align:left; padding-left:10px;'>" . $avaliacao->getObservacao() . "</td></tr>";
+                        
                     }
                  
                     echo "</table><br>";

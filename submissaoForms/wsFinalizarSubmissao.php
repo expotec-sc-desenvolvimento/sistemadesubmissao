@@ -16,13 +16,15 @@
     date_default_timezone_set('America/Sao_Paulo');
     
     if (isset($_GET['id'])) {
-        $submissao = Submissao::retornaDadosSubmissao($_GET['id']);
         
-        if (Submissao::finalizarSubmissao($submissao->getId())) {
+        
+        if (Submissao::finalizarSubmissao($_GET['id'])) {
+            $submissao = Submissao::retornaDadosSubmissao($_GET['id']);
             $emails = array();
             foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $userSubmissao) {
                 array_push($emails, Usuario::retornaDadosUsuario($userSubmissao->getIdUsuario())->getEmail());
             }
+            // REVER
             emailFinalizacaoSubmissao($submissao,$emails); // Envio de email para os usuários saberem que a submissão foi finalizada
             
             if ($submissao->getIdTipoSubmissao()==2 && $submissao->getIdSituacaoSubmissao()==4) { /* Caso seja uma submissão Corrigida e tenha sido considerada Aprovada depois

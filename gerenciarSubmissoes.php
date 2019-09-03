@@ -92,7 +92,7 @@
         
         
         <fieldset>
-            <h3 align='center'>Listagem de Submissoes (<?php echo count($listaSubmissoes)?>)</h3>
+            <h3 align='center'>Listagem de Submissões (<?php echo count($listaSubmissoes)?>)</h3>
             
             <p align="center">
                 <input class="addObjeto btn-verde" type="button" value="Distribuir Avaliadores Automaticamente" onclick="window.location.href='distribuirAvaliadores.php'"/>

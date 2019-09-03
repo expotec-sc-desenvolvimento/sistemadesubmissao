@@ -96,15 +96,21 @@
         $titulo = "Finalização de Submissão";
         $remetente = "Sistema de Submissão";
 
+        
+        
         $corpo = "A seguinte submissão foi finalizada:<br><br> ";
         $corpo .= "<strong>Titulo: </strong>" . $submissao->getTitulo() . "<br>";
         $corpo .= "<strong>Área: </strong>" . Area::retornaDadosArea($submissao->getIdArea())->getDescricao() . "<br>";
-        $corpo .= "<strong>Situação: </strong>" . SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getId())->getDescricao() . "<br>";
+        $corpo .= "<strong>Situação: </strong>" . SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao())->getDescricao() . "<br>";
         
-        if ($submissao->getIdSituacaoSubmissao()==5) {
+        if ($submissao->getIdSituacaoSubmissao()==5) { // Aprovada com Ressalvas
             $corpo .= "<strong>Prazo Final para envio das correções solicitadas no sistema: </strong>" . date('d/m/Y', strtotime(Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioSubmissaoCorrigida())) . "<br><br>";
+            $corpo .= "Observe no sistema as correções solicitadas pelos avaliadores e atente-se à data Final para o envio da Ressubmissão!<br>";
         }
         
+        if ($submissao->getIdSituacaoSubmissao()==4) { // Se foi uma submissão corrigida
+            $corpo .= "Este trabalho foi aprovado e está apto a ser apresentado no evento <strong>".Evento::retornaDadosEvento($submissao->getIdEvento())->getNome()."</strong><br><br>";
+        }
         
         $corpo .= "<br>Atenciosamente, <br>";
         $corpo .= "<strong>Equipe do Sistema de Submissão - IFRN</strong>";
