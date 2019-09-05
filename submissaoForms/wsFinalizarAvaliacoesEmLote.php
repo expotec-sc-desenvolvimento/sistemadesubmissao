@@ -28,7 +28,7 @@
         else {
             foreach ($p['submissoes'] as $idSubmissao) {
                 if (Submissao::finalizarSubmissao($idSubmissao)) {
-                    $submissao = Submissao::retornaDadosSubmissao($_GET['id']);
+                    $submissao = Submissao::retornaDadosSubmissao($idSubmissao);
                     $emails = array();
                     foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $userSubmissao) {
                         array_push($emails, Usuario::retornaDadosUsuario($userSubmissao->getIdUsuario())->getEmail());
