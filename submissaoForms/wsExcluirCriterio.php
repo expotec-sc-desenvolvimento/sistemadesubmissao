@@ -25,10 +25,10 @@
             
             if ($criterio->getId()!="") {
                 if (Criterio::excluirCriterio($idCriterio)) {
-                    header('Location: ../gerenciarMOdalidades.php?Item=Excluido');
+                    header('Location: ../gerenciarModalidades.php?Item=Excluido');
                 }
                 else {
-                    header('Location: ../gerenciarMOdalidades.php?Item=NaoExcluido');
+                    header('Location: ../gerenciarModalidades.php?Item=NaoExcluido');
                 }
                 
             }

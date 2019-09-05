@@ -1,6 +1,8 @@
 <?php
 
 require_once dirname(__DIR__). '/dao/SubmissaoDAO.php';
+require_once dirname(__DIR__). '/classes/Avaliacao.php';
+date_default_timezone_set('America/Sao_Paulo');
 
 class Submissao {
     
@@ -254,6 +256,25 @@ class Submissao {
         return $resposta;
     }
     
+    public static function retornaSubmissoesParaFinalizar() {
+        $retorno = array();
+        $resposta = array();
+        
+        $dado = SubmissaoDAO::retornaSubmissoesParaFinalizar();// CONSULTA O BANCO DE DADOS
+        $retorno = Submissao::ListaDeDados($dado);
+        
+        foreach ($retorno as $submissao) {
+            $contAvaliacoesFinalizadas = 0;
+            foreach (Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), '') as $aval) {
+                if (in_array($aval->getIdSituacaoAvaliacao(), array(2,4,5,6)) && strtotime(date('d-m-Y'))>strtotime($aval->getDataRealizacaoAvaliacao())) {
+                    $contAvaliacoesFinalizadas++;
+                }
+            }    
+            if ($contAvaliacoesFinalizadas==3) array_push($resposta,$submissao);
+        }
+
+        return $resposta;
+    }
 } 
     
 

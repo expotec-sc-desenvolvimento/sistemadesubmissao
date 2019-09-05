@@ -70,4 +70,12 @@ class SubmissaoDAO {
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }
+    
+    public static function retornaSubmissoesParaFinalizar() {
+        $sql = "CALL listaSubmissoesComFiltro('','','',3,'');";
+        //echo $sql; exit(1);
+        return Conexao::executar($sql);
+    }
+    
+    
 }

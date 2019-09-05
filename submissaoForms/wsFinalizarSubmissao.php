@@ -27,8 +27,8 @@
             // REVER
             emailFinalizacaoSubmissao($submissao,$emails); // Envio de email para os usuários saberem que a submissão foi finalizada
             
-            if ($submissao->getIdTipoSubmissao()==2 && $submissao->getIdSituacaoSubmissao()==4) { /* Caso seja uma submissão Corrigida e tenha sido considerada Aprovada depois
-                                                                                                        das devidas correções, é gerada uma submissão Final automaticamente */
+            if (in_array($submissao->getIdTipoSubmissao(), array(1,2)) && $submissao->getIdSituacaoSubmissao()==4) { /* Caso seja uma submissão Parcial/Corrigida e tenha sido considerada Aprovada depois
+                                                                                                                      das devidas correções, é gerada uma submissão Final automaticamente */
                     $evento = Evento::retornaDadosEvento($submissao->getIdEvento());
                     $modalidade = Modalidade::retornaDadosModalidade($submissao->getIdModalidade());
                     $novoArquivo = $evento->getNome() . "-" . $modalidade->getDescricao() . "-" . substr(md5(time()), 0,15) . "-Final.pdf";
@@ -76,12 +76,10 @@
                 else if ($submissao->getIdTipoSubmissao()==3 && $submissao->getIdSituacaoSubmissao()==7) { /* Caso seja uma submissão Final e todos os avaliadores tenham terminado
                                                                                                         a avaliação, são gerados certificados de Apresentação para os submissores */
                     
-                    foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $user) {
-                        $evento = Evento::retornaDadosEvento($submissao->getIdEvento());
-                        gerarCertificado($evento, Usuario::retornaDadosUsuario($user->getIdUsuario()),1,$pastaCertificados);
-                        
-
-                    }
+                  //  foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $user) {
+                  //      $evento = Evento::retornaDadosEvento($submissao->getIdEvento());
+                  //      gerarCertificado($evento, Usuario::retornaDadosUsuario($user->getIdUsuario()),1,$pastaCertificados);
+                  //  }
                 }
                // else {echo "PQP"; exit(1);}
                 header('Location: ../gerenciarSubmissoes.php?Item=Atualizado');

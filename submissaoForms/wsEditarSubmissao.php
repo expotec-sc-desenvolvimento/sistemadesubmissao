@@ -51,7 +51,7 @@
                     if ($tamanho>0 ) { // Tenta Inserir a imagem na pasta
                         //unlink('./../' . $pastaSubmissoes . $novoArquivo);
                         if (move_uploaded_file($_FILES['arquivo']['tmp_name'], dirname(__DIR__) . "/" . $pastaSubmissoes . $novoArquivo))
-                            header('Location: ../submissoes.php?Item=Atualizado');
+                            header('Location: ../minhasSubmissoes.php?Item=Atualizado');
                         else echo "<script>window.alert('2-Houve um erro na Submissao. Entre em contato com um Administrador do Sistema');window.history.back();</script>";
                     }
                     else header('Location: ../minhasSubmissoes.php?Item=Atualizado');
