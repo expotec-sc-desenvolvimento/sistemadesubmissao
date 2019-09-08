@@ -90,7 +90,7 @@
                 <th></th><td><span style="color: #FF0000; font-size: 10px;">O arquivo já existe. Caso não seja adicionado nenhum arquivo, o atual será considerado!</span></td>
             </tr>
             <tr>
-                <th class='direita'>Submissores: </th>
+                <th class='direita'>Autores: </th>
                 <td>
                     <div style="float: left"><?php echo $usuario->getNome() . "<img src='" . $iconOK. "' class='img-miniatura'>"?></div>
                     <div id='users-selected'></div>

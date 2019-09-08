@@ -33,7 +33,7 @@
     <body>
         
         <?php 
-            include 'inc/menuInicial.php';
+            include 'inc/pInicial.php';
             include 'inc/modal.php';
         
         ?>
@@ -47,8 +47,8 @@
         
         <fieldset>
             <h3 align='center'>Listagem de Modalidades (<?php echo count($listaModalidades)?>)</h3>
-            <p align="center"><input type="button" class="addObjeto btn-verde" name='Modalidade' value="Adicionar Modalidade"></p>
-            <table border="1" align="center" class="table_list">
+            <p align="center"><input type="button" class="addObjeto btn btn-sm marginTB-xs btn-success" name='Modalidade' value="Adicionar Modalidade"></p>
+            <table border="1" align="center" class="table table-striped table-bordered dt-responsive nowrap">
 
                 <tr><td align="center"><strong>*</strong></td>
                     <td align="center"><strong>Nome da Modalidade</strong></td>
@@ -86,13 +86,15 @@
                                     ?>
                                 </ul>
                                 
-                                <div style="align-items: center; justify-content: center;"><input type='button' class='addCriterio btn-verde' id='<?php echo $modalidade->getId() ?>' name='<?php echo $tipo->getId()?>' value='Adicionar Critério' ></div>
+                                <div style="align-items: center; justify-content: center;"><input type='button' class='addCriterio btn btn-sm marginTB-xs btn-success' id='<?php echo $modalidade->getId() ?>' name='<?php echo $tipo->getId()?>' value='Adicionar Critério' ></div>
                             </td>
                          <?php } 
                 
                      }?>
 
             </table>
-        
+       <?php 
+            include 'inc/pFinal.php';
+        ?>
     </body>
 </html>

@@ -28,7 +28,7 @@
                 if ($situacaoSubmissao->getDescricao() == "Submetida") {
                     if (count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($idSubmissao, $usuario->getId(), 1)) == 1) { // Caso o usuário seja o Usuário submissor
                         if (Submissao::cancelarSubmissao($idSubmissao)) {
-                            header('Location: ../submissoes.php?Item=Cancelado');
+                            header('Location: ../minhasSubmissoes.php?Item=Cancelado');
                         }
                         else echo "<script>window.alert('Houve um erro na exclusão da Submissao. Contacte um administrador!');window.history.back();</script>";
                     }

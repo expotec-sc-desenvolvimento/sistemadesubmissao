@@ -65,7 +65,7 @@
         <body>
 
             <?php 
-                require_once './inc/menuInicial.php';
+                require_once './inc/pInicial.php';
                 require_once './inc/modal.php';
             ?>
 
@@ -85,16 +85,18 @@
             ?>
             <br><br>
             <h3 align='center'>Listagem de Usuários: <?php echo count ($listaUsuarios)?></h3>
-            <p align="center"><input type="button" class="addObjeto btn-verde" name="Usuario" value="Adicionar Usuário"></p>
+            <p align="center"><input type="button" class="addObjeto btn btn-sm marginTB-xs btn-success" name="Usuario" value="Adicionar Usuário"></p>
             
             <div class="users">
             
                 <br>
 
                 <form method="get" action="<?=htmlspecialchars('gerenciarUsuarios.php');?>">
-                    <p align='center'>
-                        Buscar por nome: <input class="input" type="text" id="nome" name="nome" value='<?php if (isset($_GET['nome'])) echo $_GET['nome']?>'> 
-                        Tipo Usuário:   <select name="tipoUsuario" id="tipoUsuario">
+                    <table align="center">
+                        <tr><td>
+                        Buscar por nome: <input class="form-control" style="width: 200px" type="text" id="nome" name="nome" value='<?php if (isset($_GET['nome'])) echo $_GET['nome']?>'> 
+                        </td><td>
+                        Tipo Usuário:   <select class="form-control" style="width: 200px" name="tipoUsuario" id="tipoUsuario">
                                             <option value='-1'>Selecione um Tipo</option>
                                             <?php
                                             foreach (TipoUsuario::listaTipoUsuarios() as $tipoUsuario) {
@@ -106,7 +108,8 @@
                                             }
                                         ?>
                                         </select>
-                        Perfil: <select name="pPerfil" id="inpPerfil">
+                        </td><td>
+                        Perfil: <select class="form-control" style="width: 200px" name="pPerfil" id="inpPerfil">
                                     <option value='-1'>Selecione um Perfil</option>>
                                     <?php
 
@@ -119,19 +122,22 @@
                                         }
                                     ?>
                             </select>
-                        <input class="botaoConfirmar" type="submit" value="Buscar Usuário"></p>
+                        </td><td>Buscar
+                        <input class=" form-control btn btn-sm marginTB-xs btn-success" type="submit" value="Buscar Usuário">
+                        </td></tr>
+                    </table>
 
                 </form>
                 <br>
-                <table class='table_list' border='1' align="center">
+                <table class="table table-striped table-bordered dt-responsive nowrap" border='1' align="center">
                     <thead>
                     <tr>
-                        <th>*</th>
-                        <th>Imagem</th>
-                        <th>Nome Completo</th>
-                        <th>CPF</th>
-                        <th>Perfil</th>
-                        <th>Tipo de Usuário</th>
+                        <th align="center">*</th>
+                        <th align="center">Imagem</th>
+                        <th align="center">Nome Completo</th>
+                        <th align="center">CPF</th>
+                        <th align="center">Perfil</th>
+                        <th align="center">Tipo de Usuário</th>
                     </tr>
                     </thead>
                     <?php foreach ($listaUsuarios as $user) { ?>
@@ -160,5 +166,8 @@
                     <div class="fechar">X</div>
                 </div>
             </div>
+            <?php 
+                require_once './inc/pFinal.php';
+            ?>
         </body>
     </html>

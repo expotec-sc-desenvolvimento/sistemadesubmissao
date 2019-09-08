@@ -53,7 +53,7 @@
     <body>
         
         <?php 
-            include 'inc/menuInicial.php';
+            include 'inc/pInicial.php';
             include 'inc/modal.php';
 
             $idEvento = "";
@@ -89,81 +89,92 @@
             
         ?>
         <br>
+   
         
-        
-        <fieldset>
-            <h3 align='center'>Listagem de Submissões (<?php echo count($listaSubmissoes)?>)</h3>
+            <h3 align='center' >Listagem de Submissões (<?php echo count($listaSubmissoes)?>)</h3>
             
             <p align="center">
-                <input class="addObjeto btn-verde" type="button" value="Distribuir Avaliadores Automaticamente" onclick="window.location.href='distribuirAvaliadores.php'"/>
-                <input class="addObjeto btn-verde" type="button" value="Finalizar Avaliações em Lote (<?php echo count(Submissao::retornaSubmissoesParaFinalizar()) ?>)" onclick="window.location.href='finalizarAvaliacoesEmLote.php'"/>
+                <input class="addObjeto btn btn-sm marginTB-xs btn-success" type="button" value="Distribuir Avaliadores Automaticamente" onclick="window.location.href='distribuirAvaliadores.php'"/>
+                <input class="addObjeto btn btn-sm marginTB-xs btn-success" type="button" value="Finalizar Avaliações em Lote (<?php echo count(Submissao::retornaSubmissoesParaFinalizar()) ?>)" onclick="window.location.href='finalizarAvaliacoesEmLote.php'"/>
             </p>
             <p align="center"><a href="downloads/wsListagemSubmissoes.php?<?php echo $vars ?>">Exportar Planilha Excel</a></p>
-            <p align="center">     
-                <label for="select-Eventos">Evento: </label>
-                <select class="campoDeEntrada" id="select-Eventos" name="select-Eventos" onchange="direcionar()" style="width:200px">
-                    <option value="">Selecione um evento</option>
-                    <?php
-                        foreach (Evento::listaEventos() as $evento) {
-                            echo "<option value='".$evento->getId()."'";
-                            if (isset($_GET['idEvento']) && $_GET['idEvento'] == $evento->getId()) echo " selected";
-                            echo ">" . $evento->getNome() . "</option>";
-                        }
-                    ?>
-                </select>
-                <label for="select-Modalidades">Modalidade: </label>
-                <select class="campoDeEntrada" id="select-Modalidades" name="select-Modalidades" onchange="direcionar()" style="width:200px">
-                    <option value="">Selecione uma modalidade</option>
-                    <?php
-                        foreach (Modalidade::listaModalidades() as $modalidade) {
-                            echo "<option value='".$modalidade->getId()."'";
-                            if (isset($_GET['idModalidade']) && $_GET['idModalidade'] == $modalidade->getId()) echo " selected";
-                            echo ">" . $modalidade->getDescricao() . "</option>";
-                        }
-                    ?>
-                </select>
-                <label for="select-Areas">Area: </label>
-                <select class="campoDeEntrada" id="select-Areas" name="select-Areas" onchange="direcionar()" style="width:200px">
-                    <option value="">Selecione uma Area</option>
-                    <?php
-                        foreach (Area::listaAreas() as $area) {
-                            echo "<option value='".$area->getId()."'";
-                            if (isset($_GET['idArea']) && $_GET['idArea'] == $area->getId()) echo " selected";
-                            echo ">" . $area->getDescricao() . "</option>";
-                        }
-                    ?>
-                </select>
-                <label for="select-Situacao">Situação: </label>
-                <select class="campoDeEntrada" id="select-Situacao" name="select-Situacao" onchange="direcionar()" style="width:200px">
-                    <option value="">Selecione uma Situação</option>
-                    <?php
-                        foreach (SituacaoSubmissao::listaSituacaoSubmissao() as $situacao) {
-                            echo "<option value='".$situacao->getId()."'";
-                            if (isset($_GET['idSituacao']) && $_GET['idSituacao'] == $situacao->getId()) echo " selected";
-                            echo ">" . $situacao->getDescricao() . "</option>";
-                        }
-                    ?>
-                </select>
-                <label for="select-Situacao">Tipo: </label>
-                <select class="campoDeEntrada" id="select-Tipo" name="select-Tipo" onchange="direcionar()" style="width:200px">
-                    <option value="">Selecione um Tipo</option>
-                    <?php
-                        foreach (TipoSubmissao::listaTipoSubmissoes() as $tipo) {
-                            echo "<option value='".$tipo->getId()."'";
-                            if (isset($_GET['idTipo']) && $_GET['idTipo'] == $tipo->getId()) echo " selected";
-                            echo ">" . $tipo->getDescricao() . "</option>";
-                        }
-                    ?>
-                </select>
-                
-            </p>
             
-            <table border="1" align="center" class="table_list_3">
+            <table align="center">
+                <tr><td>
+                    <label for="select-Eventos">Evento: </label>
+                    <select class="form-control" id="select-Eventos" name="select-Eventos" onchange="direcionar()" style="width:200px">
+                        <option value="">Selecione um evento</option>
+                        <?php
+                            foreach (Evento::listaEventos() as $evento) {
+                                echo "<option value='".$evento->getId()."'";
+                                if (isset($_GET['idEvento']) && $_GET['idEvento'] == $evento->getId()) echo " selected";
+                                echo ">" . $evento->getNome() . "</option>";
+                            }
+                        ?>
+                    </select>
+                    </td>
+                    <td>
+                    <label for="select-Modalidades">Modalidade: </label>
+                    <select class="form-control" id="select-Modalidades" name="select-Modalidades" onchange="direcionar()" style="width:200px">
+                        <option value="">Selecione uma modalidade</option>
+                        <?php
+                            foreach (Modalidade::listaModalidades() as $modalidade) {
+                                echo "<option value='".$modalidade->getId()."'";
+                                if (isset($_GET['idModalidade']) && $_GET['idModalidade'] == $modalidade->getId()) echo " selected";
+                                echo ">" . $modalidade->getDescricao() . "</option>";
+                            }
+                        ?>
+                    </select>
+                    </td>
+                    <td>
+                    <label for="select-Areas">Area: </label>
+                    <select class="form-control" id="select-Areas" name="select-Areas" onchange="direcionar()" style="width:200px">
+                        <option value="">Selecione uma Area</option>
+                        <?php
+                            foreach (Area::listaAreas() as $area) {
+                                echo "<option value='".$area->getId()."'";
+                                if (isset($_GET['idArea']) && $_GET['idArea'] == $area->getId()) echo " selected";
+                                echo ">" . $area->getDescricao() . "</option>";
+                            }
+                        ?>
+                    </select>
+                    </td>
+                    <td>
+                    <label for="select-Situacao">Situação: </label>
+                    <select class="form-control" id="select-Situacao" name="select-Situacao" onchange="direcionar()" style="width:200px">
+                        <option value="">Selecione uma Situação</option>
+                        <?php
+                            foreach (SituacaoSubmissao::listaSituacaoSubmissao() as $situacao) {
+                                echo "<option value='".$situacao->getId()."'";
+                                if (isset($_GET['idSituacao']) && $_GET['idSituacao'] == $situacao->getId()) echo " selected";
+                                echo ">" . $situacao->getDescricao() . "</option>";
+                            }
+                        ?>
+                    </select>
+                    </td>
+                    <td>
+                    <label for="select-Situacao">Tipo: </label>
+                    <select class="form-control" id="select-Tipo" name="select-Tipo" onchange="direcionar()" style="width:200px">
+                        <option value="">Selecione um Tipo</option>
+                        <?php
+                            foreach (TipoSubmissao::listaTipoSubmissoes() as $tipo) {
+                                echo "<option value='".$tipo->getId()."'";
+                                if (isset($_GET['idTipo']) && $_GET['idTipo'] == $tipo->getId()) echo " selected";
+                                echo ">" . $tipo->getDescricao() . "</option>";
+                            }
+                        ?>
+                    </select>
+                    </td>
+                    
+                </tr>
+            </table>
+            <br><br>
+            <table align="center" class="table table-striped table-bordered dt-responsive nowrap">
                 <thead>
                     <tr>
                         <th>*</th>
                         <th>Evento</th>
-                        <th>Area</th>
+                        <th>Área</th>
                         <th>Modalidade</th>
                         <th>Tipo</th>
                         <th>Titulo</th>
@@ -263,5 +274,8 @@
                 ?>
                 </tbody>
             </table>
+            <?php 
+                include dirname(__FILE__) . '/inc/pFinal.php'; 
+            ?>
     </body>
 </html>

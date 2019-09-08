@@ -9,30 +9,29 @@
     $usuario = new Usuario();
     $usuario = $_SESSION['usuario'];
     
+        
 ?>
-    <!DOCTYPE html>
-    <html lang="pt-br">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="author" content="José Sueney de Lima">
-            <meta name="keywords" content="Evento, IFRN-SC, IFRN, Santa Cruz, sistema">
-            <meta name="description" content="Página inicial do sistema de submissão de trabalhos do IFRN campus Santa Cruz">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>SS - Minhas Submissões</title>
-            <?php
-                include 'inc/css.php';
-                include 'inc/javascript.php';
-            ?>
-            
-        </head>
-
-        <body>
-
-            <?php 
-                require_once './inc/menuInicial.php';
-                require_once './inc/modal.php';
-            ?>
-
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="José Sueney de Lima">
+        <meta name="keywords" content="Evento, IFRN-SC, IFRN, Santa Cruz, sistema">
+        <meta name="description" content="Página inicial do sistema de submissão de trabalhos do IFRN campus Santa Cruz">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SS - Minhas Submissões</title>
+        <?php
+            include 'inc/css.php';
+            include 'inc/javascript.php';
+        ?>
+    </head>
+    
+    <body>
+        
+        <?php 
+            include dirname(__FILE__) . '/inc/pInicial.php'; 
+            include './inc/modal.php';
+        ?>
             
             <?php
                 $submissoes = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro('', $usuario->getId(), '');
@@ -40,10 +39,10 @@
             ?>
             
             <fieldset class='inicio'>
-                <p align='center'><input class="addObjeto btn-verde" name='Submissao' type="button" value="Adicionar Submissao"></p>
+                <p align='center'><input class="btn btn-sm marginTB-xs btn-success" type="button" value="Adicionar Submissão" onclick="location.href='addSubmissao2.php'"></p>
             
                 <h2 align="center">Submissões do Usuário</h2>
-                <table border="1" class='table_list' align="center">
+                <table class="table table-striped table-bordered dt-responsive nowrap">
                 
                 <?php if (count($submissoes)==0) echo "<tr><td>Nenhum trabalho submetido</td></tr>";
                       else { ?>
@@ -58,7 +57,7 @@
                                 <th><strong>Arquivo</th>
                                 <th><strong>Situação</th>
                                 <th><strong>Autores</th>
-                                <th><strong>Versão Final</strong></td>
+                                <th><strong>Versão Final</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,11 +76,11 @@
                               $nota = $submissao->getNota();
                               $situacao = SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao());
                                                             
-                              $visualizar = "<a class='visualizarObjeto' id='".$id."' name='Submissao'><img class='img-miniatura' src='".$iconVisualizar."' width='20px'></a>";
+                              $visualizar = "<a id='".$id."' onclick=\"location.href='visualizarSubmissao2.php?id=".$submissao->getId()."'\"><img class='img-miniatura' src='".$iconVisualizar."' width='20px'></a>";
                               $editar="";
                               $excluir="";
                               if ($obj->getIsSubmissor() && $situacao->getDescricao()=="Submetida" && $submissao->getIdTipoSubmissao()==1) {
-                                  $editar = "<a class='editarObjeto' id='".$id."' name='Submissao'><img class='img-miniatura' src='".$iconEditar."' ></a>";
+                                  $editar = "<a id='".$id."' onclick=\"location.href='editarSubmissao2.php?id=".$submissao->getId()."'\"><img class='img-miniatura' src='".$iconEditar."' width='20px'></a>";
                                   
                                   if (TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao() == "Parcial") {
                                     $excluir = "<a href='submissaoForms/wsCancelarSubmissao.php?id=" . $id . "' "
@@ -121,6 +120,11 @@
                       } ?>
                     </tbody>
                 </table>
-            </fieldset>
-        </body>
-    </html>
+            </fieldset>   
+        
+        <?php include dirname(__FILE__) . '/inc/pFinal.php'; ?>
+                            
+                        
+    </body>
+</html>
+

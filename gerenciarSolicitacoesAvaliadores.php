@@ -32,7 +32,7 @@
     <body>
         
         <?php 
-            include 'inc/menuInicial.php';
+            include 'inc/pInicial.php';
             include 'inc/modal.php';
 
             $filtro = "";
@@ -57,20 +57,20 @@
                 </select>
             </p>
             
-            <table border="1" align="center" class='table_list_2'>
+            <table border="1" align="center" class="table table-striped table-bordered dt-responsive nowrap">
                 <?php
-                    if (count($solicitacoesAvaliadores)==0) echo "<tr><td>Nenhuma solicitação para este filtro</td></tr>";
+                    if (count($solicitacoesAvaliadores)==0) echo "<tr><td align='center'>Nenhuma solicitação para este filtro</td></tr>";
                     else {
                 ?>
                         <thead>
                         <tr>
-                            <th>*</th>
-                            <th>Imagem</th>
-                            <th>Nome do Solicitante</th>
-                            <th>Evento</th>
-                            <th>Area</th>
-                            <th>Situacao</th>
-                            <th>Observação</th>
+                            <th align="center">*</th>
+                            <th align="center">Imagem</th>
+                            <th align="center">Nome do Solicitante</th>
+                            <th align="center">Evento</th>
+                            <th align="center">Area</th>
+                            <th align="center">Situacao</th>
+                            <th align="center">Observação</th>
 
                         </tr>
                         </thead>
@@ -105,6 +105,8 @@
             </table>
             
         </fieldset>
-        
+       <?php 
+            include 'inc/pFinal.php';
+        ?>
     </body>
 </html>

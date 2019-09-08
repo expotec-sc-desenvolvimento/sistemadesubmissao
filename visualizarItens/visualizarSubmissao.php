@@ -60,7 +60,7 @@
             $avaliacoes = Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(),'');
                 
             if (count($avaliacoes)==0) {
-                echo "<tr><td colspan='2'><p align='center'>Nenhuma Avaliação cadastrada para a Submissão</p><td></tr>";
+                echo "<p align='center'>Nenhuma Avaliação cadastrada para a Submissão</p>";
             } else {
                 $cont = 1;
                 foreach ($avaliacoes as $avaliacao) {

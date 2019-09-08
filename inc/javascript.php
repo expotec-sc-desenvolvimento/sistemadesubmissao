@@ -22,6 +22,9 @@
                 $(function(){
                     $('.table_list_3').tablesorter();
                 });
+                $(function(){
+                    $('.table').tablesorter();
+                });
                 
                 $('.editarObjeto').click(function (){
                    $('#modal').fadeIn(500);

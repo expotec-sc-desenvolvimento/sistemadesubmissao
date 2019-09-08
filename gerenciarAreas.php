@@ -32,7 +32,7 @@
     <body>
         
         <?php 
-            include 'inc/menuInicial.php';
+            include 'inc/pInicial.php';
             include 'inc/modal.php';
 
             $listaAreas = Area::listaAreas();
@@ -43,13 +43,13 @@
         
         <fieldset>
             <h3 align='center'>Listagem de Áreas (<?php echo count($listaAreas)?>)</h3>
-            <p align="center"><input type="button" class="addObjeto btn-verde"  name='Area' value="Adicionar Área"></p>
-            <table class='table_list_2' align='center' border='1'>
+            <p align="center"><input type="button" class="addObjeto btn btn-sm marginTB-xs btn-success"  name='Area' value="Adicionar Área"></p>
+            <table border="1" align="center" class="table table-striped table-bordered dt-responsive nowrap" style="width: 70%">
                 <thead>
                     <tr>
-                        <th>*</th>
-                        <th>Descrição</th>
-                        <th>SubAreas</th>
+                        <th style="width: 10%; text-align: center">*</th>
+                        <th style="text-align: center">Descrição</th>
+                        <th style="text-align: center">SubAreas</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,6 +67,8 @@
                     </tbody>
             </table>
         </fieldset>
-        
+        <?php 
+            include 'inc/pFinal.php';
+        ?>
     </body>
 </html>

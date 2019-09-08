@@ -1,5 +1,0 @@
-https://www.youtube.com/watch?v=GRvEZ55tWko (Gerar Planilhas excel)
-
-https://github.com/LincolnBorges/gerador-certificado-php/tree/master/gerar_certificado
-
-(Gerar certificados)

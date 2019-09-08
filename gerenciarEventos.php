@@ -34,7 +34,7 @@
     <body>
         
         <?php 
-            include 'inc/menuInicial.php';
+            include 'inc/pInicial.php';
             include 'inc/modal.php';
             
         ?>
@@ -42,22 +42,22 @@
         <br>
         <h3 align='center'>Listagem de Eventos - <?php echo count($listaEventos)?></h3>
 
-            <p align="center"><input type="button" class="addObjeto btn-verde" name='Evento' value="Adicionar Evento"></p>
+            <p align="center"><input type="button" class="addObjeto btn btn-sm marginTB-xs btn-success" name='Evento' value="Adicionar Evento"></p>
             
                 <br>
                 
-        <table class='table_list' border="1" align='center'>
+        <table class='table table-striped table-bordered dt-responsive nowrap' border="1" align='center' >
             <tr>
-                <td colspan="9"><strong>Lista de Eventos Cadastrados</strong></td>
+                <td colspan="9" style="text-align: center"><strong>Lista de Eventos Cadastrados</strong></td>
             </tr>
             
             <tr>
-                <th>*</th>
-                <th>Logo</th>
-                <th>Nome</th>
-                <th>Modalidades de Submissão</th>
-                <th>Áreas de Submissão</th>
-                <th>Prazos</th>
+                <th style="text-align: center">*</th>
+                <th style="text-align: center">Logo</th>
+                <th style="text-align: center">Nome</th>
+                <th style="text-align: center">Modalidades de Submissão</th>
+                <th style="text-align: center">Áreas de Submissão</th>
+                <th style="text-align: center">Prazos</th>
                 
             </tr>
             <?php foreach($listaEventos as $evento){ 
@@ -90,7 +90,7 @@
                             
                         
                     <?php }  ?>
-                        <p align='center'><input type='button' class='addObjeto btn-verde' id='<?php echo $evento->getId() ?>' name='ModalidadeEvento' value='Vincular Modalidade' ></p>
+                        <p align='center'><input type='button' class='addObjeto btn btn-sm marginTB-xs btn-success' id='<?php echo $evento->getId() ?>' name='ModalidadeEvento' value='Vincular Modalidade' ></p>
                         </td>
                     <?php
                     if (count($areasDoEvento)==0) { ?> <td>-
@@ -108,7 +108,7 @@
                         </ul>
                             
                     <?php } ?>
-                    <p align='center'><input type='button' class='addObjeto btn-verde' id='<?php echo $evento->getId() ?>' name='AreaEvento' value='Vincular Area' ></p>
+                    <p align='center'><input type='button' class='addObjeto btn btn-sm marginTB-xs btn-success' id='<?php echo $evento->getId() ?>' name='AreaEvento' value='Vincular Area' ></p>
                         </td>
                         <td>
                             <ul class="listaCriterios">
@@ -126,5 +126,8 @@
             <?php }?>
              
         </table>
+            <?php 
+                include 'inc/pFinal.php';
+            ?>
     </body>
 </html>

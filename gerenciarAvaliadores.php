@@ -47,7 +47,7 @@
     <body>
         
         <?php 
-            include 'inc/menuInicial.php';
+            include 'inc/pInicial.php';
             include 'inc/modal.php';
         
             $areas = null;
@@ -59,11 +59,12 @@
         
         <fieldset>
             <h2 align="center">Lista de Avaliadores</h2>
-            <p align="center"><input type="button" class="addObjeto btn-verde" value="Adicionar Avaliadores" name='Avaliadores'></p>
+            <p align="center"><input type="button" class="addObjeto btn btn-sm marginTB-xs btn-success" value="Adicionar Avaliadores" name='Avaliadores'></p>
             <p align="center"><a href="downloads/wsListagemAvaliadores.php">Exportar Planilha Excel</a></p>
-            <p align="center">     
+            <table align="center">
+                <tr><td>
                 <label for="select-Eventos">Evento: </label>
-                <select class="campoDeEntrada" style="width: 200px" id="select-Eventos" name="select-Eventos" onchange="direcionar()">
+                <select class="form-control" style="width: 200px" id="select-Eventos" name="select-Eventos" onchange="direcionar()">
                     <option value="">Selecione um evento</option>
                     <?php
                         foreach (Evento::listaEventos() as $evento) {
@@ -73,9 +74,9 @@
                         }
                     ?>
                 </select>
-
-                <label for="select-Areas">Area: </label>
-                <select class="campoDeEntrada" style="width: 200px" id="select-Areas" name="select-Areas" onchange="direcionar()">
+                </td><td>
+                <label for="select-Areas" >Área: </label>
+                <select class="form-control" style="width: 200px" id="select-Areas" name="select-Areas" onchange="direcionar()">
                     <option value="">Selecione uma Area</option>
                     <?php
                         foreach ($areas as $area) {
@@ -85,18 +86,20 @@
                         }
                     ?>
                 </select>
-            </p>
+                </td></tr>
+            </table>
             
-            <table class='table_list_2' align='center' border='1'>
+            <br><br>
+            <table class='table table-striped table-bordered dt-responsive nowrap' align='center' border='1'>
                 <thead>
                     <tr>
-                        <th>*</th>
-                        <th>Evento</th>
-                        <th>Área</th>
-                        <th>Avaliador</th>
-                        <th>Avaliações Parciais</th>
-                        <th>Avaliações Ressubmetidas</th>
-                        <th>Avaliações Finais</th>
+                        <th style="text-align: center">*</th>
+                        <th style="text-align: center">Evento</th>
+                        <th style="text-align: center">Área</th>
+                        <th style="text-align: center">Avaliador</th>
+                        <th style="text-align: center">Avaliações Parciais</th>
+                        <th style="text-align: center">Avaliações Ressubmetidas</th>
+                        <th style="text-align: center">Avaliações Finais</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,6 +146,9 @@
                         
             
         </fieldset>
+        <?php 
+            include 'inc/pFinal.php';
+        ?>
     </body>
     
 </html>

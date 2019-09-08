@@ -47,7 +47,7 @@
     <body>
         
         <?php 
-            include 'inc/menuInicial.php';
+            include 'inc/pInicial.php';
             include 'inc/modal.php';
 
             $idUsuario = "";
@@ -74,9 +74,10 @@
             <h3 align='center'>Listagem de Avaliações (<?php echo count($listaAvaliacoes)?>)</h3>
             
             <p align="center"><a href="downloads/wsListagemAvaliacoes.php?<?php echo $vars ?>">Exportar Planilha Excel</a></p>
-            <p align="center">     
+            <table align="center">     
+                <tr><td>
                 <label for="select-Usuario">Usuario: </label>
-                <select class="campoDeEntrada" id="select-Usuario" name="select-Usuario" onchange="direcionar()" style="width: 200px">
+                <select class="form-control" id="select-Usuario" name="select-Usuario" onchange="direcionar()" style="width: 200px">
                     <option value="">Selecione um Usuário</option>
                     <?php
                         foreach (Avaliador::listaAvaliadoresComFiltro('','','','') as $avaliador) {
@@ -88,8 +89,9 @@
                         }
                     ?>
                 </select>
+                </td><td>
                 <label for="select-Situacao">Situação: </label>
-                <select class="campoDeEntrada" id="select-Situacao" name="select-Situacao" onchange="direcionar()" style="width: 200px">
+                <select class="form-control" id="select-Situacao" name="select-Situacao" onchange="direcionar()" style="width: 200px">
                     <option value="">Selecione uma Situação</option>
                     <?php
                         foreach (SituacaoAvaliacao::listaSituacaoAvaliacao() as $tipo) {
@@ -100,28 +102,28 @@
                         
                     ?>
                 </select>
-                
-            </p>
-            
-            <table border="1" align="center" class='table_list'>
+                </td><tr>
+            </table>
+            <br><br>
+            <table border="1" align="center" class='table table-striped table-bordered dt-responsive nowrap' >
                 <thead>
                     <tr>
-                        <th>*</th>
-                        <th>Trabalho</th>
-                        <th>Tipo</th>
-                        <th>Avaliador</th>
-                        <th>Situação</th>
-                        <th>Data de Recebimento</th>
-                        <th>Data de Realização da Avaliação</th>
-                        <th>Data Final para Entrega</th>
-                        <th>Observação</th>
+                        <th style="text-align: center">*</th>
+                        <th style="text-align: center">Trabalho</th>
+                        <th style="text-align: center">Tipo</th>
+                        <th style="text-align: center">Avaliador</th>
+                        <th style="text-align: center">Situação</th>
+                        <th style="text-align: center">Data de Recebimento</th>
+                        <th style="text-align: center">Data de Realização da Avaliação</th>
+                        <th style="text-align: center">Data Final para Entrega</th>
+                        <th style="text-align: center">Observação</th>
                         
                     </tr>
                 </thead>
                 <tbody>
                 <?php 
                     if (count($listaAvaliacoes)==0) { ?>
-                        <tr><td colspan='8' align=center>Nenhuma Avaliação com os Filtros acima!</td></tr>
+                        <tr><td colspan='9' align=center>Nenhuma Avaliação com os Filtros acima!</td></tr>
                     
                     <?php }
                     else {
@@ -177,5 +179,8 @@
                 </tbody>
             </table>
         </fieldset>
+        <?php 
+            include 'inc/pFinal.php';
+        ?>
     </body>
 </html>

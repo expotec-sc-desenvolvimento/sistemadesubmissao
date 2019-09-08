@@ -15,19 +15,38 @@ if(isset($_GET['nome'])) {
     if (isset($_GET['idSubmissor'])) $idSubmissor = $_GET['idSubmissor'];
     
     $resposta = "";
-    foreach ($usuarios as $usuario) {
-        
-        $idUsuario = $usuario->getId();
-        
-        if ($idUsuario == $idSubmissor) continue;
-        
-        $nomeCompleto = $usuario->getNome() . " " . $usuario->getSobrenome();
-        
-        $resposta = $resposta . "<input type='hidden' id='". $idUsuario."' value='". $idUsuario ."'>"
-                                . "<span id='users-dinamic' onclick=\"javascript:adicionarId('".$usuario->getId()."','".$nomeCompleto ."','$iconExcluir')\">" 
-                                  . "<img src='".$pastaFotosPerfil . $usuario->getImagem()."' width='20px'> "  . $nomeCompleto . "</span><br>";
-    }
     
+    if (count($usuarios)==0) {
+        $resposta = $resposta . "<ul class='select2-results' style='list-style-type: none;'>"
+                . "     <li class='select2-results-dept-0 select2-result select2-result-selectable select2-selected' role='presentation'>"
+                . "         <div class='select2-result-label users-dinamic' role='option'>"
+                . "             <img class='flag' src='public/img/semFoto.jpg'>Sem Resultados"
+                . "         </div>"
+                . "     </li>"
+                . "     <li class='select2-results-dept-0 select2-result select2-result-selectable select2-selected' role='presentation'>"
+                . "         <div class='select2-result-label users-dinamic' role='option'>"
+                . "             <img class='flag' src='public/img/semFoto.jpg'>Sem Resultados"
+                . "         </div>"
+                . "     </li>"
+                . "</ul>";
+    }
+    else {
+        $resposta = $resposta . "<ul class='select2-results' style='list-style-type: none;'>";
+        foreach ($usuarios as $usuario) {
+
+            $idUsuario = $usuario->getId();
+
+            if ($idUsuario == $idSubmissor) continue;
+
+            $nomeCompleto = $usuario->getNome() . " " . $usuario->getSobrenome();
+
+            $resposta = $resposta . "<input type='hidden' id='". $idUsuario."' value='". $idUsuario ."'>"
+                                    ."<li class='select2-results-dept-0 select2-result select2-result-selectable select2-selected' role='presentation'>"
+                                        . "<div class='select2-result-label users-dinamic' role='option' onclick=\"javascript:adicionarId('".$usuario->getId()."','".$nomeCompleto ."','$iconExcluir')\">" 
+                                            . "<img src='".$pastaFotosPerfil . $usuario->getImagem()."' class='flag'> "  . $nomeCompleto . "</div></li>";
+        }
+        $resposta .= "</ul>";
+    }
     echo $resposta;
     
 }

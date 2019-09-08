@@ -16,7 +16,7 @@
     left: 50%;
     top: 20%;
     position: absolute;
-    margin-left:-30%;
+    margin-left:-22%;
     overflow: auto;
     max-height: 70%;
     
@@ -96,19 +96,16 @@
     
 }
 
-#users-dinamic {
+.users-dinamic {
     padding: 0px;
     margin: 0px;
     cursor: pointer; 
-    position: absolute;
-    width: 402px;
-    background-color:#CCC;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
     
 }
 
-#users-dinamic:hover {
-    background-color: #00FF00;
+.users-dinamic:hover {
+    background-color: #EEE;
 }
 
 .link-users:hover {

@@ -34,7 +34,7 @@
     <body>
         
         <?php 
-            include 'inc/menuInicial.php';
+            include dirname(__FILE__) . '/inc/pInicial.php'; 
             include 'inc/modal.php';
             $minhasAvaliacoes = Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), '', '');
         ?>
@@ -46,10 +46,15 @@
             
                 
                 <?php
-                    if (count($minhasAvaliacoes)==0)
-                        echo "<h1 align='center'>Não existem avaliações a serem realizadas por você</h1>";
+                    if (count($minhasAvaliacoes)==0) { ?>
+                        <table border='1' align='center' class='table table-striped table-bordered dt-responsive nowrap'>
+                            <tr><td colspan="11" align='center'>Não existem avaliações a serem realizadas por você</td></tr>
+                        </table>
+                    
+                    <?php }
+                        
                     else {
-                        $cabecalho = "<table border='1' align='center' class='table_list'>
+                        $cabecalho = "<table border='1' align='center' class='table table-striped table-bordered dt-responsive nowrap'>
                                             <thead>
                                                 <tr>
                                                     <th>*</th>
@@ -146,5 +151,8 @@
                 ?>
                 
         </fieldset>
+            <?php 
+                include dirname(__FILE__) . '/inc/pFinal.php'; 
+            ?>
     </body>
 </html>
