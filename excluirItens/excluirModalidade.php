@@ -36,7 +36,7 @@
         <?php 
             if (count($listaEventosDaModalidade)>0) {
                 echo "<p align='center'><strong>Eventos desta Modalidade (".count($listaEventosDaModalidade).")</strong></p>";
-                echo "<ul>";
+                echo "<ul style='margin-left: 30px;'>";
                 foreach ($listaEventosDaModalidade as $obj) {
                     echo "<li>";
                     echo "<strong>Evento: </strong>" . Evento::retornaDadosEvento($obj->getIdEvento())->getNome();
@@ -46,7 +46,7 @@
             }
             if (count($listaCriteriosParciaisDaModalidade)>0) {
                 echo "<p align='center'><strong>Critérios Parciais desta Modalidade (".count($listaCriteriosParciaisDaModalidade).")</strong></p>";
-                echo "<ul>";
+                echo "<ul style='list-style-type:none; margin-left: 30px;'>";
                 foreach ($listaCriteriosParciaisDaModalidade as $obj) {
                     echo "<li>";
                     echo "<strong>Critério: </strong>" .$obj->getDescricao();
@@ -56,7 +56,7 @@
             }
             if (count($listaCriteriosFinaisDaModalidade)>0) {
                 echo "<p align='center'><strong>Critérios Finais desta Modalidade (".count($listaCriteriosFinaisDaModalidade).")</strong></p>";
-                echo "<ul>";
+                echo "<ul style='list-style-type:none; margin-left: 30px;'>";
                 foreach ($listaCriteriosFinaisDaModalidade as $obj) {
                     echo "<li>";
                     echo "<strong>Critério: </strong>" .$obj->getDescricao();

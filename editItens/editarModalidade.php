@@ -15,15 +15,39 @@
     
 ?>
 
-<div class="titulo-modal">Editar Modalidade</div>
 
-<div class="itens-modal">
-    <form method="post" action="<?=htmlspecialchars('submissaoForms/wsEditarModalidade.php');?>" enctype="multipart/form-data">
-    <input type="hidden" name="pIdModalidade" value="<?php echo $modalidade->getId() ?>">
-    
-    <p align="center">Descrição: <input class="campoDeEntrada" rows="10" cols="40" id="inpModalidade" name="pNome" value="<?php echo $modalidade->getDescricao() ?>" required="true"></p>
-    <div class="div-btn"><input class="btn-verde" type="submit" value="Atualizar Modalidade"></div>
 
-    </form>
+
+<div class="panel-heading">
+    <h3 class="panel-title">Editar Modalidade</h3>
 </div>
-<br>
+
+<div class="panel panel-headline">
+    <div class="panel-body">
+
+        <form method="post" action="<?=htmlspecialchars('submissaoForms/wsEditarModalidade.php');?>" enctype="multipart/form-data">
+            <input type="hidden" name="pIdModalidade" value="<?php echo $modalidade->getId() ?>">
+
+            <div class="row">
+                <div class="col-md-12  mb-4">
+                    <label for="e.address">Área</label> 
+                        <input class="form-control" id="inpModalidade" name="pNome" value="<?php echo $modalidade->getDescricao() ?>" required="true">
+                    <div class="help-inline ">
+
+                    </div>
+                </div>	
+            </div>
+            <div class="control-group form-actions">
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                    <button class="btn btn-lg btn-primary btn-block mb-8" type="submit">Editar Modalidade</button>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <a class="btn btn-lg btn-default  btn-block" onclick="$('#modal').fadeOut(500)">Retornar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

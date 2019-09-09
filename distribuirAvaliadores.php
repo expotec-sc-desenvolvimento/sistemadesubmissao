@@ -32,7 +32,7 @@
     <body>
         
         <?php 
-            include 'inc/menuInicial.php';
+            include 'inc/pInicial.php';
             include 'inc/modal.php';
         ?>
         
@@ -74,5 +74,8 @@
            </form>
         </fieldset>
             
+        <?php 
+                include dirname(__FILE__) . '/inc/pFinal.php'; 
+            ?>
     </body>
 </html>

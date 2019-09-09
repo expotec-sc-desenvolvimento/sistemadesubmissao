@@ -11,24 +11,38 @@
     
 ?>
 
-<div class="titulo-modal">Adicionar Área</div>
+<div class="panel-heading">
+    <h3 class="panel-title">Adicionar Área</h3>
+</div>
 
-<div class="itens-modal">
+
+
+
+<div class="panel-body">
 
     <form method="post" action="<?=htmlspecialchars('submissaoForms/wsAddArea.php');?>" enctype="multipart/form-data">
+        <input type='hidden' id="subareas" name="subareas" value="<?php echo "-"?> ">
 
-        <table class="cadastroItens-2" align="center">
-            <tr>
-                <td class='direita'><label for="descricao">Descrição: </label></td>
-                <td><input class="campoDeEntrada" id="descricao" name="descricao" required="true"></td>
-            </tr>
-            <tr>
-                <td class='direita'><label for="subareas">SubAreas: </label></td>
-                <td><input class="campoDeEntrada" id="subareas" name="subareas" required="true"></td>
-            </tr>
-        </table>
-        
-        <div class="div-btn"><input class="btn-verde" type="submit" value="Adicionar Area"></div>
+        <div class="row">
+            <div class="col-md-12  mb-4">
+                <label for="e.address">Área</label> 
+                    <input class="form-control" id="descricao" name="descricao" required="true">
+                <div class="help-inline ">
+
+                </div>
+            </div>	
+        </div>
+        <div class="control-group form-actions">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                <button class="btn btn-lg btn-primary btn-block mb-4" type="submit">Criar Área</button>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <a class="btn btn-lg btn-default  btn-block" onclick="$('#modal').fadeOut(500)">Retornar</a>
+                </div>
+            </div>
+        </div>
     </form>
-    
 </div>
+

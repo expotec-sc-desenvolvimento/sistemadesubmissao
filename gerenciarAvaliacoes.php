@@ -133,14 +133,16 @@
                             $dataAtual = date('Y-m-d');
                             $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao();
                             
-                            $editarAvaliacao = "";
-                            if ($avaliacao->getIdSituacaoAvaliacao()==1 ||$avaliacao->getIdSituacaoAvaliacao()==3) {
-                                $editarAvaliacao = $editarAvaliador = "<a class='editarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='".$iconEditar."' class='img-miniatura'></a>";
-                            }
 
                     ?>
                         <tr>
-                            <td><a class='visualizarObjeto' id='<?php echo $avaliacao->getId()?>' name='Avaliacao'><img src='<?php echo $iconVisualizar ?>' class='img-miniatura'></a><?php echo $editarAvaliacao ?></td>
+                            <td>
+                                <?php if ($avaliacao->getIdSituacaoAvaliacao()==1 ||$avaliacao->getIdSituacaoAvaliacao()==3 ) {?>
+                                    <a class='editarObjeto' id='<?php echo $avaliacao->getId()?>' name='Avaliacao'><img src='<?php echo $iconEditar ?>' class='img-miniatura'></a>
+                                <?php } else { ?>
+                                    <a class='visualizarObjeto' id='<?php echo $avaliacao->getId()?>' name='Avaliacao'><img src='<?php echo $iconVisualizar ?>' class='img-miniatura'></a>
+                                <?php } ?>    
+                            </td>
                             <td><?php echo Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()?></td>
                             <td><?php echo TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdTipoSubmissao())->getDescricao()?></td>
                             <td><?php echo $avaliador->getNome() . " " . $avaliador->getSobrenome() ?></td>

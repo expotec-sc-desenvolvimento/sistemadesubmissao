@@ -76,7 +76,7 @@
                               $nota = $submissao->getNota();
                               $situacao = SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao());
                                                             
-                              $visualizar = "<a id='".$id."' onclick=\"location.href='visualizarSubmissao2.php?id=".$submissao->getId()."'\"><img class='img-miniatura' src='".$iconVisualizar."' width='20px'></a>";
+                              $visualizar = "<a id='".$id."' onclick=\"location.href='visualizarSubmissao.php?id=".$submissao->getId()."'\"><img class='img-miniatura' src='".$iconVisualizar."' width='20px'></a>";
                               $editar="";
                               $excluir="";
                               if ($obj->getIsSubmissor() && $situacao->getDescricao()=="Submetida" && $submissao->getIdTipoSubmissao()==1) {

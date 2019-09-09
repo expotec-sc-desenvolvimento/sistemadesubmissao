@@ -44,7 +44,7 @@
             // CONTINUAR DAQUI
             
             echo "<p align='center'><strong>Submissões com pelo menos 1 avaliação já realizada (".count($avaliacoesRealizadas).")</strong></p>";
-            echo "<ul>";
+            echo "<ul style='margin-left: 30px;'>";
             foreach ($avaliacoesRealizadas as $obj) {
                 echo "<li>";
                 echo "<strong>Trabalho: </strong>" . $obj->getTitulo();

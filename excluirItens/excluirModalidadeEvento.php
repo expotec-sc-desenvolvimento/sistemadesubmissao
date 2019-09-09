@@ -36,7 +36,7 @@
         <p align='center'>O vínculo não pode ser excluído excluída devido às pendências abaixo:</p>
         <?php 
             echo "<p align='center'><strong>Submissoes desta Modalidade (".count($submissoes).")</strong></p>";
-            echo "<ul>";
+            echo "<ul style='margin-left: 30px;'>";
             foreach ($submissoes as $submissao) {
                 echo "<li>".$submissao->getTitulo()."</li>";
             }

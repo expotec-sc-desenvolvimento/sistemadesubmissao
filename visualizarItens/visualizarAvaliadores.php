@@ -21,7 +21,7 @@ include dirname(__DIR__) . '/inc/includes.php';
 <div class="titulo-modal">Avaliadores</div>
 
 <div class="itens-modal">
-    <table class="cadastroItens" border='1'>
+    <table class='table table-striped table-bordered dt-responsive nowrap'>
         <tr><td><strong>Evento: </strong></td><td><?php echo $nomeEvento ?></td></tr>
         <tr><td><strong>Area: </strong></td><td><?php echo $nomeArea ?></td></tr>
         <tr><td><strong>Avaliadores: </strong></td><td>

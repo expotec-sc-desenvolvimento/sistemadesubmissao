@@ -55,7 +55,7 @@
     <body>
         
         <?php 
-            include 'inc/menuInicial.php';
+            include 'inc/pInicial.php';
             include 'inc/modal.php';
         
             $listaSubmissoes = Submissao::retornaSubmissoesParaFinalizar();
@@ -70,7 +70,7 @@
             
             
             <form method="post" action="<?=htmlspecialchars('submissaoForms/wsFinalizarAvaliacoesEmLote.php');?>" enctype="multipart/form-data">
-            <table border="1" align="center" class="table_list_3">
+            <table class="table table-striped table-bordered dt-responsive nowrap">
                 <thead>
                     <tr>
                         <th>*</th>
@@ -174,8 +174,9 @@
                 </tbody>
             </table>
             <p align="center">
-                <input class="btn-verde" type="submit" value="Finalizar Avaliações Selecionadas" onclick="return confirm('Deseja finalizar as submissões selecionadas?')"/>
+                <input class="btn btn-sm marginTB-xs btn-success" type="submit" value="Finalizar Avaliações Selecionadas" onclick="return confirm('Deseja finalizar as submissões selecionadas?')"/>
             </p>
             </form>
+            <?php include 'inc/pFinal.php'; ?>
     </body>
 </html>

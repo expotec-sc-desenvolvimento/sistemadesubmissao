@@ -36,7 +36,7 @@
         <?php 
             if (count($listaAreasDoEvento)>0) {
                 echo "<p align='center'><strong>Áreas vinculadas a este evento (".count($listaAreasDoEvento).")</strong></p>";
-                echo "<ul>";
+                echo "<ul style='margin-left: 30px;'>";
                 foreach ($listaAreasDoEvento as $obj) {
                     echo "<li>";
                     echo "<strong>Área: </strong>" . Area::retornaDadosArea($obj->getIdArea())->getDescricao();
@@ -46,7 +46,7 @@
             }
             if (count($listaModalidadesDoEvento)>0) {
                 echo "<p align='center'><strong>Áreas vinculadas a este evento (".count($listaModalidadesDoEvento).")</strong></p>";
-                echo "<ul>";
+                echo "<ul style='list-style-type:none; margin-left: 30px;'>";
                 foreach ($listaModalidadesDoEvento as $obj) {
                     echo "<li>";
                     echo "<strong>Modalidade: </strong>" . Modalidade::retornaDadosModalidade($obj->getIdModalidade())->getDescricao();

@@ -33,54 +33,80 @@
     
 ?>
 
-<div class="titulo-modal">Editar Critério</div>
+<div class="panel-heading">
+    <h3 class="panel-title">Editar Critério</h3>
+</div>
 
-
-<div class="itens-modal">
-    
-    
-    
+<div class="panel-body">
     <form method="post" action="<?=htmlspecialchars('submissaoForms/wsEditarCriterio.php');?>" enctype="multipart/form-data">
-                
         <input type="hidden" name="pIdCriterio" value="<?php echo $criterio->getId() ?>">
         <?php echo $pendencias ?>
-        
-        <table class="cadastroItens-2">
-            <tr><td><strong>Modalidade:</td><td><?php echo Modalidade::retornaDadosModalidade($criterio->getIdModalidade())->getDescricao()?></td></tr>
-            <tr><td><strong>Tipo de Critério:</strong></td><td><?php echo TipoSubmissao::retornaDadosTipoSubmissao($criterio->getIdTipoSubmissao())->getDescricao()?></td></tr>
-            <tr>
-                <td class='direita'><strong>Descrição:</strong></td>
-                <td><input class="campoDeEntrada" id="inpDescricao" name="pDescricao" required="true" value="<?php echo $criterio->getDescricao()?>" <?php echo $readonly; ?>></td>
-                <td><div id="msgDescricao" class="msgerr"></div></td>
-            </tr>
-            <tr>
-                <td class='direita'><strong>Detalhamento: </strong></td>
-                <td><textarea class="campoDeEntrada" id="inpDescricao" name="pDetalhamento" cols="60" rows="5" required="true" style="resize: none;" <?php echo $readonly; ?>><?php echo $criterio->getDetalhamento()?></textarea></td>
-                <td><div id="msgDescricao" class="msgerr"></div></td>
-            </tr>
-            <tr>
-                <?php if ($criterio->getIdTipoSubmissao()==3) {?>
-                <td class='direita'><strong>Peso: </strong></td>
-                <td><select class="campoDeEntrada" id='inpPeso' name="pPeso" <?php echo $disable ?>>
-                        <option value="1" <?php if ($criterio->getPeso()==1) echo " selected"?>>1</option>
-                        <option value="2" <?php if ($criterio->getPeso()==2) echo " selected"?>>2</option>
-                        <option value="3" <?php if ($criterio->getPeso()==3) echo " selected"?>>3</option>
-                        <option value="4" <?php if ($criterio->getPeso()==4) echo " selected"?>>4</option>
-                        <option value="5" <?php if ($criterio->getPeso()==5) echo " selected"?>>5</option>
-                    </select></td>
-                <?php } else echo "<input type='hidden' id='inpPeso' name='pPeso' value=''>;"?>
-            </tr>
+    <div class="row">
+        <div class="col-md-6 mb-6">
+            <label class="control-label">Modalidade</label>
+            <input class="form-control" readonly="true" value="<?php echo Modalidade::retornaDadosModalidade($criterio->getIdModalidade())->getDescricao() ?>">
+            <div class="help-inline ">
 
-        </table>
-        
-        <?php if (!$flag) { ?><div class="div-btn"><input class="btn-verde" type="submit" value="Atualizar Criterio"></div> <?php } ?>
+            </div>
+        </div>
+        <div class="col-md-6 mb-6">
+            <label class="control-label">Tipo de Avaliação</label>
+            <input class="form-control" readonly="true" value="<?php echo TipoSubmissao::retornaDadosTipoSubmissao($criterio->getIdTipoSubmissao())->getDescricao() ?>">
+            <div class="help-inline ">
 
-    </form>
-    
+            </div>
+        </div>
+
     </div>
+    <div class="row">
+        <div class="col-md-12  mb-4">
+            <label for="e.address">Descrição</label> 
+                <input class="form-control" id="inpDescricao" name="pDescricao" required="true" value="<?php echo $criterio->getDescricao()?>" <?php echo $readonly; ?>>
+            <div class="help-inline ">
+
+            </div>
+        </div>	
+    </div>
+    <div class="row">
+        <div class="col-md-12  mb-4">
+            <label for="resumo">Detalhamento</label> 
+            <textarea class="form-control" id="inpDescricao" name="pDetalhamento" rows="6"   style="resize:none" required="true" <?php echo $readonly; ?>><?php echo $criterio->getDetalhamento()?></textarea>
+            <div class="help-inline ">
+
+            </div>
+        </div>	
+    </div>
+    <?php if (($criterio->getIdTipoSubmissao()==3)) {?>
+    <div class="row">
+        <div class="col-md-12  mb-4">
+            <label for="resumo">Peso</label> 
+                <select class="form-control" id='inpPeso' name="pPeso" <?php echo $disable ?>>
+                    <option value="1" <?php if ($criterio->getPeso()==1) echo " selected"?>>1</option>
+                    <option value="2" <?php if ($criterio->getPeso()==2) echo " selected"?>>2</option>
+                    <option value="3" <?php if ($criterio->getPeso()==3) echo " selected"?>>3</option>
+                    <option value="4" <?php if ($criterio->getPeso()==4) echo " selected"?>>4</option>
+                    <option value="5" <?php if ($criterio->getPeso()==5) echo " selected"?>>5</option>
+                </select>
+            <div class="help-inline ">
+
+            </div>
+        </div>	
+    </div>
+    <?php } else echo "<input type='hidden' id='inpPeso' name='pPeso' value=''>;" ?>
 
 
+    <?php if (!$flag) { ?>    
+    <div class="control-group form-actions">
+        <div class="row">
+            <div class="col-md-3 mb-4">
+            <button class="btn btn-lg btn-primary btn-block mb-15" type="submit">Atualizar Critério</button>
+            </div>
 
-    
-
-    
+            <div class="col-md-3 mb-4">
+                <a class="btn btn-lg btn-default  btn-block" onclick="$('#modal').fadeOut(500)">Retornar</a>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+    </form>
+</div>    

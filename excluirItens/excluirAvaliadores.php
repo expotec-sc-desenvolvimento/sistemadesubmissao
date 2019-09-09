@@ -51,7 +51,7 @@
         <?php 
             if (count($avParciais)>0) {
                 echo "<p align='center'><strong>Avaliações Parciais atribuidas (".count($avParciais).")</strong></p>";
-                echo "<ul>";
+                echo "<ul style='margin-left: 30px;'>";
                 foreach ($avParciais as $obj) {
                     echo "<li>";
                     echo "<strong>Trabalho: </strong>" . $obj->getTitulo();
@@ -61,7 +61,7 @@
             }
             if (count($avFinais)>0) {
                 echo "<p align='center'><strong>Avaliações Finais atribuidas (".count($avFinais).")</strong></p>";
-                echo "<ul>";
+                echo "<ul style=' margin-left: 30px;'>";
                 foreach ($avFinais as $obj) {
                     echo "<li>";
                     echo "<strong>Trabalho: </strong>" . $obj->getTitulo();

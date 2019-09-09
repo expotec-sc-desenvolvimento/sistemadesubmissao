@@ -41,7 +41,7 @@
             ?>
             
             <fieldset class='inicio'>
-                <p align='center'><input class="addObjeto btn btn-sm marginTB-xs btn-success" type="button" name='SolicitacaoAvaliador' value="Adicionar Solicitacao"></p>
+                <p align='center'><input class="addObjeto btn btn-sm marginTB-xs btn-success" type="button" name='SolicitacaoAvaliador' value="Adicionar Solicitação"></p>
             
                 <h2 align="center">Solicitacões para Avaliador do Usuário</h2>
                 <table border="1" align="center" class="table table-striped table-bordered dt-responsive nowrap">

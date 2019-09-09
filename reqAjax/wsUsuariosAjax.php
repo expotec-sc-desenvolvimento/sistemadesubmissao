@@ -20,12 +20,7 @@ if(isset($_GET['nome'])) {
         $resposta = $resposta . "<ul class='select2-results' style='list-style-type: none;'>"
                 . "     <li class='select2-results-dept-0 select2-result select2-result-selectable select2-selected' role='presentation'>"
                 . "         <div class='select2-result-label users-dinamic' role='option'>"
-                . "             <img class='flag' src='public/img/semFoto.jpg'>Sem Resultados"
-                . "         </div>"
-                . "     </li>"
-                . "     <li class='select2-results-dept-0 select2-result select2-result-selectable select2-selected' role='presentation'>"
-                . "         <div class='select2-result-label users-dinamic' role='option'>"
-                . "             <img class='flag' src='public/img/semFoto.jpg'>Sem Resultados"
+                . "             <img class='flag' src='public/img/semFoto.jpg'>Nenhum resultado encontrado"
                 . "         </div>"
                 . "     </li>"
                 . "</ul>";

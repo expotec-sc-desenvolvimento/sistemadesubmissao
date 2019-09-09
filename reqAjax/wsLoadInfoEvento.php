@@ -22,7 +22,7 @@ if(isset($_GET['evento']) && $_GET['evento']!="") {
     
 
     
-    $resposta = $resposta . "<table align='center' border='1' class='table_list'><tr>"
+    $resposta = $resposta . "<table class='table table-striped table-bordered dt-responsive nowrap'><tr>"
                                 . "<td align='center'><strong>Área</strong></td>"
                                 . "<td align='center'><strong>Avaliadores <br>da Área</strong></td>"
                                 . "<td align='center'><strong>Trabalhos <br>sem Avaliadores</strong></td>";
@@ -31,8 +31,8 @@ if(isset($_GET['evento']) && $_GET['evento']!="") {
     foreach ($areasDoEvento as $area) {
         $avaliadores = Avaliador::listaAvaliadoresComFiltro($_GET['evento'], $area->getId(), '',"area");
 
-        $resposta = $resposta . "<tr><td>" . $area->getDescricao() . "</td>";
-        $resposta = $resposta . "<td><a class='visualizarObjeto' id='".AreaEvento::retornaIdAreaEvento($_GET['evento'], $area->getId())."' name='Avaliadores'>"
+        $resposta = $resposta . "<tr><td align='center'>" . $area->getDescricao() . "</td>";
+        $resposta = $resposta . "<td align='center'><a class='visualizarObjeto' id='".AreaEvento::retornaIdAreaEvento($_GET['evento'], $area->getId())."' name='Avaliadores'>"
                                 . "<img src='".$iconVisualizar."' class='img-miniatura'></a>";
         
         /*

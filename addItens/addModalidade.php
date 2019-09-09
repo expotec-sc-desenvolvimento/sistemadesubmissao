@@ -11,12 +11,38 @@
     
 ?>
 
-<div class="titulo-modal">Adicionar Modalidade</div>
 
-<div class="itens-modal">
+
+
+<div class="panel-heading">
+    <h3 class="panel-title">Adicionar Modalidade</h3>
+</div>
+
+
+
+<div class="panel-body">
+
     <form method="post" action="<?=htmlspecialchars('submissaoForms/wsAddModalidade.php');?>" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-12  mb-4">
+                <label for="e.address">Modalidade</label> 
+                    <input class="form-control" id="descricao" name="descricao" required="true">
+                <div class="help-inline ">
 
-        <p align="center">Descrição: <input class="campoDeEntrada" id="descricao" name="descricao" required="true" ></p>
-        <div class="div-btn"><input class="btn-verde" type="submit" value="Adicionar Modalidade"></div>
+                </div>
+            </div>	
+        </div>
+        <div class="control-group form-actions">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                <button class="btn btn-lg btn-primary btn-block mb-4" type="submit">Criar Modalidade</button>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <a class="btn btn-lg btn-default  btn-block" onclick="$('#modal').fadeOut(500)">Retornar</a>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
+

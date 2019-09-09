@@ -34,90 +34,127 @@ include dirname(__DIR__) . '/inc/includes.php';
     
 ?>
 
-<div class="titulo-modal">Enviar Versão Corrigida</div>
+<div class="panel-heading">
+    <h3 class="panel-title">Ressubmeter Trabalho</h3>
+</div>
 
-
-<div class="itens-modal">
-    
+<div class="panel-body">
     <?php
-    
     if ($userNaoSubmissor) echo "<p align='center'>Apenas o usuário Submissor pode realizar esta Operação</p>";
     else if ($prazoEsgotado) echo "<p align='center'>O prazo para envio da Versão corrigida foi excedido. Prazo Final: <strong>".date('d/m/Y',strtotime($dataFinalEnvioSubmissaoCorrigida))."</strong></p>";
-    
+        
     
     else { ?>
-    
-    <form method="post" action="<?=htmlspecialchars('submissaoForms/wsEnviarSubmissaoCorrigida.php');?>" enctype="multipart/form-data">
-    <input type="hidden" id="idSubmissao" name="idSubmissao" value="<?php echo $submissao->getId() ?>">
-    <input type="hidden" id="idUsuariosAdd" name="idUsuariosAdd" value="<?php echo $submissores ?>">
+        <form method="post" action="<?=htmlspecialchars('submissaoForms/wsEnviarSubmissaoCorrigida.php');?>" enctype="multipart/form-data">
+        <input type="hidden" id="idSubmissao" name="idSubmissao" value="<?php echo $submissao->getId() ?>">
+        <input type="hidden" id="idUsuariosAdd" name="idUsuariosAdd" value="<?php echo $submissores ?>">
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <label class="control-label">Evento</label>
+                <input type='hidden' id="select-Eventos" name="select-Eventos" value="<?php echo $evento->getId()?>">
+                <input class='form-control' readonly="true" value="<?php echo $evento->getNome() ?>">
+                <div class="help-inline ">
 
-        <table class="cadastroItens-2">
-            <tr><th></th><td><h2 align="center">Dados do Evento</h2></td></tr>
-            <tr>
-                <th class="direita">Evento: </th>
-                <td>
-                    <input type='hidden' id="select-Eventos" name="select-Eventos" value="<?php echo $evento->getId()?>">
-                    <input class='campoDeEntrada' readonly="readonly" value="<?php echo $evento->getNome() ?>">
-                </td>
-            </tr>
-            <tr>
-                <th class="direita">Área: </th>
-                <td>
-                    <input type='hidden' id="select-Areas" name="select-Areas" value="<?php echo $area->getId()?>">
-                    <input class='campoDeEntrada' readonly="readonly" value="<?php echo $area->getDescricao() ?>">
-                </td>
-            </tr>
-            <tr>
-                <th class="direita">Modalidade: </th>
-                <td>
-                    <input type='hidden' id="select-Modalidades" name="select-Modalidades" value="<?php echo $modalidade->getId()?>">
-                    <input class='campoDeEntrada' readonly="readonly" value="<?php echo $modalidade->getDescricao() ?>">
-                </td>
-            </tr>
-            <tr><th></th><td><h2 align="center">Dados do Trabalho</h2></td></tr>
-            <tr>
-                <th class='direita'>Título: </th>
-                <td><input class="campoDeEntrada" id="titulo" name="titulo" required="true" value="<?php echo $submissao->getTitulo() ?>"></td>
-            </tr>
-            <tr>
-                <th class='direita'>Resumo: </th>
-                <td><textarea class="campoDeEntrada" id="resumo" name="resumo" rows="10" required="true"><?php echo $submissao->getResumo() ?></textarea></td>
-            </tr>
-            <tr>
-                <th class='direita'>Palavras-chave: </th>
-                <td><input class="campoDeEntrada" id="palavrasChave" name="palavrasChave" required="true" value="<?php echo $submissao->getPalavrasChave()?>"></td>
-            </tr>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <label class="control-label">Modalidade</label>
+                <input type='hidden' id="select-Modalidades" name="select-Modalidades" value="<?php echo $modalidade->getId()?>">
+                <input class='form-control' readonly="true" value="<?php echo $modalidade->getDescricao() ?>">
+                <div class="help-inline ">
+
+                </div>
+            </div>
+
+
+            <div class="col-md-4 mb-4">
+                <label class="control-label">Área</label>
+                <input type='hidden' id="select-Areas" name="select-Areas" value="<?php echo $area->getId()?>">
+                <input class='form-control' readonly="true" value="<?php echo $area->getDescricao() ?>">
+                <div class="help-inline ">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12  mb-4">
+                <label for="e.address">Título</label> 
+                    <input class="form-control" id="titulo" name="titulo" value="<?php echo $submissao->getTitulo() ?>">
+                <div class="help-inline ">
+
+                </div>
+            </div>	
+        </div>
+        <div class="row">
+            <div class="col-md-12  mb-4">
+                <label for="resumo">Resumo</label> 
+                <textarea rows="10" class="form-control"  id="resumo" name="resumo" style="resize:none"><?php echo $submissao->getResumo() ?></textarea>
+                <div class="help-inline ">
+
+                </div>
+            </div>	
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                    <label for="e.contact">Palavras-Chave</label>
+                    <input class="form-control" id="palavrasChave" name="palavrasChave" value="<?php echo $submissao->getPalavrasChave() ?>">
+                    <div class="help-inline ">
+
+                    </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <label for="e.contact">Relação com</label>
+                <input class="form-control" id="relacaoCom" name="relacaoCom" readonly="true" value="<?php echo $submissao->getRelacaoCom() ?>">
+                <div class="help-inline ">
+
+                </div>
+            </div>
+
+            <div class="col-md-4  mb-4">
+                <label  for="arquivo" >Download</label>
+                <input class="form-control" type="file" id="arquivo" name="arquivo" required="true">
+                <div class="help-inline ">
+
+                </div>
+            </div>
             
-                <tr>
-                    <th class='direita'>Relação com: </th>
-                    <td>
-                        <input type="radio" id="relacaoCom" name="relacaoCom" value="TCC" <?php if ($submissao->getRelacaoCom()=="TCC") echo " checked" ?> disabled="true">TCC
-                        <input type="radio" id="relacaoCom" name="relacaoCom" value="PI" <?php if ($submissao->getRelacaoCom()=="PI") echo " checked"?> disabled="true">PI
-                        <input type="radio" id="relacaoCom" name="relacaoCom" value="-" <?php if ($submissao->getRelacaoCom()=="-") echo " checked"?> disabled="true">Nenhuma das Alternativas
-                    </td>
-                </tr>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12  mb-4">
+                <label for="e.address">Autores</label><br>
+                    <ul style='list-style-type: none;'>
+                        <?php
+                            foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $obj) {
+                                $user = Usuario::retornaDadosUsuario($obj->getIdUsuario());
+                                echo "<li><div><img class='flag' src='public/img/semFoto.jpg'>" .$user->getNome() . " " , $user->getSobrenome();
+                                if ($obj->getIsSubmissor()==1) echo "(Submissor)";
 
-            <tr>
-                <th class='direita'>Download: </th>
-                <td><input class="campoDeEntrada" type="file" id="arquivo" name="arquivo" required="true"></td>
-            </tr>
 
-            <tr>
-                <th class='direita'>Submissores: </th>
-                <td>
-                    <?php 
-                        foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $usuarioSubmissao) {
-                            $user = Usuario::retornaDadosUsuario($usuarioSubmissao->getIdUsuario());
-                            echo $user->getNome() . "<img src='" . $iconOK. "' class='img-miniatura'>";
-                        }
-                    ?>
-                    
-                </td>
-            </tr>
+                            }
+                        ?>
+                    </ul>
+                <div class="help-inline ">
+
+                </div>
+            </div>
+        </div>
+        <div class="control-group form-actions">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                <button class="btn btn-lg btn-primary btn-block mb-4" type="submit" onclick="submeterAutores('<?php echo $usuario->getId()?>')">Enviar Trabalho</button>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <a class="btn btn-lg btn-default  btn-block" onclick="$('#modal').fadeOut(500)">Retornar</a>
+                </div>
+            </div>
+        </div>
+    <?php }?>
+</div>
+
             
-        </table>
-        <div class="div-btn"><input type='submit' class='btn-verde' value='Enviar Submissão Corrigida' onclick="submeterAutores('<?php echo $usuario->getId()?>')"></div>
-    </form>       
-<?php }?>
-    
-    </div>    
+              

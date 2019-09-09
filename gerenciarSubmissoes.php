@@ -256,7 +256,7 @@
                             }    //date('m/d/Y',$submissao->getDataEnvio());
                     ?>
                             <tr>
-                                <td><a class='visualizarObjeto' id='<?php echo $submissao->getId() ?>' name='Submissao'><img src='<?php echo $iconVisualizar ?>' class='img-miniatura'></a></td>
+                                <td><a onclick="location.href='visualizarSubmissao.php?id=<?php echo $submissao->getId()?>'"><img src='<?php echo $iconVisualizar ?>' class='img-miniatura'></a></td>
                                 <td><?php echo Evento::retornaDadosEvento($submissao->getIdEvento())->getNome() ?></td>
                                 <td><?php echo Area::retornaDadosArea($submissao->getIdArea())->getDescricao() ?></td>
                                 <td><?php echo Modalidade::retornaDadosModalidade($submissao->getIdModalidade())->getDescricao() ?></td>

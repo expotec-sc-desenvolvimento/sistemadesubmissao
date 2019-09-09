@@ -12,27 +12,38 @@
     $area = Area::retornaDadosArea($_GET['id']);
 ?>
 
-<div class="titulo-modal">Editar Área</div>
-
-<div class="itens-modal">
-    
-
-<form method="post" action="<?=htmlspecialchars('submissaoForms/wsEditarArea.php');?>" enctype="multipart/form-data">
-    <input type="hidden" name="pIdArea" value="<?php echo $area->getId() ?>">
-    <table class="cadastroItens-2" align="center">
-        <tr>
-            <td class='direita'><label for="inpArea">Area: </label></td>
-                <td><input class="campoDeEntrada" rows="10" cols="40" id="inpArea" name="pArea" value="<?php echo $area->getDescricao() ?>" required="true"></td>
-                <td><div id="msgArea" class="msgerr"></div></td>
-            </tr>
-            <tr>
-                <td class='direita'><label for="inpSubAreas">Subareas: </label></td>
-                <td><input class="campoDeEntrada" class="input" id="inpSubAreas" name="pSubAreas" value="<?php echo $area->getSubAreas() ?>" required="true"></td>
-                <td><div id="msgSubAreas" class="msgerr"></div></td>
-            </tr>
-    </table>
-    <div class="div-btn"><input class="btn-verde" type="submit" value="Atualizar Area"></div>
-</form>
 
 
+<div class="panel-heading">
+    <h3 class="panel-title">Editar Área</h3>
+</div>
+
+<div class="panel panel-headline">
+    <div class="panel-body">
+
+        <form method="post" action="<?=htmlspecialchars('submissaoForms/wsEditarArea.php');?>" enctype="multipart/form-data">
+            <input type='hidden' id="inpSubAreas" name="pSubAreas" value="<?php echo "-"?> ">
+
+            <div class="row">
+                <div class="col-md-12  mb-4">
+                    <label for="e.address">Área</label> 
+                        <input class="form-control" id="inpArea" name="pArea" value="<?php echo $area->getDescricao() ?>" required="true">
+                    <div class="help-inline ">
+
+                    </div>
+                </div>	
+            </div>
+            <div class="control-group form-actions">
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                    <button class="btn btn-lg btn-primary btn-block mb-4" type="submit">Atualizar Área</button>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <a class="btn btn-lg btn-default  btn-block" onclick="$('#modal').fadeOut(500)">Retornar</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

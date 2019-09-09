@@ -38,7 +38,7 @@
         <?php 
             if (count($listaEventosDaArea)>0) {
                 echo "<p align='center'><strong>Eventos desta Área (".count($listaEventosDaArea).")</strong></p>";
-                echo "<ul>";
+                echo "<ul style='margin-left: 30px;'>";
                 foreach ($listaEventosDaArea as $obj) {
                     echo "<li>";
                     echo "<strong>Evento: </strong>" . Evento::retornaDadosEvento($obj->getIdEvento())->getNome();
@@ -48,7 +48,7 @@
             }
             if (count($listaAvaliadoresDaArea)>0) {
                 echo "<p align='center'><strong>Avaliadores desta Área (".count($listaAvaliadoresDaArea).")</strong></p>";
-                echo "<ul>";
+                echo "<ul style='margin-left: 30px;'>";
                 foreach ($listaAvaliadoresDaArea as $obj) {
                     $user = Usuario::retornaDadosUsuario($obj->getIdUsuario());
                     echo "<li>";

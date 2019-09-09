@@ -33,7 +33,7 @@
             if (count($avaliadores)==0) echo "<p align='center'>Nenhum avaliador cadastrado para esta Área/Evento";
             else {
                 echo "<p align='center'>Avaliadores desta Área/Evento:";
-                "<ul>";
+                "<ul style='margin-left: 30px;'>";
                 foreach ($avaliadores as $avaliador) {
                     echo "<li>".Usuario::retornaDadosUsuario($avaliador->getIdUsuario())->getNome()."</li>";
                 }
@@ -50,7 +50,7 @@
         <p align='center'>O vínculo não pode ser excluído excluída devido às pendências abaixo:</p>
         <?php 
             echo "<p align='center'><strong>Submissoes desta Área (".count($submissoes).")</strong></p>";
-            echo "<ul>";
+            echo "<ul style='margin-left: 30px;'>";
             foreach ($submissoes as $submissao) {
                 echo "<li>".$submissao->getTitulo()."</li>";
             }

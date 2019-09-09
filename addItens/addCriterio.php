@@ -20,61 +20,91 @@
     
     foreach ($submissoesDaModalidade as $submissao) {
         // Testa se já existem avaliações realizadas para esta modalidade/tiposubmissao
-        if (count(Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), 2))) array_push ($avaliacoesRealizadas, $submissao);
+        if (count(Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), 2)) ||
+                count(Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), 4)) ||
+                count(Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), 5)) ||
+                count(Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), 6))) array_push ($avaliacoesRealizadas, $submissao);
     }
-    
+
 ?>
 
-<div class="titulo-modal">Adicionar Critério</div>
 
+<?php if (count($avaliacoesRealizadas)>0) { ?>
+    <p align='center'>Não é possível adicionar Critério <strong><?php echo $tipoCriterio->getDescricao() ?></strong> para esta Modalidade, pois existem avaliações já realizadas!</p>
+<?php } else { ?>
+    <div class="panel-heading">
+        <h3 class="panel-title">Adicionar Critério</h3>
+    </div>
 
-<div class="itens-modal">
-    
-    <?php
-    
-    if (count($avaliacoesRealizadas)>0) {
-        echo "<p align='center'>Não é possível adicionar Critério <strong>".$tipoCriterio->getDescricao()."</strong>"
-                . " para esta Modalidade, pois existem avaliações já realizadas!</p>";
-    }
-    
-    else {?>
-    
-    <form method="post" action="<?=htmlspecialchars('submissaoForms/wsAddCriterio.php');?>" enctype="multipart/form-data">
-                
-        <input type="hidden" name="pIdModalidade" value="<?php echo $modalidade->getId() ?>">
-        <input type="hidden" name="pTipoCriterio" value="<?php echo $tipoCriterio->getId() ?>">
-        
-        <table class="cadastroItens">
-            <tr><td><strong>Modalidade:</td><td><?php echo $modalidade->getDescricao()?></td></tr>
-            <tr><td><strong>Tipo de Critério:</strong></td><td><?php echo $tipoCriterio->getDescricao()?></td></tr>
-            <tr>
-                <td class='direita'><strong>Descrição:</strong></td>
-                <td><input class="campoDeEntrada" id="inpDescricao" name="pDescricao" required="true"></td>
-                <td><div id="msgDescricao" class="msgerr"></div></td>
-            </tr>
-            <tr>
-                <td class='direita'><strong>Detalhamento: </strong></td>
-                <td><textarea class="campoDeEntrada" id="inpDescricao" name="pDetalhamento" cols="60" rows="5" required="true" style="resize: none;"></textarea></td>
-                <td><div id="msgDescricao" class="msgerr"></div></td>
-            </tr>
-            <tr>
-                <?php if ($tipoCriterio->getDescricao()=="Final") {?>
-                <td class='direita'><strong>Peso: </strong></td>
-                <td><select class="campoDeEntrada" id='inpPeso' name="pPeso">
+    <div class="panel-body">
+        <form method="post" action="<?=htmlspecialchars('submissaoForms/wsAddCriterio.php');?>" enctype="multipart/form-data">
+            <input type="hidden" name="pIdModalidade" value="<?php echo $modalidade->getId() ?>">
+            <input type="hidden" name="pTipoCriterio" value="<?php echo $tipoCriterio->getId() ?>">
+        <div class="row">
+            <div class="col-md-6 mb-6">
+                <label class="control-label">Modalidade</label>
+                <input class="form-control" readonly="true" value="<?php echo $modalidade->getDescricao() ?>">
+                <div class="help-inline ">
+
+                </div>
+            </div>
+            <div class="col-md-6 mb-6">
+                <label class="control-label">Tipo de Avaliação</label>
+                <input class="form-control" readonly="true" value="<?php echo $tipoCriterio->getDescricao() ?>">
+                <div class="help-inline ">
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12  mb-4">
+                <label for="e.address">Descrição</label> 
+                    <input class="form-control" id="inpDescricao" name="pDescricao" required="true">
+                <div class="help-inline ">
+
+                </div>
+            </div>	
+        </div>
+        <div class="row">
+            <div class="col-md-12  mb-4">
+                <label for="resumo">Detalhamento</label> 
+                <textarea id="inpDescricao" name="pDetalhamento" rows="6" class="form-control"  style="resize:none" required="true"></textarea>
+                <div class="help-inline ">
+
+                </div>
+            </div>	
+        </div>
+        <?php if ($tipoCriterio->getDescricao()=="Final") {?>
+        <div class="row">
+            <div class="col-md-12  mb-4">
+                <label for="resumo">Peso</label> 
+                    <select class="form-control" id='inpPeso' name="pPeso">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                </td>
-                <?php } else echo "<input type='hidden' id='inpPeso' name='pPeso' value=''>;"?>
-            </tr>
+                <div class="help-inline ">
 
-        </table>
-        <div class="div-btn"><input class="btn-verde" type="submit" value="Adicionar Criterio"></div>
-        
-    </form>
-    <?php }?>
-    
-    </div>    
+                </div>
+            </div>	
+        </div>
+        <?php } ?>
+
+        <div class="control-group form-actions">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                <button class="btn btn-lg btn-primary btn-block mb-15" type="submit">Adicionar Critério</button>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <a class="btn btn-lg btn-default  btn-block" onclick="$('#modal').fadeOut(500)">Retornar</a>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+
+<?php } ?>
