@@ -3,6 +3,7 @@
     
 
     require_once dirname(__DIR__) . '/dao/Conexao.php';
+    require_once dirname(__DIR__) . '/dao/Conexao2.php';
     require_once dirname(__DIR__) . '/funcoes/funcoes.php';
     require_once dirname(__DIR__) . '/classes/EnviarEmail.php';
     require_once dirname(__DIR__) . '/inc/varGlobais.php';
@@ -27,6 +28,7 @@
     require_once dirname(__DIR__) . '/classes/TipoSubmissao.php';
     require_once dirname(__DIR__) . '/classes/TipoUsuario.php';
     require_once dirname(__DIR__) . '/classes/Usuario.php';
+    require_once dirname(__DIR__) . '/classes/UsuarioPedrina.php';
     require_once dirname(__DIR__) . '/classes/UsuariosDaSubmissao.php';
     
     
@@ -49,6 +51,7 @@
     require_once dirname(__DIR__) . '/dao/TipoSubmissaoDAO.php';
     require_once dirname(__DIR__) . '/dao/TipoUsuarioDAO.php';
     require_once dirname(__DIR__) . '/dao/UsuarioDAO.php';
+    require_once dirname(__DIR__) . '/dao/UsuarioPedrinaDAO.php';
     require_once dirname(__DIR__) . '/dao/UsuariosDaSubmissaoDAO.php';
     
     

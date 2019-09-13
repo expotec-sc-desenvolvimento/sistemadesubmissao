@@ -11,10 +11,10 @@ class Conexao extends MySQLi {
     
     private $servidor = "127.0.0.1";
     private $banco = "sistemadesubmissao";
-    //private $usuario = "root";
-    //private $senha = "root";
-    private $usuario = "admin_expotec";
-    private $senha = "4dm1n3xp0t3c";
+    private $usuario = "root";
+    private $senha = "root";
+    //private $usuario = "admin_expotec";
+    //private $senha = "4dm1n3xp0t3c";
     
     public function __construct() {
         parent::__construct($this->servidor, $this->usuario, $this->senha, $this->banco);

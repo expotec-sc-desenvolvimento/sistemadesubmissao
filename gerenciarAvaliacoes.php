@@ -6,7 +6,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"./paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página    
@@ -136,11 +136,11 @@
 
                     ?>
                         <tr>
-                            <td>
+                            <td align="center" style="vertical-align: middle;">
                                 <?php if ($avaliacao->getIdSituacaoAvaliacao()==1 ||$avaliacao->getIdSituacaoAvaliacao()==3 ) {?>
-                                    <a class='editarObjeto' id='<?php echo $avaliacao->getId()?>' name='Avaliacao'><img src='<?php echo $iconEditar ?>' class='img-miniatura'></a>
+                                    <a class='editarObjeto' id='<?php echo $avaliacao->getId()?>' name='Avaliacao'><i class="fa fa-edit m-right-xs"></i></a>
                                 <?php } else { ?>
-                                    <a class='visualizarObjeto' id='<?php echo $avaliacao->getId()?>' name='Avaliacao'><img src='<?php echo $iconVisualizar ?>' class='img-miniatura'></a>
+                                    <a class='visualizarObjeto' id='<?php echo $avaliacao->getId()?>' name='Avaliacao'><i class="fa fa-search m-right-xs"></i></a>
                                 <?php } ?>    
                             </td>
                             <td><?php echo Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()?></td>

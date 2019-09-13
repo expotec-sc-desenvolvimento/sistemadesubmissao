@@ -5,7 +5,7 @@
     session_start();
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página
@@ -33,10 +33,10 @@
                         <option value="1">Selecione um Avaliador</option>
                         <?php 
                             foreach (Avaliador::listaAvaliadoresComFiltro($submissao->getIdEvento(), $submissao->getIdArea(), '', "area") as $avaliador) {
-                                $user = Usuario::retornaDadosUsuario($avaliador->getIdUsuario());
+                                $user = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
                                 if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $submissao->getId(), ''))>0 || 
                                         count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $user->getId(), ''))>0) continue;
-                                echo "<option value='". $user->getId()."'>".$user->getNome()." ".$user->getSobrenome()."</option>";
+                                echo "<option value='". $user->getId()."'>".$user->getNome()."</option>";
                         }?>
                     </select>
                 </td>
@@ -53,10 +53,10 @@
                         <option value="1">Selecione um Avaliador</option>
                         <?php 
                             foreach (Avaliador::listaAvaliadoresComFiltro($submissao->getIdEvento(), $submissao->getIdArea(), '', "area") as $avaliador) {
-                                $user = Usuario::retornaDadosUsuario($avaliador->getIdUsuario());
+                                $user = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
                                 if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $submissao->getId(), ''))>0 || 
                                         count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $user->getId(), ''))>0) continue;
-                                echo "<option value='". $user->getId()."'>".$user->getNome()." ".$user->getSobrenome()."</option>";
+                                echo "<option value='". $user->getId()."'>".$user->getNome()."</option>";
                         }?>
                     </select>
                 </td>
@@ -73,10 +73,10 @@
                         <option value="1">Selecione um Avaliador</option>
                         <?php 
                             foreach (Avaliador::listaAvaliadoresComFiltro($submissao->getIdEvento(), $submissao->getIdArea(), '', "outra-area") as $avaliador) {
-                                $user = Usuario::retornaDadosUsuario($avaliador->getIdUsuario());
+                                $user = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
                                 if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $submissao->getId(), ''))>0 || 
                                         count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $user->getId(), ''))>0) continue;
-                                echo "<option value='". $user->getId()."'>".$user->getNome()." ".$user->getSobrenome()."</option>";
+                                echo "<option value='". $user->getId()."'>".$user->getNome()."</option>";
                         }?>
                     </select>
                 </td>

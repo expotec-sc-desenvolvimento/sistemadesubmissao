@@ -6,7 +6,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"./paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página    
@@ -91,8 +91,8 @@
 
                             <tr>
                                 <td><?php echo $editar ?></td>
-                                <td><img src='<?php echo $pastaFotosPerfil.Usuario::retornaDadosUsuario($solicitacao->getIdUsuario())->getImagem() ?>' width='30px'></td>
-                                <td><?php echo Usuario::retornaDadosUsuario($solicitacao->getIdUsuario())->getNome() ?></td>
+                                <td><img src='/expotecsc/attendees/getuserpicture/<?php echo $usuario->getId() ?>' width='30px'></td>
+                                <td><?php echo UsuarioPedrina::retornaDadosUsuario($solicitacao->getIdUsuario())->getNome() ?></td>
                                 <td><?php echo Evento::retornaDadosEvento($solicitacao->getIdEvento())->getNome() ?></td>
                                 <td><?php echo Area::retornaDadosArea($solicitacao->getIdArea())->getDescricao() ?></td>
                                 <td><?php echo $situacao ?></td>

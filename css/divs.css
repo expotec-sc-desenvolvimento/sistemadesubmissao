@@ -37,7 +37,7 @@
     border-color: #666;
 }
 
-.editarObjeto:hover,.excluirObjeto:hover {
+.editarObjeto:hover,.excluirObjeto:hover, .visualizarObjeto:hover {
     cursor: pointer;
 }
 

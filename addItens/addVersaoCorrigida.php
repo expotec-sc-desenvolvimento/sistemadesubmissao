@@ -6,7 +6,7 @@ include dirname(__DIR__) . '/inc/includes.php';
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
 
     date_default_timezone_set('America/Sao_Paulo');    

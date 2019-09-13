@@ -6,7 +6,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"./paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página    
@@ -64,8 +64,8 @@
                     // A proxima instrução imprime os Eventos aos quais este tipo de submissao está vinculado
                 ?>
                     <tr>
-                        <td><a class='editarObjeto' id='<?php echo $modalidade->getId()?>' name='Modalidade'><img src='<?php echo $iconEditar ?>' class="img-miniatura"></a>
-                            <a class='excluirObjeto' id='<?php echo $modalidade->getId()?>' name='Modalidade'><img src='<?php echo $iconExcluir ?>' class="img-miniatura"></a>
+                        <td><a class='editarObjeto' id='<?php echo $modalidade->getId()?>' name='Modalidade'><i class="fa fa-edit m-right-xs"></i></a>
+                            <a class='excluirObjeto' id='<?php echo $modalidade->getId()?>' name='Modalidade'><i class="fa fa-trash-alt m-right-xs"></i></a>
                         </td>
                         <td><?php echo $modalidade->getDescricao()?></td>
                         <?php foreach ($tipoSubmissoes as $tipo) { ?>
@@ -74,8 +74,8 @@
                                     <?php foreach ($criteriosDaModalidade as $criterio) {
                                         if ($tipo->getId() == $criterio->getIdTipoSubmissao()) { ?>
                                             <li>
-                                                <a class='editarObjeto' id='<?php echo $criterio->getId() ?>' name='Criterio'><img class="img-miniatura" src='<?php echo $iconEditar ?>' ></a>
-                                                <a class='excluirObjeto' id='<?php echo $criterio->getId() ?>' name='Criterio'><img src='<?php  echo $iconExcluir ?>' class="img-miniatura"></a>
+                                                <a class='editarObjeto' id='<?php echo $criterio->getId() ?>' name='Criterio'><i class="fa fa-edit m-right-xs"></i></a>
+                                                <a class='excluirObjeto' id='<?php echo $criterio->getId() ?>' name='Criterio'><i class="fa fa-trash-alt m-right-xs"></i></a>
                                                 
                                                 <?php if ($criterio->getDescricao() == "Final") {echo "Peso " . $criterio->getPeso() . " - ";}
                                                       echo $criterio->getDescricao(); 

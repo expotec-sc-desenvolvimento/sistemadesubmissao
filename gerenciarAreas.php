@@ -6,7 +6,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"./paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página    
@@ -44,23 +44,23 @@
         <fieldset>
             <h3 align='center'>Listagem de Áreas (<?php echo count($listaAreas)?>)</h3>
             <p align="center"><input type="button" class="addObjeto btn btn-sm marginTB-xs btn-success"  name='Area' value="Adicionar Área"></p>
-            <table border="1" align="center" class="table table-striped table-bordered dt-responsive nowrap" style="width: 70%">
+            <table border="1" align="center" class="table table-striped table-bordered dt-responsive nowrap" style="width: 50%">
                 <thead>
                     <tr>
                         <th style="width: 10%; text-align: center">*</th>
                         <th style="text-align: center">Descrição</th>
-                        <th style="text-align: center">SubAreas</th>
+                        <!-- <th style="text-align: center">SubAreas</th> -->
                     </tr>
                 </thead>
                 <tbody>
                 <?php foreach($listaAreas as $area){ ?>
 
                     <tr>
-                        <td><a class='editarObjeto' id='<?php echo $area->getId()?>' name='Area'><img src='<?php echo $iconEditar ?>' class='img-miniatura'></a>
-                            <a class='excluirObjeto' id='<?php echo $area->getId() ?>' name='Area'> <img src='<?php echo $iconExcluir ?>' class='img-miniatura'></a>
+                        <td><a class='editarObjeto' id='<?php echo $area->getId()?>' name='Area'><i class="fa fa-edit m-right-xs"></i></a>
+                            <a class='excluirObjeto' id='<?php echo $area->getId() ?>' name='Area'><i class="fa fa-trash-alt m-right-xs"></i></a>
                         </td>
-                        <td><?php echo $area->getDescricao() ?></td>
-                        <td><?php echo $area->getSubAreas() ?></td>    
+                        <td align="center"><?php echo $area->getDescricao() ?></td>
+                        <!-- <td>< ?php echo $area->getSubAreas() ?></td>    -->
                     </tr>
                 
                 <?php }?>

@@ -42,5 +42,11 @@ class AvaliadorDAO {
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }
+    
+    public static function listaAvaliadoresParaCadastro($idEvento,$idArea,$tipo,$limite,$idSubmissao) {
+        $sql = "CALL listaAvaliadoresParaCadastro('$idEvento','$idArea','$tipo','$limite','$idSubmissao')";
+        //echo $sql; exit(1);
+        return Conexao::executar($sql);
+    }
 }
 ?>

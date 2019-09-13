@@ -6,7 +6,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
 
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página
@@ -42,9 +42,9 @@
             if (Avaliacao::adicionarAvaliacoes($submissao->getId(), $submissao->getIdTipoSubmissao(), $submissao->getIdModalidade(), $novosAvaliadores,$prazo)) {
                 
                 $emails = array();
-                array_push($emails, Usuario::retornaDadosUsuario($p['avaliador1'])->getEmail());
-                array_push($emails, Usuario::retornaDadosUsuario($p['avaliador2'])->getEmail());
-                array_push($emails, Usuario::retornaDadosUsuario($p['avaliador3'])->getEmail());
+                array_push($emails, UsuarioPedrina::retornaDadosUsuario($p['avaliador1'])->getEmail());
+                array_push($emails, UsuarioPedrina::retornaDadosUsuario($p['avaliador2'])->getEmail());
+                array_push($emails, UsuarioPedrina::retornaDadosUsuario($p['avaliador3'])->getEmail());
                 
                 emailAtribuicaoAvaliacao($submissao, $prazo, $emails);
                 header('Location: ../gerenciarSubmissoes.php?Item=Atualizado');

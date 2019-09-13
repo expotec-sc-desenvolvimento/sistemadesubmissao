@@ -35,8 +35,8 @@
             
             
             foreach($submissoes as $submissao) {
-                $listaAvaliadoresArea = Usuario::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'mesma-area',$qtdeAvaliadoresArea,$submissao->getId());
-                $listaAvaliadoresOutraArea = Usuario::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'outra-area',$qtdeAvaliadoresOutraArea,$submissao->getId());
+                $listaAvaliadoresArea = Avaliador::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'mesma-area',$qtdeAvaliadoresArea,$submissao->getId());
+                $listaAvaliadoresOutraArea = Avaliador::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'outra-area',$qtdeAvaliadoresOutraArea,$submissao->getId());
                 
                 
                 if (count($listaAvaliadoresArea)>=$qtdeAvaliadoresArea && count($listaAvaliadoresOutraArea)>=$qtdeAvaliadoresOutraArea) {
@@ -46,16 +46,16 @@
                     
                     // Coleta os ID's dos avaliadores da área do evento com menos avaliações
                     foreach($listaAvaliadoresArea as $usuarioAvaliador) {
-                        $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";
-                        array_push($emails, Usuario::retornaDadosUsuario($usuarioAvaliador->getId())->getEmail());
+                        $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getIdUsuario() . ";";
+                        array_push($emails, Usuario::retornaDadosUsuario($usuarioAvaliador->getIdUsuario())->getEmail());
                         
                     }
                     
                     // Coleta os ID's dos avaliadores de outras áreas do evento com menos avaliações
                     if ($qtdeAvaliadoresOutraArea>0) {
                         foreach($listaAvaliadoresOutraArea as $usuarioAvaliador) {
-                            $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";
-                            array_push($emails, Usuario::retornaDadosUsuario($usuarioAvaliador->getId())->getEmail());
+                            $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getIdUsuario() . ";";
+                            array_push($emails, UsuarioPedrina::retornaDadosUsuario($usuarioAvaliador->getIdUsuario())->getEmail());
                         }
                     }
                     
@@ -66,7 +66,7 @@
                     else if ($submissao->getIdTipoSubmissao()==3) $prazo = Evento::retornaDadosEvento ($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoFinal ();
                     
                     if (Avaliacao::adicionarAvaliacoes($submissao->getId(),$submissao->getIdTipoSubmissao(),$submissao->getIdModalidade(),$idsAvaliadores,$prazo)) {
-                      //  emailAtribuicaoAvaliacao($submissao, $prazo, $emails);
+                        emailAtribuicaoAvaliacao($submissao, $prazo, $emails);
                     }
                     else $avaliacoesSemAvaliadores+=1;                
                 }

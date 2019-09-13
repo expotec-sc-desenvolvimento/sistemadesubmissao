@@ -6,7 +6,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
 
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página
@@ -22,7 +22,7 @@
             $submissao = Submissao::retornaDadosSubmissao($_GET['id']);
             $emails = array();
             foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $userSubmissao) {
-                array_push($emails, Usuario::retornaDadosUsuario($userSubmissao->getIdUsuario())->getEmail());
+                array_push($emails, UsuarioPedrina::retornaDadosUsuario($userSubmissao->getIdUsuario())->getEmail());
             }
             // REVER
             emailFinalizacaoSubmissao($submissao,$emails); // Envio de email para os usuários saberem que a submissão foi finalizada
@@ -52,7 +52,7 @@
                         
                         foreach ($avaliadoresAnteriores as $avaliador) { 
                             $novosAvaliadores .= $avaliador->getIdUsuario() . ";";
-                            array_push($emails, Usuario::retornaDadosUsuario($avaliador->getIdUsuario())->getEmail());   
+                            array_push($emails, UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario())->getEmail());   
                         }
                         
                         $sub = Submissao::retornaDadosSubmissao(Submissao::retornaIdUltimaSubmissao());

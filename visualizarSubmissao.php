@@ -4,7 +4,7 @@
     session_start();
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     //verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página
@@ -148,8 +148,8 @@
                     <ul style='list-style-type: none;'>
                         <?php
                             foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $obj) {
-                                $user = Usuario::retornaDadosUsuario($obj->getIdUsuario());
-                                echo "<li><div><img class='flag' src='public/img/semFoto.jpg'>" .$user->getNome() . " " , $user->getSobrenome();
+                                $user = UsuarioPedrina::retornaDadosUsuario($obj->getIdUsuario());
+                                echo "<li><div><img class='flag' src='public/img/semFoto.jpg'>" .$user->getNome();
                                 if ($obj->getIsSubmissor()==1) echo "(Submissor)";
 
 
@@ -174,12 +174,12 @@
         $cont = 1;
         foreach ($avaliacoes as $avaliacao) {
 
-            $user = Usuario::retornaDadosUsuario($avaliacao->getIdUsuario());
+            $user = UsuarioPedrina::retornaDadosUsuario($avaliacao->getIdUsuario());
             $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao());
 
             $nomeCompleto = "Avaliador $cont";
             $cont++;
-            if (Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao() == "Administrador") $nomeCompleto = $user->getNome() . " " . $user->getSobrenome();
+            if (Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao() == "Administrador") $nomeCompleto = $user->getNome();
 
             echo "<table align='center' class='table table-striped table-bordered dt-responsive nowrap'>"
                 ."<tr><th class='direita' width='10px'>Avaliador: </th><td style='text-align:left; padding-left:10px;'>" . $nomeCompleto . "</td>"

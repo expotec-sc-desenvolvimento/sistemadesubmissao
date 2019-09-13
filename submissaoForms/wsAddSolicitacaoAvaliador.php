@@ -6,7 +6,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
             
     $metodoHttp = filter_input(INPUT_SERVER, 'REQUEST_METHOD');

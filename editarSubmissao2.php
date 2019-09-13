@@ -5,13 +5,11 @@
     session_start();    
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
-    $usuario = $_SESSION['usuario'];
     
     $submissao = Submissao::retornaDadosSubmissao($_GET['id']);
     if ($submissao->getId()=="") header('Location: paginaInicial.php');
@@ -221,7 +219,7 @@
             $usuariosDaSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '');
             
             foreach ($usuariosDaSubmissao as $usuarioSubmissao) {
-                $user = Usuario::retornaDadosUsuario($usuarioSubmissao->getIdUsuario());
+                $user = UsuarioPedrina::retornaDadosUsuario($usuarioSubmissao->getIdUsuario());
                 if ($usuarioSubmissao->getIsSubmissor() == 1) continue;
                 echo "<script>adicionarId('".$user->getId()."','".$user->getNome()."','".$iconExcluir."')</script>";
             }

@@ -74,7 +74,7 @@
                                 </ul>
                             </li>
                         <?php }?>
-                        <?php if ($usuario->getIdPerfil()==1) {?>
+                        <?php if ($usuario->getIdPerfil()==2) {?>
                             <!-- MENUS ATTENDANT -->
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> 

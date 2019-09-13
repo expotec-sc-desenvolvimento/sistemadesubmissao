@@ -6,7 +6,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     date_default_timezone_set('America/Sao_Paulo');
@@ -118,11 +118,11 @@
                                     $a.= "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a></td>";
                                 }
                                 else if (strtotime(date('d-m-Y'))<=strtotime ($avaliacao->getDataRealizacaoAvaliacao())) { //Se a avaliação tiver sido finalizada, mas foi ainda está no prazo para alteração (mesmo dia da avaliação)
-                                    $a.= "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a></td>";
+                                    $a.= "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><i class='fa fa-edit m-right-xs'></i></a></td>";
                                 }
-                                else $a.= "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='$iconVisualizar' class='img-miniatura'></a></td>";
+                                else $a.= "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><i class='fa fa-search m-right-xs'></i></a></td>";
                             }
-                            else $a.= "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='$iconVisualizar' class='img-miniatura'></a></td>";
+                            else $a.= "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><i class='fa fa-search m-right-xs'></i></a></td>";
                             
                             $a.= "<td>".Evento::retornaDadosEvento(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdEvento())->getNome()."</td>";
                             $a.= "<td>".Area::retornaDadosArea(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdArea())->getDescricao()."</td>";

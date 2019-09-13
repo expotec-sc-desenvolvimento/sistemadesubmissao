@@ -6,7 +6,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
             
     $metodoHttp = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
@@ -53,21 +53,23 @@
                         
                         if ($evento->getDistribuicaoAutomaticaAvaliadores()==1) {
                             $id = Submissao::retornaIdUltimaSubmissao();
+                            $submissao = Submissao::retornaDadosSubmissao($id);
                             
-                            $avaliadoresArea = Usuario::listaAvaliadoresParaCadastro($idEvento,$idArea,'mesma-area',2,$id);
-                            $avaliadorOutraArea = Usuario::listaAvaliadoresParaCadastro($idEvento,$idArea,'outra-area',1,$id);
+                            
+                            $avaliadoresArea = Avaliador::listaAvaliadoresParaCadastro($idEvento,$idArea,'mesma-area',2,$id);
+                            $avaliadorOutraArea = Avaliador::listaAvaliadoresParaCadastro($idEvento,$idArea,'outra-area',1,$id);
                             
                             if (count($avaliadoresArea)>=2 && count($avaliadorOutraArea)>=1) {
                                 $idsAvaliadores="";
                                 $emails = array();
                                 // Coleta os ID's dos avaliadores da área do evento com menos avaliações
                                 foreach($avaliadoresArea as $usuarioAvaliador)    {
-                                    $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";
-                                    array_push($emails, Usuario::retornaDadosUsuario($usuarioAvaliador->getId())->getEmail());
+                                    $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getIdUsuario() . ";";
+                                    array_push($emails, UsuarioPedrina::retornaDadosUsuario($usuarioAvaliador->getIdUsuario())->getEmail());
                                 }
                                 foreach($avaliadorOutraArea as $usuarioAvaliador) {
-                                    $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";
-                                    array_push($emails, Usuario::retornaDadosUsuario($usuarioAvaliador->getId())->getEmail());
+                                    $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getIdUsuario() . ";";
+                                    array_push($emails, UsuarioPedrina::retornaDadosUsuario($usuarioAvaliador->getIdUsuario())->getEmail());
                                 }
 
                                 $prazo="";

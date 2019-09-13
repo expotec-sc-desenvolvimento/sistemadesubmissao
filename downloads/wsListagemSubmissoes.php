@@ -14,7 +14,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página
@@ -75,8 +75,8 @@
                     if ($flag) $flag=false;
                     else $avaliadores .= "<br>";
                     
-                    $user = Usuario::retornaDadosUsuario($avaliador->getIdUsuario());
-                    $avaliadores .= $user->getNome() . " " . $user->getSobrenome();
+                    $user = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
+                    $avaliadores .= $user->getNome();
                 }
                 
                 $flag = true;
@@ -84,8 +84,8 @@
                     if ($flag) $flag=false;
                     else $usuariosDaSubmissao .= "<br>";
                     
-                    $user = Usuario::retornaDadosUsuario($usuarioSubmissao->getIdUsuario());
-                    $usuariosDaSubmissao .= $user->getNome() . " " . $user->getSobrenome();
+                    $user = UsuarioPedrina::retornaDadosUsuario($usuarioSubmissao->getIdUsuario());
+                    $usuariosDaSubmissao .= $user->getNome();
                 }
                 
                 $html .= "<tr><td>".Evento::retornaDadosEvento($submissao->getIdEvento())->getNome()."</td>";

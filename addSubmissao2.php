@@ -11,7 +11,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     date_default_timezone_set('America/Sao_Paulo');
@@ -154,7 +154,7 @@
                     <label for="e.contact">Palavras-Chave</label>
                         <input class="form-control" id="palavrasChave" name="palavrasChave" required="true">
                     <div class="help-inline ">
-                        Separadas por linha (Ex.: palavra1; palavra2)
+                        Inserir de 3 a 5 palavras-chave, Separadas por vírgula (Ex.: palavra1; palavra2)
                     </div>
             </div>
 
@@ -172,7 +172,7 @@
 
             <div class="col-md-4  mb-4">
                 <label  for="arquivo" >Arquivo</label>
-                <input class="form-control" type="file" id="arquivo" name="arquivo">
+                <input class="form-control" type="file" id="arquivo" name="arquivo" required>
                 <div class="help-inline ">
                     Arquivo em PDF
                 </div>

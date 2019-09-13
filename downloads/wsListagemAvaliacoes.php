@@ -11,7 +11,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página
@@ -56,7 +56,7 @@
                     else $situacaoPrazo = "<strong>Último dia para entrega da Avaliação</strong>";
                 }
                 
-                $user = Usuario::retornaDadosUsuario($avaliacao->getIdUsuario());
+                $user = UsuarioPedrina::retornaDadosUsuario($avaliacao->getIdUsuario());
                 $html .= "<tr><td>". Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()."</td>";
                 $html .= "<td>". TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdTipoSubmissao())->getDescricao()."</td>";
                 $html .= "<td>". $user->getNome()." ".$user->getSobrenome()."</td>";

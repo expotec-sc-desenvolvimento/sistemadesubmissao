@@ -11,7 +11,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página
@@ -38,11 +38,11 @@
             $html .= "<td><strong>Trabalhos Vinculados</strong></td></tr>";
             
             foreach (Avaliador::listaAvaliadoresComFiltro('','','','') as $avaliador) {
-                $usuario = Usuario::retornaDadosUsuario($avaliador->getIdUsuario());
+                $usuario = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
                 $trabalhosVinculados = count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), '', ''));
                 $html .= "<tr><td>". Evento::retornaDadosEvento($avaliador->getIdEvento())->getNome()."</td>";
                 $html .= "<td>". Area::retornaDadosArea($avaliador->getIdArea())->getDescricao()."</td>";
-                $html .= "<td>". $usuario->getNome() ." ". $usuario->getSobrenome() ."</td>";
+                $html .= "<td>". $usuario->getNome() ."</td>";
                 $html .= "<td>". $trabalhosVinculados ."</td></tr>";
             }
             

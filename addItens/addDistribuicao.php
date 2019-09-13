@@ -4,7 +4,7 @@
     session_start();
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página
@@ -55,8 +55,8 @@
                 <input type="hidden" name="select-Eventos" value="<?php echo $_GET['idEvento'] ?>">
                 <input type="hidden" name="select-tipoAvaliacao" value="<?php echo $_GET['idTipoAvaliacao'] ?>">
                 <div class="div-btn">
-                    <input class="btn-verde" type="submit" value="Distribuir Avaliadores" onclick="return confirm('Confirma a Distribuição dos Avaliadores?')">
-                    <input class="btn-vermelho" type="button" value="Fechar" onclick="$('#modal').fadeOut(500)">
+                    <input class="btn btn-sm marginTB-xs btn-primary" type="submit" value="Distribuir Avaliadores" onclick="return confirm('Confirma a Distribuição dos Avaliadores?')">
+                    &nbsp;&nbsp;<input class="btn btn-sm marginTB-xs btn-danger" type="button" value="Fechar" onclick="$('#modal').fadeOut(500)">
                 </div>    
             </form>
 

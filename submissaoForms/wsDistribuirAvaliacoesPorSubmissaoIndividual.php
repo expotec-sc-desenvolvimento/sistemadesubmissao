@@ -6,7 +6,7 @@ include dirname(__DIR__) . '/inc/includes.php';
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
 
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"../paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página
@@ -26,8 +26,8 @@ include dirname(__DIR__) . '/inc/includes.php';
 
             if ($submissao->getIdSituacaoSubmissao()==1 && count(Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), ''))==0) { // Se a submissão estiver no estado 'SUBMETIDA' e não possui avaliadores...
                 
-                $listaAvaliadoresArea = Usuario::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'mesma-area',30,$submissao->getId());
-                $listaAvaliadoresOutraArea = Usuario::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'outra-area',30,$submissao->getId());
+                $listaAvaliadoresArea = Avaliador::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'mesma-area',30,$submissao->getId());
+                $listaAvaliadoresOutraArea = Avaliador::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'outra-area',30,$submissao->getId());
                     
                 if (count($listaAvaliadoresArea)>=2 && count($listaAvaliadoresOutraArea)>=1) {
                     // DISTRIBUIR AVALIADORES
@@ -47,21 +47,21 @@ include dirname(__DIR__) . '/inc/includes.php';
                     
                     
                     foreach($listaAvaliadoresArea as $usuarioAvaliador) {
-                        if (in_array($usuarioAvaliador->getId(), $listaIdsAvaliadores)) continue;
+                        if (in_array($usuarioAvaliador->getIdUsuario(), $listaIdsAvaliadores)) continue;
                         else {
-                            $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";
-                            array_push($listaIdsAvaliadores, $usuarioAvaliador->getId());
-                            array_push($emails, Usuario::retornaDadosUsuario($usuarioAvaliador->getId())->getEmail());
+                            $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getIdUsuario() . ";";
+                            array_push($listaIdsAvaliadores, $usuarioAvaliador->getIdUsuario());
+                            array_push($emails, UsuarioPedrina::retornaDadosUsuario($usuarioAvaliador->getIdUsuario())->getEmail());
                             $contArea++;
                             if ($contArea==2) break;
                         }
                     }
                     foreach($listaAvaliadoresOutraArea as $usuarioAvaliador) { 
-                        if (in_array($usuarioAvaliador->getId(), $listaIdsAvaliadores)) continue;
+                        if (in_array($usuarioAvaliador->getIdUsuario(), $listaIdsAvaliadores)) continue;
                         else {
-                            $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getId() . ";";
-                            array_push($listaIdsAvaliadores, $usuarioAvaliador->getId());
-                            array_push($emails, Usuario::retornaDadosUsuario($usuarioAvaliador->getId())->getEmail());
+                            $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getIdUsuario() . ";";
+                            array_push($listaIdsAvaliadores, $usuarioAvaliador->getIdUsuario());
+                            array_push($emails, UsuarioPedrina::retornaDadosUsuario($usuarioAvaliador->getIdUsuario())->getEmail());
                             $contOutraArea++;
                             if ($contOutraArea==1) break;
                         }

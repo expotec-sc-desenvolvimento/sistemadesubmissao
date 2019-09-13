@@ -6,7 +6,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"./paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página    
@@ -129,7 +129,7 @@
                                 
                             ?>
                             <tr>
-                                <td><a class='excluirObjeto' id='<?php echo $avaliador->getId() ?>' name='Avaliadores'><img src='<?php echo $iconExcluir ?>' class='img-miniatura'></a></td>
+                                <td align="center" style="vertical-align: middle;"><a class='excluirObjeto' id='<?php echo $avaliador->getId() ?>' name='Avaliadores'><i class="fa fa-trash-alt m-right-xs"></i></a></td>
                                 <td><?php echo Evento::retornaDadosEvento($avaliador->getIdEvento())->getNome() ?></td>
                                 <td><?php echo Area::retornaDadosArea($avaliador->getIdArea())->getDescricao() ?></td>
                                 <td><?php echo Usuario::retornaDadosUsuario($avaliador->getIdUsuario())->getNome() ?></td>

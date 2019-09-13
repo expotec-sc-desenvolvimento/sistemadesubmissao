@@ -114,6 +114,14 @@ class Avaliador {
         
         return $retorno;
     }
+    
+    public static function listaAvaliadoresParaCadastro($idEvento,$idArea,$tipo,$limite,$idSubmissao) {
+        $retorno = array();
+        
+        $dado = AvaliadorDao::listaAvaliadoresParaCadastro($idEvento,$idArea,$tipo,$limite,$idSubmissao);// CONSULTA O BANCO DE DADOS
+        $retorno = Avaliador::ListaDeDados($dado);
+        return $retorno;
+    }
    
 }
 ?>

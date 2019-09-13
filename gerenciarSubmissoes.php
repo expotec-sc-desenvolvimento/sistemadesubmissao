@@ -6,7 +6,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     verificarPermissaoAcesso(Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao(),['Administrador'],"./paginaInicial.php"); //Apenas os perfis ao lado podem acessar a página    
@@ -94,7 +94,7 @@
             <h3 align='center' >Listagem de Submissões (<?php echo count($listaSubmissoes)?>)</h3>
             
             <p align="center">
-                <input class="addObjeto btn btn-sm marginTB-xs btn-success" type="button" value="Distribuir Avaliadores Automaticamente" onclick="window.location.href='distribuirAvaliadores.php'"/>
+                <input class="addObjeto btn btn-sm marginTB-xs btn-primary" type="button" value="Distribuir Avaliadores Automaticamente" onclick="window.location.href='distribuirAvaliadores.php'"/>
                 <input class="addObjeto btn btn-sm marginTB-xs btn-success" type="button" value="Finalizar Avaliações em Lote (<?php echo count(Submissao::retornaSubmissoesParaFinalizar()) ?>)" onclick="window.location.href='finalizarAvaliacoesEmLote.php'"/>
             </p>
             <p align="center"><a href="downloads/wsListagemSubmissoes.php?<?php echo $vars ?>">Exportar Planilha Excel</a></p>
@@ -196,7 +196,7 @@
                             
                             $usuariosSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '');
                             $usuarioSubmissao = "<ul class='listaCriterios'>";
-                            foreach ($usuariosSubmissao as $user) $usuarioSubmissao = $usuarioSubmissao . "<li>" . Usuario::retornaDadosUsuario($user->getIdUsuario())->getNome() . "</li>";
+                            foreach ($usuariosSubmissao as $user) $usuarioSubmissao = $usuarioSubmissao . "<li>" . UsuarioPedrina::retornaDadosUsuario($user->getIdUsuario())->getNome() . "</li>";
                             $usuarioSubmissao .= "</ul>";
                                     
                             $avaliacoes = Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(),'');
@@ -209,11 +209,11 @@
                                 
                                 // Situações de Avaliação = 1-Pendente, 2-Finalizada, 3-Atrasada, 4-Aprovado(a), 5-Aprovado(a) com ressalvas, 6-Reprovado
                                 if (in_array($situacaoAvaliacao, array(1,3))) {
-                                    $editarAvaliador = "<a class='editarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='".$iconEditar."' class='img-miniatura'></a>";
+                                    $editarAvaliador = "<a class='editarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><i class='fa fa-edit m-right-xs'></i></a>";
                                             //. "<a class='excluirObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='".$iconExcluir."' class='img-miniatura'></a>";
                                 }
                                 else {
-                                    $editarAvaliador = "<a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><img src='".$iconVisualizar."' class='img-miniatura'></a>";
+                                    $editarAvaliador = "<a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><i class='fa fa-search m-right-xs'></i></a>";
                                 
                                     if ($situacaoAvaliacao == 2) /* Apresentado */ $resultadoAvaliacao = " - <img src='".$iconOK."' class='img-miniatura' title='Apresentado'>";
                                     else if ($situacaoAvaliacao == 4) /* Aprovado */ $resultadoAvaliacao = " - <img src='".$iconOK."' class='img-miniatura' title='Aprovado'>";
@@ -223,7 +223,7 @@
                                 
                                 
                                 
-                                $user = Usuario::retornaDadosUsuario($avaliacao->getIdUsuario());
+                                $user = UsuarioPedrina::retornaDadosUsuario($avaliacao->getIdUsuario());
                                 $avaliadores = $avaliadores . "<li>" .$editarAvaliador . $user->getNome() . $resultadoAvaliacao ."</li>";
                             }
                             
@@ -237,7 +237,7 @@
                                         $contAvaliacoesFinalizadas++;
                                     }
                                 }    
-                                if ($contAvaliacoesFinalizadas==3) $finalizar = "<input type='button' class='editarObjeto btn-verde' id='".$submissao->getId()."' name='Finalizacao' value='Finalizar Submissão' />";
+                                if ($contAvaliacoesFinalizadas==3) $finalizar = "<input type='button' class='editarObjeto btn btn-sm marginTB-xs btn-primary' id='".$submissao->getId()."' name='Finalizacao' value='Finalizar Submissão' />";
                             }
                             
                             
@@ -246,8 +246,8 @@
                             
                             $situacaoSubmissao = SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao())->getDescricao();
                             if ($situacaoSubmissao=="Submetida") {
-                                $addAvaliador = "<p align='center'><input type='button' class='addObjeto btn-verde' id='".$submissao->getId()."' name='Avaliacao' value='Adicionar Manualmente'></p>";
-                                $addAvaliador .= "<p align='center'><input type='button' class='btn-verde' onclick=\"window.location.href='submissaoForms/wsDistribuirAvaliacoesPorSubmissaoIndividual.php?id=".$submissao->getId()."'\" value='Distribuir Automaticamente'></p>";
+                                $addAvaliador = "<p align='center'><input type='button' class='addObjeto btn btn-sm marginTB-xs btn-success' id='".$submissao->getId()."' name='Avaliacao' value='Adicionar Manualmente'></p>";
+                                $addAvaliador .= "<p align='center'><input type='button' class='btn btn-sm marginTB-xs btn-primary' onclick=\"window.location.href='submissaoForms/wsDistribuirAvaliacoesPorSubmissaoIndividual.php?id=".$submissao->getId()."'\" value='Distribuir Automaticamente'></p>";
                             }
                             
                             if (TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao()=="Final" &&
@@ -256,15 +256,15 @@
                             }    //date('m/d/Y',$submissao->getDataEnvio());
                     ?>
                             <tr>
-                                <td><a onclick="location.href='visualizarSubmissao.php?id=<?php echo $submissao->getId()?>'"><img src='<?php echo $iconVisualizar ?>' class='img-miniatura'></a></td>
-                                <td><?php echo Evento::retornaDadosEvento($submissao->getIdEvento())->getNome() ?></td>
-                                <td><?php echo Area::retornaDadosArea($submissao->getIdArea())->getDescricao() ?></td>
-                                <td><?php echo Modalidade::retornaDadosModalidade($submissao->getIdModalidade())->getDescricao() ?></td>
-                                <td><?php echo TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao() ?></td>
-                                <td><?php echo $submissao->getTitulo(); ?></td>
-                                <td><a href='<?php echo $pastaSubmissoes . $submissao->getArquivo()  ?>'>Visualizar</a></td>
-                                <td><?php echo SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao())->getDescricao() ?></td>
-                                <td><?php echo $usuarioSubmissao ?></td>
+                                <td align="center" style="vertical-align: middle;"><a onclick="location.href='visualizarSubmissao.php?id=<?php echo $submissao->getId()?>'"><i class="fa fa-search m-right-xs"></i></a></td>
+                                <td align="center" style="vertical-align: middle;"><?php echo Evento::retornaDadosEvento($submissao->getIdEvento())->getNome() ?></td>
+                                <td align="center" style="vertical-align: middle;"><?php echo Area::retornaDadosArea($submissao->getIdArea())->getDescricao() ?></td>
+                                <td align="center" style="vertical-align: middle;"><?php echo Modalidade::retornaDadosModalidade($submissao->getIdModalidade())->getDescricao() ?></td>
+                                <td align="center" style="vertical-align: middle;"><?php echo TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao() ?></td>
+                                <td align="center" style="vertical-align: middle;"><?php echo $submissao->getTitulo(); ?></td>
+                                <td align="center" style="vertical-align: middle;"><a href='<?php echo $pastaSubmissoes . $submissao->getArquivo()  ?>'>Visualizar</a></td>
+                                <td align="center" style="vertical-align: middle;"><?php echo SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao())->getDescricao() ?></td>
+                                <td align="center" style="vertical-align: middle;"><?php echo $usuarioSubmissao ?></td>
                                 <td><?php echo $avaliadores . $addAvaliador . $repetirAvaliadores?></td>
                                 <td><?php echo $submissao->getIdTipoSubmissao()==3 ? $submissao->getNota() : '-'; ?></td>
                                 <td><?php echo $finalizar ?></td></tr>

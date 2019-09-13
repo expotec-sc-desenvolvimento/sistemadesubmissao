@@ -8,7 +8,7 @@
     date_default_timezone_set('America/Sao_Paulo');
     
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
 
     $avaliadorAreas = Avaliador::listaAvaliadoresComFiltro('', '', $usuario->getId(), '');

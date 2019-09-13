@@ -6,8 +6,9 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
+    
     
         
 ?>
@@ -35,7 +36,7 @@
             
             <?php
                 $submissoes = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro('', $usuario->getId(), '');
-                
+
             ?>
             
             <fieldset class='inicio'>
@@ -68,7 +69,7 @@
                               $usuarioSubmissao = "";
                               
                               foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($obj->getIdSubmissao(), '', '') as $user) {
-                                  $usuarioSubmissao = $usuarioSubmissao . Usuario::retornaDadosUsuario($user->getIdUsuario())->getNome();
+                                  $usuarioSubmissao = $usuarioSubmissao . UsuarioPedrina::retornaDadosUsuario($user->getIdUsuario())->getNome();
                                   if ($user->getIsSubmissor() == 1) $usuarioSubmissao = $usuarioSubmissao . " (Submissor)";
                                   $usuarioSubmissao = $usuarioSubmissao . "<br>";
                               }
@@ -76,16 +77,16 @@
                               $nota = $submissao->getNota();
                               $situacao = SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao());
                                                             
-                              $visualizar = "<a id='".$id."' onclick=\"location.href='visualizarSubmissao.php?id=".$submissao->getId()."'\"><img class='img-miniatura' src='".$iconVisualizar."' width='20px'></a>";
+                              $visualizar = "<a id='".$id."' onclick=\"location.href='visualizarSubmissao.php?id=".$submissao->getId()."'\"><i class='fa fa-search m-right-xs'></i></a>";
                               $editar="";
                               $excluir="";
                               if ($obj->getIsSubmissor() && $situacao->getDescricao()=="Submetida" && $submissao->getIdTipoSubmissao()==1) {
-                                  $editar = "<a id='".$id."' onclick=\"location.href='editarSubmissao2.php?id=".$submissao->getId()."'\"><img class='img-miniatura' src='".$iconEditar."' width='20px'></a>";
+                                  $editar = "<a id='".$id."' onclick=\"location.href='editarSubmissao2.php?id=".$submissao->getId()."'\"><i class='fa fa-edit m-right-xs'></i></a>";
                                   
                                   if (TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao() == "Parcial") {
                                     $excluir = "<a href='submissaoForms/wsCancelarSubmissao.php?id=" . $id . "' "
                                               . "onclick=\"return confirm('Tem certeza que deseja excluir esta Submissao?')\">"
-                                              . "<img src='".$iconExcluir."' width='20px'></a>";
+                                              . "<i class='fa fa-trash-alt m-right-xs'></i></a>";
                                   }
                               }
                               
@@ -94,7 +95,7 @@
                                 // Tipos de Submissoes: 1-Parcial, 2-Corrigida, 3-Final
                                 // Tipos de Situacao de Submissao: 4-Aprovado(a), 5-Aprovado(a), 6-Reprovado(a)
                                 if ($submissao->getIdTipoSubmissao()==1 && $submissao->getIdSituacaoSubmissao()==5 && !Submissao::existeSubmissaoCorrigida($submissao->getId())) {  
-                                      $versaoFinal = "<input type='button' class='addObjeto btn-verde' name='VersaoCorrigida' id='".$submissao->getId()."' value='Enviar Versão Corrigida'><br><strong>Prazo Final:</strong> ". date('d/m/Y', strtotime(Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioSubmissaoCorrigida()));
+                                      $versaoFinal = "<input type='button' class='addObjeto btn-sm marginTB-xs btn-primary' name='VersaoCorrigida' id='".$submissao->getId()."' value='Enviar Versão Corrigida'><br><strong>Prazo Final:</strong> ". date('d/m/Y', strtotime(Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioSubmissaoCorrigida()));
                                 }
                                 else if ($submissao->getIdTipoSubmissao()==1 && $submissao->getIdSituacaoSubmissao()==5 && Submissao::existeSubmissaoCorrigida($submissao->getId())) {
                                     $versaoFinal = "Enviada";

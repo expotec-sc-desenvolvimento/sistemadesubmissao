@@ -6,7 +6,7 @@
     
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
 ?>
@@ -70,7 +70,7 @@
                               if ($situacao=='Pendente') {
                                   $excluir = "<a href='submissaoForms/wsExcluirSolicitacaoAvaliador.php?id=" . $obj->getId() . "' "
                                           . "onclick=\"return confirm('Tem certeza que deseja excluir esta Solicitacao?')\">"
-                                          . "<img src='".$iconExcluir."' width='20px'></a>";
+                                          . "<i class='fa fa-trash-alt m-right-xs'></i></a>";
                                   
                               }
                               

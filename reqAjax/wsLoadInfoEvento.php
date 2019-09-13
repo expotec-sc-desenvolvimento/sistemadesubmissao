@@ -62,7 +62,7 @@ if(isset($_GET['evento']) && $_GET['evento']!="") {
                 . "              Deseja gerar as avalições com esses valores?')\">"
                 . "</p>"; */
         
-        $resposta = $resposta . "<p align='center'><input type='button' class='addDistribuicao btn-verde' value='Verificar'></p>";
+        $resposta = $resposta . "<p align='center'><input type='button' class='addDistribuicao btn btn-sm marginTB-xs btn-primary' value='Verificar'></p>";
      echo $resposta;
 }
 else {

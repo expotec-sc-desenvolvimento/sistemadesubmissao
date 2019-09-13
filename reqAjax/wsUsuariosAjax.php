@@ -9,7 +9,7 @@ include dirname(__FILE__) . '/../inc/includes.php';
 
 if(isset($_GET['nome'])) {
     
-    $usuarios = Usuario::listaUsuarios($_GET['nome'], "", -1);
+    $usuarios = UsuarioPedrina::listaUsuarios($_GET['nome'], "", -1);
     
     $idSubmissor = "";
     if (isset($_GET['idSubmissor'])) $idSubmissor = $_GET['idSubmissor'];
@@ -33,12 +33,12 @@ if(isset($_GET['nome'])) {
 
             if ($idUsuario == $idSubmissor) continue;
 
-            $nomeCompleto = $usuario->getNome() . " " . $usuario->getSobrenome();
+            $nomeCompleto = $usuario->getNome();
 
             $resposta = $resposta . "<input type='hidden' id='". $idUsuario."' value='". $idUsuario ."'>"
                                     ."<li class='select2-results-dept-0 select2-result select2-result-selectable select2-selected' role='presentation'>"
                                         . "<div class='select2-result-label users-dinamic' role='option' onclick=\"javascript:adicionarId('".$usuario->getId()."','".$nomeCompleto ."','$iconExcluir')\">" 
-                                            . "<img src='".$pastaFotosPerfil . $usuario->getImagem()."' class='flag'> "  . $nomeCompleto . "</div></li>";
+                                            . "<img src='/expotecsc/attendees/getuserpicture/".$idUsuario."/' class='flag'> "  . $nomeCompleto . "</div></li>";
         }
         $resposta .= "</ul>";
     }

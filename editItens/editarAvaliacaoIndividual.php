@@ -5,7 +5,7 @@
     session_start();
     loginObrigatorio();
 
-    $usuario = new Usuario();
+    $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
     
     $avaliacao = Avaliacao::retornaDadosAvaliacao($_GET['id']);

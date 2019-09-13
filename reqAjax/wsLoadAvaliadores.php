@@ -27,7 +27,7 @@ if( isset($_GET['idSubmissao']) && $_GET['idSubmissao']!="" && isset($_GET['tipo
     
     $resposta = "<option value''>Selecione um avaliador</option>";
     foreach ($avaliadores as $avaliador) {
-        $usuario = new Usuario();
+        $usuario = new UsuarioPedrina();
         $usuario = Usuario::retornaDadosUsuario($avaliador->getIdUsuario());
         
         
@@ -36,7 +36,7 @@ if( isset($_GET['idSubmissao']) && $_GET['idSubmissao']!="" && isset($_GET['tipo
 
         $selected = '';
         if ($idAvaliadorAtual!='' && $usuario->getId()==$idAvaliadorAtual) $selected = ' selected';
-        $resposta = $resposta . "<option value='". $usuario->getId()."' ".$selected.">".$usuario->getNome()." ".$usuario->getSobrenome()."</option>";
+        $resposta = $resposta . "<option value='".$usuario->getId()."' ".$selected.">".$usuario->getNome()."</option>";
     }
     echo $resposta;
 }
