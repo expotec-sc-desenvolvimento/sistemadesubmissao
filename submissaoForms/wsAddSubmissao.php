@@ -31,9 +31,11 @@
             $tipo = strtolower(pathinfo($_FILES[ 'arquivo' ]["name"], PATHINFO_EXTENSION));
             
     
-            
             if (!strpos($tipoArquivo, $tipo)) { // Verifica o tipo de arquivo enviado
                 echo "<script>window.alert('Tipo de Arquivo não permitido');window.history.back();</script>";
+            }
+            else if ($_FILES[ 'arquivo' ][ 'size' ]==0 || $_FILES[ 'arquivo' ][ 'size' ]>(5 * 1024 * 1024)) {
+                echo "<script>window.alert('Tamanho de arquivo inválido. O arquivo deve ter, no máximo, 5MB!');window.history.back();</script>";
             }
             else {
                 $evento = Evento::retornaDadosEvento($idEvento);
@@ -49,6 +51,7 @@
                 // CONTINUAR DAQUI
                 
                 if (Submissao::adicionarSubmissao($idEvento, $idArea, $idModalidade,$idTipoSubmissao,1,$novoArquivo,$titulo,$resumo,$palavrasChave,$relacaoCom,$idUsuariosAdd,'')) {
+                    
                     if (move_uploaded_file($_FILES['arquivo']['tmp_name'], dirname(__DIR__) . "/" . $pastaSubmissoes . $novoArquivo)) { // Tenta Inserir a imagem na pasta
                         
                         if ($evento->getDistribuicaoAutomaticaAvaliadores()==1) {
@@ -88,7 +91,7 @@
                         header('Location: ../minhasSubmissoes.php?Item=Criado');
                         
                     }
-                    else echo "<script>window.alert('2-Houve um erro na Submissao. Entre em contato com um Administrador do Sistema');window.history.back();";
+                    else {echo "<script>window.alert('2-Houve um erro na Submissao. Entre em contato com um Administrador do Sistema');window.history.back();";}
                 }
 
                 else echo "<script>window.alert('1-Houve um erro na Submissao. Entre em contato com um Administrador do Sistema');window.history.back();</script>";

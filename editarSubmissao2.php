@@ -129,7 +129,7 @@
                     <label for="e.contact">Palavras-Chave</label>
                         <input class="form-control" id="palavrasChave" name="palavrasChave" required="true" value="<?php echo $submissao->getPalavrasChave()?>">
                     <div class="help-inline ">
-                        Separadas por vírgula (Ex.: palavra1; palavra2)
+                        Inserir de 3 a 5 palavras-chave, Separadas por vírgula (Ex.: palavra1; palavra2)
                     </div>
             </div>
 
@@ -149,7 +149,7 @@
                 <label  for="arquivo" >Arquivo</label>
                 <input class="form-control" type="file" id="arquivo" name="arquivo">
                 <div class="help-inline ">
-                    Arquivo em PDF (caso não haja upload, o arquivo anterior será considerado
+                    Arquivo em PDF (caso não haja upload, o arquivo anterior será considerado)
                 </div>
             </div>
 

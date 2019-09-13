@@ -101,7 +101,7 @@ include dirname(__DIR__) . '/inc/includes.php';
                     <label for="e.contact">Palavras-Chave</label>
                     <input class="form-control" id="palavrasChave" name="palavrasChave" value="<?php echo $submissao->getPalavrasChave() ?>">
                     <div class="help-inline ">
-
+                        Inserir de 3 a 5 palavras-chave, Separadas por vírgula (Ex.: palavra1; palavra2)
                     </div>
             </div>
 

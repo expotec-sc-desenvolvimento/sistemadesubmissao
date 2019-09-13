@@ -41,6 +41,9 @@
             if (!strpos($tipoArquivo, $tipo)) { // Verifica o tipo de arquivo enviado
                 echo "<script>window.alert('Tipo de Arquivo não permitido');window.history.back();</script>";
             }
+            else if ($_FILES[ 'arquivo' ][ 'size' ]==0 || $_FILES[ 'arquivo' ][ 'size' ]>(5 * 1024 * 1024)) {
+                echo "<script>window.alert('Tamanho de arquivo inválido. O arquivo deve ter, no máximo, 5MB!');window.history.back();</script>";
+            }
             else {
                 $evento = Evento::retornaDadosEvento($idEvento);                
                 $modalidade = Modalidade::retornaDadosModalidade($idModalidade);
