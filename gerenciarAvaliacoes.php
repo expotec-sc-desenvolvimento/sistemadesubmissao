@@ -79,13 +79,17 @@
                 <label for="select-Usuario">Usuario: </label>
                 <select class="form-control" id="select-Usuario" name="select-Usuario" onchange="direcionar()" style="width: 200px">
                     <option value="">Selecione um Usuário</option>
-                    <?php
+		    <?php
+			$userListado = array();
                         foreach (Avaliador::listaAvaliadoresComFiltro('','','','') as $avaliador) {
                             
-                            $user = Usuario::retornaDadosUsuario($avaliador->getIdUsuario());
+			    $user = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
+
+			    if (in_array($user->getId(),$userListado)) continue;
                             echo "<option value='".$user->getId()."'";
                             if (isset($_GET['idUsuario']) && $_GET['idUsuario'] == $user->getId()) echo " selected";
-                            echo ">" . $user->getNome()." ".$user->getSobrenome() ."</option>";
+			    echo ">" . $user->getNome() ."</option>";
+			    array_push($userListado,$user->getId());
                         }
                     ?>
                 </select>
@@ -129,7 +133,7 @@
                     else {
                         foreach ($listaAvaliacoes as $avaliacao) {
                             
-                            $avaliador = Usuario::retornaDadosUsuario($avaliacao->getIdUsuario());
+                            $avaliador = UsuarioPedrina::retornaDadosUsuario($avaliacao->getIdUsuario());
                             $dataAtual = date('Y-m-d');
                             $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao();
                             
@@ -145,10 +149,10 @@
                             </td>
                             <td><?php echo Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()?></td>
                             <td><?php echo TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdTipoSubmissao())->getDescricao()?></td>
-                            <td><?php echo $avaliador->getNome() . " " . $avaliador->getSobrenome() ?></td>
+                            <td><?php echo $avaliador->getNome() ?></td>
                             <td><?php echo $situacaoAvaliacao ?></td>
                             <td><?php echo date('d/m/Y', strtotime($avaliacao->getDataRecebimento())) ?></td>
-                            <td><?php echo $avaliacao->getDataRealizacaoAvaliacao()=='' ? "-" : $avaliacao->getDataRealizacaoAvaliacao() ?></td>
+                            <td><?php echo $avaliacao->getDataRealizacaoAvaliacao()=='' ? "-" : date('d/m/Y',strtotime($avaliacao->getDataRealizacaoAvaliacao())) ?></td>
                             <td><?php 
                                     // SituacaoAvaliacao = 1-Pendente / 3-Atrasada
                                     if ($avaliacao->getIdSituacaoAvaliacao()==1 || $avaliacao->getIdSituacaoAvaliacao()==3) echo date('d/m/Y',strtotime($avaliacao->getPrazo())); 

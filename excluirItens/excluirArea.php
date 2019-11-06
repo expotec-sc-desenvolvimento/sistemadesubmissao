@@ -21,15 +21,15 @@
       $nome = Area::retornaDadosArea($_GET['id'])->getDescricao()
 ?>
 
-<div class="titulo-modal">Excluir Usuário</div>
+<div class="titulo-modal">Excluir Área</div>
 
 <div class="itens-modal">
     
     <?php if ($pendencias==0) {?>
         <p align='center'>Deseja realmente excluir a Área <strong><?php echo $nome  ?>?</strong></p>
         <div class="div-btn">
-            <input type='button' value='Sim' class='addObjeto btn-verde' onclick="location.href='submissaoForms/wsExcluirArea.php?id=<?php echo $_GET['id']?>'">
-            <input type='button' value='Não' class='addObjeto btn-vermelho' onclick="$('#modal').fadeOut(500)">
+            <input type='button' value='Sim' class='btn btn-sm marginTB-xs btn-success' onclick="location.href='submissaoForms/wsExcluirArea.php?id=<?php echo $_GET['id']?>'">
+            &nbsp;&nbsp;<input type='button' value='Não' class='btn btn-sm marginTB-xs btn-danger' onclick="$('#modal').fadeOut(500)">
         </div>
     <?php }
     
@@ -50,7 +50,7 @@
                 echo "<p align='center'><strong>Avaliadores desta Área (".count($listaAvaliadoresDaArea).")</strong></p>";
                 echo "<ul style='margin-left: 30px;'>";
                 foreach ($listaAvaliadoresDaArea as $obj) {
-                    $user = Usuario::retornaDadosUsuario($obj->getIdUsuario());
+                    $user = UsuarioPedrina::retornaDadosUsuario($obj->getIdUsuario());
                     echo "<li>";
                     echo "<strong>Avaliador: </strong>" . $user->getNome() . " " . $user->getSobrenome();
                     echo "</li>";

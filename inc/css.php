@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="css/img.css">
         <link rel="stylesheet" href="css/inputs.css">
         <link rel="stylesheet" href="css/geral.css">
-        <link rel="stylesheet" href="css/botao.css">
+        <link rel="stylesheet" href="css/botao.css"> 
         
         
         <link rel="stylesheet" href="public/template/vendor/bootstrap/css/bootstrap.min.css">

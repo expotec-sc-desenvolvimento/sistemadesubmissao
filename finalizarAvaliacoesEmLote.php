@@ -95,7 +95,7 @@
                             
                             $usuariosSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '');
                             $usuarioSubmissao = "<ul class='listaCriterios'>";
-                            foreach ($usuariosSubmissao as $user) $usuarioSubmissao = $usuarioSubmissao . "<li>" . Usuario::retornaDadosUsuario($user->getIdUsuario())->getNome() . "</li>";
+                            foreach ($usuariosSubmissao as $user) $usuarioSubmissao = $usuarioSubmissao . "<li>" . UsuarioPedrina::retornaDadosUsuario($user->getIdUsuario())->getNome() . "</li>";
                             $usuarioSubmissao .= "</ul>";
                                     
                             $avaliacoes = Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(),'');
@@ -122,7 +122,7 @@
                                 
                                 
                                 
-                                $user = Usuario::retornaDadosUsuario($avaliacao->getIdUsuario());
+                                $user = UsuarioPedrina::retornaDadosUsuario($avaliacao->getIdUsuario());
                                 $avaliadores = $avaliadores . "<li>" .$editarAvaliador . $user->getNome() . $resultadoAvaliacao ."</li>";
                             }
                             

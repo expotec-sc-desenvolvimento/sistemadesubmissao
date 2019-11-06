@@ -2,8 +2,9 @@
     
     session_start();
     
-    if (isset( $_SESSION['usuario'] )) header('Location: paginaInicial.php');
-
+    if (isset( $_SESSION['usuario'] )) header('Location: /expotecsc/cpanel');
+        else {echo "<h3 align='center'>A sessão foi encerrada. Faça login novamente no sistema para ter acesso a todas as páginas!</h3>"; exit(1);}
+    //else {header('Location: /expotecsc/security/logout');};
 ?>
 
 <html lang="pt-br">

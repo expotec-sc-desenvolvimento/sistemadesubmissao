@@ -47,7 +47,7 @@
                         $novosAvaliadores = "";
                         $emails = array();
                         
-                        $prazo = Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioSubmissaoCorrigida();
+                        $prazo = Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoFinal();
                         $avaliadoresAnteriores = Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), '');
                         
                         foreach ($avaliadoresAnteriores as $avaliador) { 
@@ -60,7 +60,8 @@
                         
                         
                         if (Avaliacao::adicionarAvaliacoes($sub->getId(), 3, $submissao->getIdModalidade(), $novosAvaliadores, $prazo)) {
-                            emailAtribuicaoAvaliacao($sub, $prazo, $emails);
+			// RETIRADO O ENVIO DO EMAIL AUTOMATICO PARA OS AVALIADORES MOMENTANEAMENTE
+			//   emailAtribuicaoAvaliacao($sub, $prazo, $emails);
                             header('Location: ../gerenciarSubmissoes.php?Item=Atualizado');
                         }
                         else header('Location: ../gerenciarSubmissoes.php?Item=NaoAtualizado');

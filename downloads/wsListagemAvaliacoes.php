@@ -59,7 +59,7 @@
                 $user = UsuarioPedrina::retornaDadosUsuario($avaliacao->getIdUsuario());
                 $html .= "<tr><td>". Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()."</td>";
                 $html .= "<td>". TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdTipoSubmissao())->getDescricao()."</td>";
-                $html .= "<td>". $user->getNome()." ".$user->getSobrenome()."</td>";
+                $html .= "<td>". $user->getNome()."</td>";
                 $html .= "<td>". SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao()."</td>";
                 $html .= "<td>". date('d/m/Y', strtotime($avaliacao->getDataRecebimento())) ."</td>";
                 

@@ -46,7 +46,16 @@
                 
                 // Tipo Submissao: 1-Parcial / 2-Corrigda / 3-Final
                 // Situacao Submissao: 1-Submetida / 3-Em Avaliacao
-                if (Submissao::adicionarSubmissao($idEvento, $idArea, $idModalidade,2,3,$novoArquivo,$titulo,$resumo,$palavrasChave,$relacaoCom,$idUsuariosAdd,$idSubmissao)) {
+		if (Submissao::adicionarSubmissao($idEvento, $idArea, $idModalidade,2,3,$novoArquivo,$titulo,$resumo,$palavrasChave,$relacaoCom,$idUsuariosAdd,$idSubmissao)) {
+
+			// ADICAO DE CODIGO EXTRA PARA ATUALIZACAO DE DADOS
+//			$subT = Submissao::retornaDadosSubmissao($idSubmissao);
+//			Submissao::atualizarSubmissao($subT->getId(),$idEvento,$idArea,$idModalidade,$subT->getIdTipoSubmissao(),$subT->getIdSituacaoSubmissao(),$subT->getArquivo(),$subT->getTitulo(),$subT->getResumo(),$subT->getPalavrasChave(),$subT->getRelacaoCom(),$idUsuariosAdd,$subT->getIdRelacaoComSubmissao());
+
+
+		    //FIM
+
+
                     if (move_uploaded_file($_FILES['arquivo']['tmp_name'], dirname(__DIR__) . "/" . $pastaSubmissoes . $novoArquivo)) { // Tenta Inserir a imagem na pasta
                         
                         $novaSubmissao = Submissao::retornaSubmissaoCorrigidaPelaParcial($idSubmissao);
@@ -60,7 +69,7 @@
                                 //echo $novaSubmissao->getId() . " " . $evento->getPrazoFinalEnvioAvaliacaoCorrigida() . " " . $av->getIdUsuario(); exit(1);
                                 if (Avaliacao::adicionarAvaliacoes($novaSubmissao->getId(), 2, $idModalidade, $av->getIdUsuario().";", $evento->getPrazoFinalEnvioAvaliacaoCorrigida())) {
                                     
-                                    //array_push($emails, Usuario::retornaDadosUsuario($av->getIdUsuario())->getEmail());
+                                    array_push($emails, UsuarioPedrina::retornaDadosUsuario($av->getIdUsuario())->getEmail());
                                     
                                     
                                 }

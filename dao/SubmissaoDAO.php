@@ -12,7 +12,7 @@ class SubmissaoDAO {
     
      public static function adicionarSubmissao($idEvento,$idArea,$idModalidade,$idTipoSubmissao,$idSituacaoSubmissao,$arquivo,$titulo,$resumo,$palavrasChave,$relacaoCom,$componentes,$idRelacaoComSubmissao) {
         $sql = "CALL adicionarSubmissao('$idEvento','$idArea','$idModalidade','$idTipoSubmissao','$idSituacaoSubmissao','$arquivo','$titulo','$resumo','$palavrasChave','$relacaoCom','$componentes','$idRelacaoComSubmissao');";
-        //echo $sql; exit(1);
+       // echo $sql; exit(1);
         return Conexao::executar($sql);
     }
     

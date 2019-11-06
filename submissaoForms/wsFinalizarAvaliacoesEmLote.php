@@ -56,7 +56,7 @@
                                 $novosAvaliadores = "";
                                 $emails = array();
 
-                                $prazo = Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioSubmissaoCorrigida();
+                                $prazo = Evento::retornaDadosEvento($submissao->getIdEvento())->getPrazoFinalEnvioAvaliacaoFinal();
                                 $avaliadoresAnteriores = Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), '');
 
                                 foreach ($avaliadoresAnteriores as $avaliador) { 
@@ -69,7 +69,8 @@
 
 
                                 if (Avaliacao::adicionarAvaliacoes($sub->getId(), 3, $submissao->getIdModalidade(), $novosAvaliadores, $prazo)) {
-                                    emailAtribuicaoAvaliacao($sub, $prazo, $emails);
+				// RETIRADO MOMENTANEAMENTE O ENVIO DE EMAILS PARA OS AVALIADORES	
+				// emailAtribuicaoAvaliacao($sub, $prazo, $emails);
                                     header('Location: ../finalizarAvaliacoesEmLote.php?Item=Atualizado');
                                 }
                                 else header('Location: ../finalizarAvaliacoesEmLote.php?Item=NaoAtualizado');

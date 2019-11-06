@@ -46,7 +46,7 @@
             <td>
         <?php
             foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $obj) {
-                $user = Usuario::retornaDadosUsuario($obj->getIdUsuario());
+                $user = UsuarioPedrina::retornaDadosUsuario($obj->getIdUsuario());
                 echo $user->getNome() . " " , $user->getSobrenome();
                 if ($obj->getIsSubmissor()==1) echo "(Submissor)";
                 echo "<br>";
@@ -65,7 +65,7 @@
                 $cont = 1;
                 foreach ($avaliacoes as $avaliacao) {
                     
-                    $user = Usuario::retornaDadosUsuario($avaliacao->getIdUsuario());
+                    $user = UsuarioPedrina::retornaDadosUsuario($avaliacao->getIdUsuario());
                     $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao());
                     
                     $nomeCompleto = "Avaliador $cont";

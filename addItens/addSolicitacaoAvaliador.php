@@ -52,7 +52,7 @@
                         <?php
                             foreach ($eventos as $evento) {
                                 $dataFimInscricaoAvaliadores = date('d-m-Y', strtotime($evento->getPrazoInscricaoAvaliadores()));                
-                                if (strtotime($dataFimInscricaoAvaliadores) <= strtotime($dataAtual)) {echo "<option value='".$evento->getId()."'>".$evento->getNome()."</option>";}
+                                if (strtotime($dataAtual) <= strtotime($dataFimInscricaoAvaliadores)) {echo "<option value='".$evento->getId()."'>".$evento->getNome()."</option>";}
                             }
                         ?>
                     </select>

@@ -64,13 +64,13 @@
                 ?>
                         <thead>
                         <tr>
-                            <th align="center">*</th>
-                            <th align="center">Imagem</th>
-                            <th align="center">Nome do Solicitante</th>
-                            <th align="center">Evento</th>
-                            <th align="center">Area</th>
-                            <th align="center">Situacao</th>
-                            <th align="center">Observação</th>
+                            <td align="center"><strong>*</td>
+                            <td align="center"><strong>Imagem</td>
+                            <td align="center"><strong>Nome do Solicitante</td>
+                            <td align="center"><strong>Evento</td>
+                            <td align="center"><strong>Área</td>
+                            <td align="center"><strong>Situação</td>
+                            <td align="center"><strong>Observação</td>
 
                         </tr>
                         </thead>
@@ -80,18 +80,21 @@
                             
                         $editar = "";  
                         $situacao = "";
-                        if ($solicitacao->getSituacao()=="Pendente") {
+			$img = "./uploads/fotosPerfil/semFoto.jpg";
+			if ($solicitacao->getSituacao()=="Pendente") {
                             $editar = "<a class='editarObjeto' id='".$solicitacao->getId()."' name='SolicitacaoAvaliador'><img src='".$iconEditar."' class='img-miniatura'>";
                         }
                         
-                        if ($solicitacao->getSituacao() == 'Pendente') $situacao= "<img src='".$iconAguardando."' class='img-miniatura' title='Pendente'>";
-                        if ($solicitacao->getSituacao() == 'Deferida') $situacao= "<img src='".$iconOK."' class='img-miniatura' title='Deferido'>";
-                        if ($solicitacao->getSituacao() == 'Indeferida') $situacao= "<img src='".$iconExcluir."' class='img-miniatura' title='Indeferido'>";
+                        if ($solicitacao->getSituacao() == 'Pendente') $situacao= "Pendente <img src='".$iconAguardando."' class='img-miniatura' title='Pendente'>";
+                        if ($solicitacao->getSituacao() == 'Deferida') $situacao= "Deferido(a)<img src='".$iconOK."' class='img-miniatura' title='Deferido'>";
+			if ($solicitacao->getSituacao() == 'Indeferida') $situacao= "Indeferido(a)<img src='".$iconExcluir."' class='img-miniatura' title='Indeferido'>";
+
+			if (UsuarioPedrina::retornaDadosUsuario($solicitacao->getIdUsuario())->getPicture()!=NULL) $img = "/expotecsc/attendees/getuserpicture/".$solicitacao->getIdUsuario()."/";
                 ?>            
 
                             <tr>
-                                <td><?php echo $editar ?></td>
-                                <td><img src='/expotecsc/attendees/getuserpicture/<?php echo $usuario->getId() ?>' width='30px'></td>
+                                <td align='center'><?php echo $editar ?></td>
+                                <td><img src='<?php echo $img ?>' width='30px'></td>
                                 <td><?php echo UsuarioPedrina::retornaDadosUsuario($solicitacao->getIdUsuario())->getNome() ?></td>
                                 <td><?php echo Evento::retornaDadosEvento($solicitacao->getIdEvento())->getNome() ?></td>
                                 <td><?php echo Area::retornaDadosArea($solicitacao->getIdArea())->getDescricao() ?></td>

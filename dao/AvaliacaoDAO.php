@@ -30,7 +30,7 @@ class AvaliacaoDao {
     
     public static function realizarAvaliacao($idAvaliacao,$situacaoAvaliacao,$notas,$notaFinalAvaliacao,$observacao) {
         $sql = "CALL realizarAvaliacao ('$idAvaliacao','$situacaoAvaliacao','$notas','$notaFinalAvaliacao','$observacao');";
-        //echo $sql; exit(1);
+       // echo $sql; exit(1);
         return Conexao::executar($sql);
     }
     

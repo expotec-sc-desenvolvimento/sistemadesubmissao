@@ -54,6 +54,14 @@
     var idUsersSelected = [];
     var nomeUsersSelected = [];
     //var idUserSubmissor;
+
+    function verificarArquivo () {
+	if (document.getElementById('novoArquivo').checked==false) document.getElementById('arquivo').value='';
+	else if (document.getElementById('novoArquivo').checked==true && document.getElementById('arquivo').value=='') {
+	    alert('Selecione um arquivo, caso deseje substituir o arquivo anteriormente submetido!');
+	    document.getElementById('novoArquivo').checked=false;
+	}
+    }
 </script>
 
 
@@ -64,7 +72,7 @@
 </div>
 <div class="panel-body">
 
-    <form method="post" action="<?=htmlspecialchars('submissaoForms/wsEditarSubmissao.php');?>" enctype="multipart/form-data">
+    <form method="post" action="<?=htmlspecialchars('submissaoForms/wsEditarSubmissao.php');?>" enctype="multipart/form-data" onsubmit="submeterAutores('<?php echo $usuario->getId()?>')">
         <input type="hidden" id="idSubmissao" name="idSubmissao" value="<?php echo $submissao->getId() ?>">
         <input type="hidden" id="idUsuariosAdd" name="idUsuariosAdd">
 
@@ -147,9 +155,9 @@
 
             <div class="col-md-4  mb-4">
                 <label  for="arquivo" >Arquivo</label>
-                <input class="form-control" type="file" id="arquivo" name="arquivo">
+		<input class="form-control" type="file" id="arquivo" name="arquivo" onchange="document.getElementById('novoArquivo').checked=true;">
                 <div class="help-inline ">
-                    Arquivo em PDF (caso não haja upload, o arquivo anterior será considerado)
+		<input type='checkbox' id='novoArquivo' name='novoArquivo' onclick="verificarArquivo()"> Adicionar novo arquivo (caso essa caixa não seja marcada, será mantido o arquivo anterior)
                 </div>
             </div>
 
@@ -202,7 +210,7 @@
         <div class="control-group form-actions">
             <div class="row">
                 <div class="col-md-3 mb-4">
-                <button class="btn btn-lg btn-primary btn-block mb-4" type="submit" onclick="submeterAutores('<?php echo $usuario->getId()?>')">Atualizar Submissão</button>
+                                <input class="btn btn-lg btn-primary btn-block mb-4" type="submit"  id='botaoSubmeter' value="Atualizar Submissão">
                 </div>
 
                 <div class="col-md-3 mb-4">

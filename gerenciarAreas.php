@@ -56,8 +56,8 @@
                 <?php foreach($listaAreas as $area){ ?>
 
                     <tr>
-                        <td><a class='editarObjeto' id='<?php echo $area->getId()?>' name='Area'><i class="fa fa-edit m-right-xs"></i></a>
-                            <a class='excluirObjeto' id='<?php echo $area->getId() ?>' name='Area'><i class="fa fa-trash-alt m-right-xs"></i></a>
+                        <td><a class='editarObjeto' id='<?php echo $area->getId()?>' name='Area'><i class="fa fa-edit aria-hidden='true'"></i></a>
+                            <a class='excluirObjeto' id='<?php echo $area->getId() ?>' name='Area'><i class="fa fa-trash m-right-xs"></i></a>
                         </td>
                         <td align="center"><?php echo $area->getDescricao() ?></td>
                         <!-- <td>< ?php echo $area->getSubAreas() ?></td>    -->

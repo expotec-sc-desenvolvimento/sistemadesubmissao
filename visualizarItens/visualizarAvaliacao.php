@@ -27,8 +27,8 @@
             echo "<p align='center'>Avaliação ainda não realizada</p>";
         }
         else {
-            $user = Usuario::retornaDadosUsuario($avaliacao->getIdUsuario());
-            $nomeCompleto = $user->getNome() . " " . $user->getSobrenome();
+            $user = UsuarioPedrina::retornaDadosUsuario($avaliacao->getIdUsuario());
+            $nomeCompleto = $user->getNome();
             $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao();
             $avaliacaoCriterios = AvaliacaoCriterio::retornaCriteriosParaAvaliacao($avaliacao->getId());
         ?>
@@ -43,9 +43,13 @@
         <?php
             foreach ($avaliacaoCriterios as $avaliacaoCriterio) {
                 $criterio = Criterio::retornaDadosCriterio($avaliacaoCriterio->getIdCriterio());
-                if ($submissao->getArquivo()==3) echo $criterio->getDescricao() ."(" .$criterio->getPeso().") - <i>" . $avaliacaoCriterio->getNota() . "</i><br>";
-                else echo $criterio->getDescricao() ." - <i>" . $avaliacaoCriterio->getNota() . "</i><br>";
-            }
+                if ($submissao->getIdTipoSubmissao()==3) echo "<p style='white-space:pre-line;text-align=justify'>" . $criterio->getDescricao() ."(" .$criterio->getPeso().") - <b>" . $avaliacaoCriterio->getNota() . "</b></p><br>";
+		else {
+			echo "<p style='white-space:pre-line;text-align=justify'>" . $criterio->getDescricao() ." - <b>";
+		        if ($avaliacaoCriterio->getNota()==1) echo  "Sim</b></p><br>";
+		else echo "Não</i></p><br>";
+		}
+	    }
         ?>
                 <?php // 1 - Parcial / 2 - Corrigida / 3 - Final 
                 if ($submissao->getIdTipoSubmissao()==3) {
@@ -53,7 +57,7 @@
                 }
                 ?>
                 </td>
-                <tr><th>Observações:</th><td id='listaAvaliacoes'><?php echo $avaliacao->getObservacao() ?></td></tr>
+                <tr><th>Observações:</th><td id='listaAvaliacoes'><p style='white-space:pre-line;text-align:justify;'> <?php echo $avaliacao->getObservacao() ?></p></td></tr>
             </table>
         <?php } ?>
     </div>

@@ -33,12 +33,15 @@ if(isset($_GET['nome'])) {
 
             if ($idUsuario == $idSubmissor) continue;
 
+	    $img =  "<img src='./uploads/fotosPerfil/semFoto.jpg' class='flag'>";
+	    if ($usuario->getPicture()!=NULL) $img = "<img src='/expotecsc/attendees/getuserpicture/".$idUsuario."/' class='flag'>";
+
             $nomeCompleto = $usuario->getNome();
 
             $resposta = $resposta . "<input type='hidden' id='". $idUsuario."' value='". $idUsuario ."'>"
                                     ."<li class='select2-results-dept-0 select2-result select2-result-selectable select2-selected' role='presentation'>"
                                         . "<div class='select2-result-label users-dinamic' role='option' onclick=\"javascript:adicionarId('".$usuario->getId()."','".$nomeCompleto ."','$iconExcluir')\">" 
-                                            . "<img src='/expotecsc/attendees/getuserpicture/".$idUsuario."/' class='flag'> "  . $nomeCompleto . "</div></li>";
+                                            . $img  . $nomeCompleto . "</div></li>";
         }
         $resposta .= "</ul>";
     }

@@ -168,8 +168,9 @@
         <?php 
     $avaliacoes = Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(),'');
 
-    if (count($avaliacoes)==0) {
-        echo "<p align='center'><strong>Nenhuma Avaliação cadastrada para a Submissão</strong></p>";
+//    if (count($avaliacoes)==0) {
+    if (count($avaliacoes)==0 || $submissao->getIdSituacaoSubmissao()==3) {
+        echo "<p align='center'><strong>Nenhuma Avaliação Cadastrada/Finalizada para a Submissão</strong></p>";
     } else {
         $cont = 1;
         foreach ($avaliacoes as $avaliacao) {
@@ -193,10 +194,11 @@
                     echo "<tr><th class='direita' width='10px'>Avaliação: </th><td>";
                     $avaliacaoCriterios = AvaliacaoCriterio::retornaCriteriosParaAvaliacao($avaliacao->getId());
 
-                    echo "<ul class='listaCriterios'>";
+		    echo "<ul class='listaCriterios'>";
+		    $cont=1;		    
                     foreach ($avaliacaoCriterios as $avaliacaoCriterio) {
                         $criterio = Criterio::retornaDadosCriterio($avaliacaoCriterio->getIdCriterio());
-                        echo "<li>".$criterio->getDescricao();
+                        echo "<li> ".$cont++." - ".$criterio->getDescricao();
                         //if ($submissao->getIdTipoSubmissao()==3) echo "(" .$criterio->getPeso().")";
                         echo " - ";
                         if ($submissao->getIdTipoSubmissao()==3) echo "<strong>" . $avaliacaoCriterio->getNota() . "</strong><br>";
@@ -206,7 +208,7 @@
 
                     if ($submissao->getIdTipoSubmissao()==3) echo "<tr><th class='direita'>Nota Final: </th><td><strong>". $avaliacao->getNota()."</strong></td>";
                 }
-                echo "<tr><th class='direita'>Observações:</th><td style='text-align:left; padding-left:10px;'>" . $avaliacao->getObservacao() . "</td></tr>";
+                echo "<tr><th class='direita'>Observações:</th><td style='text-align:left; padding-left:10px;'><p style='white-space:pre-line;text-align=justify'>" . $avaliacao->getObservacao() . "</p></td></tr>";
 
             }
 

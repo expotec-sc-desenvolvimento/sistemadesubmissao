@@ -22,7 +22,7 @@ class SolicitacaoAvaliadorDAO {
     }
     public static function atualizarSolicitacaoAvaliador($id,$idUsuario,$idEvento,$idArea,$situacao,$observacao) {
         $sql = "CALL atualizarSolicitacaoAvaliador('$id','$idUsuario','$idEvento','$idArea','$situacao','$observacao');";
-        //echo $sql; exit(1);
+      //  echo $sql; exit(1);
         return Conexao::executar($sql);
     }
     

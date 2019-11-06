@@ -25,7 +25,7 @@ include dirname(__DIR__) . '/inc/includes.php';
             if ($submissao->getId()=="") echo "<script>window.alert('Submissao Inválida');window.history.back();</script>";
 
             if ($submissao->getIdSituacaoSubmissao()==1 && count(Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(), ''))==0) { // Se a submissão estiver no estado 'SUBMETIDA' e não possui avaliadores...
-                
+//                echo $submissao->getIdEvento() . "-". $submissao->getIdArea() . "-" . $submissao->getId(); exit(1);
                 $listaAvaliadoresArea = Avaliador::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'mesma-area',30,$submissao->getId());
                 $listaAvaliadoresOutraArea = Avaliador::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'outra-area',30,$submissao->getId());
                     

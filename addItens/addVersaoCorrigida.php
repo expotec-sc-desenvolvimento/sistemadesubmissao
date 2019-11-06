@@ -22,7 +22,8 @@ include dirname(__DIR__) . '/inc/includes.php';
 
     $userNaoSubmissor = false;
     $prazoEsgotado = false;
-    //echo $dataAtual . " - " . $dataFinalEnvioSubmissaoCorrigida;
+ //   echo $dataAtual . " - " . $dataFinalEnvioSubmissaoCorrigida;
+//    echo date('Y-m-d H:m:s');
     if (strtotime($dataAtual) > strtotime($dataFinalEnvioSubmissaoCorrigida)) $prazoEsgotado = true;
     if (count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $usuario->getId(), 1))==0) $userNaoSubmissor = true;
     
@@ -101,7 +102,7 @@ include dirname(__DIR__) . '/inc/includes.php';
                     <label for="e.contact">Palavras-Chave</label>
                     <input class="form-control" id="palavrasChave" name="palavrasChave" value="<?php echo $submissao->getPalavrasChave() ?>">
                     <div class="help-inline ">
-                        Inserir de 3 a 5 palavras-chave, Separadas por vírgula (Ex.: palavra1; palavra2)
+                        Inserir de 3 a 5 palavras-chave, Separadas por vírgula (Ex.: palavra1, palavra2)
                     </div>
             </div>
 
@@ -129,8 +130,8 @@ include dirname(__DIR__) . '/inc/includes.php';
                     <ul style='list-style-type: none;'>
                         <?php
                             foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $obj) {
-                                $user = Usuario::retornaDadosUsuario($obj->getIdUsuario());
-                                echo "<li><div><img class='flag' src='public/img/semFoto.jpg'>" .$user->getNome() . " " , $user->getSobrenome();
+                                $user = UsuarioPedrina::retornaDadosUsuario($obj->getIdUsuario());
+                                echo "<li><div><img class='flag' src='public/img/semFoto.jpg'>" .$user->getNome();
                                 if ($obj->getIsSubmissor()==1) echo "(Submissor)";
 
 
@@ -145,7 +146,7 @@ include dirname(__DIR__) . '/inc/includes.php';
         <div class="control-group form-actions">
             <div class="row">
                 <div class="col-md-3 mb-4">
-                <button class="btn btn-lg btn-primary btn-block mb-4" type="submit" onclick="submeterAutores('<?php echo $usuario->getId()?>')">Enviar Trabalho</button>
+                <button class="btn btn-lg btn-primary btn-block mb-4" type="submit" onclick="submeterAutores('<?php echo $usuario->getId()?>')">Enviar</button>
                 </div>
 
                 <div class="col-md-3 mb-4">

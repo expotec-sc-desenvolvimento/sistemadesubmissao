@@ -47,7 +47,7 @@
                     // Coleta os ID's dos avaliadores da área do evento com menos avaliações
                     foreach($listaAvaliadoresArea as $usuarioAvaliador) {
                         $idsAvaliadores = $idsAvaliadores . $usuarioAvaliador->getIdUsuario() . ";";
-                        array_push($emails, Usuario::retornaDadosUsuario($usuarioAvaliador->getIdUsuario())->getEmail());
+                        array_push($emails, UsuarioPedrina::retornaDadosUsuario($usuarioAvaliador->getIdUsuario())->getEmail());
                         
                     }
                     

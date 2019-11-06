@@ -20,7 +20,7 @@
 
 <div class="itens-modal">
     <h3 align="center">Você deve adicionar 3 Avaliadores</h3>
-    <form method="post" action="<?=htmlspecialchars('submissaoForms/wsAddAvaliacao.php');?>">
+    <form method="post" action="<?=htmlspecialchars('submissaoForms/wsAddAvaliacao.php');?>" onsubmit='return validacao()'>
         <input type="hidden" id="idSubmissao" name="idSubmissao" value="<?php echo $submissao->getId() ?>">
         
         <table class="cadastroItens-2">
@@ -29,8 +29,8 @@
             <tr>
                 <th>Avaliador 1:</th>
                 <td>
-                    <select class=campoDeEntrada id="avaliador1" name="avaliador1" required="true">
-                        <option value="1">Selecione um Avaliador</option>
+                    <select style='width:250px;' id="avaliador1" name="avaliador1" required="true">
+                        <option value="">Selecione um Avaliador</option>
                         <?php 
                             foreach (Avaliador::listaAvaliadoresComFiltro($submissao->getIdEvento(), $submissao->getIdArea(), '', "area") as $avaliador) {
                                 $user = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
@@ -49,8 +49,8 @@
             <tr>
                 <th>Avaliador 2:</th>
                 <td>
-                    <select class=campoDeEntrada id="avaliador2" name="avaliador2" required="true">
-                        <option value="1">Selecione um Avaliador</option>
+                    <select  style='width:250px;' id="avaliador2" name="avaliador2" required="true">
+                        <option value="">Selecione um Avaliador</option>
                         <?php 
                             foreach (Avaliador::listaAvaliadoresComFiltro($submissao->getIdEvento(), $submissao->getIdArea(), '', "area") as $avaliador) {
                                 $user = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
@@ -69,14 +69,16 @@
             <tr>
                 <th>Avaliador 3:</th>
                 <td>
-                    <select class=campoDeEntrada id="avaliador3" name="avaliador3" required="true">
-                        <option value="1">Selecione um Avaliador</option>
-                        <?php 
+                    <select style='width:250px;' id="avaliador3" name="avaliador3" required="true">
+                        <option value="">Selecione um Avaliador</option>
+			<?php 
+			    $userListado3 = array();
                             foreach (Avaliador::listaAvaliadoresComFiltro($submissao->getIdEvento(), $submissao->getIdArea(), '', "outra-area") as $avaliador) {
                                 $user = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
                                 if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $submissao->getId(), ''))>0 || 
-                                        count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $user->getId(), ''))>0) continue;
-                                echo "<option value='". $user->getId()."'>".$user->getNome()."</option>";
+                                        count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $user->getId(), ''))>0 || in_array($user->getId(),$userListado3)) continue;
+				echo "<option value='". $user->getId()."'>".$user->getNome()."</option>";
+				array_push($userListado3,$user->getId());
                         }?>
                     </select>
                 </td>
@@ -87,7 +89,7 @@
                                                                                                                     'avaliador3')">Avaliador da Área</td>
             </tr>
         </table>
-        <div class="div-btn"><input type="submit" class='btn-verde' value="Adicionar Avaliadores" onclick="return validacao();"></div>
+        <div class="div-btn"><input type="submit" class='btn btn-sm marginTB-xs btn-success' value="Adicionar Avaliadores"></div>
     </form>
     
     <script type='text/javascript'>

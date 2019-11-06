@@ -6,10 +6,10 @@
     $user = new UsuarioPedrina();
     $user = $_SESSION['usuario'];
     
-    
+   
     unset($_SESSION['usuario']);
     session_destroy();
     
-    header('Location: ../index.php?logOut=Sucesso');
+    header('Location: /expotecsc/logout');
 
 ?>

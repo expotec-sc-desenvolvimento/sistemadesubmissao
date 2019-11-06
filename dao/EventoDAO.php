@@ -29,7 +29,7 @@ class EventoDao {
     
     public static function excluirEvento($id) {
         $sql = "CALL excluirItem('evento','$id');";
-        //echo $sql; exit(1);
+       // echo $sql; exit(1);
         return Conexao::executar($sql);
     }
 

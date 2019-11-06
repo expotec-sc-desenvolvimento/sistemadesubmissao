@@ -15,7 +15,9 @@ if( isset($_GET['idSubmissao']) && $_GET['idSubmissao']!="" && isset($_GET['tipo
     $area = $_GET['area'];
     $tipo = $_GET['tipo'];
     $idSubmissao = $_GET['idSubmissao'];
-    $idAvaliadorAtual = $_GET['idAvaliadorAtual'];
+
+    $idAvaliadorAtual='';
+    if (isset($_GET['idAvaliadorAtual'])) $idAvaliadorAtual = $_GET['idAvaliadorAtual'];
     
     
     //CODIGO ALTERADO PARA MUDANÇA DE PROCEDURES
@@ -25,20 +27,29 @@ if( isset($_GET['idSubmissao']) && $_GET['idSubmissao']!="" && isset($_GET['tipo
     //FALTA TESTAR SE O USUÁRIO É AVALIADOR DA SUBMISSAO
     
     
-    $resposta = "<option value''>Selecione um avaliador</option>";
+    $resposta = "<option value=''>Selecione um avaliador</option>";
+//    $resposta = "<option value''>".$avaliadores."</option>";
+
+    $userListado = array();
     foreach ($avaliadores as $avaliador) {
         $usuario = new UsuarioPedrina();
-        $usuario = Usuario::retornaDadosUsuario($avaliador->getIdUsuario());
+        $usuario = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
         
-        
-        if ((count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $idSubmissao, ''))>0 && $usuario->getId()!=$idAvaliadorAtual) || 
-                count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($idSubmissao, $usuario->getId(), ''))>0) continue;
+        if ($idAvaliadorAtual=='') {
+	   if ((count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $idSubmissao, ''))>0) || 
+                count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($idSubmissao, $usuario->getId(), ''))>0 || in_array($avaliador->getIdUsuario(),$userListado)) continue;
+
+	}	
+	else if ((count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $idSubmissao, ''))>0 && $usuario->getId()!=$idAvaliadorAtual) || 
+                count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($idSubmissao, $usuario->getId(), ''))>0 || in_array($avaliador->getIdUsuario(),$userListado)) continue;
 
         $selected = '';
         if ($idAvaliadorAtual!='' && $usuario->getId()==$idAvaliadorAtual) $selected = ' selected';
-        $resposta = $resposta . "<option value='".$usuario->getId()."' ".$selected.">".$usuario->getNome()."</option>";
+	$resposta = $resposta . "<option value='".$usuario->getId()."' ".$selected.">".$usuario->getNome()."</option>";
+	array_push($userListado,$avaliador->getIdUsuario());
     }
     echo $resposta;
+//	echo "<option value=''>".$evento." ".$area." ".$tipo." ".$idSubmissao." ".$idAvaliadorAtual."</option>";
 }
 else echo "<option value=''>Algum erro ocorreu</option>";
   

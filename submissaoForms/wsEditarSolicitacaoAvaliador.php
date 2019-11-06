@@ -27,14 +27,15 @@
             $observacao = $p['observacao'];
 
             
-            
+// echo $idUsuario . " - " . $idEvento; exit(1);           
             $solicitacao = SolicitacaoAvaliador::retornaDadosSolicitacoesAvaliador($idSolicitacao);
 
             
             if ($solicitacao->getId()!="") {
                 
                 if (SolicitacaoAvaliador::atualizarSolicitacaoAvaliador($idSolicitacao, $idUsuario, $idEvento, $idArea, $situacao, $observacao)) {
-                    header("Location: ../gerenciarSolicitacoesAvaliadores.php?Item=Criado");
+//		echo "aqui"; exit(1);    
+			header("Location: ../gerenciarSolicitacoesAvaliadores.php?Item=Criado");
                 }
                 else {
                     header("Location: ../gerenciarSolicitacoesAvaliadores.php?Item=NaoCriado");

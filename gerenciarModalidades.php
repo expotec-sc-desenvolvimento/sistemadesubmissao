@@ -50,7 +50,7 @@
             <p align="center"><input type="button" class="addObjeto btn btn-sm marginTB-xs btn-success" name='Modalidade' value="Adicionar Modalidade"></p>
             <table border="1" align="center" class="table table-striped table-bordered dt-responsive nowrap">
 
-                <tr><td align="center"><strong>*</strong></td>
+                <tr><td align='center'><strong>*</strong></td>
                     <td align="center"><strong>Nome da Modalidade</strong></td>
                     <td align="center"><strong>Criterios Av. Parciais</strong></td>
                     <td align="center"><strong>Criterios Av. Corrigidas</strong></td>
@@ -64,18 +64,27 @@
                     // A proxima instrução imprime os Eventos aos quais este tipo de submissao está vinculado
                 ?>
                     <tr>
-                        <td><a class='editarObjeto' id='<?php echo $modalidade->getId()?>' name='Modalidade'><i class="fa fa-edit m-right-xs"></i></a>
-                            <a class='excluirObjeto' id='<?php echo $modalidade->getId()?>' name='Modalidade'><i class="fa fa-trash-alt m-right-xs"></i></a>
-                        </td>
-                        <td><?php echo $modalidade->getDescricao()?></td>
+			<td align='center' style='vertical-align: middle;'>
+			   <a class='editarObjeto' id='<?php echo $modalidade->getId()?>' name='Modalidade'><i class="fa fa-edit"></i></a>
+			    <a class='excluirObjeto' id='<?php echo $modalidade->getId()?>' name='Modalidade'><i class="fa fa-trash"></i></a>
+			    <a class='excluirObjeto' href='javascript:void(0);' onclick="modCall(<?php echo $modalidade->getId()?>);" name='Modalidade'><i class="fa fa-dot-circle"></i>Chamada</a>
+			</td>
+
+		    <script>
+		    function modCall(id){
+				
+				window.top.location.href="/expotecsc/administrators/modTrack?id="+id;
+			}
+			</script>
+                        <td align='center' style='vertical-align: middle;'><?php echo $modalidade->getDescricao()?></td>
                         <?php foreach ($tipoSubmissoes as $tipo) { ?>
                             <td>
                                 <ul class="listaCriterios">
                                     <?php foreach ($criteriosDaModalidade as $criterio) {
                                         if ($tipo->getId() == $criterio->getIdTipoSubmissao()) { ?>
                                             <li>
-                                                <a class='editarObjeto' id='<?php echo $criterio->getId() ?>' name='Criterio'><i class="fa fa-edit m-right-xs"></i></a>
-                                                <a class='excluirObjeto' id='<?php echo $criterio->getId() ?>' name='Criterio'><i class="fa fa-trash-alt m-right-xs"></i></a>
+                                                <a class='editarObjeto' id='<?php echo $criterio->getId() ?>' name='Criterio'><i class="fa fa-edit"></i></a>
+                                                <a class='excluirObjeto' id='<?php echo $criterio->getId() ?>' name='Criterio'><i class="fa fa-trash m-right-xs"></i></a>
                                                 
                                                 <?php if ($criterio->getDescricao() == "Final") {echo "Peso " . $criterio->getPeso() . " - ";}
                                                       echo $criterio->getDescricao(); 

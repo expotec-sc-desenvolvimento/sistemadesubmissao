@@ -1,9 +1,10 @@
+<!--
 <div id="wrapper" class="cpanel">
-        <!-- NAVBAR -->
+
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="brand">
                     <a href="">
-                            <img src="public/img/logo_2.png" alt="9&ordf; EXPOTEC/SC" />
+                            <img src="/expotecsc/application/geteventlogo?eventid=1" alt="9&ordf; EXPOTEC/SC" />
                     </a>
                 </div>
                 <div class="container-fluid">
@@ -11,11 +12,11 @@
                         <button type="button" class="btn-toggle-fullwidth">
                             <i class="lnr lnr-arrow-left-circle"></i>
                         </button>
-                    </div>
+		    </div>
                     <div id="navbar-menu">
                         <ul class="nav navbar-nav navbar-right">
-                        <!-- MENUS ADMIN -->
-                        <?php if ($usuario->getIdPerfil()==1) {?>
+
+                        <?php //if ($usuario->getIdPerfil()==1) {?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> 
                                     <i class=" lnr lnr-cog"></i> 
@@ -73,9 +74,9 @@
                                     </li>
                                 </ul>
                             </li>
-                        <?php }?>
-                        <?php if ($usuario->getIdPerfil()==2) {?>
-                            <!-- MENUS ATTENDANT -->
+                        <?php //}?>
+                        <?php //if ($usuario->getIdPerfil()==2) {?>
+
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> 
                                     <i class=" lnr lnr-screen"></i> 
@@ -96,16 +97,22 @@
                                     </li>
                                 </ul>
                             </li>
-                        <?php }?>
-                            <!-- MENUS DE PERFIL -->
+                        <?php// }?>
+                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> 
-                                        <img class="img-circle inline-block user-profile-pic" src="public/img/semFoto.jpg"/>
-                                        <span><?php echo $usuario->getNome() ?></span>
+                                        <img class="img-circle inline-block user-profile-pic" src="/expotecsc/attendees/getuserpicture/<?php //echo $usuario->getId() ?>/"/>
+                                        <span><?php //echo $usuario->getNome() ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="submissaoForms/wsLogOut.php">
+                                        <a href="/expotecsc/attendees/viewmyprofile">
+                                            <i class="lnr lnr-exit"></i> 
+                                            <span>Meu Perfil </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/expotecsc/security/logout">
                                             <i class="lnr lnr-exit"></i> 
                                             <span>Sair </span>
                                         </a>
@@ -116,14 +123,13 @@
                     </div>
                 </div>
             </nav>
-    <!-- END NAVBAR -->
-    <!-- LEFT SIDEBAR -->
+   
             <div id="sidebar-nav" class="sidebar">
                 <div class="sidebar-scroll">
                     <nav>
                         <ul class="nav">
                             <li>
-                                <a href="paginaInicial.php" class="">
+                                <a href="/expotecsc/cpanel" class="">
                                     <i class="lnr lnr-home"></i> 
                                     <span>Início</span>
                                 </a>
@@ -132,6 +138,12 @@
                                 <a href="minhasSubmissoes.php" class="">
                                     <i class="lnr lnr-pencil"></i> 
                                     <span>Minhas Submissões</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/expotecsc/attendees/listmyinscriptions" class="">
+                                    <i class="lnr lnr-pencil"></i> 
+                                    <span>Minhas Inscrições</span>
                                 </a>
                             </li>
                             <li>
@@ -151,15 +163,15 @@
                     </nav>
                 </div>
             </div>
-    <!-- END LEFT SIDEBAR -->
-    <!-- MAIN -->
+ 
             <div class="main">
-                <!-- MAIN CONTENT -->
+ -->
                 <?php include dirname(__FILE__) . '/mensagensGET.php'; ?>
+<!--
                 <div class="main-content">
                     <div class="container-fluid">
                         <div class="breadcrumbs">9&ordf; EXPOTEC/SC</div>
-                        <div class="panel panel-headline">
+                        <div class="panel panel-headline"> -->
                          <?php 
                 
                 require_once './inc/modal.php';

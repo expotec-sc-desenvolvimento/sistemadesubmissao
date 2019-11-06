@@ -68,7 +68,7 @@
                         
                 <tr><td align="center" style="vertical-align: middle;">
                         <a class='editarObjeto' id='<?php echo $evento->getId() ?>' name='Evento'><i class="fa fa-edit m-right-xs"></i></a>
-                        <a class="excluirObjeto" id="<?php echo $evento->getId() ?>" name='Evento'><i class="fa fa-trash-alt m-right-xs"></i></a>
+                        <a class="excluirObjeto" id="<?php echo $evento->getId() ?>" name='Evento'><i class="fa fa-trash m-right-xs"></i></a>
                     </td>
                     
                     <td align="center" style="vertical-align: middle;"><img src='<?php echo $pastaFotosEventos . $evento->getLogo() ?>' width='90px'></td>
@@ -82,7 +82,7 @@
                     <?php   foreach ($modalidadesDoEvento as $modalidade) {
                                 $id = ModalidadeEvento::retornaIdModalidadeEvento($evento->getId(),$modalidade->getId()); ?>
                                 <li>
-                                     <a class='excluirObjeto' id='<?php echo $id ?>' name='ModalidadeEvento'><i class="fa fa-trash-alt m-right-xs"></i></a>
+                                     <a class='excluirObjeto' id='<?php echo $id ?>' name='ModalidadeEvento'><i class="fa fa-trash m-right-xs"></i></a>
                                      <?php echo $modalidade->getDescricao() ?>    
                                 </li>
                     <?php   } ?>
@@ -101,7 +101,7 @@
                     <?php   foreach ($areasDoEvento as $area) {
                                 $id = AreaEvento::retornaIdAreaEvento($evento->getId(),$area->getId()); ?>
                                 <li>
-                                     <a class='excluirObjeto' id='<?php echo $id ?>' name='AreaEvento'><i class="fa fa-trash-alt m-right-xs"></i></a>
+                                     <a class='excluirObjeto' id='<?php echo $id ?>' name='AreaEvento'><i class="fa fa-trash m-right-xs"></i></a>
                                      <?php echo $area->getDescricao() ?>    
                                 </li>
                     <?php   } ?>

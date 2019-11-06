@@ -15,7 +15,7 @@ function loadAreas() {
 
 }
 
-function loadModalidades() {
+function loadModalidades(campo) {
     
     
     var xhttp = new XMLHttpRequest();
@@ -24,6 +24,7 @@ function loadModalidades() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("select-Modalidades").innerHTML = this.responseText;
+	    if (campo!='') document.getElementById('select-Modalidades').value = campo;
         }
     };
 
@@ -79,7 +80,7 @@ function gerarLista(icon) {
     //var idUsers = "";
 
     for (var i=0;i<idUsersSelected.length;i++) {
-        var inserir = "<span class='link-users' onclick=\"retirarNome('"+idUsersSelected[i]+"','"+icon+"')\">"+nomeUsersSelected[i]+"<img src='"+icon+"' class='img-miniatura' style='cursor:pointer;'></span>";
+        var inserir = "&nbsp;&nbsp;<span class='link-users' onclick=\"retirarNome('"+idUsersSelected[i]+"','"+icon+"')\">"+nomeUsersSelected[i]+"<img src='"+icon+"' class='img-miniatura' style='cursor:pointer;'></span>";
 
         nomesUsers = nomesUsers + inserir + " ";
         
@@ -141,7 +142,9 @@ function submeterAutores(idSubmissor) {
     for (var i=0;i<idUsersSelected.length;i++) ids = ids + idUsersSelected[i] + ";";
     document.getElementById('idUsuariosAdd').value = ids;
     
-    return false;
+    document.getElementById('botaoSubmeter').value = "Aguarde...";
+    document.getElementById('botaoSubmeter').disabled = true;
+    return true;
 
 }
 
@@ -165,7 +168,7 @@ function loadAvaliadores(idAvaliadorAtual,idSubmissao,evento,area,tipo,resposta)
     
     
     document.getElementById(resposta).innerHTML = "<option value=''>Aguarde...</option>";
-    //alert(idAvaliadorAtual+" "+idSubmissao+" "+evento+" "+area+" "+tipo);
+   // alert(idAvaliadorAtual+" ; "+idSubmissao+" ; "+evento+" ; "+area+" ; "+tipo);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {

@@ -63,7 +63,7 @@
                                                     <th>Modalidade</th>
                                                     <th>Título</th>
                                                     <th>Versão</th>
-                                                    <th>Arquivo</th>
+                                                    
                                                     <th>Situação desta Avaliação</th>
                                                     <th>Data de Realização da Avaliação</th>
                                                     <th>Prazo de Entrega</th>
@@ -96,8 +96,8 @@
                                  * ou seja, o avaliador tenha avaliado a versão parcial do Trabalho como APROVADO ou REPROVADO, ele não precisa mais realizar a avaliação
                                  */
                                 $submissaoParcial = Submissao::retornaDadosSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdRelacaoComSubmissao());
-                                if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $submissaoParcial->getId(), 5))!=1) continue;
-                                else {
+			        if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $submissaoParcial->getId(), 5))!=1) continue;
+			        else {
                                     $a = &$avCorrigidas;
                                     $contAvCorrigidas++;
                                 }
@@ -106,7 +106,8 @@
                             else if ($tipoSubmissao==3) {$a = &$avFinais; $contAvFinais++;}
                             
                             
-                            
+                             $arquivo = "<a href='".$pastaSubmissoes .  Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getArquivo()."' target='blank'><i class='fa fa-file'></i>  </a>";
+
                             $situacaoSubmissao = SituacaoSubmissao::retornaDadosSituacaoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdSituacaoSubmissao())->getDescricao();
                             $situacaoAvaliacao = SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao());
                             
@@ -115,22 +116,22 @@
                             
                             if ($situacaoSubmissao=="Em avaliacao") { // Se a submissão não tiver sido finalizada...
                                 if (!in_array($situacaoAvaliacao->getId(), array(2,4,5,6))) { // Se a avaliação não tiver sido finalizada
-                                    $a.= "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a></td>";
+				     if ($tipoSubmissao!=3)  $a.= "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a>".$arquivo."</td>";
+				     else	$a .= "<td></td>"; //REVER ISSO
                                 }
                                 else if (strtotime(date('d-m-Y'))<=strtotime ($avaliacao->getDataRealizacaoAvaliacao())) { //Se a avaliação tiver sido finalizada, mas foi ainda está no prazo para alteração (mesmo dia da avaliação)
-                                    $a.= "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><i class='fa fa-edit m-right-xs'></i></a></td>";
+                                    $a.= "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><i class='fa fa-edit m-right-xs'></i></a>".$arquivo."</td>";
                                 }
-                                else $a.= "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><i class='fa fa-search m-right-xs'></i></a></td>";
+                                else $a.= "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><i class='fa fa-search m-right-xs'></i></a>".$arquivo."</td>";
                             }
-                            else $a.= "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><i class='fa fa-search m-right-xs'></i></a></td>";
+                            else $a.= "<td><a class='visualizarObjeto' id='".$avaliacao->getId()."' name='Avaliacao'><i class='fa fa-search m-right-xs'></i></a>".$arquivo."</td>";
                             
                             $a.= "<td>".Evento::retornaDadosEvento(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdEvento())->getNome()."</td>";
                             $a.= "<td>".Area::retornaDadosArea(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdArea())->getDescricao()."</td>";
                             $a.= "<td>".Modalidade::retornaDadosModalidade(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdModalidade())->getDescricao()."</td>";
                             $a.= "<td>".Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getTitulo()."</td>";
                             $a.= "<td>".TipoSubmissao::retornaDadosTipoSubmissao(Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getIdTipoSubmissao())->getDescricao()."</td>";
-                            $a.= "<td><a href='".$pastaSubmissoes . Submissao::retornaDadosSubmissao($avaliacao->getIdSubmissao())->getArquivo()."'>Visualizar</td>";
-                            
+                                                        
                             $a.= "<td>".SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($avaliacao->getIdSituacaoAvaliacao())->getDescricao()."</td>";
                             
                             if ($avaliacao->getDataRealizacaoAvaliacao()=='') {$a.= "<td>-</td>";}

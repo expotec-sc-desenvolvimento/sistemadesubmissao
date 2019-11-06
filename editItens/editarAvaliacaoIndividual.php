@@ -177,9 +177,9 @@
                     $id = $avaliacaoCriterio->getId();
                 ?>
                     <input type='hidden' id='<?php echo $id ?>' name='<?php echo $id ?>' value='<?php echo $avaliacaoCriterio->getNota()?>'>
-                    <tr><td><?php echo $criterio->getDescricao() ?></td>
+                    <tr><td><p style='white-space:pre-line; text-align:justify'><?php echo $criterio->getDescricao() ?></p></td>
                         <td align='center'><?php echo $submissao->getIdTipoSubmissao()==3 ? $criterio->getPeso() : "-" ?></td>
-                        <td><?php echo $criterio->getDetalhamento()?></td>
+                        <td><p style='white-space:pre-line; text-align:justify;'><?php echo $criterio->getDetalhamento() ?></p></td>
                         <td><select required='true' class='form-control' style='width: 70px' onchange="document.getElementById('<?php echo $avaliacaoCriterio->getId() ?>').value=this.value">
                                <option value=''>-</option>
                                <?php if ($tipoSubmissao == 1 || $tipoSubmissao == 2) { ?>
@@ -218,14 +218,14 @@
                                             if ($opcao == $avaliacao->getIdSituacaoAvaliacao()) echo "<option selected value='".$opcao."'>".SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($opcao)->getDescricao()."</option>";
                                             else echo "<option value='".$opcao."'>".SituacaoAvaliacao::retornaDadosSituacaoAvaliacao($opcao)->getDescricao()."</option>";
                                         }
-                                        
+                                       // (Descreva os pontos que na sua opinião devem ser melhorados, analisando itens como o emprego adequado da língua culta, preenchimento adequado dos campos exigidos no resumo expandido (TÍTULO, RESUMO, RESUMO EM LÍNGUA ESTRANGEIRA, INTRODUÇÃO, METODOLOGIA, RESULTADOS E DISCUSSÕES, CONSIDERAÇÕES FINAIS e REFERÊNCIAS) e qualidade do texto apresentado):
                                     ?>
                                 </select>
                             </td>
                         </tr>
                     <?php }?>
-                    <tr><td align='right'>Análise da Avaliação: </td>
-                        <td><textarea class=form-control id='observacao' name='observacao' cols='80' rows='10' style="resize: none;"><?php echo $avaliacao->getObservacao()?></textarea></td>
+                    <tr><td align='right' width='33%'><b>Análise da Avaliação: </b> <i>Baseado em suas observações na primeira avaliação e o resultado final apresentado no resumo expandido corrigido, o trabalho deverá ser considerado: <b>Aprovado/Reprovado</b></i></td>
+                        <td><textarea class=form-control id='observacao' name='observacao' cols='80' rows='15' style="resize: none;"><?php echo $avaliacao->getObservacao()?></textarea></td>
                     </tr>
                     <?php if ($tipoSubmissao == 2) { // Submissão Corrigida, mostradas as observações feitas na submissão anterior?>
                     <tr><th>Observações da <br>Submissão Parcial: </th>
@@ -242,7 +242,7 @@
                 <div class="control-group form-actions">
                     <div class="row">
                         <div class="col-md-3 mb-4">
-                        <button class="btn btn-lg btn-primary btn-block mb-4" type="submit">Realizar Avaliação</button>
+                        <button class="btn btn-lg btn-primary btn-block mb-4" type="submit">Finalizar</button>
                         </div>
 
                         <div class="col-md-3 mb-4">

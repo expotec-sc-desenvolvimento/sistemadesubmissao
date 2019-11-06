@@ -59,7 +59,7 @@ class UsuarioPedrina {
     }
 
     function setPicture($picture) {
-        $this->foto = $picture;
+        $this->picture = $picture;
     }
 
     function setIdPerfil($idPerfil) {
@@ -69,12 +69,13 @@ class UsuarioPedrina {
         
     public static function retornaDadosUsuario ($idUsuario) {
         
-        $conn = mysqli_connect('localhost', 'root', 'root', 'expotecdb');
-        //$conn = mysqli_connect('localhost', 'admin_expotec', '4dm1n3xp0t3c', 'expotecdb');
+        //$conn = mysqli_connect('localhost', 'root', 'root', 'expotecdb');
+        $conn = mysqli_connect('localhost', 'admin_expotec', '4dm1n3xp0t3c', 'sistemadesubmissao');
         mysqli_set_charset($conn, "utf8");
         
-        
-        $result = mysqli_query($conn, 'SELECT u.uuid, u.name, u.permission, u.email, u.picture FROM users u WHERE u.uuid = ' . $idUsuario);
+      
+	$result = mysqli_query($conn, 'SELECT u.uuid, u.name, u.permission, u.email, u.picture FROM User u WHERE u.uuid = ' . $idUsuario);
+//	echo $result; exit(1);
         $user = null;
         while ($consulta = mysqli_fetch_array($result)) {
             $user = new UsuarioPedrina();
@@ -94,12 +95,12 @@ class UsuarioPedrina {
     
     public static function listaUsuarios ($filtroNome,$filtroTipoUsuario,$filtroPerfil) {
         
-        $conn = mysqli_connect('localhost', 'root', 'root', 'expotecdb');
-        //$conn = mysqli_connect('localhost', 'admin_expotec', '4dm1n3xp0t3c', 'expotecdb');
+        //$conn = mysqli_connect('localhost', 'root', 'root', 'expotecdb');
+        $conn = mysqli_connect('localhost', 'admin_expotec', '4dm1n3xp0t3c', 'sistemadesubmissao');
         mysqli_set_charset($conn, "utf8");
         
         
-        $result = mysqli_query($conn, "SELECT u.uuid, u.name, u.permission, u.email, u.picture FROM users u WHERE u.name LIKE '%".$filtroNome."%'");
+        $result = mysqli_query($conn, "SELECT u.uuid, u.name, u.permission, u.email, u.picture FROM User u WHERE u.name LIKE '%".$filtroNome."%'");
         $users = array();
         while ($consulta = mysqli_fetch_array($result)) {
             $user = new UsuarioPedrina();
@@ -118,6 +119,7 @@ class UsuarioPedrina {
         mysqli_close($conn);
         return $users;
     }
+/*    
 /*    
     public static function listaAvaliadoresParaCadastro($idEvento,$idArea,$tipo,$limite,$idSubmissao,$tipoAvaliacao) {
         $conn = mysqli_connect('localhost', 'root', 'root', 'expotecdb');

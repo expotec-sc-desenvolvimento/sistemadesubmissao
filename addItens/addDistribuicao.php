@@ -35,8 +35,8 @@
                     <?php 
                         foreach ($submissoes as $submissao) {
                             $situacao = "";
-                            $listaAvaliadoresArea = Usuario::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'mesma-area',2,$submissao->getId());
-                            $listaAvaliadoresOutraArea = Usuario::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'outra-area',1,$submissao->getId());
+                            $listaAvaliadoresArea = Avaliador::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'mesma-area',2,$submissao->getId());
+                            $listaAvaliadoresOutraArea = Avaliador::listaAvaliadoresParaCadastro($submissao->getIdEvento(),$submissao->getIdArea(),'outra-area',1,$submissao->getId());
 
                             if (count($listaAvaliadoresArea)>=2 && count($listaAvaliadoresOutraArea)>=1) $situacao = "<img class='img-miniatura' src='".$iconOK."' title='Há avaliadores suficientes'>";
                             else $situacao = "<img class='img-miniatura' src='".$iconExcluir."' title='Sem avaliadores suficientes'>";

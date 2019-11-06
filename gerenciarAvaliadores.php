@@ -129,13 +129,13 @@
                                 
                             ?>
                             <tr>
-                                <td align="center" style="vertical-align: middle;"><a class='excluirObjeto' id='<?php echo $avaliador->getId() ?>' name='Avaliadores'><i class="fa fa-trash-alt m-right-xs"></i></a></td>
+                                <td align="center" style="vertical-align: middle;"><a class='excluirObjeto' id='<?php echo $avaliador->getId() ?>' name='Avaliadores'><i class="fa fa-trash m-right-xs"></i></a></td>
                                 <td><?php echo Evento::retornaDadosEvento($avaliador->getIdEvento())->getNome() ?></td>
                                 <td><?php echo Area::retornaDadosArea($avaliador->getIdArea())->getDescricao() ?></td>
-                                <td><?php echo Usuario::retornaDadosUsuario($avaliador->getIdUsuario())->getNome() ?></td>
-                                <td><?php echo $avParciais ?></td>
-                                <td><?php echo $avCorrigidas ?></td>
-                                <td><?php echo $avFinais ?></td>
+                                <td><?php echo UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario())->getNome() ?></td>
+                                <td align='center'><?php echo $avParciais ?></td>
+                                <td align='center'><?php echo $avCorrigidas ?></td>
+                                <td align='center'><?php echo $avFinais ?></td>
                             </tr>
                         
                         <?php } ?>

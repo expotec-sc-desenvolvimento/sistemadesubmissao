@@ -4,11 +4,13 @@
     
     session_start();
     
+
     loginObrigatorio();
 
     $usuario = new UsuarioPedrina();
     $usuario = $_SESSION['usuario'];
-    
+    //echo $usuario->getNome(); 
+   // exit(1);  
     
         
 ?>
@@ -45,20 +47,19 @@
                 <h2 align="center">Submissões do Usuário</h2>
                 <table class="table table-striped table-bordered dt-responsive nowrap">
                 
-                <?php if (count($submissoes)==0) echo "<tr><td>Nenhum trabalho submetido</td></tr>";
+                <?php if (count($submissoes)==0) echo "<tr><td align='center'>Nenhum trabalho submetido</td></tr>";
                       else { ?>
                         <thead>
                             <tr>
-                                <th><strong>*</th>
-                                <th><strong>Evento</th>
-                                <th><strong>Area</th>
-                                <th><strong>Modalidade</th>
-                                <th><strong>Tipo</th>
-                                <th><strong>Titulo</th>
-                                <th><strong>Arquivo</th>
-                                <th><strong>Situação</th>
-                                <th><strong>Autores</th>
-                                <th><strong>Versão Final</td>
+                                <td align='center'><strong>*</td>
+				<td align='center'><strong>Título</td>
+				<td align='center'><strong>Evento</td>
+                                <td align='center'><strong>Area</td>
+                                <td align='center'><strong>Modalidade</td>
+                                <td align='center'><strong>Tipo</td>
+                                <td align='center'><strong>Situação</td>
+                                <td align='center'><strong>Autores</td>
+                                <td align='center'><strong>Versão Final</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,10 +69,16 @@
                               $submissao = Submissao::retornaDadosSubmissao($obj->getIdSubmissao());
                               $usuarioSubmissao = "";
                               
-                              foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($obj->getIdSubmissao(), '', '') as $user) {
-                                  $usuarioSubmissao = $usuarioSubmissao . UsuarioPedrina::retornaDadosUsuario($user->getIdUsuario())->getNome();
-                                  if ($user->getIsSubmissor() == 1) $usuarioSubmissao = $usuarioSubmissao . " (Submissor)";
-                                  $usuarioSubmissao = $usuarioSubmissao . "<br>";
+			      foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($obj->getIdSubmissao(), '', '') as $user) {
+
+				  $user12 = UsuarioPedrina::retornaDadosUsuario($user->getIdUsuario());
+				  $img = "<img src='/uploads/fotosPerfil/semFoto.jpg' class='flag'>";
+				  if ($user12->getPicture()!=NULL) $img ="<img src='/expotecsc/attendees/getuserpicture/".$user12->getId()."/' class='flag'>";
+
+	  		          $usuarioSubmissao .= $img . $user12->getNome();
+			  	  				  
+                                  if ($user->getIsSubmissor() == 1) $usuarioSubmissao .= " (Submissor)";
+                                  $usuarioSubmissao .= "<br>";
                               }
                               $id = $submissao->getId();
                               $nota = $submissao->getNota();
@@ -80,16 +87,23 @@
                               $visualizar = "<a id='".$id."' onclick=\"location.href='visualizarSubmissao.php?id=".$submissao->getId()."'\"><i class='fa fa-search m-right-xs'></i></a>";
                               $editar="";
                               $excluir="";
-                              if ($obj->getIsSubmissor() && $situacao->getDescricao()=="Submetida" && $submissao->getIdTipoSubmissao()==1) {
+			      $arquivo = "<a href='".$pastaSubmissoes . $submissao->getArquivo()."' target='blank'><i class='fa fa-file'></i>  </a>";
+			      if ($obj->getIsSubmissor() && $situacao->getDescricao()=="Submetida" && $submissao->getIdTipoSubmissao()==1) {
                                   $editar = "<a id='".$id."' onclick=\"location.href='editarSubmissao2.php?id=".$submissao->getId()."'\"><i class='fa fa-edit m-right-xs'></i></a>";
                                   
                                   if (TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao() == "Parcial") {
                                     $excluir = "<a href='submissaoForms/wsCancelarSubmissao.php?id=" . $id . "' "
                                               . "onclick=\"return confirm('Tem certeza que deseja excluir esta Submissao?')\">"
-                                              . "<i class='fa fa-trash-alt m-right-xs'></i></a>";
+                                              . "<i class='fa fa-trash m-right-xs'></i></a>";
                                   }
                               }
-                              
+			      // INSERÇÃO DE CODIGO MOMENTANEO PARA ALTERAÇÃO DE ALGUNS DADOS:
+			      if ($obj->getIsSubmissor() && ($submissao->getIdTipoSubmissao()==3 || $submissao->getIdTipoSubmissao()==2)) {
+				  $editar = "<a id='".$id."' onclick=\"location.href='editarSubmissao2.php?id=".$submissao->getId()."'\"><i class='fa fa-edit m-right-xs'></i></a>";
+			      }
+			      // FIM
+
+
                               $versaoFinal = "-";
                               
                                 // Tipos de Submissoes: 1-Parcial, 2-Corrigida, 3-Final
@@ -103,16 +117,17 @@
                               
                                 ?>
                                     <tr>
-                                        <td align='center'><?php echo $visualizar.$editar.$excluir ?></td>
-                                        <td><?php echo Evento::retornaDadosEvento($submissao->getIdEvento())->getNome() ?></td>
-                                        <td><?php echo Area::retornaDadosArea($submissao->getIdArea())->getDescricao() ?></td>
-                                        <td><?php echo Modalidade::retornaDadosModalidade($submissao->getIdModalidade())->getDescricao() ?></td>
-                                        <td><?php echo TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao() ?></td>
-                                        <td><?php echo $submissao->getTitulo() ?></td>
-                                        <td><a href='<?php echo $pastaSubmissoes . $submissao->getArquivo()  ?>'>Visualizar</a></td>
-                                        <td><?php echo $situacao->getDescricao() ?></td>
-                                        <td><?php echo $usuarioSubmissao ?></td>
-                                        <td><?php echo $versaoFinal ?></td></tr>
+					<td align='center' style='vertical-align: middle;'><?php echo $visualizar.$arquivo.$editar.$excluir ?></td>
+					<td align='center' style='vertical-align: middle;'><?php echo $submissao->getTitulo() ?> </td>
+                                        <td align='center' style='vertical-align: middle;'><?php echo Evento::retornaDadosEvento($submissao->getIdEvento())->getNome() ?></td>
+                                        <td align='center' style='vertical-align: middle;'><?php echo Area::retornaDadosArea($submissao->getIdArea())->getDescricao() ?></td>
+                                        <td align='center' style='vertical-align: middle;'><?php echo Modalidade::retornaDadosModalidade($submissao->getIdModalidade())->getDescricao() ?></td>
+                                        <td align='center' style='vertical-align: middle;'><?php echo TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao() ?></td>
+                                        
+                                     
+                                        <td align='center' style='vertical-align: middle;'><?php echo $situacao->getDescricao() ?></td>
+                                        <td style='vertical-align: middle;'><?php echo $usuarioSubmissao ?></td>
+                                        <td align='center' style='vertical-align: middle;'><?php echo $versaoFinal ?></td></tr>
                                 
                               
                     <?php }

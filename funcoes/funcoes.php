@@ -59,7 +59,10 @@
         $corpo = "Foi cadastrada uma nova Avaliação de Trabalho para você.<br><br> ";
         $corpo .= "<strong>Titulo: </strong>" . $submissao->getTitulo() . "<br>";
         $corpo .= "<strong>Área: </strong>" . Area::retornaDadosArea($submissao->getIdArea())->getDescricao() . "<br>";
-        $corpo .= "<strong>Prazo Final: </strong>" . date('d/m/Y', strtotime($prazoEnvio)) . "<br><br>";
+	$corpo .= "<strong>Prazo Final: </strong>" . date('d/m/Y', strtotime($prazoEnvio)) . "<br><br>";
+	$corpo .= "<strong>Link de acesso ao sistema: </strong> http://lausana.ifrn.edu.br/expotecsc/login <br>";	
+	$corpo .= "<strong>Link de acesso ao trabalho: </strong><a href='".$pastaSubmissoes .  $submissao->getArquivo()."' target='blank'>CLIQUE AQUI</a><br><br>";
+;
         $corpo .= "<br>Atenciosamente, <br>";
         $corpo .= "<strong>Equipe do Sistema de Submissão - IFRN</strong>";
         
@@ -81,8 +84,11 @@
         $corpo = "Foi atualizada uma nova Avaliação de Trabalho para você.<br><br> ";
         $corpo .= "<strong>Titulo: </strong>" . $submissao->getTitulo() . "<br>";
         $corpo .= "<strong>Área: </strong>" . Area::retornaDadosArea($submissao->getIdArea())->getDescricao() . "<br>";
-        $corpo .= "<strong>Prazo Final: </strong>" . date('d/m/Y', strtotime($prazoEnvio)) . "<br><br>";
-        $corpo .= "<br>Atenciosamente, <br>";
+	$corpo .= "<strong>Prazo Final: </strong>" . date('d/m/Y', strtotime($prazoEnvio)) . "<br><br>";
+	$corpo .= "<strong>Link de acesso ao sistema: </strong> http://lausana.ifrn.edu.br/expotecsc/login <br>";	
+	$corpo .= "<strong>Link de acesso ao trabalho: </strong><a href='".$pastaSubmissoes .  $submissao->getArquivo()."' target='blank'>CLIQUE AQUI</a><br><br>";
+
+	$corpo .= "<br>Atenciosamente, <br>";
         $corpo .= "<strong>Equipe do Sistema de Submissão - IFRN</strong>";
         
         
@@ -111,7 +117,8 @@
         if ($submissao->getIdSituacaoSubmissao()==4) { // Se foi uma submissão corrigida
             $corpo .= "Este trabalho foi aprovado e está apto a ser apresentado no evento <strong>".Evento::retornaDadosEvento($submissao->getIdEvento())->getNome()."</strong><br><br>";
         }
-        
+
+	$corpo .= "<strong>Link de acesso ao sistema: </strong> http://lausana.ifrn.edu.br/expotecsc/login <br><br>";	
         $corpo .= "<br>Atenciosamente, <br>";
         $corpo .= "<strong>Equipe do Sistema de Submissão - IFRN</strong>";
         

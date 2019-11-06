@@ -13,13 +13,14 @@
 
     $listaEventosDaModalidade = ModalidadeEvento::listaModalidadeEventoComFiltro($_GET['id'], '');
     $listaCriteriosParciaisDaModalidade = Criterio::listaCriteriosComFiltro($_GET['id'], 1);
-    $listaCriteriosFinaisDaModalidade = Criterio::listaCriteriosComFiltro($_GET['id'], 2);
+    $listaCriteriosCorrigidosDaModalidade = Criterio::listaCriteriosComFiltro($_GET['id'], 2);
+    $listaCriteriosFinaisDaModalidade = Criterio::listaCriteriosComFiltro($_GET['id'], 3);
     
-    $pendencias = count($listaEventosDaModalidade)+count($listaCriteriosParciaisDaModalidade)+ count($listaCriteriosFinaisDaModalidade);
+    $pendencias = count($listaEventosDaModalidade)+count($listaCriteriosParciaisDaModalidade)+count($listaCriteriosCorrigidosDaModalidade) +count($listaCriteriosFinaisDaModalidade);
     $nome = Modalidade::retornaDadosModalidade($_GET['id'])->getDescricao();
 ?>
 
-<div class="titulo-modal">Excluir Usuário</div>
+<div class="titulo-modal">Excluir Modalidade</div>
 
 <div class="itens-modal">
     
@@ -48,6 +49,16 @@
                 echo "<p align='center'><strong>Critérios Parciais desta Modalidade (".count($listaCriteriosParciaisDaModalidade).")</strong></p>";
                 echo "<ul style='list-style-type:none; margin-left: 30px;'>";
                 foreach ($listaCriteriosParciaisDaModalidade as $obj) {
+                    echo "<li>";
+                    echo "<strong>Critério: </strong>" .$obj->getDescricao();
+                    echo "</li>";
+                }
+                echo "</ul>";
+	    }
+	    if (count($listaCriteriosCorrigidosDaModalidade)>0) {
+                echo "<p align='center'><strong>Critérios de Ressubmissão desta Modalidade (".count($listaCriteriosCorrigidosDaModalidade).")</strong></p>";
+                echo "<ul style='list-style-type:none; margin-left: 30px;'>";
+                foreach ($listaCriteriosCorrigidosDaModalidade as $obj) {
                     echo "<li>";
                     echo "<strong>Critério: </strong>" .$obj->getDescricao();
                     echo "</li>";

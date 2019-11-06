@@ -40,7 +40,7 @@
             <div class="control-group form-actions">
                 <div class="row">
                     <div class="col-md-3 mb-4">
-                    <button class="btn btn-lg btn-primary btn-block mb-8" type="submit">Editar Modalidade</button>
+                    <button class="btn btn-lg btn-primary btn-block mb-8" type="submit">Atualizar</button>
                     </div>
 
                     <div class="col-md-3 mb-4">

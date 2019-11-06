@@ -33,7 +33,8 @@ class AvaliadorDAO {
     
     public static function listaAvaliadoresComFiltro($idEvento,$idArea,$idUsuario,$tipo) {
         $sql = "CALL listaAvaliadoresComFiltro('$idEvento','$idArea','$idUsuario','$tipo');";
-        //echo $sql; exit(1);
+	//echo $sql; exit(1);
+	
         return Conexao::executar($sql);
     }
  

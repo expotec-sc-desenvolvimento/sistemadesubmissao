@@ -14,7 +14,7 @@
     
     if ($solicitacao->getId()=="") header('Location: ./paginaInicial.php');
 
-    $user = Usuario::retornaDadosUsuario($solicitacao->getIdUsuario());
+    $user = UsuarioPedrina::retornaDadosUsuario($solicitacao->getIdUsuario());
     
     $eventoDaSolicitacao = Evento::retornaDadosEvento($solicitacao->getIdEvento());
     $areaDaSolicitacao = Area::retornaDadosArea($solicitacao->getIdArea());

@@ -29,7 +29,7 @@
             // 1 = Parcial , 2 = Corrigida , 3 - Final
             
             $idAvaliacao = $p['idAvaliacao'];
-            $observacao = $p['observacao'];
+            $observacao = str_replace("'","\'",$p['observacao']);
             
             $situacaoAvaliacao = '';
             $notas = "";

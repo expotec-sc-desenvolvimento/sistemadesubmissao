@@ -71,21 +71,21 @@
 
 
 
-        
+
 
 <div class="panel-heading">
     <h3 class="panel-title">Adicionar Submissão</h3>
 </div>
 <div class="panel-body">
 
-    <form method="post" action="<?=htmlspecialchars('submissaoForms/wsAddSubmissao.php');?>" enctype="multipart/form-data">
+    <form method="post" action="<?=htmlspecialchars('submissaoForms/wsAddSubmissao.php');?>" enctype="multipart/form-data" onsubmit="submeterAutores('<?php echo $usuario->getId()?>')">
         <input type="hidden" id="idUsuariosAdd" name="idUsuariosAdd">
 
 
         <div class="row">
             <div class="col-md-4 mb-4">
                 <label class="control-label">Evento</label>
-                    <select class='form-control' id="select-Eventos" name="select-Eventos" onchange="loadAreas();loadModalidades()" required="true">
+                    <select class='form-control' id="select-Eventos" name="select-Eventos" onchange="loadAreas();loadModalidades('')" required="true">
                         <option value="">Selecione um evento</option>
                         <?php
                             foreach ($eventos as $evento) {
@@ -154,7 +154,7 @@
                     <label for="e.contact">Palavras-Chave</label>
                         <input class="form-control" id="palavrasChave" name="palavrasChave" required="true">
                     <div class="help-inline ">
-                        Inserir de 3 a 5 palavras-chave, Separadas por vírgula (Ex.: palavra1; palavra2)
+                        Inserir de 3 a 5 palavras-chave, Separadas por vírgula (Ex.: palavra1, palavra2)
                     </div>
             </div>
 
@@ -227,7 +227,7 @@
         <div class="control-group form-actions">
             <div class="row">
                 <div class="col-md-3 mb-4">
-                <button class="btn btn-lg btn-primary btn-block mb-4" type="submit" onclick="submeterAutores('<?php echo $usuario->getId()?>')">Adicionar Submissão</button>
+                <input class="btn btn-lg btn-primary btn-block mb-4" type="submit"  id='botaoSubmeter' value="Submeter Trabalho">
                 </div>
 
                 <div class="col-md-3 mb-4">
@@ -240,7 +240,15 @@
 </div>
 
         
-    <?php }?>
+    <?php 
+	if (isset($_GET['idEvento']) && isset($_GET['idModalidade'])) {
+	     echo "<script>
+		     document.getElementById('select-Eventos').value = ".$_GET['idEvento'].";
+		     loadModalidades('".$_GET['idModalidade']."');
+		     loadAreas();
+		  </script>";
+	}
+    }?>
 
 <?php 
     include './inc/pFinal.php';

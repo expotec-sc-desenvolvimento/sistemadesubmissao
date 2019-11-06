@@ -26,7 +26,7 @@ include dirname(__DIR__) . '/inc/includes.php';
         <tr><td><strong>Area: </strong></td><td><?php echo $nomeArea ?></td></tr>
         <tr><td><strong>Avaliadores: </strong></td><td>
             <?php foreach (Avaliador::listaAvaliadoresComFiltro($areaAvento->getIdEvento(), $areaAvento->getIdArea(), '', "area") as $avaliador) {
-                echo "<i>" . Usuario::retornaDadosUsuario($avaliador->getIdUsuario())->getNome() . "</i><br> ";
+                echo "<i>" . UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario())->getNome() . "</i><br> ";
             }
     ?>
           </td> 

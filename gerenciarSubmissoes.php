@@ -42,7 +42,7 @@
                 if (evento!='') url+='idEvento='+evento+'&';
                 if (modalidade!='') url+='idModalidade='+modalidade+'&';
                 if (area!='') url+='idArea='+area+'&';
-                if (situacao!='') url+='idSituacao='+situacao;
+                if (situacao!='') url+='idSituacao='+situacao+'&';
                 if (tipo!='') url+='idTipo='+tipo;
                 
                 document.location = url;
@@ -172,19 +172,18 @@
             <table align="center" class="table table-striped table-bordered dt-responsive nowrap">
                 <thead>
                     <tr>
-                        <th>*</th>
-                        <th>Evento</th>
-                        <th>Área</th>
-                        <th>Modalidade</th>
-                        <th>Tipo</th>
-                        <th>Titulo</th>
-                        <th>Arquivo</th>
-                        <th>Situação</th>
-                        <th>Autores</th>
-                        <th>Avaliadores</th>
-                        <th>Nota</th>
+                        <td align='center'><strong>*</td>
+                        <td align='center'><strong>Evento</td>
+                        <td align='center'><strong>Área</td>
+                        <td align='center'><strong>Modalidade</td>
+                        <td align='center'><strong>Tipo</td>
+                        <td align='center'><strong>Título</td>                        
+                        <td align='center'><strong>Situação</td>
+                        <td align='center'><strong>Autores</td>
+                        <td align='center'><strong>Avaliadores</td>
+                        <td align='center'><strong>Nota</td>
                         
-                        <th>*</th>
+                        <td align='center'>*</td>
 
                     </tr>
                 </thead>
@@ -201,7 +200,9 @@
                                     
                             $avaliacoes = Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(),'');
                             $avaliadores = "<ul class='listaCriterios'>";
-                            
+			    $arquivo = "<a href='".$pastaSubmissoes . $submissao->getArquivo()."' target='blank'><i class='fa fa-file'></i>  </a>";
+			    $visualizar = "<a onclick=\"location.href='visualizarSubmissao.php?id=".$submissao->getId()."'\"><i class='fa fa-search m-right-xs'></i></a>";
+
                             foreach ($avaliacoes as $avaliacao) {
                                 $editarAvaliador = "";
                                 $resultadoAvaliacao = "";
@@ -256,13 +257,13 @@
                             }    //date('m/d/Y',$submissao->getDataEnvio());
                     ?>
                             <tr>
-                                <td align="center" style="vertical-align: middle;"><a onclick="location.href='visualizarSubmissao.php?id=<?php echo $submissao->getId()?>'"><i class="fa fa-search m-right-xs"></i></a></td>
+			    <td align="center" style="vertical-align: middle;"><?php echo $visualizar . $arquivo;?></td>
                                 <td align="center" style="vertical-align: middle;"><?php echo Evento::retornaDadosEvento($submissao->getIdEvento())->getNome() ?></td>
                                 <td align="center" style="vertical-align: middle;"><?php echo Area::retornaDadosArea($submissao->getIdArea())->getDescricao() ?></td>
                                 <td align="center" style="vertical-align: middle;"><?php echo Modalidade::retornaDadosModalidade($submissao->getIdModalidade())->getDescricao() ?></td>
                                 <td align="center" style="vertical-align: middle;"><?php echo TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao() ?></td>
                                 <td align="center" style="vertical-align: middle;"><?php echo $submissao->getTitulo(); ?></td>
-                                <td align="center" style="vertical-align: middle;"><a href='<?php echo $pastaSubmissoes . $submissao->getArquivo()  ?>'>Visualizar</a></td>
+                                
                                 <td align="center" style="vertical-align: middle;"><?php echo SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao())->getDescricao() ?></td>
                                 <td align="center" style="vertical-align: middle;"><?php echo $usuarioSubmissao ?></td>
                                 <td><?php echo $avaliadores . $addAvaliador . $repetirAvaliadores?></td>
