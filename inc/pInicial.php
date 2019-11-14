@@ -16,7 +16,7 @@
                     <div id="navbar-menu">
                         <ul class="nav navbar-nav navbar-right">
 
-                        <?php //if ($usuario->getIdPerfil()==1) {?>
+                        <?php// if ($usuario->getIdPerfil()==1) {?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> 
                                     <i class=" lnr lnr-cog"></i> 
@@ -55,6 +55,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="./gerenciarCertificados.php">
+                                            <i class="lnr lnr-graduation-hat"></i>
+                                            <span>Certificados</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="./gerenciarSolicitacoesAvaliadores.php">
                                             <i class="lnr lnr-star"></i>
                                             <span>Solicitacoes de Avaliadores</span>
@@ -74,7 +80,7 @@
                                     </li>
                                 </ul>
                             </li>
-                        <?php //}?>
+                        <?php // }?>
                         <?php //if ($usuario->getIdPerfil()==2) {?>
 
                             <li class="dropdown">
@@ -97,7 +103,7 @@
                                     </li>
                                 </ul>
                             </li>
-                        <?php// }?>
+                        <?php //}?>
                             
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> 
@@ -165,14 +171,15 @@
             </div>
  
             <div class="main">
- -->
+ 
                 <?php include dirname(__FILE__) . '/mensagensGET.php'; ?>
-<!--
+
                 <div class="main-content">
                     <div class="container-fluid">
                         <div class="breadcrumbs">9&ordf; EXPOTEC/SC</div>
-                        <div class="panel panel-headline"> -->
+                        <div class="panel panel-headline"> 
                          <?php 
                 
                 require_once './inc/modal.php';
             ?>
+-->

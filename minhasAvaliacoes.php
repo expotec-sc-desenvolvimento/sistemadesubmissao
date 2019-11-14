@@ -116,7 +116,7 @@
                             
                             if ($situacaoSubmissao=="Em avaliacao") { // Se a submissão não tiver sido finalizada...
                                 if (!in_array($situacaoAvaliacao->getId(), array(2,4,5,6))) { // Se a avaliação não tiver sido finalizada
-				     if ($tipoSubmissao!=3)  $a.= "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a>".$arquivo."</td>";
+				     if ($tipoSubmissao==3)  $a.= "<td><a class='editarObjeto' id='".$avaliacao->getId()."' name='AvaliacaoIndividual'><img src='$iconEditar' class='img-miniatura'></a>".$arquivo."</td>";
 				     else	$a .= "<td></td>"; //REVER ISSO
                                 }
                                 else if (strtotime(date('d-m-Y'))<=strtotime ($avaliacao->getDataRealizacaoAvaliacao())) { //Se a avaliação tiver sido finalizada, mas foi ainda está no prazo para alteração (mesmo dia da avaliação)

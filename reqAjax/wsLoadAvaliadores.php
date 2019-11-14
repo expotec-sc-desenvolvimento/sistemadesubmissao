@@ -37,11 +37,11 @@ if( isset($_GET['idSubmissao']) && $_GET['idSubmissao']!="" && isset($_GET['tipo
         
         if ($idAvaliadorAtual=='') {
 	   if ((count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $idSubmissao, ''))>0) || 
-                count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($idSubmissao, $usuario->getId(), ''))>0 || in_array($avaliador->getIdUsuario(),$userListado)) continue;
+                count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($idSubmissao, $usuario->getId(), '','',''))>0 || in_array($avaliador->getIdUsuario(),$userListado)) continue;
 
 	}	
 	else if ((count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $idSubmissao, ''))>0 && $usuario->getId()!=$idAvaliadorAtual) || 
-                count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($idSubmissao, $usuario->getId(), ''))>0 || in_array($avaliador->getIdUsuario(),$userListado)) continue;
+                count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($idSubmissao, $usuario->getId(), '','',''))>0 || in_array($avaliador->getIdUsuario(),$userListado)) continue;
 
         $selected = '';
         if ($idAvaliadorAtual!='' && $usuario->getId()==$idAvaliadorAtual) $selected = ' selected';

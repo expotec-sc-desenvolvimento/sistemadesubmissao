@@ -4,9 +4,8 @@ require_once dirname(__DIR__). '/dao/CertificadoDAO.php';
 
 class Certificado {
     private $id;
-    private $idEvento;
+    private $tipoCertificado;
     private $idUsuario;
-    private $idTipoCertificado;
     private $arquivo;
     
     function __construct() {
@@ -17,16 +16,12 @@ class Certificado {
         return $this->id;
     }
 
-        function getIdEvento() {
-        return $this->idEvento;
+    function getTipoCertificado() {
+        return $this->tipoCertificado;
     }
 
     function getIdUsuario() {
         return $this->idUsuario;
-    }
-
-    function getIdTipoCertificado() {
-        return $this->idTipoCertificado;
     }
 
     function getArquivo() {
@@ -37,35 +32,39 @@ class Certificado {
         $this->id = $id;
     }
 
-        
-    function setIdEvento($idEvento) {
-        $this->idEvento = $idEvento;
+    function setTipoCertificado($tipoCertificado) {
+        $this->tipoCertificado = $tipoCertificado;
     }
 
     function setIdUsuario($idUsuario) {
         $this->idUsuario = $idUsuario;
     }
 
-    function setIdTipoCertificado($idTipoCertificado) {
-        $this->idTipoCertificado = $idTipoCertificado;
-    }
-
     function setArquivo($arquivo) {
         $this->arquivo = $arquivo;
     }
 
-    public static function adicionarCertificado($idEvento,$idUsuario,$idTipoCertificado,$arquivo) {
+    public static function adicionarCertificado($tipoCertificado,$idUsuario,$arquivo) {
 
-        $dado = CertificadoDAO::adicionarCertificado($idEvento,$idUsuario,$idTipoCertificado,$arquivo);
+        $dado = CertificadoDAO::adicionarCertificado($tipoCertificado,$idUsuario,$arquivo);
         $resposta = retornaRespostaUnica($dado);
 
         if ($resposta==1) return true;
         else return false;
     }
     
-    public static function listaCertificadosComFiltro($idEvento,$idUsuario,$idTipoCertificado) {
+    public static function excluirCertificado($id) {
+
+        $dado = CertificadoDAO::excluirCertificado($id);
+        $resposta = retornaRespostaUnica($dado);
+
+        if ($resposta==1) return true;
+        else return false;
+    }
+    
+    public static function listaCertificadosComFiltro($tipoCertificado,$idUsuario) {
         $retorno = array();
-        $dado = CertificadoDAO::listaCertificadosComFiltro($idEvento,$idUsuario,$idTipoCertificado);// CONSULTA O BANCO DE DADOS
+        $dado = CertificadoDAO::listaCertificadosComFiltro($tipoCertificado,$idUsuario);// CONSULTA O BANCO DE DADOS
         $retorno = Certificado::ListaDeDados($dado);
         
         return $retorno;

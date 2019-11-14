@@ -13,6 +13,7 @@
 
         <script>
             $(document).ready(function (e){
+                
                 $(function(){
                     $('.table_list_2').tablesorter();
                 });
@@ -85,6 +86,7 @@
                     $('.modal-box-conteudo').load("addItens/addDistribuicao.php?idEvento="+evento+"&idTipoAvaliacao="+tipoAvaliacao+"&avArea="+avaliadoresDaArea+"&avOutraArea="+avaliadoresOutraArea);
                     
                 });
+                
                 
             });
     </script>

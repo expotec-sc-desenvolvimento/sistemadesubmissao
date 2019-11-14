@@ -96,6 +96,7 @@
             <p align="center">
                 <input class="addObjeto btn btn-sm marginTB-xs btn-primary" type="button" value="Distribuir Avaliadores Automaticamente" onclick="window.location.href='distribuirAvaliadores.php'"/>
                 <input class="addObjeto btn btn-sm marginTB-xs btn-success" type="button" value="Finalizar Avaliações em Lote (<?php echo count(Submissao::retornaSubmissoesParaFinalizar()) ?>)" onclick="window.location.href='finalizarAvaliacoesEmLote.php'"/>
+                <input class="addObjeto btn btn-sm marginTB-xs btn-info" type="button" name='EnvioCartasAceite' value="Enviar Cartas de Aceite"/>
             </p>
             <p align="center"><a href="downloads/wsListagemSubmissoes.php?<?php echo $vars ?>">Exportar Planilha Excel</a></p>
             
@@ -193,7 +194,7 @@
                     else {
                         foreach ($listaSubmissoes as $submissao) {
                             
-                            $usuariosSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '');
+                            $usuariosSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','');
                             $usuarioSubmissao = "<ul class='listaCriterios'>";
                             foreach ($usuariosSubmissao as $user) $usuarioSubmissao = $usuarioSubmissao . "<li>" . UsuarioPedrina::retornaDadosUsuario($user->getIdUsuario())->getNome() . "</li>";
                             $usuarioSubmissao .= "</ul>";

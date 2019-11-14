@@ -64,7 +64,7 @@
                 
 
                 $listaAvaliadores = Avaliacao::listaAvaliacoesComFiltro('', $submissao->getId(),'');
-                $listaUsuariosDaSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '');
+                $listaUsuariosDaSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','');
                 
                 
                 $avaliadores = "";

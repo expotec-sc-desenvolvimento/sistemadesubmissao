@@ -15,7 +15,7 @@
     
     
             
-    if (count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $usuario->getId(), 1))==0) { // Se ele não é o usuário submissor    
+    if (count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $usuario->getId(), 1,'',''))==0) { // Se ele não é o usuário submissor    
         header('Location: ./minhasSubmissoes.php?Submissao=UsuarioNaoSubmissor');
     }
     
@@ -109,7 +109,7 @@
     </form>       
    
         <?php
-            $usuariosDaSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '');
+            $usuariosDaSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','');
             
             foreach ($usuariosDaSubmissao as $usuarioSubmissao) {
                 $user = UsuarioPedrina::retornaDadosUsuario($usuarioSubmissao->getIdUsuario());

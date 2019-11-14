@@ -60,7 +60,13 @@
             
             
             if (Avaliacao::realizarAvaliacao($avaliacao->getId(),$situacaoAvaliacao,$notas,$notaFinalAvaliacao,$observacao)) {
-                // O CÓDIGO QUE TINHA ABAIXO FOI TRANSFERIDO PARA O ARQUIVO wsFinalizarSubmissao.php
+                // Código inserido para marcar os usuários que apresentaram o trabalho
+                if (isset($p['apresentados'])) {
+                    foreach ($p['apresentados'] as $idUserSubmissao) {
+                        $userSubmissao = UsuariosDaSubmissao::retornaDadosUsuariosDaSubmissao($idUserSubmissao);
+                        UsuariosDaSubmissao::atualizarUsuariosDaSubmissao($userSubmissao->getId(), $userSubmissao->getIdSubmissao(), $userSubmissao->getIdUsuario(), $userSubmissao->getIsSubmissor(), 1, $userSubmissao->getEnvioEmailCartaAceite());
+                    }
+                }
                 header('Location: ../minhasAvaliacoes.php?Item=Atualizado');
             }
             else header('Location: ../minhasAvaliacoes.php?Item=NaoAtualizado');

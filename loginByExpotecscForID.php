@@ -15,7 +15,7 @@
  //     echo "dsdsds"; exit(1);
 	    $_SESSION['usuario'] = UsuarioPedrina::retornaDadosUsuario($_GET['id']);
 	   
-        header('Location: /expotecsc/cpanel');
+        header('Location: paginaInicial.php');
     }
     else echo "erro";
     

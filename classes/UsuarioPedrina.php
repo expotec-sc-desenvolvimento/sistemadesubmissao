@@ -7,6 +7,7 @@ class UsuarioPedrina {
     private $uuid;
     private $permission;
     private $name;
+    private $cpf;
     private $email;
     private $picture;
     private $idPerfil;
@@ -28,6 +29,10 @@ class UsuarioPedrina {
 
     function getNome() {
         return $this->name;
+    }
+
+    function getCpf() {
+        return $this->cpf;
     }
 
     function getEmail() {
@@ -54,6 +59,10 @@ class UsuarioPedrina {
         $this->name = $name;
     }
 
+    function setCpf($cpf) {
+        $this->cpf = $cpf;
+    }
+
     function setEmail($email) {
         $this->email = $email;
     }
@@ -70,11 +79,11 @@ class UsuarioPedrina {
     public static function retornaDadosUsuario ($idUsuario) {
         
         //$conn = mysqli_connect('localhost', 'root', 'root', 'expotecdb');
-        $conn = mysqli_connect('localhost', 'admin_expotec', '4dm1n3xp0t3c', 'sistemadesubmissao');
+        $conn = mysqli_connect('localhost', 'root', 'root', 'sistemadesubmissao');
         mysqli_set_charset($conn, "utf8");
         
       
-	$result = mysqli_query($conn, 'SELECT u.uuid, u.name, u.permission, u.email, u.picture FROM User u WHERE u.uuid = ' . $idUsuario);
+	$result = mysqli_query($conn, 'SELECT u.uuid, u.name, u.permission, u.email, u.picture, u.cpf_suap FROM User u WHERE u.uuid = ' . $idUsuario);
 //	echo $result; exit(1);
         $user = null;
         while ($consulta = mysqli_fetch_array($result)) {
@@ -82,6 +91,7 @@ class UsuarioPedrina {
             $user->setUuid($consulta['uuid']);
             $user->setName($consulta['name']);
             $user->setPermission($consulta['permission']);
+            $user->setCpf($consulta['cpf_suap']);
             $user->setEmail($consulta['email']);
             $user->setPicture($consulta['picture']);
             
@@ -96,17 +106,18 @@ class UsuarioPedrina {
     public static function listaUsuarios ($filtroNome,$filtroTipoUsuario,$filtroPerfil) {
         
         //$conn = mysqli_connect('localhost', 'root', 'root', 'expotecdb');
-        $conn = mysqli_connect('localhost', 'admin_expotec', '4dm1n3xp0t3c', 'sistemadesubmissao');
+        $conn = mysqli_connect('localhost', 'root', 'root', 'sistemadesubmissao');
         mysqli_set_charset($conn, "utf8");
         
         
-        $result = mysqli_query($conn, "SELECT u.uuid, u.name, u.permission, u.email, u.picture FROM User u WHERE u.name LIKE '%".$filtroNome."%'");
+        $result = mysqli_query($conn, "SELECT u.uuid, u.name, u.permission, u.email, u.picture, u.cpf_suap FROM User u WHERE u.name LIKE '%".$filtroNome."%' ORDER BY name");
         $users = array();
         while ($consulta = mysqli_fetch_array($result)) {
             $user = new UsuarioPedrina();
             $user->setUuid($consulta['uuid']);
             $user->setName($consulta['name']);
             $user->setPermission($consulta['permission']);
+            $user->setCpf($consulta['cpf_suap']);
             $user->setEmail($consulta['email']);
             $user->setPicture($consulta['picture']);
             

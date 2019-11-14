@@ -13,7 +13,7 @@
     if ($submissao->getId()=="") header('Location: paginaInicial.php');
     
     // Caso o usuário não seja administrador e não seja usuário da submissão
-    if (count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $usuario->getId(), ''))==0 
+    if (count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $usuario->getId(), '','',''))==0 
             && Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao()!="Administrador") header('Location: paginaInicial.php');
     
     $tipoSubmissao = TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao();
@@ -145,17 +145,36 @@
         <div class="row">
             <div class="col-md-12  mb-4">
                 <label for="e.address">Autores</label><br>
-                    <ul style='list-style-type: none;'>
-                        <?php
-                            foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $obj) {
-                                $user = UsuarioPedrina::retornaDadosUsuario($obj->getIdUsuario());
-                                echo "<li><div><img class='flag' src='public/img/semFoto.jpg'>" .$user->getNome();
-                                if ($obj->getIsSubmissor()==1) echo "(Submissor)";
+                    <form method="post" action="<?=htmlspecialchars('submissaoForms/wsGerenciarApresentacaoTrabalho.php');?>" onsubmit="return confirm('Deseja atualizar os alunos que apresentaram este Trabalho?')"> <!-- Adicionado para contemplar a parte de apresentação de trabalhos-->
+                        <input type="hidden" name="submissao" id="submissao" value="<?php echo $submissao->getId() ?>">
+                        <ul style='list-style-type: none;'>
+                            <?php
+                                $botaoEnviar = "";
+                                foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','') as $obj) {
+                                    $user = UsuarioPedrina::retornaDadosUsuario($obj->getIdUsuario());
+                                    /*
+                                     * O Código a seguir foi acrescentado para marcar os alunos que apresentaram o trabalho na EXPOTEC e que estão aptos a receber o certificado de
+                                     * apresentação
+                                     */
+                                    $checkBoxApresentacao = "";
+                                    
+                                    if ($submissao->getIdTipoSubmissao()==3 && $usuario->getIdPerfil()==1) { // Caso o usuário logado seja um administrador e esta submissao for uma submissao final...
+                                        $checked = "";
+                                        $botaoEnviar = "<br><input type='submit' class='btn btn-sm marginTB-xs btn-success' value='Atualizar Apresentação de Trabalho'>";
+                                        
+                                        if ($obj->getApresentouTrabalho()==1) $checked = " checked";
+                                        $checkBoxApresentacao = "<input type='checkbox' name='apresentados[]' id='apresentados[]' value='".$obj->getId()."' ".$checked.">";
+                                    }
 
 
-                            }
-                        ?>
-                    </ul>
+                                    if ($user->getPicture()!=NULL) echo "<li><div>".$checkBoxApresentacao."<img class='flag' src='/expotecsc/attendees/getuserpicture/".$user->getId()."/'>" .$user->getNome();
+                                    else echo "<li><div>".$checkBoxApresentacao."<img class='flag' src='public/img/semFoto.jpg'>" .$user->getNome();
+                                    if ($obj->getIsSubmissor()==1) echo "(Submissor)";
+                                }
+                                echo $botaoEnviar;
+                            ?>
+                        </ul>
+                    </form>
                 <div class="help-inline ">
 
                 </div>
@@ -217,6 +236,7 @@
     }
 ?>
 
+        
         <div class="control-group form-actions">
             <div class="row">
                 <div class="col-md-3 mb-4">

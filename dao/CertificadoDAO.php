@@ -8,18 +8,25 @@ require_once 'Conexao.php';
  */
 
 class CertificadoDao {
-    public static function adicionarCertificado ($idEvento,$idUsuario,$idTipoCertificado,$arquivo) {
-        $sql = "CALL adicionarCertificado ('$idEvento','$idUsuario','$idTipoCertificado','$arquivo');";
+    public static function adicionarCertificado($tipoCertificado,$idUsuario,$arquivo) {
+        $sql = "CALL adicionarCertificado ('$tipoCertificado','$idUsuario','$arquivo');";
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }
+    
+    public static function excluirCertificado($id) {
+        $sql = "CALL excluirItem ('certificado','$id');";
+        //echo $sql; exit(1);
+        return Conexao::executar($sql);
+    }
+    
     public static function retornaDadosCertificado($idCertificado) {
         $sql = "CALL retornaItemPorId ('certificado','$idCertificado');";
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }
-    public static function listaCertificadosComFiltro($idEvento,$idUsuario,$idTipoCertificado) {
-        $sql = "CALL listaCertificadosComFiltro('$idEvento','$idUsuario','$idTipoCertificado');";
+    public static function listaCertificadosComFiltro($idTipoCertificado,$idUsuario) {
+        $sql = "CALL listaCertificadosComFiltro('$idTipoCertificado','$idUsuario');";
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }

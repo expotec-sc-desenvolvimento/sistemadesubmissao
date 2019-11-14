@@ -35,7 +35,7 @@
                             foreach (Avaliador::listaAvaliadoresComFiltro($submissao->getIdEvento(), $submissao->getIdArea(), '', "area") as $avaliador) {
                                 $user = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
                                 if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $submissao->getId(), ''))>0 || 
-                                        count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $user->getId(), ''))>0) continue;
+                                        count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $user->getId(), '','',''))>0) continue;
                                 echo "<option value='". $user->getId()."'>".$user->getNome()."</option>";
                         }?>
                     </select>
@@ -55,7 +55,7 @@
                             foreach (Avaliador::listaAvaliadoresComFiltro($submissao->getIdEvento(), $submissao->getIdArea(), '', "area") as $avaliador) {
                                 $user = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
                                 if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $submissao->getId(), ''))>0 || 
-                                        count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $user->getId(), ''))>0) continue;
+                                        count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $user->getId(), '','',''))>0) continue;
                                 echo "<option value='". $user->getId()."'>".$user->getNome()."</option>";
                         }?>
                     </select>
@@ -76,7 +76,7 @@
                             foreach (Avaliador::listaAvaliadoresComFiltro($submissao->getIdEvento(), $submissao->getIdArea(), '', "outra-area") as $avaliador) {
                                 $user = UsuarioPedrina::retornaDadosUsuario($avaliador->getIdUsuario());
                                 if (count(Avaliacao::listaAvaliacoesComFiltro($usuario->getId(), $submissao->getId(), ''))>0 || 
-                                        count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $user->getId(), ''))>0 || in_array($user->getId(),$userListado3)) continue;
+                                        count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $user->getId(), '','',''))>0 || in_array($user->getId(),$userListado3)) continue;
 				echo "<option value='". $user->getId()."'>".$user->getNome()."</option>";
 				array_push($userListado3,$user->getId());
                         }?>

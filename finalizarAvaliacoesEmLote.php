@@ -93,7 +93,7 @@
                     else {
                         foreach ($listaSubmissoes as $submissao) {
                             
-                            $usuariosSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '');
+                            $usuariosSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','');
                             $usuarioSubmissao = "<ul class='listaCriterios'>";
                             foreach ($usuariosSubmissao as $user) $usuarioSubmissao = $usuarioSubmissao . "<li>" . UsuarioPedrina::retornaDadosUsuario($user->getIdUsuario())->getNome() . "</li>";
                             $usuarioSubmissao .= "</ul>";

@@ -15,7 +15,7 @@
     if ($submissao->getId()=="") header('Location: paginaInicial.php');
     
     // Caso o usuário não seja administrador e não seja usuário da submissão
-    if (count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $usuario->getId(), ''))==0 
+    if (count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $usuario->getId(), '','',''))==0 
             && Perfil::retornaDadosPerfil($usuario->getIdPerfil())->getDescricao()!="Administrador") header('Location: paginaInicial.php');
     
     $tipoSubmissao = TipoSubmissao::retornaDadosTipoSubmissao($submissao->getIdTipoSubmissao())->getDescricao();
@@ -224,7 +224,7 @@
 
         
 <?php
-            $usuariosDaSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '');
+            $usuariosDaSubmissao = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','');
             
             foreach ($usuariosDaSubmissao as $usuarioSubmissao) {
                 $user = UsuarioPedrina::retornaDadosUsuario($usuarioSubmissao->getIdUsuario());

@@ -26,7 +26,7 @@
                 $situacaoSubmissao = SituacaoSubmissao::retornaDadosSituacaoSubmissao($submissao->getIdSituacaoSubmissao());
           
                 if ($situacaoSubmissao->getDescricao() == "Submetida") {
-                    if (count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($idSubmissao, $usuario->getId(), 1)) == 1) { // Caso o usuário seja o Usuário submissor
+                    if (count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($idSubmissao, $usuario->getId(), 1,'','')) == 1) { // Caso o usuário seja o Usuário submissor
                         if (Submissao::cancelarSubmissao($idSubmissao)) {
                             header('Location: ../minhasSubmissoes.php?Item=Cancelado');
                         }

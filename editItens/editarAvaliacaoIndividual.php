@@ -239,6 +239,33 @@
                     <?php } ?>
                 </table>
                 
+                <hr/>
+                <?php if ($submissao->getIdTipoSubmissao()==3) { ?>
+                    <h3 class="panel-title" align='center'>Alunos que apresentaram o Trabalho</h3>
+
+                    <ul style='list-style-type: none;'>
+                        <?php
+
+                            foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','') as $obj) {
+                                $user = UsuarioPedrina::retornaDadosUsuario($obj->getIdUsuario());
+                                /*
+                                 * O Código a seguir foi acrescentado para marcar os alunos que apresentaram o trabalho na EXPOTEC e que estão aptos a receber o certificado de
+                                 * apresentação
+                                 */
+                                $checkBoxApresentacao = "<img class='img-miniatura' src='".$iconOK."'>";
+                                if ($obj->getApresentouTrabalho()!=1) $checkBoxApresentacao = "<input type='checkbox' name='apresentados[]' id='apresentados[]' value='".$obj->getId()."'>";
+
+                                if ($user->getPicture()!=NULL) echo "<li><div>".$checkBoxApresentacao."<img class='flag' src='/expotecsc/attendees/getuserpicture/".$user->getId()."/'>" .$user->getNome();
+                                else echo "<li><div>".$checkBoxApresentacao."<img class='flag' src='public/img/semFoto.jpg'>" .$user->getNome();
+                                if ($obj->getIsSubmissor()==1) echo "(Submissor)";
+                            }
+
+                        ?>
+                    </ul>
+                    <br>
+                <?php } ?>
+                    
+                
                 <div class="control-group form-actions">
                     <div class="row">
                         <div class="col-md-3 mb-4">

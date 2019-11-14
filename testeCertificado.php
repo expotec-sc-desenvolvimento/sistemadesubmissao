@@ -31,6 +31,11 @@
                 margin-right: 90px;
                 font-size: 20px;
             }
+            p.data {
+                text-align: right;
+                
+                font-size: 20px;
+            }
         </style>
     </head>
 
@@ -39,6 +44,7 @@
             <h1>Certificado de Apresentação de Trabalho</h1>
             
             <p>Certificamos para os devidos e fins que $nome apresentou o trabalho entitulado $trabalho no evento</p>
+            <p class='data'>Teste</p>
         </div>
     </body>
     </html>

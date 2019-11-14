@@ -21,7 +21,7 @@
         if (Submissao::finalizarSubmissao($_GET['id'])) {
             $submissao = Submissao::retornaDadosSubmissao($_GET['id']);
             $emails = array();
-            foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $userSubmissao) {
+            foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','') as $userSubmissao) {
                 array_push($emails, UsuarioPedrina::retornaDadosUsuario($userSubmissao->getIdUsuario())->getEmail());
             }
             // REVER
@@ -34,7 +34,7 @@
                     $novoArquivo = $evento->getNome() . "-" . $modalidade->getDescricao() . "-" . substr(md5(time()), 0,15) . "-Final.pdf";
                     $idUsuariosAdd = "";
                     
-                    foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $user) {
+                    foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','') as $user) {
                         $idUsuariosAdd .= $user->getIdUsuario() . ";";
                     }
                     
@@ -77,7 +77,7 @@
                 else if ($submissao->getIdTipoSubmissao()==3 && $submissao->getIdSituacaoSubmissao()==7) { /* Caso seja uma submissão Final e todos os avaliadores tenham terminado
                                                                                                         a avaliação, são gerados certificados de Apresentação para os submissores */
                     
-                  //  foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $user) {
+                  //  foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','') as $user) {
                   //      $evento = Evento::retornaDadosEvento($submissao->getIdEvento());
                   //      gerarCertificado($evento, Usuario::retornaDadosUsuario($user->getIdUsuario()),1,$pastaCertificados);
                   //  }

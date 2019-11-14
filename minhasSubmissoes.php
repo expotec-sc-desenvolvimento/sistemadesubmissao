@@ -37,7 +37,7 @@
         ?>
             
             <?php
-                $submissoes = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro('', $usuario->getId(), '');
+                $submissoes = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro('', $usuario->getId(), '','','');
 
             ?>
             
@@ -69,10 +69,10 @@
                               $submissao = Submissao::retornaDadosSubmissao($obj->getIdSubmissao());
                               $usuarioSubmissao = "";
                               
-			      foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($obj->getIdSubmissao(), '', '') as $user) {
+			      foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($obj->getIdSubmissao(), '', '','','') as $user) {
 
 				  $user12 = UsuarioPedrina::retornaDadosUsuario($user->getIdUsuario());
-				  $img = "<img src='/uploads/fotosPerfil/semFoto.jpg' class='flag'>";
+				  $img = "<img src='/sistemadesubmissao/uploads/fotosPerfil/semFoto.jpg' class='flag'>";
 				  if ($user12->getPicture()!=NULL) $img ="<img src='/expotecsc/attendees/getuserpicture/".$user12->getId()."/' class='flag'>";
 
 	  		          $usuarioSubmissao .= $img . $user12->getNome();

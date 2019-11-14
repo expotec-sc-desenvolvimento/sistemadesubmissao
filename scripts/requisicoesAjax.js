@@ -164,6 +164,21 @@ function loadInfoEvento(evento,tipoAvaliacao,resposta) {
     else document.getElementById(resposta).innerHTML = "";
 }
 
+function loadUsuariosAptos(tipo,resposta) {
+   
+    document.getElementById(resposta).innerHTML = "<h3>Aguarde...</h3>";
+   // alert(idAvaliadorAtual+" ; "+idSubmissao+" ; "+evento+" ; "+area+" ; "+tipo);
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById(resposta).innerHTML = this.responseText;
+      }
+    };
+
+    xhttp.open("GET", "./reqAjax/wsLoadUsuariosAptos.php?tipo="+tipo, true);
+    xhttp.send();
+}
+
 function loadAvaliadores(idAvaliadorAtual,idSubmissao,evento,area,tipo,resposta) {
     
     

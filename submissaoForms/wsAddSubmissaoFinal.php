@@ -22,7 +22,7 @@
             $idUsuariosAdd = "";
                     
             
-            foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $user) {
+            foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','') as $user) {
                 $idUsuariosAdd = $idUsuariosAdd . UsuarioPedrina::retornaDadosUsuario($user->getIdUsuario())->getId() . ";";
             }
             $idEvento = $submissao->getIdEvento();

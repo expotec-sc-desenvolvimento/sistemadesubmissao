@@ -13,7 +13,7 @@
     
     $listaAvaliacoesDoUsuario = Avaliacao::listaAvaliacoesComFiltro($_GET['id'], '', '');
     $listaSolicitacoesAvaliadorDoUsuario = SolicitacaoAvaliador::listaSolicitacaoAvaliadorComFiltro($_GET['id'], '', '', '');
-    $listaSubmissoesDoUsuario = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro('', $_GET['id'], '');
+    $listaSubmissoesDoUsuario = UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro('', $_GET['id'], '','','');
     $listaAreasEventosAvaliacaoDoUsuario = Avaliador::listaAvaliadoresComFiltro('', '', $_GET['id'], '');
     
     $pendencias = count($listaAvaliacoesDoUsuario)+count($listaSolicitacoesAvaliadorDoUsuario)+count($listaSubmissoesDoUsuario)+ count($listaAreasEventosAvaliacaoDoUsuario);

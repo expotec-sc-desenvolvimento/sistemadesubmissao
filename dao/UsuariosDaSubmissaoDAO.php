@@ -21,9 +21,21 @@ class UsuariosDaSubmissaoDao{
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }
+    
+    public static function atualizarUsuariosDaSubmissao($id,$idSubmissao,$idUsuario,$isSubmissor,$apresentouTrabalho,$envioEmailCartaAceite) {
+        $sql = "CALL atualizarUsuariosDaSubmissao('$id','$idSubmissao','$idUsuario','$isSubmissor','$apresentouTrabalho','$envioEmailCartaAceite');";
+        //echo $sql; exit(1);
+        return Conexao::executar($sql);
+    }
 
-    public static function listaUsuariosDaSubmissaoComFiltro($idSubmissao,$idUsuario,$isSubmissor) {
-        $sql = "CALL listaUsuariosDaSubmissaoComFiltro('$idSubmissao','$idUsuario','$isSubmissor');";
+    public static function listaUsuariosDaSubmissaoComFiltro($idSubmissao,$idUsuario,$isSubmissor,$apresentouTrabalho,$envioEmailCartaAceite) {
+        $sql = "CALL listaUsuariosDaSubmissaoComFiltro('$idSubmissao','$idUsuario','$isSubmissor','$apresentouTrabalho','$envioEmailCartaAceite');";
+        //echo $sql; exit(1);
+        return Conexao::executar($sql);
+    }
+    
+    public static function retornaDadosUsuariosDaSubmissao($idUsuarioDaSubmissao){
+        $sql = "CALL retornaItemPorId('usuariosdasubmissao','$idUsuarioDaSubmissao');";
         //echo $sql; exit(1);
         return Conexao::executar($sql);
     }

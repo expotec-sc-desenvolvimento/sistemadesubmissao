@@ -25,11 +25,11 @@ include dirname(__DIR__) . '/inc/includes.php';
  //   echo $dataAtual . " - " . $dataFinalEnvioSubmissaoCorrigida;
 //    echo date('Y-m-d H:m:s');
     if (strtotime($dataAtual) > strtotime($dataFinalEnvioSubmissaoCorrigida)) $prazoEsgotado = true;
-    if (count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $usuario->getId(), 1))==0) $userNaoSubmissor = true;
+    if (count(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), $usuario->getId(), 1,'',''))==0) $userNaoSubmissor = true;
     
     $submissores="";
     
-    foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $submissor) {
+    foreach (UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','') as $submissor) {
         $submissores .= $submissor->getIdUsuario().";";
     }
     
@@ -129,7 +129,7 @@ include dirname(__DIR__) . '/inc/includes.php';
                 <label for="e.address">Autores</label><br>
                     <ul style='list-style-type: none;'>
                         <?php
-                            foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '') as $obj) {
+                            foreach(UsuariosDaSubmissao::listaUsuariosDaSubmissaoComFiltro($submissao->getId(), '', '','','') as $obj) {
                                 $user = UsuarioPedrina::retornaDadosUsuario($obj->getIdUsuario());
                                 echo "<li><div><img class='flag' src='public/img/semFoto.jpg'>" .$user->getNome();
                                 if ($obj->getIsSubmissor()==1) echo "(Submissor)";
